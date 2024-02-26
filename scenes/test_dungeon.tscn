@@ -8,8 +8,6 @@
 [node name="TestDungeon" type="Node2D"]
 script = ExtResource("1_87vrx")
 
-[node name="Room" parent="." instance=ExtResource("2_u1vqi")]
-
 [node name="Player" parent="." instance=ExtResource("3_lt8jm")]
 z_index = 2
 position = Vector2(88, 59)
@@ -23,8 +21,19 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("4_ri72g")
 
+[node name="Room" parent="." instance=ExtResource("2_u1vqi")]
+
 [node name="Room2" parent="." instance=ExtResource("2_u1vqi")]
-position = Vector2(329, 0)
+position = Vector2(315, 1)
 
 [node name="Room3" parent="." instance=ExtResource("2_u1vqi")]
-position = Vector2(1, -157)
+position = Vector2(2, -144)
+
+[node name="Room4" parent="." instance=ExtResource("2_u1vqi")]
+position = Vector2(-316, 0)
+
+[node name="Room5" parent="." instance=ExtResource("2_u1vqi")]
+position = Vector2(-2, 148)
+
+[node name="Room6" parent="." instance=ExtResource("2_u1vqi")]
+position = Vector2(317, -143)
