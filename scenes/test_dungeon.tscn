@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://2xljtsdemkt8"]
+
+[ext_resource type="Script" path="res://scripts/Tests/TestDungeon.gd" id="1_87vrx"]
+[ext_resource type="PackedScene" uid="uid://bxvfe2h3ur6ol" path="res://scenes/room.tscn" id="2_u1vqi"]
+[ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://scenes/player.tscn" id="3_lt8jm"]
+[ext_resource type="Script" path="res://scripts/Tests/Camera2D.gd" id="4_ri72g"]
+
+[node name="TestDungeon" type="Node2D"]
+script = ExtResource("1_87vrx")
+
+[node name="Room" parent="." instance=ExtResource("2_u1vqi")]
+
+[node name="Player" parent="." instance=ExtResource("3_lt8jm")]
+z_index = 2
+position = Vector2(88, 59)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 1)
+offset = Vector2(-10, -30)
+anchor_mode = 0
+zoom = Vector2(3.7, 3.7)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("4_ri72g")
+
+[node name="Room2" parent="." instance=ExtResource("2_u1vqi")]
+position = Vector2(329, 0)
+
+[node name="Room3" parent="." instance=ExtResource("2_u1vqi")]
+position = Vector2(1, -157)
