@@ -1,9 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf80b87yue4s1"]
-
-[ext_resource type="Texture2D" uid="uid://dx5m6pi8lrf6v" path="res://tempAssets/RandomLevelGenTileset.png" id="1_his3s"]
+[gd_scene load_steps=3 format=3 uid="uid://bf80b87yue4s1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m4lm7"]
-texture = ExtResource("1_his3s")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
