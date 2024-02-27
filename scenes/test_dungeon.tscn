@@ -10,9 +10,12 @@
 [node name="TestDungeon" type="Node2D"]
 script = ExtResource("1_87vrx")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+
 [node name="Player" parent="." instance=ExtResource("3_lt8jm")]
 z_index = 2
-position = Vector2(150, 64)
+position = Vector2(154, 71)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, 1)
@@ -24,6 +27,7 @@ position_smoothing_speed = 10.0
 script = ExtResource("4_ri72g")
 
 [node name="Room1" parent="." instance=ExtResource("2_u1vqi")]
+script = null
 
 [node name="Room2" parent="Room1" instance=ExtResource("2_u1vqi")]
 position = Vector2(315, 1)
@@ -85,20 +89,32 @@ position = Vector2(14, 891)
 [node name="Rock" parent="." instance=ExtResource("5_2k8y0")]
 position = Vector2(-479, 85)
 
-[node name="Rock2" parent="." instance=ExtResource("5_2k8y0")]
-position = Vector2(-253, 50)
+[node name="Rock2" parent="Rock" instance=ExtResource("5_2k8y0")]
+position = Vector2(226, -35)
 
-[node name="Rock3" parent="." instance=ExtResource("5_2k8y0")]
-position = Vector2(-799, 52)
+[node name="Rock3" parent="Rock" instance=ExtResource("5_2k8y0")]
+position = Vector2(-320, -33)
 
-[node name="Rock4" parent="." instance=ExtResource("5_2k8y0")]
-position = Vector2(-901, -56)
+[node name="Rock4" parent="Rock" instance=ExtResource("5_2k8y0")]
+position = Vector2(-422, -141)
 
-[node name="Rock5" parent="." instance=ExtResource("5_2k8y0")]
-position = Vector2(-1045, -86)
+[node name="Rock5" parent="Rock" instance=ExtResource("5_2k8y0")]
+position = Vector2(-566, -171)
 
-[node name="Rock6" parent="." instance=ExtResource("5_2k8y0")]
-position = Vector2(-1241, -230)
+[node name="Rock6" parent="Rock" instance=ExtResource("5_2k8y0")]
+position = Vector2(-762, -315)
+
+[node name="Rock7" parent="Rock" instance=ExtResource("5_2k8y0")]
+position = Vector2(550, 19)
+
+[node name="Rock9" parent="Rock" instance=ExtResource("5_2k8y0")]
+position = Vector2(506, 130)
+
+[node name="Rock10" parent="Rock" instance=ExtResource("5_2k8y0")]
+position = Vector2(667, 165)
+
+[node name="Rock11" parent="Rock" instance=ExtResource("5_2k8y0")]
+position = Vector2(509, 280)
 
 [node name="Skull" parent="." instance=ExtResource("6_nxtrn")]
 position = Vector2(260, 102)
