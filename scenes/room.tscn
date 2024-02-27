@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://bxvfe2h3ur6ol"]
 
 [ext_resource type="Script" path="res://scripts/room.gd" id="1_k281e"]
-[ext_resource type="Texture2D" uid="uid://dncq4u4eh56t6" path="res://tempAssets/World/TRBL.png" id="2_485ss"]
+[ext_resource type="Texture2D" uid="uid://dncq4u4eh56t6" path="res://tempAssets/world/TRBL.png" id="2_5cxab"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_assl7"]
 size = Vector2(310, 10)
@@ -60,7 +60,7 @@ script = ExtResource("1_k281e")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(155, 69)
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_485ss")
+texture = ExtResource("2_5cxab")
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
