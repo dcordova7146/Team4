@@ -8,7 +8,8 @@ var connectedRooms = {
 	Vector2(0,-1): null,
 }
 
-func _on_play_area_body_entered(body):
-	Events.room_entered.emit(self)
-	
 
+## Emit room entered signal if body entered is the player.
+func _on_play_area_body_entered(body: Node2D):
+	if body.name == "Player":
+		Events.room_entered.emit(self)

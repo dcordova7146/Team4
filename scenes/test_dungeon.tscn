@@ -1,14 +1,16 @@
 [gd_scene load_steps=8 format=3 uid="uid://2xljtsdemkt8"]
 
 [ext_resource type="Script" path="res://scripts/Tests/TestDungeon.gd" id="1_87vrx"]
-[ext_resource type="PackedScene" uid="uid://bxvfe2h3ur6ol" path="res://scenes/room.tscn" id="2_u1vqi"]
+[ext_resource type="PackedScene" uid="uid://xrgbbtphhwjn" path="res://scenes/room.tscn" id="2_u1vqi"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://scenes/playerScenes/player.tscn" id="3_lt8jm"]
 [ext_resource type="Script" path="res://scripts/Tests/Camera2D.gd" id="4_ri72g"]
 [ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://scenes/propScenes/rock.tscn" id="5_2k8y0"]
 [ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://scenes/mobScenes/skull.tscn" id="6_nxtrn"]
 [ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://scenes/propScenes/fireball_turret.tscn" id="7_ekbal"]
+[ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://pause_menu.tscn" id="7_nuam3"]
 
 [node name="TestDungeon" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_87vrx")
 
 [node name="Player" parent="." instance=ExtResource("3_lt8jm")]
@@ -25,7 +27,6 @@ position_smoothing_speed = 10.0
 script = ExtResource("4_ri72g")
 
 [node name="Room1" parent="." instance=ExtResource("2_u1vqi")]
-script = null
 
 [node name="Room2" parent="Room1" instance=ExtResource("2_u1vqi")]
 position = Vector2(315, 1)
@@ -124,3 +125,8 @@ motion_mode = 1
 
 [node name="Fireball Turret" parent="." instance=ExtResource("7_ekbal")]
 position = Vector2(154, -72)
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_nuam3")]
+
+[connection signal="game_exited_to_menu" from="PauseMenu" to="." method="_on_pause_menu_game_exited_to_menu"]
+[connection signal="game_restarted" from="PauseMenu" to="." method="_on_pause_menu_game_restarted"]

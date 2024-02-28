@@ -1,7 +1,9 @@
 extends CharacterBody2D # Inherits from CharacterBody2D
 
 var health = 5 # Initialize with 5 
-@onready var player = get_node("/root/TestDungeon/Player") # Store Reference to Player Node
+
+## The sibling node player.
+@onready var player = get_node("../Player") # Store Reference to Player Node
 
 func _physics_process(delta): 
 	if player: # If Player exists, face and move toward player
