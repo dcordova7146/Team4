@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://2xljtsdemkt8"]
+[gd_scene load_steps=8 format=3 uid="uid://2xljtsdemkt8"]
 
 [ext_resource type="Script" path="res://scripts/Tests/TestDungeon.gd" id="1_87vrx"]
 [ext_resource type="PackedScene" uid="uid://bxvfe2h3ur6ol" path="res://scenes/room.tscn" id="2_u1vqi"]
@@ -6,16 +6,14 @@
 [ext_resource type="Script" path="res://scripts/Tests/Camera2D.gd" id="4_ri72g"]
 [ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://scenes/propScenes/rock.tscn" id="5_2k8y0"]
 [ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://scenes/mobScenes/skull.tscn" id="6_nxtrn"]
+[ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://scenes/propScenes/fireball_turret.tscn" id="7_ekbal"]
 
 [node name="TestDungeon" type="Node2D"]
 script = ExtResource("1_87vrx")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -100
-
 [node name="Player" parent="." instance=ExtResource("3_lt8jm")]
 z_index = 2
-position = Vector2(154, 71)
+position = Vector2(36, -32)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, 1)
@@ -119,3 +117,10 @@ position = Vector2(509, 280)
 [node name="Skull" parent="." instance=ExtResource("6_nxtrn")]
 position = Vector2(260, 102)
 motion_mode = 1
+
+[node name="Skull2" parent="." instance=ExtResource("6_nxtrn")]
+position = Vector2(268, -114)
+motion_mode = 1
+
+[node name="Fireball Turret" parent="." instance=ExtResource("7_ekbal")]
+position = Vector2(154, -72)
