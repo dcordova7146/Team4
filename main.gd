@@ -14,4 +14,13 @@ func start_game() -> void:
 
 ## Show the main menu.
 func show_main_menu() -> void:
-	($MainMenu as CanvasLayer).show()
+	($MainMenu as MainMenu).start()
+
+
+## Open settings menu.
+func _on_main_menu_settings_menu_opened() -> void:
+	var settings: PackedScene = preload("res://scenes/settings_menu.tscn")
+	var settings_instance := settings.instantiate() as SettingsMenu
+	if settings_instance != null:
+		add_child(settings_instance)
+		settings_instance.settings_menu_closed.connect(show_main_menu)

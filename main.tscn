@@ -9,4 +9,5 @@ script = ExtResource("1_tmflm")
 
 [node name="MainMenu" parent="." instance=ExtResource("2_u4xk3")]
 
+[connection signal="settings_menu_opened" from="MainMenu" to="." method="_on_main_menu_settings_menu_opened"]
 [connection signal="start_game" from="MainMenu" to="." method="start_game"]

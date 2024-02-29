@@ -20,6 +20,14 @@ func _process(delta: float) -> void:
 process_mode = 3
 script = ExtResource("1_btakn")
 
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
 [node name="PauseLabel" type="Label" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
@@ -32,67 +40,40 @@ theme_override_font_sizes/font_size = 64
 text = "Paused"
 script = SubResource("GDScript_safw0")
 
-[node name="ResumeButton" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -48.0
-offset_right = 128.0
-offset_bottom = 48.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 64
-text = "Resume"
-
-[node name="RestartButton" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -116.0
-offset_top = 56.0
-offset_right = 116.0
-offset_bottom = 152.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 64
-text = "Restart"
-
-[node name="QuitToMenuButton" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -116.0
-offset_top = 160.0
-offset_right = 116.0
-offset_bottom = 256.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 64
-text = "Quit to Menu"
-
-[node name="QuitToDesktopButton" type="Button" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -248.0
-offset_top = 264.0
+offset_top = -198.0
 offset_right = 248.0
-offset_bottom = 360.0
+offset_bottom = 198.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Restart"
+
+[node name="QuitToMenuButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Quit to Menu"
+
+[node name="QuitToDesktopButton" type="Button" parent="Buttons"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Quit to Desktop"
 
-[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="QuitToMenuButton" to="." method="_on_quit_to_menu_button_pressed"]
-[connection signal="pressed" from="QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]
+[connection signal="pressed" from="Buttons/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Buttons/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Buttons/QuitToMenuButton" to="." method="_on_quit_to_menu_button_pressed"]
+[connection signal="pressed" from="Buttons/QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]

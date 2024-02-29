@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://nlg7p2i3xtmd"]
+
+[ext_resource type="Script" path="res://scenes/settings_menu.gd" id="1_iy22o"]
+
+[node name="SettingsMenu" type="CanvasLayer"]
+script = ExtResource("1_iy22o")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.266667, 0.266667, 0.266667, 1)
+
+[node name="Root" type="VBoxContainer" parent="."]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -124.0
+offset_right = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="Root"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Settings"
+
+[node name="Scroll" type="ScrollContainer" parent="Root"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Inputs" type="VBoxContainer" parent="Root/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FullscreenButton" type="CheckButton" parent="Root/Scroll/Inputs"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Fullscreen"
+
+[node name="ResolutionButton" type="OptionButton" parent="Root/Scroll/Inputs"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+item_count = 2
+selected = 0
+popup/item_0/text = "1280×720"
+popup/item_0/id = 0
+popup/item_1/text = "1920×1080"
+popup/item_1/id = 1
+
+[node name="Nav" type="HBoxContainer" parent="Root"]
+layout_mode = 2
+alignment = 2
+
+[node name="BackButton" type="Button" parent="Root/Nav"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 64
+text = "Back"
+
+[connection signal="toggled" from="Root/Scroll/Inputs/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
+[connection signal="item_selected" from="Root/Scroll/Inputs/ResolutionButton" to="." method="_on_resolution_button_item_selected"]
+[connection signal="pressed" from="Root/Nav/BackButton" to="." method="_on_back_button_pressed"]

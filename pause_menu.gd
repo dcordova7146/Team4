@@ -4,10 +4,22 @@ extends CanvasLayer
 signal game_restarted
 signal game_exited_to_menu
 
+
 ## Hide by default.
 func _ready() -> void:
 	hide()
 
+
+## Pause game logic.
+##
+## Only affects nodes whose process mode is explictly "Pausable",
+## as the main scene's process mode is "Always".
+func pause() -> void:
+	get_tree().paused = true;
+	show()
+	# Focus the first button.
+	($Buttons/ResumeButton as Button).grab_focus()
+	
 
 ## Hide self and unpause game. 
 func resume() -> void:
@@ -21,9 +33,7 @@ func _input(event: InputEvent) -> void:
 		if visible:
 			resume()
 		else:
-			show()
-			get_tree().paused = true;
-
+			pause()
 
 ## Unpause when "Resume" button pressed.
 func _on_resume_button_pressed() -> void:
