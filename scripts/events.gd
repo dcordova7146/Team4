@@ -1,5 +1,4 @@
 extends Node
 #singleton script
 
-signal room_entered(room)
-	
+signal room_entered(room: Room)

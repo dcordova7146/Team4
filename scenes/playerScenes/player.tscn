@@ -19,3 +19,6 @@ shape = SubResource("RectangleShape2D_ysv7g")
 texture = ExtResource("2_22u6h")
 
 [node name="Gun" parent="." instance=ExtResource("3_mw41a")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)

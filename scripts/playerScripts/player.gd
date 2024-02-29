@@ -1,9 +1,13 @@
 extends CharacterBody2D
 
+## Move speed multiplier.
+@export var speed: int = 250
 
-func _physics_process(delta): 
-	# Face direction based on key input
-	var direction = Input.get_vector("move_left","move_right","move_up","move_down")
-	# Speed of movement 
-	velocity = direction * 250
+
+## Move the player according to cardinal direction input.
+func _physics_process(_delta: float) -> void:
+	var direction: Vector2 = Input.get_vector(
+			"move_left","move_right","move_up","move_down"
+	)
+	velocity = direction * speed
 	move_and_slide() 

@@ -1,13 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcj36edtxg3ck"]
+[gd_scene load_steps=7 format=3 uid="uid://dcj36edtxg3ck"]
 
 [ext_resource type="Script" path="res://scripts/dungeon.gd" id="1_1hjgm"]
+[ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://pause_menu.tscn" id="2_img3q"]
+[ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://scenes/playerScenes/player.tscn" id="3_51vlb"]
+[ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://scenes/propScenes/rock.tscn" id="4_7yry6"]
+[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://scenes/mobScenes/skull.tscn" id="5_u63n0"]
+[ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://scenes/propScenes/fireball_turret.tscn" id="6_gpxj7"]
 
-[node name="Dunegon" type="Node2D"]
+[node name="Dungeon" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_1hjgm")
 
-[node name="Spawn" type="Node2D" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="HUD"]
 offset_left = 1167.0
 offset_top = 653.0
 offset_right = 1247.0
@@ -15,7 +21,56 @@ offset_bottom = 684.0
 text = "Generate
 "
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
+[node name="PauseMenu" parent="." instance=ExtResource("2_img3q")]
+visible = false
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Spawn" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("3_51vlb")]
+z_index = 2
+position = Vector2(32, 112)
+
+[node name="Rock" parent="." instance=ExtResource("4_7yry6")]
+position = Vector2(-479, 85)
+
+[node name="Rock2" parent="Rock" instance=ExtResource("4_7yry6")]
+position = Vector2(226, -35)
+
+[node name="Rock3" parent="Rock" instance=ExtResource("4_7yry6")]
+position = Vector2(-320, -33)
+
+[node name="Rock4" parent="Rock" instance=ExtResource("4_7yry6")]
+position = Vector2(-422, -141)
+
+[node name="Rock5" parent="Rock" instance=ExtResource("4_7yry6")]
+position = Vector2(-566, -171)
+
+[node name="Rock6" parent="Rock" instance=ExtResource("4_7yry6")]
+position = Vector2(-762, -315)
+
+[node name="Rock7" parent="Rock" instance=ExtResource("4_7yry6")]
+position = Vector2(550, 19)
+
+[node name="Rock9" parent="Rock" instance=ExtResource("4_7yry6")]
+position = Vector2(506, 130)
+
+[node name="Rock10" parent="Rock" instance=ExtResource("4_7yry6")]
+position = Vector2(667, 165)
+
+[node name="Rock11" parent="Rock" instance=ExtResource("4_7yry6")]
+position = Vector2(509, 280)
+
+[node name="Skull" parent="." instance=ExtResource("5_u63n0")]
+position = Vector2(260, 102)
+motion_mode = 1
+
+[node name="Skull2" parent="." instance=ExtResource("5_u63n0")]
+position = Vector2(268, -114)
+motion_mode = 1
+
+[node name="Fireball Turret" parent="." instance=ExtResource("6_gpxj7")]
+position = Vector2(160, 56)
+
+[connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]
+[connection signal="game_exited_to_menu" from="PauseMenu" to="." method="_on_pause_menu_game_exited_to_menu"]
+[connection signal="game_restarted" from="PauseMenu" to="." method="_on_pause_menu_game_restarted"]

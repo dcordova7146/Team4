@@ -5,11 +5,6 @@ signal game_restarted
 signal game_exited_to_menu
 
 
-## Hide by default.
-func _ready() -> void:
-	hide()
-
-
 ## Pause game logic.
 ##
 ## Only affects nodes whose process mode is explictly "Pausable",
