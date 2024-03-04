@@ -1,33 +1,68 @@
-extends Area2D
+extends Node2D
 
-# Preload the Bullet scene
 const BULLET: PackedScene = preload("res://scenes/playerScenes/bullet.tscn")
 
+@onready var gun_pivot: Marker2D = $GunPivot
+@onready var shooting_timer: Timer = $ShootingTimer
+@onready var cooldown_timer: Timer = $CooldownTimer
+@onready var cooldown_bar: ProgressBar = $CooldownBar
+## How long until the gun can be fired again.
+@export var cooldown_duration: float = 0.25
+## How long until the game is fired again when primary action key held.
+@export var auto_fire_duration: float = 0.75
+
+## Whether the gun still cooling down from the last time it was fired.
+##
+## If true, bullets cannot be shot.
+var is_cooling_down: bool = false
+
+
+## Set up timers for shooting and cooldown and value of cooldown progress bar.
+func _ready() -> void:
+	shooting_timer.wait_time = auto_fire_duration
+	cooldown_timer.wait_time = cooldown_duration
+	cooldown_bar.max_value = cooldown_duration
+
+
+## Shoot a bullet on primary action pressed.
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("primary_action"):
+		shoot()
+		shooting_timer.start()
+	if event.is_action_released("primary_action"):
+		shooting_timer.stop()
+
+
+## Face the mouse position at all times.
 func _physics_process(_delta: float) -> void:
-	# List of all bodies in collision area.
-	var enemies_in_range: Array[Node2D] = get_overlapping_bodies()
-	# If enemies are in range, select first and look at them.
-	if enemies_in_range.size() > 0:
-		# select target
-		var target_enemy: Node2D = enemies_in_range[0]
-		# face target
-		look_at(target_enemy.global_position)
+	gun_pivot.look_at(get_global_mouse_position())
+	if is_cooling_down:
+		cooldown_bar.value = cooldown_timer.time_left
 
 
-## Shooting logic.
+## Create a bullet with the position and rotation of this gun.
 func shoot() -> void:
-	# instatiate new bullet when func is called
+	# Don't shoot if still cooling down.
+	if is_cooling_down:
+		return;
+	
 	var new_bullet: Node2D = BULLET.instantiate()
 	var bullet_hole: Node2D = %BulletHole
-	# make bullet appear next to gun
 	new_bullet.global_position = bullet_hole.global_position
-	# make bullet rotation match the gun
 	new_bullet.global_rotation = bullet_hole.global_rotation
-	# add new bullet as child of Gun(Bullet Hole)
 	bullet_hole.add_child(new_bullet)
+	# Begin cooldown, show its progress bar, and start timer to end it.
+	is_cooling_down = true;
+	cooldown_bar.visible = true;
+	cooldown_timer.start()
 
 
-## Executes every 0.5s.
-func _on_timer_timeout() -> void:
-	# call shoot func on timer signal
+## Shoot when shooting timer times out....
+func _on_shooting_timer_timeout() -> void:
 	shoot()
+
+
+## When cooldown is over, cooling down is over and the progress bar is hidden.
+func _on_cooldown_timer_timeout() -> void:
+	is_cooling_down = false;
+	cooldown_bar.visible = false;

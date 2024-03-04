@@ -1,30 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnwpwikn763lo"]
+[gd_scene load_steps=3 format=3 uid="uid://dnwpwikn763lo"]
 
 [ext_resource type="Texture2D" uid="uid://bxu356kwn3wpy" path="res://tempAssets/gun.png" id="1_cx6ee"]
 [ext_resource type="Script" path="res://scripts/playerScripts/gun.gd" id="1_qjjkn"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_na5rg"]
-radius = 49.0102
-
-[node name="Gun" type="Area2D"]
-collision_layer = 0
-collision_mask = 2
+[node name="Gun" type="Node2D"]
 script = ExtResource("1_qjjkn")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_na5rg")
 
 [node name="GunPivot" type="Marker2D" parent="."]
 
-[node name="Gun" type="Sprite2D" parent="GunPivot"]
+[node name="Sprite" type="Sprite2D" parent="GunPivot"]
 position = Vector2(14, 0)
 texture = ExtResource("1_cx6ee")
 
-[node name="BulletHole" type="Marker2D" parent="GunPivot/Gun"]
+[node name="BulletHole" type="Marker2D" parent="GunPivot/Sprite"]
 unique_name_in_owner = true
 position = Vector2(5, -4)
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
+[node name="ShootingTimer" type="Timer" parent="."]
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CooldownBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 16.0
+offset_bottom = -24.0
+show_percentage = false
+
+[connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
