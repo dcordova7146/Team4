@@ -3,8 +3,14 @@ extends CharacterBody2D
 
 @export var health: int = 5
 @export var speed: int = 50
+@onready var health_bar: ProgressBar = $HealthBar
 ## The sibling node player.
 @onready var player: Node2D = get_node("../Player")
+
+
+## Set max value of the health bar to the initial health.
+func _ready() -> void:
+	health_bar.max_value = health
 
 
 func _physics_process(_delta: float) -> void:
@@ -25,3 +31,6 @@ func take_damage() -> void:
 	# When health 0, destroy node (kills the mob)
 	if health == 0: 
 		queue_free()
+	# Update health bar to reflect health and display.
+	health_bar.value = health
+	health_bar.visible = true

@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnwpwikn763lo"]
+[gd_scene load_steps=5 format=3 uid="uid://dnwpwikn763lo"]
 
 [ext_resource type="Texture2D" uid="uid://bxu356kwn3wpy" path="res://tempAssets/gun.png" id="1_cx6ee"]
 [ext_resource type="Script" path="res://scripts/playerScripts/gun.gd" id="1_qjjkn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
+bg_color = Color(0, 0, 0, 0.266667)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi6y3"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_qjjkn")
@@ -24,9 +30,11 @@ one_shot = true
 [node name="CooldownBar" type="ProgressBar" parent="."]
 visible = false
 offset_left = -16.0
-offset_top = -32.0
+offset_top = -24.0
 offset_right = 16.0
-offset_bottom = -24.0
+offset_bottom = -20.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ki7oq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fi6y3")
 show_percentage = false
 
 [connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
