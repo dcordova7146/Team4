@@ -1,3 +1,5 @@
+## Contributors: James
+
 extends CharacterBody2D
 
 ## Move speed multiplier.

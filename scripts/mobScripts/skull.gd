@@ -1,3 +1,5 @@
+## Contributors: James
+
 class_name Skull
 extends CharacterBody2D
 

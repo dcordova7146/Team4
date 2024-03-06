@@ -1,3 +1,5 @@
+## Contributors: James
+
 extends Area2D
 
 var travelled_distance = 0  # Variable to track distance traveled by the bullet.
