@@ -1,3 +1,5 @@
+## Contributors: Diego, Karwai
+
 class_name Room
 extends Node2D
 

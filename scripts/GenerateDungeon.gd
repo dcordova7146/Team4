@@ -1,3 +1,5 @@
+## Contributors: Diego, Karwai
+
 extends Node
 
 var room: PackedScene = preload("res://scenes/room.tscn")

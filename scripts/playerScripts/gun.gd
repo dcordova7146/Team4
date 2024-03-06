@@ -1,4 +1,4 @@
-## Contributors: James
+## Contributors: James, Karwai
 
 extends Node2D
 

@@ -1,3 +1,5 @@
+## Contributors: Diego, Karwai
+
 extends Node
 #singleton script
 

@@ -1,3 +1,5 @@
+## Contributors: Karwai
+
 extends Node
 ## The main scene, holding all other nodes.
 

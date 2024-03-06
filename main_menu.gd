@@ -1,3 +1,5 @@
+## Contributors: Karwai
+
 class_name MainMenu 
 extends CanvasLayer
 ## The main menu, which is the first screen displayed.

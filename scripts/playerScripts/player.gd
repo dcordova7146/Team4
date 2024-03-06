@@ -1,4 +1,4 @@
-## Contributors: James
+## Contributors: James, Diego, Karwai
 
 extends CharacterBody2D
 

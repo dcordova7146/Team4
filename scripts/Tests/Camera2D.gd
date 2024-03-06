@@ -1,3 +1,5 @@
+## Contributors: Diego, Karwai
+
 extends Camera2D
 
 

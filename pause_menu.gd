@@ -1,3 +1,5 @@
+## Contributors: Karwai
+
 extends CanvasLayer
 ## Menu that appears when the game is paused.
 
