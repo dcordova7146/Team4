@@ -2,10 +2,6 @@
 
 **CSCI 49900 Advanced Applications: A Capstone for Majors, Spring 2024**
 
-## Due Dates
-
-Code Submission 1: Wednesday, March 6th 2024
-
 ## Running the Game
 
 ### Launch Instructions
@@ -14,3 +10,9 @@ Code Submission 1: Wednesday, March 6th 2024
 2. Download Game's Source code from this repository, and unzip on local machine.
 3. Open Godot, and import game source code as project
 4. Press F5 to run 'main scene'(technical demo of our game)
+
+## Code Contributions
+
+## Due Dates
+
+Code Submission 1: Wednesday, March 6th 2024
