@@ -1,3 +1,5 @@
+## Contributors: James, Karwai
+
 extends Area2D
 
 ## Speed of the bullet.

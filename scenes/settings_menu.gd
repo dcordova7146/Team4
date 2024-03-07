@@ -1,3 +1,5 @@
+## Contributors: Karwai
+
 class_name SettingsMenu
 extends CanvasLayer
 ## The settings menu, containing controls to configure the game.

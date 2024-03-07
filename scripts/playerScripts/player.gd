@@ -1,4 +1,5 @@
-#Diego Cordova
+## Contributors: James, Diego, Karwai
+
 extends CharacterBody2D
 
 # Move speed multiplier.

@@ -1,3 +1,5 @@
+## Contributors: Diego, Karwai
+
 class_name TestDungeon extends Node2D
 
 signal game_restarted

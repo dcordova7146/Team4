@@ -1,3 +1,5 @@
+## Contributors: James, Karwai
+
 extends Node2D
 
 const BULLET: PackedScene = preload("res://scenes/playerScenes/bullet.tscn")
