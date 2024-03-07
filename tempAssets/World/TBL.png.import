@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d078e6vjktef3"
-path="res://.godot/imported/TBL.png-6dd493cb2fe18f48dd012ed21d374491.ctex"
+path="res://.godot/imported/TBL.png-adf3847d22df11c357f1c97dca2d613e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tempAssets/world/TBL.png"
-dest_files=["res://.godot/imported/TBL.png-6dd493cb2fe18f48dd012ed21d374491.ctex"]
+source_file="res://tempAssets/World/TBL.png"
+dest_files=["res://.godot/imported/TBL.png-adf3847d22df11c357f1c97dca2d613e.ctex"]
 
 [params]
 

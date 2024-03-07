@@ -1,3 +1,4 @@
+#Diego Cordova
 class_name Dungeon
 extends Node2D
 
@@ -9,7 +10,7 @@ signal game_exited_to_menu
 func _ready() -> void:
 	visualize(GenerateDungeon.generate(randi_range(-1000,1000)))
 
-
+#visualize function is used to turn the data structure that is the dungeon into a real in game scene of rooms
 func visualize(dungeon: Dictionary) -> void:
 	for i: int in range(0, spawn.get_child_count()):
 		spawn.get_child(i).queue_free()
@@ -18,12 +19,12 @@ func visualize(dungeon: Dictionary) -> void:
 		var room: Node2D = dungeon[key]
 		spawn.add_child(room)
 
-
+#temp function to see effectiveness of random generation
 func _on_button_pressed() -> void:
 	randomize()
 	visualize(GenerateDungeon.generate(randi_range(-1000,1000)))
 
-
+#Karwei
 ## Pass signal to main, then delete self.
 func _on_pause_menu_game_restarted() -> void:
 	game_restarted.emit()

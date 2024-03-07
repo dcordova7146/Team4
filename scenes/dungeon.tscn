@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcj36edtxg3ck"]
+[gd_scene load_steps=8 format=3 uid="uid://dcj36edtxg3ck"]
 
 [ext_resource type="Script" path="res://scripts/dungeon.gd" id="1_1hjgm"]
 [ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://pause_menu.tscn" id="2_img3q"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://scenes/playerScenes/player.tscn" id="3_51vlb"]
 [ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://scenes/propScenes/rock.tscn" id="4_7yry6"]
+[ext_resource type="Script" path="res://scripts/Tests/Camera2D.gd" id="4_hmp84"]
 [ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://scenes/mobScenes/skull.tscn" id="5_u63n0"]
 [ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://scenes/propScenes/fireball_turret.tscn" id="6_gpxj7"]
 
@@ -29,6 +30,9 @@ visible = false
 [node name="Player" parent="." instance=ExtResource("3_51vlb")]
 z_index = 2
 position = Vector2(32, 112)
+
+[node name="Camera2D2" type="Camera2D" parent="Player"]
+script = ExtResource("4_hmp84")
 
 [node name="Rock" parent="." instance=ExtResource("4_7yry6")]
 position = Vector2(-479, 85)

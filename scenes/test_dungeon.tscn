@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://2xljtsdemkt8"]
+[gd_scene load_steps=9 format=3 uid="uid://2xljtsdemkt8"]
 
 [ext_resource type="Script" path="res://scripts/Tests/TestDungeon.gd" id="1_87vrx"]
-[ext_resource type="PackedScene" uid="uid://xrgbbtphhwjn" path="res://scenes/room.tscn" id="2_u1vqi"]
+[ext_resource type="PackedScene" uid="uid://bxvfe2h3ur6ol" path="res://scenes/room.tscn" id="2_u1vqi"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://scenes/playerScenes/player.tscn" id="3_lt8jm"]
 [ext_resource type="Script" path="res://scripts/Tests/Camera2D.gd" id="4_ri72g"]
 [ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://scenes/propScenes/rock.tscn" id="5_2k8y0"]

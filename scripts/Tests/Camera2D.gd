@@ -1,3 +1,4 @@
+#Diego Cordova
 extends Camera2D
 
 
@@ -8,4 +9,5 @@ func _ready():
 
 ## Move camera to room entered.
 func _on_room_entered(room: Node2D) -> void:
+	print("cam:room enter")
 	position = room.position

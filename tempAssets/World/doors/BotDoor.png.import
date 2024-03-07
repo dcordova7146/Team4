@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c87xswjoaabdj"
-path="res://.godot/imported/RightDoor.png-97f7c1b803e8ad4bafa54323aa475351.ctex"
+uid="uid://dkf6rnbpwdnay"
+path="res://.godot/imported/BotDoor.png-cdeba7cd2f7d2486af964428846b507c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tempAssets/world/RightDoor.png"
-dest_files=["res://.godot/imported/RightDoor.png-97f7c1b803e8ad4bafa54323aa475351.ctex"]
+source_file="res://tempAssets/World/doors/BotDoor.png"
+dest_files=["res://.godot/imported/BotDoor.png-cdeba7cd2f7d2486af964428846b507c.ctex"]
 
 [params]
 

@@ -1,3 +1,4 @@
+#Diego Cordova + Optimization Done by Karwei
 extends Node
 
 var room: PackedScene = preload("res://scenes/room.tscn")
@@ -5,13 +6,15 @@ var room: PackedScene = preload("res://scenes/room.tscn")
 @export var max_rooms: int = 15
 @export var generation_chance: int = 25
 
+#Karwei addition to ease readability 
 const direction_vector: Dictionary = {
 	1: Vector2(1, 0),
 	2: Vector2(-1, 0),
 	3: Vector2(0, 1),
 	4: Vector2(0, -1),
 }
-
+#Diego Function optimized by karwei
+#The basic walker that starts at a base room and randomly chooses a direction to walk in and add a room if one does not already exist and then calling the connect room function to have a record of what is connected with what
 func generate(dungeon_seed: int) -> Dictionary:
 	seed(dungeon_seed)
 	var dungeon: Dictionary = {}
@@ -37,19 +40,23 @@ func generate(dungeon_seed: int) -> Dictionary:
 				var current_room: Room = dungeon.get(key)
 				var adjacent_room: Room = dungeon.get(adjacent_room_pos)
 				if(current_room.connectedRooms.get(direction) == null):
-					connectRooms(current_room, adjacent_room, direction)
+					current_room.connectRooms(adjacent_room, direction)
+	#wip check for dungeon to not have the possibility of a straight line 
 	#while(!check(dungeon)):
 		#for key: Vector2 in dungeon.keys():
 			#(dungeon.get(key) as Node).queue_free()
 		#dungeon = generate(dungeon_seed * randf_range(-1,1))
 	return dungeon
 	
-func connectRooms(room1: Room, room2: Room, direction: Vector2) -> void:
-	room1.connectedRooms[direction] = room2
-	room2.connectedRooms[-direction] = room1
-	room1.connections += 1
-	room2.connections += 1
-	
+	#changed the connect Rooms function to exist within the room itself to allow me to test this function outside the dungeon generation
+#func connectRooms(room1: Room, room2: Room, direction: Vector2) -> void:
+	#room1.connectedRooms[direction] = room2
+	#room2.connectedRooms[-direction] = room1
+	#room1.connections += 1
+	#room2.connections += 1
+	#
+#Diego
+#wip check to allow a room to have a minimum amount of branching paths to add uniqueness
 #func check(dungeon: Dictionary) -> bool:
 	#var branchRooms: int = 0
 	#for key: Vector2 in dungeon.keys():
