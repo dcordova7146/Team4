@@ -11,7 +11,9 @@
 3. **Open Godot and Import Project**: Launch Godot and import the game source code as a project.
 4. **Run the Main Scene**: Press F5 to run the 'main scene', which serves as the technical demo of our game.
 
-## Code Contributions
+## Additional Code Contributions
+
+- **Basic Distribution Site**: A template React website designed for distributing the game when it is further completed(Done by James). [Repo](https://github.com/Jamcre/gamesite), ["Deployed Site"](https://capstoneprojectgamesite.onrender.com)
 
 ## Due Dates
 
