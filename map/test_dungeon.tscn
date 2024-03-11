@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://2xljtsdemkt8"]
 
-[ext_resource type="Script" path="res://scripts/Tests/TestDungeon.gd" id="1_87vrx"]
-[ext_resource type="PackedScene" uid="uid://bxvfe2h3ur6ol" path="res://scenes/room.tscn" id="2_u1vqi"]
-[ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://scenes/playerScenes/player.tscn" id="3_lt8jm"]
-[ext_resource type="Script" path="res://scripts/Tests/Camera2D.gd" id="4_ri72g"]
-[ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://scenes/propScenes/rock.tscn" id="5_2k8y0"]
-[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://scenes/mobScenes/skull.tscn" id="6_nxtrn"]
-[ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://scenes/propScenes/fireball_turret.tscn" id="7_ekbal"]
-[ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://pause_menu.tscn" id="7_nuam3"]
+[ext_resource type="Script" path="res://map/test_dungeon.gd" id="1_87vrx"]
+[ext_resource type="PackedScene" uid="uid://bxvfe2h3ur6ol" path="res://map/room.tscn" id="2_u1vqi"]
+[ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="3_lt8jm"]
+[ext_resource type="Script" path="res://map/Camera2D.gd" id="4_ri72g"]
+[ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://map/rock.tscn" id="5_2k8y0"]
+[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="6_nxtrn"]
+[ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://enemy/fireball_turret.tscn" id="7_ekbal"]
+[ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://ui/pause_menu.tscn" id="7_nuam3"]
 
 [node name="TestDungeon" type="Node2D"]
 process_mode = 1

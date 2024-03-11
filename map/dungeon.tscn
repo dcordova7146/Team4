@@ -1,13 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcj36edtxg3ck"]
+[gd_scene load_steps=9 format=3 uid="uid://dcj36edtxg3ck"]
 
-[ext_resource type="Script" path="res://scripts/dungeon.gd" id="1_1hjgm"]
-[ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://pause_menu.tscn" id="2_img3q"]
-[ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://scenes/playerScenes/player.tscn" id="3_51vlb"]
-[ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://scenes/propScenes/rock.tscn" id="4_7yry6"]
-[ext_resource type="Script" path="res://scripts/Tests/Camera2D.gd" id="4_hmp84"]
-[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://scenes/mobScenes/skull.tscn" id="5_u63n0"]
-[ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://scenes/propScenes/fireball_turret.tscn" id="6_gpxj7"]
-[ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="7_wap1c"]
+[ext_resource type="Script" path="res://map/dungeon.gd" id="1_1hc38"]
+[ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://ui/pause_menu.tscn" id="2_b0rhl"]
+[ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="3_fe6pl"]
+[ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="4_ep5ry"]
+[ext_resource type="Script" path="res://map/Camera2D.gd" id="5_0dmmm"]
+[ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://map/rock.tscn" id="6_pociu"]
+[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="7_lll3c"]
+[ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://enemy/fireball_turret.tscn" id="8_vdk44"]
 
 [node name="Dungeon" type="Node2D"]
 process_mode = 1

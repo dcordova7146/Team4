@@ -10,7 +10,7 @@ func _physics_process(delta):
 		look_at(target_enemy.global_position) # face target
 
 func shoot(): # function for shooting logic
-	const FIREBALL = preload("res://scenes/propScenes/fireball.tscn") # Preload the Bullet scene
+	const FIREBALL = preload("res://projectile/fireball.tscn") # Preload the Bullet scene
 	var new_fireball = FIREBALL.instantiate() # instatiate new fireball when func is called
 	new_fireball.global_position = %TurretHole.global_position # make fireball appear next to gun
 	new_fireball.global_rotation = %TurretHole.global_rotation # make fireball rotation match the gun

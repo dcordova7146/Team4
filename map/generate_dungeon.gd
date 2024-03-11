@@ -1,7 +1,7 @@
 #Diego Cordova + Optimization Done by Karwei
 extends Node
 
-var room: PackedScene = preload("res://scenes/room.tscn")
+var room: PackedScene = preload("res://map/room.tscn")
 @export var min_rooms: int = 9
 @export var max_rooms: int = 15
 @export var generation_chance: int = 25

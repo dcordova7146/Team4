@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dnwpwikn763lo"]
 
-[ext_resource type="Texture2D" uid="uid://bxu356kwn3wpy" path="res://tempAssets/gun.png" id="1_cx6ee"]
-[ext_resource type="Script" path="res://scripts/playerScripts/gun.gd" id="1_qjjkn"]
+[ext_resource type="Script" path="res://player/gun.gd" id="1_tws20"]
+[ext_resource type="Texture2D" uid="uid://bxu356kwn3wpy" path="res://tempAssets/gun.png" id="2_h0he5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
 bg_color = Color(0, 0, 0, 0.266667)
@@ -10,13 +10,13 @@ bg_color = Color(0, 0, 0, 0.266667)
 bg_color = Color(1, 1, 1, 1)
 
 [node name="Gun" type="Node2D"]
-script = ExtResource("1_qjjkn")
+script = ExtResource("1_tws20")
 
 [node name="GunPivot" type="Marker2D" parent="."]
 
 [node name="Sprite" type="Sprite2D" parent="GunPivot"]
 position = Vector2(14, 0)
-texture = ExtResource("1_cx6ee")
+texture = ExtResource("2_h0he5")
 
 [node name="BulletHole" type="Marker2D" parent="GunPivot/Sprite"]
 unique_name_in_owner = true

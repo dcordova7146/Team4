@@ -5,7 +5,7 @@ extends Node2D
 signal game_restarted
 signal game_exited_to_menu
 
-const LIFE = preload("res://life.tscn")
+const LIFE = preload("res://drop/life.tscn")
 
 @onready var spawn: Node2D = $Spawn
 

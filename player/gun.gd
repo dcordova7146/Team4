@@ -2,7 +2,7 @@
 
 extends Node2D
 
-const BULLET: PackedScene = preload("res://scenes/playerScenes/bullet.tscn")
+const BULLET: PackedScene = preload("res://projectile/bullet.tscn")
 ## How long until the gun can be fired again.
 @export var cooldown_duration: float = 0.25
 ## How long until the game is fired again when primary action key held.
