@@ -3,20 +3,19 @@
 extends Node2D
 
 const BULLET: PackedScene = preload("res://scenes/playerScenes/bullet.tscn")
-
-@onready var gun_pivot: Marker2D = $GunPivot
-@onready var shooting_timer: Timer = $ShootingTimer
-@onready var cooldown_timer: Timer = $CooldownTimer
-@onready var cooldown_bar: ProgressBar = $CooldownBar
 ## How long until the gun can be fired again.
 @export var cooldown_duration: float = 0.25
 ## How long until the game is fired again when primary action key held.
-@export var auto_fire_duration: float = 0.75
-
+@export var auto_fire_duration: float = 0.5
 ## Whether the gun still cooling down from the last time it was fired.
 ##
 ## If true, bullets cannot be shot.
 var is_cooling_down: bool = false
+@onready var gun_pivot: Marker2D = $GunPivot
+@onready var shooting_timer: Timer = $ShootingTimer
+@onready var cooldown_timer: Timer = $CooldownTimer
+@onready var cooldown_bar: ProgressBar = $CooldownBar
+@onready var bullet_hole: Node2D = %BulletHole
 
 
 ## Set up timers for shooting and cooldown and value of cooldown progress bar.
@@ -49,13 +48,12 @@ func shoot() -> void:
 		return;
 	
 	var new_bullet: Node2D = BULLET.instantiate()
-	var bullet_hole: Node2D = %BulletHole
 	new_bullet.global_position = bullet_hole.global_position
 	new_bullet.global_rotation = bullet_hole.global_rotation
 	bullet_hole.add_child(new_bullet)
 	# Begin cooldown, show its progress bar, and start timer to end it.
-	is_cooling_down = true;
-	cooldown_bar.visible = true;
+	is_cooling_down = true
+	cooldown_bar.visible = true
 	cooldown_timer.start()
 
 
@@ -66,5 +64,5 @@ func _on_shooting_timer_timeout() -> void:
 
 ## When cooldown is over, cooling down is over and the progress bar is hidden.
 func _on_cooldown_timer_timeout() -> void:
-	is_cooling_down = false;
-	cooldown_bar.visible = false;
+	is_cooling_down = false
+	cooldown_bar.visible = false

@@ -5,10 +5,14 @@ extends Node2D
 signal game_restarted
 signal game_exited_to_menu
 
+const LIFE = preload("res://life.tscn")
+
 @onready var spawn: Node2D = $Spawn
+
 
 func _ready() -> void:
 	visualize(GenerateDungeon.generate(randi_range(-1000,1000)))
+	Events.enemy_died.connect(_on_enemy_died)
 
 #visualize function is used to turn the data structure that is the dungeon into a real in game scene of rooms
 func visualize(dungeon: Dictionary) -> void:
@@ -35,3 +39,10 @@ func _on_pause_menu_game_restarted() -> void:
 func _on_pause_menu_game_exited_to_menu() -> void:
 	game_exited_to_menu.emit()
 	queue_free()
+
+
+## Spawn life pickup at position of where enemy died.
+func _on_enemy_died(position: Vector2) -> void:
+	var life: Node2D = LIFE.instantiate()
+	life.global_position = position
+	add_child(life)

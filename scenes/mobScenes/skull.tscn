@@ -13,8 +13,8 @@ bg_color = Color(0, 0, 0, 0.266667)
 bg_color = Color(0.596078, 0, 0, 1)
 
 [node name="Skull" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 3
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_wcjy6")
 
 [node name="Skull" type="Sprite2D" parent="."]

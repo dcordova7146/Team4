@@ -7,12 +7,16 @@
 [ext_resource type="Script" path="res://scripts/Tests/Camera2D.gd" id="4_hmp84"]
 [ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://scenes/mobScenes/skull.tscn" id="5_u63n0"]
 [ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://scenes/propScenes/fireball_turret.tscn" id="6_gpxj7"]
+[ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="7_wap1c"]
 
 [node name="Dungeon" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_1hjgm")
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="PauseMenu" parent="." instance=ExtResource("2_img3q")]
+visible = false
+
+[node name="HUD" parent="." instance=ExtResource("7_wap1c")]
 
 [node name="Button" type="Button" parent="HUD"]
 offset_left = 1167.0
@@ -21,9 +25,6 @@ offset_right = 1247.0
 offset_bottom = 684.0
 text = "Generate
 "
-
-[node name="PauseMenu" parent="." instance=ExtResource("2_img3q")]
-visible = false
 
 [node name="Spawn" type="Node2D" parent="."]
 
@@ -75,6 +76,6 @@ motion_mode = 1
 [node name="Fireball Turret" parent="." instance=ExtResource("6_gpxj7")]
 position = Vector2(160, 56)
 
-[connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]
 [connection signal="game_exited_to_menu" from="PauseMenu" to="." method="_on_pause_menu_game_exited_to_menu"]
 [connection signal="game_restarted" from="PauseMenu" to="." method="_on_pause_menu_game_restarted"]
+[connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]

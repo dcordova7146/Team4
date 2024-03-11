@@ -6,16 +6,29 @@ extends CanvasLayer
 signal game_restarted
 signal game_exited_to_menu
 
+@onready var buttons: VBoxContainer = $Buttons
+@onready var label: Label = $PauseLabel
 
-## Pause game logic.
+
+## Listen to player death event.
+func _ready() -> void:
+	Events.player_died.connect(_on_player_died)
+
+
+## Pause game logic and display menu with given message. 
 ##
 ## Only affects nodes whose process mode is explictly "Pausable",
 ## as the main scene's process mode is "Always".
-func pause() -> void:
-	get_tree().paused = true;
+func pause(message: String = "Paused") -> void:
+	get_tree().paused = true
+	label.text = message
 	show()
-	# Focus the first button.
-	($Buttons/ResumeButton as Button).grab_focus()
+	# Focus the first non-disabled button.
+	for i: int in buttons.get_child_count():
+		var button: Button = buttons.get_child(i)
+		if not button.disabled:
+			button.grab_focus()
+			break
 	
 
 ## Hide self and unpause game. 
@@ -31,6 +44,7 @@ func _input(event: InputEvent) -> void:
 			resume()
 		else:
 			pause()
+
 
 ## Unpause when "Resume" button pressed.
 func _on_resume_button_pressed() -> void:
@@ -52,3 +66,10 @@ func _on_quit_to_menu_button_pressed() -> void:
 ## Exit game.
 func _on_quit_to_desktop_button_pressed() -> void:
 	get_tree().quit()
+
+
+## Pause game with "Game Over!" message and disable resume button.
+func _on_player_died() -> void:
+	var resume_button: Button = $Buttons/ResumeButton
+	resume_button.disabled = true
+	pause("Game Over!")

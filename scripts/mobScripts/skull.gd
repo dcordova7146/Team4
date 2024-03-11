@@ -31,8 +31,14 @@ func _physics_process(_delta: float) -> void:
 func take_damage() -> void: 
 	health -= 1
 	# When health 0, destroy node (kills the mob)
-	if health == 0: 
-		queue_free()
+	if health == 0:
+		die()
 	# Update health bar to reflect health and display.
 	health_bar.value = health
 	health_bar.visible = true
+
+
+## Drop a life and then delete self.
+func die() -> void:
+	Events.enemy_died.emit(global_position)
+	queue_free()

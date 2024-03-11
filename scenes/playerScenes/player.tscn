@@ -8,7 +8,8 @@
 size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 3
+collision_layer = 2
+collision_mask = 23
 motion_mode = 1
 script = ExtResource("1_iitf2")
 
@@ -19,3 +20,16 @@ shape = SubResource("RectangleShape2D_ysv7g")
 texture = ExtResource("2_22u6h")
 
 [node name="Gun" parent="." instance=ExtResource("3_mw41a")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="BlinkTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]
