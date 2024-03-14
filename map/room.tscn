@@ -64,21 +64,21 @@ shape = SubResource("RectangleShape2D_m1m3f")
 
 [node name="TopLeftCorner" type="CollisionPolygon2D" parent="Walls"]
 build_mode = 1
-polygon = PackedVector2Array(0, 0, 131, 0, 140, 14, 18, 14, 18, 58, 0, 50)
+polygon = PackedVector2Array(0, 0, 130, 0, 138, 13, 17, 13, 17, 58, 0, 50)
 
 [node name="TopRightCorner" type="CollisionPolygon2D" parent="Walls"]
 position = Vector2(310, 0)
 build_mode = 1
-polygon = PackedVector2Array(0, 0, -131, 0, -137, 14, -18, 14, -18, 58, 0, 50)
+polygon = PackedVector2Array(0, 0, -131, 0, -136, 13, -17, 13, -17, 57, 0, 50)
 
 [node name="BotLeftCorner" type="CollisionPolygon2D" parent="Walls"]
 position = Vector2(0, 138)
-polygon = PackedVector2Array(0, 0, 0, -56, 18, -62, 18, -11, 138, -11, 132, 0)
+polygon = PackedVector2Array(0, 0, 0, -56, 17, -62, 17, -10, 136, -10, 131, 0)
 
 [node name="BotRightCorner" type="CollisionPolygon2D" parent="Walls"]
 position = Vector2(310, 138)
 build_mode = 1
-polygon = PackedVector2Array(0, 0, 0, -56, -18, -62, -18, -11, -139, -11, -135, 0)
+polygon = PackedVector2Array(0, 0, 0, -56, -17, -62, -17, -10, -138, -10, -135, 0)
 
 [node name="Play Area" type="Area2D" parent="."]
 position = Vector2(155, 69)
