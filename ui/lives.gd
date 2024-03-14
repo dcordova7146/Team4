@@ -22,7 +22,7 @@ const DEFAULT_SIZE: float = 50.0
 
 ## Listen to health changes.
 func _ready() -> void:
-	Events.health_changed.connect(_on_health_changed)
+	Events.lives_changed.connect(_on_lives_changed)
 
 
 ## Draw filled hearts, followed by remaining unfilled hearts,
@@ -68,10 +68,11 @@ static func draw_heart(
 			Vector2(0.25, 0.5) * size + pos,
 	])
 	canvas.draw_colored_polygon(points, color)
-	
 
-## Redraw with given values.
-func _on_health_changed(lives: int, max_lives: int) -> void:
-	value = lives
+
+## Redraw HUD life bar with given values.
+func _on_lives_changed(current_lives: int, max_lives: int) -> void:
+	print("REDRAWING...")
+	value = current_lives
 	max_value = max_lives
 	queue_redraw()

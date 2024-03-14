@@ -17,7 +17,7 @@ extends CharacterBody2D
 
 ## Broadcast health state on ready so it may be rendered by the HUD.
 func _ready() -> void:
-	Events.health_changed.emit(lives, max_lives)
+	Events.lives_changed.emit(lives, max_lives)
 
 
 func _physics_process(_delta: float) -> void:
@@ -40,7 +40,6 @@ func process_collisions() -> void:
 	for i: int in get_slide_collision_count():
 		var collision: KinematicCollision2D = get_slide_collision(i)
 		var collider: Object = collision.get_collider()
-		print(collider)
 		var enemy: Skull = collider as Skull
 		if enemy:
 			lose_life()
@@ -61,7 +60,7 @@ func lose_life() -> void:
 	if lives == 0: 
 		Events.player_died.emit()
 	# Let HUD life bar know health state.
-	Events.health_changed.emit(lives, max_lives)
+	Events.lives_changed.emit(lives, max_lives)
 	# Make temporarily invincible.
 	invincibility_timer.start()
 	# Make appearance blink rapidly.
@@ -73,7 +72,7 @@ func gain_life() -> void:
 	if lives == max_lives:
 		return
 	lives += 1
-	Events.health_changed.emit(lives, max_lives)
+	Events.lives_changed.emit(lives, max_lives)
 
 
 ## Toggle visibility.

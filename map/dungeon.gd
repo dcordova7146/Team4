@@ -5,12 +5,15 @@ extends Node2D
 signal game_restarted
 signal game_exited_to_menu
 
-const LIFE = preload("res://drop/life.tscn")
+const LIFE: PackedScene = preload("res://drop/life.tscn")
+const HEALTH_CHANGE: PackedScene = preload("res://ui/health_change.tscn")
 
 @onready var spawn: Node2D = $Spawn
+@onready var lives: Lives = $HUD/Lives
 
 
 func _ready() -> void:
+	Events.health_changed.connect(_on_health_changed)
 	visualize(GenerateDungeon.generate(randi_range(-1000,1000)))
 	Events.enemy_died.connect(_on_enemy_died)
 
@@ -42,7 +45,14 @@ func _on_pause_menu_game_exited_to_menu() -> void:
 
 
 ## Spawn life pickup at position of where enemy died.
-func _on_enemy_died(position: Vector2) -> void:
+func _on_enemy_died(pos: Vector2) -> void:
 	var life: Node2D = LIFE.instantiate()
-	life.global_position = position
+	life.position = pos
 	add_child(life)
+
+
+func _on_health_changed(pos: Vector2, amount: int) -> void:
+	var health_change: HealthChange = HEALTH_CHANGE.instantiate()
+	health_change.position = pos
+	health_change.display(amount)
+	add_child(health_change)

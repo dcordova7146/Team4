@@ -30,6 +30,7 @@ func _physics_process(_delta: float) -> void:
 # Damage detection function, decrement by 1
 func take_damage() -> void: 
 	health -= 1
+	Events.health_changed.emit(position, -1)
 	# When health 0, destroy node (kills the mob)
 	if health == 0:
 		die()
