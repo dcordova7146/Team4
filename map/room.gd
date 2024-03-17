@@ -39,13 +39,12 @@ var connections: int = 0
 func _ready():
 	updateRoom()
 
-# Emit room entered signal if body entered is the player.
+#Emit room entered signal if body entered is the player.
 #function is used to talk to the camera to lock it to a room instead of free roam camera
 #camera is currently work in progress
 func _on_play_area_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
-		#to do create a lock door function which should lock all doors and not unlock until all enemies are defeated
-		Events.room_entered.emit(self)
+	print("HI")
+	Events.room_entered.emit(self)
 
 #function is used to update the connected rooms dictionary based on room generation
 #in order to make traversal more interesting not all adjacent rooms are connected 

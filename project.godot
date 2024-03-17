@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GenerateDungeon="*res://map/generate_dungeon.gd"
-Events="*res://events.gd"
+Events="*res://Scripts/events.gd"
 
 [debug]
 
@@ -76,7 +76,7 @@ pause_resume={
 [layer_names]
 
 2d_physics/layer_1="walls"
-2d_physics/layer_2="player"
+2d_physics/layer_2="Player(Scan)"
 2d_physics/layer_3="enemies"
 2d_physics/layer_4="bullets"
 2d_physics/layer_5="pickups"

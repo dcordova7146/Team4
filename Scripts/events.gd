@@ -1,4 +1,4 @@
-#Diego Cordova
+#Diego, Karwei
 extends Node
 #singleton script
 #which will keep track of game state and logic
