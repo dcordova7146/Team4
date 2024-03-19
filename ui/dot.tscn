@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0pv1j1w1ak38"]
+
+[ext_resource type="Script" path="res://ui/dot.gd" id="1_wmf8e"]
+
+[node name="Dot" type="Node2D"]
+visibility_layer = 4
+script = ExtResource("1_wmf8e")

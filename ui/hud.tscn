@@ -6,3 +6,15 @@
 
 [node name="Lives" type="Node2D" parent="."]
 script = ExtResource("1_74fjh")
+
+[node name="Minimap" type="ColorRect" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_bottom = 180.0
+grow_horizontal = 0
+color = Color(0, 0, 0, 0.266667)
+
+[node name="TextureRect" type="TextureRect" parent="Minimap"]
+layout_mode = 0

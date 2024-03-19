@@ -80,6 +80,9 @@ zoom(test)={
 
 [layer_names]
 
+2d_render/layer_1="all"
+2d_render/layer_2="main"
+2d_render/layer_3="map"
 2d_physics/layer_1="walls"
 2d_physics/layer_2="Player(Scan)"
 2d_physics/layer_3="enemies"

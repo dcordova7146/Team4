@@ -10,12 +10,22 @@ const HEALTH_CHANGE: PackedScene = preload("res://ui/health_change.tscn")
 
 @onready var spawn: Node2D = $Spawn
 @onready var lives: Lives = $HUD/Lives
+@onready var player: Node2D = $Player
+@onready var minimap: SubViewport = $MinimapViewport
+@onready var minimap_camera: Camera2D = $MinimapViewport/MinimapCamera
+@onready var hud_minimap: TextureRect = $HUD/Minimap/TextureRect
 
 
 func _ready() -> void:
+	# Connect minimap viewport to HUD.
+	minimap.world_2d = get_viewport().world_2d	
+	hud_minimap.texture = minimap.get_texture()
+	# Listen to events.
 	Events.health_changed.connect(_on_health_changed)
-	visualize(GenerateDungeon.generate(randi_range(-1000,1000)))
 	Events.enemy_died.connect(_on_enemy_died)
+	# Create dungeon.
+	visualize(GenerateDungeon.generate(randi_range(-1000,1000)))
+
 
 #visualize function is used to turn the data structure that is the dungeon into a real in game scene of rooms
 func visualize(dungeon: Dictionary) -> void:

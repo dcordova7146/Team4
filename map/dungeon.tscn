@@ -16,6 +16,16 @@ script = ExtResource("1_1hjgm")
 [node name="PauseMenu" parent="." instance=ExtResource("2_img3q")]
 visible = false
 
+[node name="MinimapViewport" type="SubViewport" parent="."]
+transparent_bg = true
+canvas_cull_mask = 4294967293
+size = Vector2i(320, 180)
+
+[node name="MinimapCamera" type="Camera2D" parent="MinimapViewport"]
+offset = Vector2(150, 60)
+zoom = Vector2(0.25, 0.25)
+script = ExtResource("4_hmp84")
+
 [node name="HUD" parent="." instance=ExtResource("7_wap1c")]
 
 [node name="Generate Dungeon Test Button" type="Button" parent="HUD"]
