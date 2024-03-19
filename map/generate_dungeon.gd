@@ -22,7 +22,9 @@ func generate(dungeon_seed: int) -> Dictionary:
 	# Choose random total room count.
 	var size: int = randi_range(min_rooms, max_rooms)
 	# Add first room.
-	dungeon[Vector2(0, 0)] = room.instantiate()
+	var startRoom = room.instantiate()
+	dungeon[Vector2(0, 0)] = startRoom
+	
 	# Keep adding rooms until total room count is reached.
 	while(roomsAdded < size):
 		# For every existing room, try adding an adjacent room.

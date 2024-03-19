@@ -29,6 +29,7 @@ func visualize(dungeon: Dictionary) -> void:
 #temp function to see effectiveness of random generation
 func _on_button_pressed() -> void:
 	randomize()
+	$Player.position =Vector2(0,0) #whenever generate a room reset player to start room
 	visualize(GenerateDungeon.generate(randi_range(-1000,1000)))
 
 #Karwei
@@ -56,3 +57,5 @@ func _on_health_changed(pos: Vector2, amount: int) -> void:
 	health_change.position = pos
 	health_change.display(amount)
 	add_child(health_change)
+
+

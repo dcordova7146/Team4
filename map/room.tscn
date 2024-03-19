@@ -104,6 +104,8 @@ position = Vector2(0, 1.66666)
 shape = SubResource("RectangleShape2D_pgx51")
 debug_color = Color(0.694118, 0.286275, 1, 0.419608)
 
+[node name="BaseSpawn" type="Marker2D" parent="Play Area"]
+
 [node name="North" type="Area2D" parent="." groups=["RoomScanners"]]
 position = Vector2(154, -11)
 

@@ -18,7 +18,7 @@ visible = false
 
 [node name="HUD" parent="." instance=ExtResource("7_wap1c")]
 
-[node name="Button" type="Button" parent="HUD"]
+[node name="Generate Dungeon Test Button" type="Button" parent="HUD"]
 visible = false
 offset_left = 1167.0
 offset_top = 653.0
@@ -76,12 +76,12 @@ motion_mode = 1
 position = Vector2(160, 56)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(150, 60)
-zoom = Vector2(3.76, 3.76)
+offset = Vector2(155, 70)
+zoom = Vector2(4.3, 4.3)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("4_hmp84")
 
 [connection signal="game_exited_to_menu" from="PauseMenu" to="." method="_on_pause_menu_game_exited_to_menu"]
 [connection signal="game_restarted" from="PauseMenu" to="." method="_on_pause_menu_game_restarted"]
-[connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HUD/Generate Dungeon Test Button" to="." method="_on_button_pressed"]
