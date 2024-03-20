@@ -28,6 +28,8 @@ one_shot = true
 wait_time = 0.05
 
 [node name="Shotgun" parent="." instance=ExtResource("3_gfbal")]
+cooldown_duration = null
+auto_fire_duration = null
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]

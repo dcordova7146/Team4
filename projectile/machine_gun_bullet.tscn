@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_khq67"]
 size = Vector2(2, 2)
 
-[node name="Bullet" type="Area2D"]
+[node name="Machine Gun Bullet" type="Area2D"]
 top_level = true
 collision_layer = 8
 collision_mask = 7

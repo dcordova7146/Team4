@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://projectile/sniper_rifle_bullet.gd" id="1_dt0al"]
 [ext_resource type="Texture2D" uid="uid://42rdpb74ekav" path="res://tempAssets/sniper_rifle_bullet.png" id="2_akfa7"]
 
-[node name="Bullet" type="Area2D"]
+[node name="Sniper Rifle Bullet" type="Area2D"]
 top_level = true
 collision_layer = 8
 collision_mask = 7

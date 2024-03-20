@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var max_lives: int = 8
 # Move speed multiplier.
 #export allows it to be modifiable outside code and in the editor
-@export var speed: int = 250
+@export var speed: int = 125
 ## Timer until invincibility after losing a life wears off.
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 ## Timer until visibility is toggled.
