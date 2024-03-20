@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcj36edtxg3ck"]
+[gd_scene load_steps=8 format=3 uid="uid://dcj36edtxg3ck"]
 
 [ext_resource type="Script" path="res://map/dungeon.gd" id="1_1hjgm"]
 [ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://ui/pause_menu.tscn" id="2_img3q"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="3_51vlb"]
 [ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://map/rock.tscn" id="4_7yry6"]
 [ext_resource type="Script" path="res://map/Camera2D.gd" id="4_hmp84"]
-[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="5_u63n0"]
 [ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://enemy/fireball_turret.tscn" id="6_gpxj7"]
 [ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="7_wap1c"]
 
@@ -73,14 +72,6 @@ position = Vector2(667, 165)
 
 [node name="Rock11" parent="Rock" instance=ExtResource("4_7yry6")]
 position = Vector2(509, 280)
-
-[node name="Skull" parent="." instance=ExtResource("5_u63n0")]
-position = Vector2(260, 102)
-motion_mode = 1
-
-[node name="Skull2" parent="." instance=ExtResource("5_u63n0")]
-position = Vector2(268, -114)
-motion_mode = 1
 
 [node name="Fireball Turret" parent="." instance=ExtResource("6_gpxj7")]
 position = Vector2(160, 56)

@@ -19,7 +19,6 @@ extends CharacterBody2D
 func _ready() -> void:
 	Events.lives_changed.emit(lives, max_lives)
 
-
 func _physics_process(_delta: float) -> void:
 	get_input()
 	process_collisions()

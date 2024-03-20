@@ -5,7 +5,12 @@ var room: PackedScene = preload("res://map/room.tscn")
 @export var min_rooms: int = 9
 @export var max_rooms: int = 15
 @export var generation_chance: int = 25
+@export var size: int = 0 
+var encounter_Rooms_Available = 0
+var shop_Rooms_Available = 0
+var rest_Rooms_Available = 0
 
+var room_Queue = []
 #Karwei addition to ease readability 
 const direction_vector: Dictionary = {
 	1: Vector2(1, 0),
@@ -13,6 +18,7 @@ const direction_vector: Dictionary = {
 	3: Vector2(0, 1),
 	4: Vector2(0, -1),
 }
+
 #Diego Function optimized by karwei
 #The basic walker that starts at a base room and randomly chooses a direction to walk in and add a room if one does not already exist and then calling the connect room function to have a record of what is connected with what
 func generate(dungeon_seed: int) -> Dictionary:
@@ -20,11 +26,12 @@ func generate(dungeon_seed: int) -> Dictionary:
 	var dungeon: Dictionary = {}
 	var roomsAdded: int = 0
 	# Choose random total room count.
-	var size: int = randi_range(min_rooms, max_rooms)
+	size = randi_range(min_rooms, max_rooms)
 	# Add first room.
 	var startRoom = room.instantiate()
+	startRoom.set_Rtype(1)
 	dungeon[Vector2(0, 0)] = startRoom
-	
+	setQueue()
 	# Keep adding rooms until total room count is reached.
 	while(roomsAdded < size):
 		# For every existing room, try adding an adjacent room.
@@ -36,6 +43,8 @@ func generate(dungeon_seed: int) -> Dictionary:
 				var adjacent_room_pos: Vector2 = key + direction * Room.SIZE
 				if(!dungeon.has(adjacent_room_pos)):
 					var newRoom: Node2D = room.instantiate()
+					var roomsType = room_Queue.pop_back()
+					newRoom.set_Rtype(roomsType)
 					dungeon[adjacent_room_pos] = newRoom
 					newRoom.position = adjacent_room_pos
 					roomsAdded += 1
@@ -50,13 +59,34 @@ func generate(dungeon_seed: int) -> Dictionary:
 		#dungeon = generate(dungeon_seed * randf_range(-1,1))
 	return dungeon
 	
-	#changed the connect Rooms function to exist within the room itself to allow me to test this function outside the dungeon generation
-#func connectRooms(room1: Room, room2: Room, direction: Vector2) -> void:
-	#room1.connectedRooms[direction] = room2
-	#room2.connectedRooms[-direction] = room1
-	#room1.connections += 1
-	#room2.connections += 1
-	#
+	#create a queue of room types to then assign to the rooms
+func setQueue()->void:
+	#there can only be 1 start room and 1 boss room so they are removed from
+	var available_Rooms = size -2
+	encounter_Rooms_Available = int(available_Rooms * .75)
+	rest_Rooms_Available = int(available_Rooms * .1)
+	shop_Rooms_Available = int(available_Rooms * .15)
+	
+	while(encounter_Rooms_Available + rest_Rooms_Available + shop_Rooms_Available <= available_Rooms):
+		var coinflip = randi_range(0,3)
+		if coinflip < 2:
+			encounter_Rooms_Available+= 1
+		elif coinflip == 2:
+			rest_Rooms_Available += 1
+		elif coinflip == 3:
+			shop_Rooms_Available += 1
+	
+	#numbers represent the enum that represents the room types (2 = battle, 4 = rest, 3 = shop, 5 = boss)
+	for i in range(encounter_Rooms_Available):
+		room_Queue.append(2)
+	for i in range(rest_Rooms_Available):
+		room_Queue.append(4)
+	for i in range(shop_Rooms_Available):
+		room_Queue.append(3)
+	
+	room_Queue.shuffle()
+	room_Queue.insert(0,5) #by appending the boss room we assure it is the last room placed
+	
 #Diego
 #wip check to allow a room to have a minimum amount of branching paths to add uniqueness
 #func check(dungeon: Dictionary) -> bool:

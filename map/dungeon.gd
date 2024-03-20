@@ -15,7 +15,6 @@ const HEALTH_CHANGE: PackedScene = preload("res://ui/health_change.tscn")
 @onready var minimap_camera: Camera2D = $MinimapViewport/MinimapCamera
 @onready var hud_minimap: TextureRect = $HUD/Minimap/TextureRect
 
-
 func _ready() -> void:
 	# Connect minimap viewport to HUD.
 	minimap.world_2d = get_viewport().world_2d	
@@ -25,8 +24,7 @@ func _ready() -> void:
 	Events.enemy_died.connect(_on_enemy_died)
 	# Create dungeon.
 	visualize(GenerateDungeon.generate(randi_range(-1000,1000)))
-
-
+	
 #visualize function is used to turn the data structure that is the dungeon into a real in game scene of rooms
 func visualize(dungeon: Dictionary) -> void:
 	for i: int in range(0, spawn.get_child_count()):
@@ -35,7 +33,9 @@ func visualize(dungeon: Dictionary) -> void:
 	for key: Vector2 in dungeon.keys():
 		var room: Node2D = dungeon[key]
 		spawn.add_child(room)
-
+	#alert dungeon generation complete
+	Events.emit_signal("dungeon_complete")
+	
 #temp function to see effectiveness of random generation
 func _on_button_pressed() -> void:
 	randomize()
@@ -48,19 +48,16 @@ func _on_pause_menu_game_restarted() -> void:
 	game_restarted.emit()
 	queue_free()
 
-
 ## Pass signal to main, then delete self.
 func _on_pause_menu_game_exited_to_menu() -> void:
 	game_exited_to_menu.emit()
 	queue_free()
-
 
 ## Spawn life pickup at position of where enemy died.
 func _on_enemy_died(pos: Vector2) -> void:
 	var life: Node2D = LIFE.instantiate()
 	life.position = pos
 	add_child(life)
-
 
 func _on_health_changed(pos: Vector2, amount: int) -> void:
 	var health_change: HealthChange = HEALTH_CHANGE.instantiate()

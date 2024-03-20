@@ -7,8 +7,11 @@ func _ready():
 	$Room.connectRooms($Room3, Vector2(1,0))
 	$Room2.connectRooms($Room, Vector2(0,1))
 	$Room3.connectRooms($Room, Vector2(-1,0))
-	pass # Replace with function body.
-
+	
+	$Room.set_Rtype(2)
+	$Room2.set_Rtype(1)
+	$Room3.set_Rtype(3)
+	Events.emit_signal("dungeon_complete")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

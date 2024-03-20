@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var health_bar: ProgressBar = $HealthBar
 ## The sibling node player.
 @onready var player: Node2D = get_node("../Player")
-
+var awake = false
 
 ## Set max value of the health bar to the initial health.
 func _ready() -> void:
@@ -17,14 +17,15 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	# If Player exists, face and move toward player
-	if player:
+	if player and awake:
 		var direction: Vector2 = (
 				global_position.direction_to(player.global_position)
 		)
 		velocity = direction * speed
 		move_and_slide()
 	else:
-		print("Player node not found!")
+		pass
+		#print("Player node not found!")
 
 
 # Damage detection function, decrement by the specified damage_total
@@ -42,4 +43,5 @@ func take_damage(damage_total: int) -> void:
 ## Drop a life and then delete self.
 func die() -> void:
 	Events.enemy_died.emit(global_position)
+	Events.enemy_defeated.emit(self)
 	queue_free()
