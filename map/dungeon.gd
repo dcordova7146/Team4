@@ -2,7 +2,7 @@
 class_name Dungeon
 extends Node2D
 
-signal game_restarted
+signal game_restarted(dungeon_seed: int)
 signal game_exited_to_menu
 
 const LIFE: PackedScene = preload("res://drop/life.tscn")
@@ -15,6 +15,8 @@ const HEALTH_CHANGE: PackedScene = preload("res://ui/health_change.tscn")
 @onready var minimap_camera: Camera2D = $MinimapViewport/MinimapCamera
 @onready var hud_minimap: TextureRect = $HUD/Minimap/TextureRect
 
+## The seed of the current dungeon.
+var rng_seed: int = 0
 
 func _ready() -> void:
 	# Connect minimap viewport to HUD.
@@ -23,8 +25,13 @@ func _ready() -> void:
 	# Listen to events.
 	Events.health_changed.connect(_on_health_changed)
 	Events.enemy_died.connect(_on_enemy_died)
-	# Create dungeon.
-	visualize(GenerateDungeon.generate(randi_range(-1000,1000)))
+
+
+## Create dungeon based on given seed.
+func create(dungeon_seed: int) -> void:
+	rng_seed = dungeon_seed
+	(%SeedLabel as Label).text = "Seed: %s" % dungeon_seed
+	visualize(GenerateDungeon.generate(dungeon_seed))
 
 
 #visualize function is used to turn the data structure that is the dungeon into a real in game scene of rooms
@@ -43,9 +50,15 @@ func _on_button_pressed() -> void:
 	visualize(GenerateDungeon.generate(randi_range(-1000,1000)))
 
 #Karwei
-## Pass signal to main, then delete self.
-func _on_pause_menu_game_restarted() -> void:
-	game_restarted.emit()
+## Give seed to main, then delete self.
+func _on_pause_menu_game_restarted(use_random: bool) -> void:
+	# Use same seed unless random seed is specified.
+	var dungeon_seed: int = (
+			randi_range(0, 1_000_000) 
+			if use_random 
+			else rng_seed
+	)
+	game_restarted.emit(dungeon_seed)
 	queue_free()
 
 

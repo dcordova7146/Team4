@@ -3,7 +3,7 @@
 extends CanvasLayer
 ## Menu that appears when the game is paused.
 
-signal game_restarted
+signal game_restarted(use_random: bool)
 signal game_exited_to_menu
 
 @onready var buttons: VBoxContainer = $Buttons
@@ -54,7 +54,12 @@ func _on_resume_button_pressed() -> void:
 ## Unpause, then hand off restart to parent node.
 func _on_restart_button_pressed() -> void:
 	get_tree().paused = false
-	game_restarted.emit()
+	game_restarted.emit(false)
+
+
+func _on_restart_random_button_pressed() -> void:
+	get_tree().paused = false
+	game_restarted.emit(true)
 
 
 ## Unpause, then hand off quit-to-menu to parent node.
