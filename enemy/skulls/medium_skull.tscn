@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cexqlf50w1why"]
+[gd_scene load_steps=7 format=3 uid="uid://c4neg4b8vv5dn"]
 
-[ext_resource type="Texture2D" uid="uid://bdtxomolk7ecx" path="res://tempAssets/skull.png" id="1_grrgn"]
-[ext_resource type="Script" path="res://enemy/skull.gd" id="1_wcjy6"]
-[ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_gubwf"]
+[ext_resource type="Script" path="res://enemy/skulls/medium_skull.gd" id="1_7d76o"]
+[ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_vfn8c"]
+[ext_resource type="Texture2D" uid="uid://bdtxomolk7ecx" path="res://tempAssets/skull.png" id="3_jqvx0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8lppj"]
 radius = 9.0
@@ -13,18 +13,18 @@ bg_color = Color(0, 0, 0, 0.266667)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akpgk"]
 bg_color = Color(0.596078, 0, 0, 1)
 
-[node name="Skull" type="CharacterBody2D"]
+[node name="Medium Skull" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 7
-script = ExtResource("1_wcjy6")
+script = ExtResource("1_7d76o")
 
-[node name="Dot" parent="." instance=ExtResource("2_gubwf")]
+[node name="Dot" parent="." instance=ExtResource("2_vfn8c")]
 
 [node name="Skull" type="Sprite2D" parent="."]
 visibility_layer = 2
 position = Vector2(0, -5.96046e-08)
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("1_grrgn")
+texture = ExtResource("3_jqvx0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8lppj")
