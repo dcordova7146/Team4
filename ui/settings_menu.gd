@@ -10,18 +10,33 @@ signal settings_menu_closed
 @onready var ResolutionButton: OptionButton = $Root/Scroll/Inputs/ResolutionButton
 @onready var BackButton: Button = $Root/Nav/BackButton
 
-## Relect the current settings and focus the back button.
 func _ready() -> void:
-	
+	_create_reticle_buttons()
+	_reflect_current_settings()
+	## Focus the back button.
+	BackButton.grab_focus()
+
+
+## Create buttons to change the appearance of the mouse cursor.
+func _create_reticle_buttons() -> void:
+	# Add to button group, turning them into radio buttons. 
+	var button_group: ButtonGroup = ButtonGroup.new()
+	for index: int in range(Main.RETICLE_COUNT):
+		var checkbox: CheckBox = CheckBox.new()
+		checkbox.button_group = button_group
+		checkbox.icon = Main.get_reticle_image(index)
+		checkbox.pressed.connect(_on_reticle_button_pressed.bind(index))
+		%Reticles.add_child(checkbox)
+
+
+## Reflect the actual settings of the game in the inputs.
+func _reflect_current_settings() -> void:
 	FullscreenButton.set_pressed_no_signal(
 			get_tree().root.mode == Window.MODE_EXCLUSIVE_FULLSCREEN
 	)
-	
-	reflect_window_resolution()
+	_reflect_window_resolution()
 	# Also reflect the resolution when it changes.
-	get_tree().root.size_changed.connect(reflect_window_resolution)
-	
-	BackButton.grab_focus()
+	get_tree().root.size_changed.connect(_reflect_window_resolution)
 
 
 ## Close settings menu.
@@ -50,10 +65,15 @@ func _on_resolution_button_item_selected(index: int) -> void:
 			get_tree().root.set(prop, Vector2(1280, 720))
 		1:
 			get_tree().root.set(prop, Vector2(1920, 1080))
-		
+
+
+## Change the reticle depending on the reticle button pressed.
+func _on_reticle_button_pressed(index: int) -> void:
+	Main.set_reticle(index)
+
 
 ## Reflect the resolution of the viewport in the resolution button.
-func reflect_window_resolution() -> void:
+func _reflect_window_resolution() -> void:
 	var prop: String = (
 			"size"
 			if get_tree().root.mode == Window.MODE_WINDOWED

@@ -18,8 +18,8 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -124.0
-offset_right = 124.0
+offset_left = -154.0
+offset_right = 154.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -27,11 +27,13 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Settings"
+horizontal_alignment = 1
 
 [node name="Scroll" type="ScrollContainer" parent="Root"]
 clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
 [node name="Inputs" type="VBoxContainer" parent="Root/Scroll"]
 layout_mode = 2
@@ -52,6 +54,11 @@ popup/item_0/text = "1280×720"
 popup/item_0/id = 0
 popup/item_1/text = "1920×1080"
 popup/item_1/id = 1
+
+[node name="Reticles" type="HBoxContainer" parent="Root/Scroll/Inputs"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
 
 [node name="Nav" type="HBoxContainer" parent="Root"]
 layout_mode = 2
