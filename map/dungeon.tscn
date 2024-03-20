@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://map/rock.tscn" id="4_7yry6"]
 [ext_resource type="Script" path="res://map/Camera2D.gd" id="4_hmp84"]
 [ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="5_u63n0"]
-[ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://enemy/fireball_turret.tscn" id="6_gpxj7"]
 [ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="7_wap1c"]
+[ext_resource type="PackedScene" uid="uid://cvv51jcjucc2m" path="res://enemy/skulls/large_skull.tscn" id="9_p0h41"]
 
 [node name="Dungeon" type="Node2D"]
 process_mode = 1
@@ -62,9 +62,6 @@ position = Vector2(-566, -171)
 [node name="Rock6" parent="Rock" instance=ExtResource("4_7yry6")]
 position = Vector2(-762, -315)
 
-[node name="Rock7" parent="Rock" instance=ExtResource("4_7yry6")]
-position = Vector2(550, 19)
-
 [node name="Rock9" parent="Rock" instance=ExtResource("4_7yry6")]
 position = Vector2(506, 130)
 
@@ -74,16 +71,9 @@ position = Vector2(667, 165)
 [node name="Rock11" parent="Rock" instance=ExtResource("4_7yry6")]
 position = Vector2(509, 280)
 
-[node name="Skull" parent="." instance=ExtResource("5_u63n0")]
-position = Vector2(260, 102)
-motion_mode = 1
-
 [node name="Skull2" parent="." instance=ExtResource("5_u63n0")]
 position = Vector2(268, -114)
 motion_mode = 1
-
-[node name="Fireball Turret" parent="." instance=ExtResource("6_gpxj7")]
-position = Vector2(160, 56)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(155, 70)
@@ -91,6 +81,9 @@ zoom = Vector2(4.3, 4.3)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("4_hmp84")
+
+[node name="Large Skull" parent="." instance=ExtResource("9_p0h41")]
+position = Vector2(225, 66)
 
 [connection signal="game_exited_to_menu" from="PauseMenu" to="." method="_on_pause_menu_game_exited_to_menu"]
 [connection signal="game_restarted" from="PauseMenu" to="." method="_on_pause_menu_game_restarted"]
