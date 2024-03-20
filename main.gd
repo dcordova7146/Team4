@@ -3,6 +3,10 @@
 extends Node
 ## The main scene, holding all other nodes.
 
+## Change main viewport cull mask to hide sprite intended only for minimap.
+func _ready() -> void:
+	var viewport: Viewport = get_viewport()
+	viewport.canvas_cull_mask = 4294967291
 
 ## Create a new game instance and listen for restart/quit events.
 func start_game() -> void:

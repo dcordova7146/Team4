@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cexqlf50w1why"]
+[gd_scene load_steps=7 format=3 uid="uid://cexqlf50w1why"]
 
 [ext_resource type="Texture2D" uid="uid://bdtxomolk7ecx" path="res://tempAssets/skull.png" id="1_grrgn"]
 [ext_resource type="Script" path="res://enemy/skull.gd" id="1_wcjy6"]
+[ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_gubwf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8lppj"]
 radius = 9.0
@@ -17,7 +18,10 @@ collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_wcjy6")
 
+[node name="Dot" parent="." instance=ExtResource("2_gubwf")]
+
 [node name="Skull" type="Sprite2D" parent="."]
+visibility_layer = 2
 position = Vector2(0, -5.96046e-08)
 scale = Vector2(0.049544, 0.0492522)
 texture = ExtResource("1_grrgn")

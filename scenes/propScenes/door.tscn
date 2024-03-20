@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://w08be4o1ar2p"]
 
-[ext_resource type="Script" path="res://Scripts/Door.gd" id="1_fayh7"]
+[ext_resource type="Script" path="res://map/Door.gd" id="1_2dkk2"]
 
 [node name="Door" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("1_fayh7")
+script = ExtResource("1_2dkk2")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 
