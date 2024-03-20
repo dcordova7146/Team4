@@ -72,7 +72,6 @@ static func draw_heart(
 
 ## Redraw HUD life bar with given values.
 func _on_lives_changed(current_lives: int, max_lives: int) -> void:
-	print("REDRAWING...")
 	value = current_lives
 	max_value = max_lives
 	queue_redraw()

@@ -22,12 +22,26 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -79.0
-offset_top = -98.0
-offset_right = 79.0
-offset_bottom = 98.0
+offset_left = -148.0
+offset_top = -165.5
+offset_right = 148.0
+offset_bottom = 165.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Buttons"]
+layout_mode = 2
+
+[node name="SeedLabel" type="Label" parent="Buttons/HBoxContainer"]
+layout_mode = 2
+text = "Seed
+"
+
+[node name="SeedTextInput" type="LineEdit" parent="Buttons/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Leave blank for random seed"
 
 [node name="StartButton" type="Button" parent="Buttons"]
 layout_mode = 2
@@ -44,6 +58,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Quit"
 
+[connection signal="text_changed" from="Buttons/HBoxContainer/SeedTextInput" to="." method="_on_seed_text_input_text_changed"]
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="Buttons/QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]

@@ -45,3 +45,26 @@ func die() -> void:
 	Events.enemy_died.emit(global_position)
 	Events.enemy_defeated.emit(self)
 	queue_free()
+	# Call the overridden function to spawn smaller skulls
+	spawn_smaller_skulls()
+
+# Virtual function to be overridden in child classes
+func spawn_smaller_skulls() -> void:
+	pass
+	
+func spawn_enemy(enemy_scene_path: String, count: int) -> void:
+	var enemy_scene = load(enemy_scene_path) as PackedScene
+	var separation_distance = 20
+	var spawn_position = global_position
+
+	for i in range(count):
+		var enemy_instance = enemy_scene.instantiate()
+		if enemy_instance:
+			enemy_instance.position = spawn_position
+			get_parent().add_child(enemy_instance)
+			spawn_position += Vector2(separation_distance, 0)
+		else:
+			print("Failed to instantiate enemy from scene:", enemy_scene_path)
+
+
+

@@ -46,7 +46,12 @@ text = "Resume"
 [node name="RestartButton" type="Button" parent="Buttons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "Restart"
+text = "Restart (same seed)"
+
+[node name="RestartRandomButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Restart (random seed)"
 
 [node name="QuitToMenuButton" type="Button" parent="Buttons"]
 layout_mode = 2
@@ -60,5 +65,6 @@ text = "Quit to Desktop"
 
 [connection signal="pressed" from="Buttons/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Buttons/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Buttons/RestartRandomButton" to="." method="_on_restart_random_button_pressed"]
 [connection signal="pressed" from="Buttons/QuitToMenuButton" to="." method="_on_quit_to_menu_button_pressed"]
 [connection signal="pressed" from="Buttons/QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]
