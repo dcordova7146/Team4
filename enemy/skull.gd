@@ -3,7 +3,7 @@
 class_name Skull
 extends CharacterBody2D
 
-@export var health: int = 5
+@export var health: int = 50
 @export var speed: int = 50
 @onready var health_bar: ProgressBar = $HealthBar
 ## The sibling node player.
@@ -27,12 +27,12 @@ func _physics_process(_delta: float) -> void:
 		print("Player node not found!")
 
 
-# Damage detection function, decrement by 1
-func take_damage() -> void: 
-	health -= 1
-	Events.health_changed.emit(position, -1)
-	# When health 0, destroy node (kills the mob)
-	if health == 0:
+# Damage detection function, decrement by the specified damage_total
+func take_damage(damage_total: int) -> void:
+	health -= damage_total
+	Events.health_changed.emit(position, -damage_total)
+	# When health is 0 or less, destroy node (kills the mob)
+	if health <= 0:
 		die()
 	# Update health bar to reflect health and display.
 	health_bar.value = health

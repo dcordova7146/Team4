@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://32a0rer8h7vt"]
+
+[ext_resource type="Script" path="res://player/weapons/sniper_rifle/sniper_rifle.gd" id="1_n32wi"]
+[ext_resource type="Texture2D" uid="uid://chgyn7i2txl74" path="res://tempAssets/sniper_rifle.png" id="2_sx0ho"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
+bg_color = Color(0, 0, 0, 0.266667)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi6y3"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Sniper Rifle" type="Node2D"]
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_n32wi")
+
+[node name="GunPivot" type="Marker2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="GunPivot"]
+position = Vector2(25, -2)
+texture = ExtResource("2_sx0ho")
+
+[node name="BulletHole" type="Marker2D" parent="GunPivot/Sprite"]
+unique_name_in_owner = true
+position = Vector2(14, -0.5)
+
+[node name="ShootingTimer" type="Timer" parent="."]
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CooldownBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 16.0
+offset_bottom = -20.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ki7oq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fi6y3")
+show_percentage = false
+
+[connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

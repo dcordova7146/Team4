@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnwpwikn763lo"]
+[gd_scene load_steps=5 format=3 uid="uid://u2vho6i5c0nc"]
 
-[ext_resource type="Script" path="res://player/gun.gd" id="1_tws20"]
-[ext_resource type="Texture2D" uid="uid://bxu356kwn3wpy" path="res://tempAssets/gun.png" id="2_h0he5"]
+[ext_resource type="Script" path="res://player/weapons/machine_gun/machine_gun.gd" id="1_smvxf"]
+[ext_resource type="Texture2D" uid="uid://jbm7yg6ia2wc" path="res://tempAssets/machine_gun.png" id="2_hf7yr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
 bg_color = Color(0, 0, 0, 0.266667)
@@ -9,19 +9,19 @@ bg_color = Color(0, 0, 0, 0.266667)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi6y3"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="Gun" type="Node2D"]
+[node name="Machine Gun" type="Node2D"]
 scale = Vector2(0.8, 0.8)
-script = ExtResource("1_tws20")
+script = ExtResource("1_smvxf")
 
 [node name="GunPivot" type="Marker2D" parent="."]
 
 [node name="Sprite" type="Sprite2D" parent="GunPivot"]
-position = Vector2(14, 0)
-texture = ExtResource("2_h0he5")
+position = Vector2(20, -2)
+texture = ExtResource("2_hf7yr")
 
 [node name="BulletHole" type="Marker2D" parent="GunPivot/Sprite"]
 unique_name_in_owner = true
-position = Vector2(5, -3.5)
+position = Vector2(11, -0.5)
 
 [node name="ShootingTimer" type="Timer" parent="."]
 

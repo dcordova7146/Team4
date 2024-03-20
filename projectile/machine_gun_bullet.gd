@@ -3,7 +3,7 @@
 extends Area2D
 
 ## Speed of the bullet.
-@export var speed: float = 250
+@export var speed: float = 100
 ## Maximum range of the bullet.
 @export var max_range: float = 1000
 ## Distance traveled by the bullet.
@@ -30,4 +30,4 @@ func _on_body_entered(body: Node2D) -> void:
 	# If body is skull, have it take damage.
 	var skull: Skull = body as Skull
 	if skull != null:
-		skull.take_damage()
+		skull.take_damage(5)

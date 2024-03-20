@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_iitf2"]
 [ext_resource type="Texture2D" uid="uid://b010odvgbpiye" path="res://tempAssets/p1.png" id="2_22u6h"]
-[ext_resource type="PackedScene" uid="uid://dnwpwikn763lo" path="res://player/gun.tscn" id="3_mw41a"]
+[ext_resource type="PackedScene" uid="uid://bit2cxxu4xi8o" path="res://player/weapons/burst_rifle/burst_rifle.tscn" id="4_8l46l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv7g"]
 size = Vector2(16, 16)
@@ -20,15 +20,14 @@ shape = SubResource("RectangleShape2D_ysv7g")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_22u6h")
 
-[node name="Gun" parent="." instance=ExtResource("3_mw41a")]
-scale = Vector2(1, 1)
-
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
 [node name="BlinkTimer" type="Timer" parent="."]
 wait_time = 0.05
+
+[node name="Burst Rifle" parent="." instance=ExtResource("4_8l46l")]
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]

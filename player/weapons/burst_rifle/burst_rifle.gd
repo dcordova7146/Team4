@@ -2,7 +2,7 @@
 
 extends Node2D
 
-const BULLET: PackedScene = preload("res://projectile/bullet.tscn")
+const BULLET: PackedScene = preload("res://projectile/burst_rifle_bullet.tscn")
 ## How long until the gun can be fired again.
 @export var cooldown_duration: float = 0.25
 ## How long until the game is fired again when primary action key held.
@@ -41,20 +41,27 @@ func _physics_process(_delta: float) -> void:
 		cooldown_bar.value = cooldown_timer.time_left
 
 
-## Create a bullet with the position and rotation of this gun.
+## Shoot a burst of 3 bullets with spacing.
 func shoot() -> void:
 	# Don't shoot if still cooling down.
 	if is_cooling_down:
-		return;
+		return
 	
-	var new_bullet: Node2D = BULLET.instantiate()
-	new_bullet.global_position = bullet_hole.global_position
-	new_bullet.global_rotation = bullet_hole.global_rotation
-	bullet_hole.add_child(new_bullet)
+	# Define spacing between bullets in the burst.
+	var spacing: float = 7.5
+	
+	for i in range(3):
+		var new_bullet: Node2D = BULLET.instantiate()
+		# Adjust the bullet's position based on its index in the burst.
+		new_bullet.global_position = bullet_hole.global_position + Vector2(spacing * i, 0)
+		new_bullet.global_rotation = bullet_hole.global_rotation
+		bullet_hole.add_child(new_bullet)
+	
 	# Begin cooldown, show its progress bar, and start timer to end it.
 	is_cooling_down = true
 	cooldown_bar.visible = true
 	cooldown_timer.start()
+
 
 
 ## Shoot when shooting timer times out....
