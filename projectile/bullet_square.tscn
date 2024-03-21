@@ -1,20 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhinglwofydn6"]
+[gd_scene load_steps=4 format=3 uid="uid://b1h7hthr1s5jd"]
 
-[ext_resource type="Script" path="res://projectile/machine_gun_bullet.gd" id="1_s682h"]
-[ext_resource type="Texture2D" uid="uid://c76tgvub7c866" path="res://tempAssets/bullet.png" id="2_8jevq"]
+[ext_resource type="Script" path="res://projectile/bullet.gd" id="1_rh0ar"]
+[ext_resource type="Texture2D" uid="uid://c76tgvub7c866" path="res://tempAssets/bullet.png" id="2_mms8u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_khq67"]
 size = Vector2(2, 2)
 
-[node name="Machine Gun Bullet" type="Area2D"]
+[node name="Pistol Bullet" type="Area2D"]
 top_level = true
 collision_layer = 8
 collision_mask = 7
-script = ExtResource("1_s682h")
+script = ExtResource("1_rh0ar")
 
 [node name="Projectile" type="Sprite2D" parent="."]
-position = Vector2(0, 1)
-texture = ExtResource("2_8jevq")
+texture = ExtResource("2_mms8u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_khq67")

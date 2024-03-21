@@ -1,13 +1,15 @@
 ## Contributors: James, Karwai
-
+class_name Bullet
 extends Area2D
 
+## Damage dealt to the enemy contacted.
+var damage: float = 10.0
 ## Speed of the bullet.
-@export var speed: float = 100
+var speed: float = 250
 ## Maximum range of the bullet.
 @export var max_range: float = 1000
 ## Distance traveled by the bullet.
-var travelled_distance: float = 0
+var travelled_distance: float = 0.0
 
 func _physics_process(delta: float) -> void:
 	# Calculate direction vector based on bullet's rotation.
@@ -30,4 +32,4 @@ func _on_body_entered(body: Node2D) -> void:
 	# If body is skull, have it take damage.
 	var skull: Skull = body as Skull
 	if skull != null:
-		skull.take_damage(5)
+		skull.take_damage(damage)

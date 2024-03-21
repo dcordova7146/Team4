@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://u2vho6i5c0nc"]
 
-[ext_resource type="Script" path="res://player/weapons/machine_gun/machine_gun.gd" id="1_smvxf"]
+[ext_resource type="Script" path="res://player/gun.gd" id="1_qsywq"]
 [ext_resource type="Texture2D" uid="uid://jbm7yg6ia2wc" path="res://tempAssets/machine_gun.png" id="2_hf7yr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
@@ -11,7 +11,11 @@ bg_color = Color(1, 1, 1, 1)
 
 [node name="Machine Gun" type="Node2D"]
 scale = Vector2(0.8, 0.8)
-script = ExtResource("1_smvxf")
+script = ExtResource("1_qsywq")
+damage = 5.0
+speed = 100.0
+cooldown_duration = 0.1
+auto_fire_duration = 0.1
 
 [node name="GunPivot" type="Marker2D" parent="."]
 

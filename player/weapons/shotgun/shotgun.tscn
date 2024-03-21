@@ -12,6 +12,10 @@ bg_color = Color(1, 1, 1, 1)
 [node name="Shotgun" type="Node2D"]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_rpk8h")
+damage = 7.0
+speed = 150.0
+max_range = 100.0
+bullet_scale = Vector2(0.5, 0.5)
 
 [node name="GunPivot" type="Marker2D" parent="."]
 

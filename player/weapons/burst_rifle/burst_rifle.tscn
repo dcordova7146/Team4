@@ -12,6 +12,9 @@ bg_color = Color(1, 1, 1, 1)
 [node name="Burst Rifle" type="Node2D"]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_4dr57")
+damage = 11.0
+speed = 167.0
+bullet_scale = Vector2(2, 1)
 
 [node name="GunPivot" type="Marker2D" parent="."]
 

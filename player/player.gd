@@ -7,21 +7,48 @@ extends CharacterBody2D
 ## Max number of lives.
 @export var max_lives: int = 8
 # Move speed multiplier.
-#export allows it to be modifiable outside code and in the editor
 @export var speed: int = 125
 ## Timer until invincibility after losing a life wears off.
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 ## Timer until visibility is toggled.
 @onready var blink_timer: Timer = $BlinkTimer
 
+## Index of the currently active weapon.
+var _active_weapon_index: int = 0
 
 ## Broadcast health state on ready so it may be rendered by the HUD.
 func _ready() -> void:
 	Events.lives_changed.emit(lives, max_lives)
+	# Set active weapon to first slot.
+	_change_active_weapon(0)
 
 func _physics_process(_delta: float) -> void:
 	get_input()
 	process_collisions()
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("weapon_slot_1"):
+		_change_active_weapon(0)
+	if event.is_action_pressed("weapon_slot_2"):
+		_change_active_weapon(1)
+	if event.is_action_pressed("weapon_slot_3"):
+		_change_active_weapon(2)
+	if event.is_action_pressed("weapon_slot_4"):
+		_change_active_weapon(3)
+	if event.is_action_pressed("weapon_slot_5"):
+		_change_active_weapon(4)
+
+
+## Change the active weapon to that at the specified slot.
+func _change_active_weapon(slot: int) -> void:
+	var old_weapon: Node2D = $Guns.get_child(_active_weapon_index)
+	old_weapon.process_mode = PROCESS_MODE_DISABLED
+	old_weapon.visible = false
+	var new_weapon: Node2D = $Guns.get_child(slot)
+	new_weapon.process_mode = PROCESS_MODE_INHERIT
+	new_weapon.visible = true
+	_active_weapon_index = slot
 
 
 # Move the player according to cardinal direction input.

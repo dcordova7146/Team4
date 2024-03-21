@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dnwpwikn763lo"]
 
-[ext_resource type="Script" path="res://player/weapons/pistol/pistol.gd" id="1_5c5ch"]
+[ext_resource type="Script" path="res://player/gun.gd" id="1_thr3t"]
 [ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://tempAssets/pistol.png" id="2_8528f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
@@ -11,7 +11,8 @@ bg_color = Color(1, 1, 1, 1)
 
 [node name="Pistol" type="Node2D"]
 scale = Vector2(0.8, 0.8)
-script = ExtResource("1_5c5ch")
+script = ExtResource("1_thr3t")
+bullet_scale = Vector2(2, 1)
 
 [node name="GunPivot" type="Marker2D" parent="."]
 

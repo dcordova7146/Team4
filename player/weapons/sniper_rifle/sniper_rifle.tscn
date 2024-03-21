@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://32a0rer8h7vt"]
+[gd_scene load_steps=6 format=3 uid="uid://32a0rer8h7vt"]
 
-[ext_resource type="Script" path="res://player/weapons/sniper_rifle/sniper_rifle.gd" id="1_n32wi"]
+[ext_resource type="Script" path="res://player/gun.gd" id="1_u6gv0"]
+[ext_resource type="PackedScene" uid="uid://bgy6ly50typcx" path="res://projectile/sniper_rifle_bullet.tscn" id="2_7pwti"]
 [ext_resource type="Texture2D" uid="uid://chgyn7i2txl74" path="res://tempAssets/sniper_rifle.png" id="2_sx0ho"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
@@ -11,7 +12,12 @@ bg_color = Color(1, 1, 1, 1)
 
 [node name="Sniper Rifle" type="Node2D"]
 scale = Vector2(0.8, 0.8)
-script = ExtResource("1_n32wi")
+script = ExtResource("1_u6gv0")
+bullet = ExtResource("2_7pwti")
+damage = 50.0
+speed = 1000.0
+cooldown_duration = 1.0
+auto_fire_duration = 1.0
 
 [node name="GunPivot" type="Marker2D" parent="."]
 
