@@ -66,7 +66,6 @@ func setQueue()->void:
 	encounter_Rooms_Available = int(available_Rooms * .75)
 	rest_Rooms_Available = int(available_Rooms * .1)
 	shop_Rooms_Available = int(available_Rooms * .15)
-	
 	while(encounter_Rooms_Available + rest_Rooms_Available + shop_Rooms_Available <= available_Rooms):
 		var coinflip: int = randi_range(0, 3)
 		if coinflip < 2:
@@ -75,7 +74,6 @@ func setQueue()->void:
 			rest_Rooms_Available += 1
 		elif coinflip == 3:
 			shop_Rooms_Available += 1
-	
 	#numbers represent the enum that represents the room types (2 = battle, 4 = rest, 3 = shop, 5 = boss)
 	for i: int in range(encounter_Rooms_Available):
 		room_Queue.append(Room.roomType.BATTLE)

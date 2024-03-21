@@ -54,7 +54,7 @@ func spawn_smaller_skulls() -> void:
 	
 func spawn_enemy(enemy_scene_path: String, count: int) -> void:
 	var enemy_scene: PackedScene = load(enemy_scene_path) as PackedScene
-	var separation_distance: int = 20
+	var separation_distance: int = 50
 	var spawn_position: Vector2 = position
 
 	for i: int in range(count):
@@ -62,7 +62,7 @@ func spawn_enemy(enemy_scene_path: String, count: int) -> void:
 		var enemy_instance: Skull = enemy_scene.instantiate()
 		if enemy_instance and room:
 			enemy_instance.position = spawn_position
-			spawn_position += Vector2(separation_distance, 0)
+			spawn_position += Vector2(separation_distance, 10)
 			enemy_instance.awake = true
 			room.enemies.append(enemy_instance)
 			room.call_deferred("add_child", enemy_instance)

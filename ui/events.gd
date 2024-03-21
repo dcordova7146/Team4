@@ -3,7 +3,6 @@ extends Node
 #singleton script
 #which will keep track of game state and logic
 
-
 signal player_died
 signal room_entered(room: Room)
 signal waveCleared

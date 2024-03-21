@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://doe0sstc3n5sh"]
+[gd_scene load_steps=5 format=3 uid="uid://doe0sstc3n5sh"]
 
 [ext_resource type="Script" path="res://ui/lives.gd" id="1_74fjh"]
+[ext_resource type="Texture2D" uid="uid://cdvs87wypg7qa" path="res://tempAssets/bloodcup.png.png" id="2_j2t6t"]
+[ext_resource type="Script" path="res://ui/Bloodcup.gd" id="3_3ucys"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ejrmc"]
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -18,3 +24,17 @@ color = Color(0, 0, 0, 0.266667)
 
 [node name="TextureRect" type="TextureRect" parent="Minimap"]
 layout_mode = 0
+
+[node name="Bloodcup" type="Sprite2D" parent="."]
+position = Vector2(416, 32)
+scale = Vector2(2.75, 2.75)
+texture = ExtResource("2_j2t6t")
+script = ExtResource("3_3ucys")
+
+[node name="bloodcount" type="Label" parent="Bloodcup"]
+offset_left = 10.5454
+offset_top = -14.1818
+offset_right = 50.5454
+offset_bottom = 8.81818
+text = "x0"
+label_settings = SubResource("LabelSettings_ejrmc")

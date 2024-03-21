@@ -144,7 +144,6 @@ func populateEnemySpawner() -> void:
 	for i: int in range(enemycount):
 		var randpos: Vector2 = rand_coor()
 		print(randpos)
-		
 		# Randomly choose an enemy type.
 		var enemy_scene: PackedScene
 		if randf() < medium_skull_chance:
@@ -212,7 +211,6 @@ func wakeEnemies()->void:
 	
 func setupRoom()->void:
 	#this function shall spawn whatever a room requires of it
-	
 	match rType:
 		roomType.BATTLE:
 			populateEnemySpawner()
@@ -226,10 +224,10 @@ func setupRoom()->void:
 		roomType.BOSS:
 			# lockRoom()
 			type_label.text = "👿 Boss"
-			# spawn a boss and a boss health bar	
+			# spawn a boss and a boss health bar
 		roomType.START:
 			# where the player begins
-			type_label.text = "🏁 Start"			
+			type_label.text = "🏁 Start"
 		roomType.ROOM:
 			#a room of ROOM type shouldnt happen this is a check for if the generator didnt mess up
 			type_label.text = "Room"
