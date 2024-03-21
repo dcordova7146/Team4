@@ -24,7 +24,7 @@ func _on_new_game_requested(dungeon_seed: int) -> void:
 	if game_instance != null:
 		add_child(game_instance)
 		game_instance.create(dungeon_seed)
-		game_instance.game_restarted.connect(_on_new_game_requested)
+		game_instance.game_restarted.connect(_on_game_restarted)
 		game_instance.game_exited_to_menu.connect(show_main_menu)
 
 
@@ -32,6 +32,11 @@ func _on_new_game_requested(dungeon_seed: int) -> void:
 func show_main_menu() -> void:
 	($MainMenu as MainMenu).start()
 
+
+func _on_game_restarted(dungeon_seed: int, game: Node) -> void:
+	game.queue_free()
+	await game.tree_exited
+	_on_new_game_requested(dungeon_seed)
 
 ## Open settings menu.
 func _on_main_menu_settings_menu_opened() -> void:

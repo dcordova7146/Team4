@@ -48,7 +48,7 @@ func visualize(dungeon: Dictionary) -> void:
 #temp function to see effectiveness of random generation
 func _on_button_pressed() -> void:
 	randomize()
-	$Player.position =Vector2(0,0) #whenever generate a room reset player to start room
+	player.position = Vector2(0, 0) #whenever generate a room reset player to start room
 	visualize(GenerateDungeon.generate(randi_range(-1000,1000)))
 
 #Karwei
@@ -60,8 +60,7 @@ func _on_pause_menu_game_restarted(use_random: bool) -> void:
 			if use_random 
 			else rng_seed
 	)
-	game_restarted.emit(dungeon_seed)
-	queue_free()
+	game_restarted.emit(dungeon_seed, self)
 
 ## Pass signal to main, then delete self.
 func _on_pause_menu_game_exited_to_menu() -> void:
@@ -72,12 +71,12 @@ func _on_pause_menu_game_exited_to_menu() -> void:
 func _on_enemy_died(pos: Vector2) -> void:
 	var life: Node2D = LIFE.instantiate()
 	life.position = pos
-	add_child(life)
+	#add_child(life)
+	call_deferred("add_child", life)
+
 
 func _on_health_changed(pos: Vector2, amount: int) -> void:
 	var health_change: HealthChange = HEALTH_CHANGE.instantiate()
-	health_change.position = pos
+	health_change.global_position = pos * 4.3
 	health_change.display(amount)
-	add_child(health_change)
-
-
+	$HUD.add_child(health_change)

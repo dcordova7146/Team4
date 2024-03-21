@@ -3,12 +3,12 @@
 class_name Skull
 extends CharacterBody2D
 
-@export var health: int = 50
-@export var speed: int = 50
+@export var health: float = 50
+@export var speed: float = 50
 @onready var health_bar: ProgressBar = $HealthBar
 ## The sibling node player.
-@onready var player: Node2D = get_node("../Player")
-var awake = false
+@onready var player: Node2D = get_node("/root/Main/Dungeon/Player")
+var awake: bool = false
 
 ## Set max value of the health bar to the initial health.
 func _ready() -> void:
@@ -29,7 +29,7 @@ func _physics_process(_delta: float) -> void:
 
 
 # Damage detection function, decrement by the specified damage_total
-func take_damage(damage_total: int) -> void:
+func take_damage(damage_total: float) -> void:
 	health -= damage_total
 	Events.health_changed.emit(position, -damage_total)
 	# When health is 0 or less, destroy node (kills the mob)
@@ -53,16 +53,19 @@ func spawn_smaller_skulls() -> void:
 	pass
 	
 func spawn_enemy(enemy_scene_path: String, count: int) -> void:
-	var enemy_scene = load(enemy_scene_path) as PackedScene
-	var separation_distance = 20
-	var spawn_position = global_position
+	var enemy_scene: PackedScene = load(enemy_scene_path) as PackedScene
+	var separation_distance: int = 20
+	var spawn_position: Vector2 = position
 
-	for i in range(count):
-		var enemy_instance = enemy_scene.instantiate()
-		if enemy_instance:
+	for i: int in range(count):
+		var room: Room = get_parent()
+		var enemy_instance: Skull = enemy_scene.instantiate()
+		if enemy_instance and room:
 			enemy_instance.position = spawn_position
-			get_parent().add_child(enemy_instance)
 			spawn_position += Vector2(separation_distance, 0)
+			enemy_instance.awake = true
+			room.enemies.append(enemy_instance)
+			room.call_deferred("add_child", enemy_instance)
 		else:
 			print("Failed to instantiate enemy from scene:", enemy_scene_path)
 

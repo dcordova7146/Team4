@@ -2,6 +2,17 @@ extends Node2D
 ## The sprite of a room on the map.
 
 @onready var room: Room = get_parent()
+@onready var type_label: Label = $TypeLabel
+
+
+const LABEL_EMOJI: Dictionary = {
+	Room.roomType.BATTLE: "⚔",
+	Room.roomType.SHOP: "💰",
+	Room.roomType.REST: "⛺",
+	Room.roomType.BOSS: "👿",
+	Room.roomType.START: "🏁",
+	Room.roomType.ROOM: "",
+}
 
 const DOOR_SIZE: float = 50.0
 const BG_COLOR: Color = Color.DARK_BLUE
@@ -14,9 +25,12 @@ const DOOR_LT: Vector2 = Vector2(0, Room.SIZE.y / 2 - DOOR_SIZE / 2)
 const DOOR_RT: Vector2 = Vector2(Room.SIZE.x, Room.SIZE.y / 2 - DOOR_SIZE / 2)
 
 
+func _ready() -> void:
+	type_label.text = LABEL_EMOJI[room.rType]
+
 func _draw() -> void:
 	# Draw background.
-	draw_rect(Rect2(position, Room.SIZE), BG_COLOR, true, 1.0)
+	draw_rect(Rect2(position, Room.SIZE), BG_COLOR, true)
 	# Draw wall around entire room (i.e. no doors).
 	draw_rect(Rect2(position, Room.SIZE), WALL_COLOR, false, WALL_WIDTH)
 	# "Punch" holes in wall according to connections.
