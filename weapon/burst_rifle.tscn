@@ -6,6 +6,8 @@
 
 [node name="Burst Rifle" instance=ExtResource("1_68848")]
 script = ExtResource("1_sr33w")
+bullet_count = 3
+spacing = 0.04
 damage = 11.0
 speed = 167.0
 bullet_scale = Vector2(2, 1)

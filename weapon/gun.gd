@@ -39,7 +39,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("primary_action"):
 		# Don't fire if still cooling down.
 		if not is_cooling_down:
-			_fire()
+			_shoot()
 		shooting_timer.start()
 	if event.is_action_released("primary_action"):
 		shooting_timer.stop()
@@ -53,24 +53,34 @@ func _physics_process(_delta: float) -> void:
 
 
 ## Create bullets and begin cooldown until it can be fired again.
-func _fire() -> void:
-	_create_bullets()
+func _shoot() -> void:
+	_spawn_bullets()
 	# Begin cooldown, show its progress bar, and start timer to end it.
 	is_cooling_down = true
 	cooldown_bar.visible = true
 	cooldown_timer.start()
 
 
-## Create bullets at the bullet hole.
-func _create_bullets() -> void:
-	var new_bullet: Bullet = _create_bullet()
-	new_bullet.global_position = bullet_hole.global_position
-	new_bullet.global_rotation = bullet_hole.global_rotation
+## Behavior of gun upon firing.
+## Intended to be overridden by various gun types.
+## By default, a single bullet is fired.
+func _spawn_bullets() -> void:
+	_add_bullet()
+
+
+## Instantiate and add a bullet to the root scene
+## with the position and rotation of the bullet hole, unless otherwise given.
+func _add_bullet(
+		bullet_position: Vector2 = bullet_hole.global_position,
+		bullet_rotation: float = bullet_hole.global_rotation) -> void:
+	var new_bullet: Bullet = _instantiate_bullet()
+	new_bullet.global_position = bullet_position
+	new_bullet.global_rotation = bullet_rotation
 	get_tree().root.add_child(new_bullet)
 
 
-## Create a single bullet.
-func _create_bullet() -> Bullet:
+## Instantiate a bullet with the properties specified on the gun.
+func _instantiate_bullet() -> Bullet:
 	var new_bullet: Bullet = bullet.instantiate()
 	new_bullet.damage = damage
 	new_bullet.speed = speed
@@ -81,7 +91,7 @@ func _create_bullet() -> Bullet:
 
 ## Shoot when shooting timer times out....
 func _on_shooting_timer_timeout() -> void:
-	_fire()
+	_shoot()
 
 
 ## When cooldown is over, cooling down is over and the progress bar is hidden.
