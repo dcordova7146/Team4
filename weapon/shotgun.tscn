@@ -1,46 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://blnmaye6htmo6"]
+[gd_scene load_steps=4 format=3 uid="uid://blnmaye6htmo6"]
 
-[ext_resource type="Script" path="res://weapon/shotgun.gd" id="1_rpk8h"]
-[ext_resource type="Texture2D" uid="uid://d1q2al00xj36c" path="res://tempAssets/shotgun.png" id="2_8gcve"]
+[ext_resource type="PackedScene" uid="uid://d20nshp1r4q6r" path="res://weapon/gun.tscn" id="1_fpx8b"]
+[ext_resource type="Texture2D" uid="uid://d1q2al00xj36c" path="res://tempAssets/shotgun.png" id="2_3iru3"]
+[ext_resource type="Script" path="res://weapon/shotgun.gd" id="2_mujnm"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
-bg_color = Color(0, 0, 0, 0.266667)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi6y3"]
-bg_color = Color(1, 1, 1, 1)
-
-[node name="Shotgun" type="Node2D"]
-scale = Vector2(0.8, 0.8)
-script = ExtResource("1_rpk8h")
+[node name="Shotgun" instance=ExtResource("1_fpx8b")]
+script = ExtResource("2_mujnm")
 damage = 7.0
 speed = 150.0
 max_range = 100.0
 bullet_scale = Vector2(0.5, 0.5)
 
-[node name="GunPivot" type="Marker2D" parent="."]
-
-[node name="Sprite" type="Sprite2D" parent="GunPivot"]
+[node name="Sprite" parent="GunPivot" index="0"]
 position = Vector2(16.25, -1.25)
-texture = ExtResource("2_8gcve")
+texture = ExtResource("2_3iru3")
 
-[node name="BulletHole" type="Marker2D" parent="GunPivot/Sprite"]
-unique_name_in_owner = true
+[node name="BulletHole" parent="GunPivot/Sprite" index="0"]
 position = Vector2(10, -1.5)
-
-[node name="ShootingTimer" type="Timer" parent="."]
-
-[node name="CooldownTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="CooldownBar" type="ProgressBar" parent="."]
-visible = false
-offset_left = -16.0
-offset_top = -24.0
-offset_right = 16.0
-offset_bottom = -20.0
-theme_override_styles/background = SubResource("StyleBoxFlat_ki7oq")
-theme_override_styles/fill = SubResource("StyleBoxFlat_fi6y3")
-show_percentage = false
-
-[connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
-[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

@@ -1,46 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://u2vho6i5c0nc"]
+[gd_scene load_steps=3 format=3 uid="uid://u2vho6i5c0nc"]
 
-[ext_resource type="Script" path="res://player/gun.gd" id="1_qsywq"]
-[ext_resource type="Texture2D" uid="uid://jbm7yg6ia2wc" path="res://tempAssets/machine_gun.png" id="2_hf7yr"]
+[ext_resource type="PackedScene" uid="uid://d20nshp1r4q6r" path="res://weapon/gun.tscn" id="1_cpkqh"]
+[ext_resource type="Texture2D" uid="uid://jbm7yg6ia2wc" path="res://tempAssets/machine_gun.png" id="2_ce5um"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
-bg_color = Color(0, 0, 0, 0.266667)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi6y3"]
-bg_color = Color(1, 1, 1, 1)
-
-[node name="Machine Gun" type="Node2D"]
-scale = Vector2(0.8, 0.8)
-script = ExtResource("1_qsywq")
+[node name="Machine Gun" instance=ExtResource("1_cpkqh")]
 damage = 5.0
 speed = 100.0
 cooldown_duration = 0.1
 auto_fire_duration = 0.1
 
-[node name="GunPivot" type="Marker2D" parent="."]
-
-[node name="Sprite" type="Sprite2D" parent="GunPivot"]
+[node name="Sprite" parent="GunPivot" index="0"]
 position = Vector2(20, -2)
-texture = ExtResource("2_hf7yr")
+texture = ExtResource("2_ce5um")
 
-[node name="BulletHole" type="Marker2D" parent="GunPivot/Sprite"]
-unique_name_in_owner = true
+[node name="BulletHole" parent="GunPivot/Sprite" index="0"]
 position = Vector2(11, -0.5)
-
-[node name="ShootingTimer" type="Timer" parent="."]
-
-[node name="CooldownTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="CooldownBar" type="ProgressBar" parent="."]
-visible = false
-offset_left = -16.0
-offset_top = -24.0
-offset_right = 16.0
-offset_bottom = -20.0
-theme_override_styles/background = SubResource("StyleBoxFlat_ki7oq")
-theme_override_styles/fill = SubResource("StyleBoxFlat_fi6y3")
-show_percentage = false
-
-[connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
-[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

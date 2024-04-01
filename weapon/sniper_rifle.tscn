@@ -1,48 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://32a0rer8h7vt"]
+[gd_scene load_steps=4 format=3 uid="uid://32a0rer8h7vt"]
 
-[ext_resource type="Script" path="res://player/gun.gd" id="1_u6gv0"]
-[ext_resource type="PackedScene" uid="uid://bgy6ly50typcx" path="res://projectile/sniper_rifle_bullet.tscn" id="2_7pwti"]
-[ext_resource type="Texture2D" uid="uid://chgyn7i2txl74" path="res://tempAssets/sniper_rifle.png" id="2_sx0ho"]
+[ext_resource type="PackedScene" uid="uid://d20nshp1r4q6r" path="res://weapon/gun.tscn" id="1_oa1vt"]
+[ext_resource type="PackedScene" uid="uid://bgy6ly50typcx" path="res://projectile/sniper_rifle_bullet.tscn" id="2_e6eha"]
+[ext_resource type="Texture2D" uid="uid://chgyn7i2txl74" path="res://tempAssets/sniper_rifle.png" id="3_i65r4"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
-bg_color = Color(0, 0, 0, 0.266667)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi6y3"]
-bg_color = Color(1, 1, 1, 1)
-
-[node name="Sniper Rifle" type="Node2D"]
-scale = Vector2(0.8, 0.8)
-script = ExtResource("1_u6gv0")
-bullet = ExtResource("2_7pwti")
+[node name="Sniper Rifle" instance=ExtResource("1_oa1vt")]
+bullet = ExtResource("2_e6eha")
 damage = 50.0
 speed = 1000.0
 cooldown_duration = 1.0
 auto_fire_duration = 1.0
 
-[node name="GunPivot" type="Marker2D" parent="."]
-
-[node name="Sprite" type="Sprite2D" parent="GunPivot"]
+[node name="Sprite" parent="GunPivot" index="0"]
 position = Vector2(25, -2)
-texture = ExtResource("2_sx0ho")
+texture = ExtResource("3_i65r4")
 
-[node name="BulletHole" type="Marker2D" parent="GunPivot/Sprite"]
-unique_name_in_owner = true
+[node name="BulletHole" parent="GunPivot/Sprite" index="0"]
 position = Vector2(14, -0.5)
-
-[node name="ShootingTimer" type="Timer" parent="."]
-
-[node name="CooldownTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="CooldownBar" type="ProgressBar" parent="."]
-visible = false
-offset_left = -16.0
-offset_top = -24.0
-offset_right = 16.0
-offset_bottom = -20.0
-theme_override_styles/background = SubResource("StyleBoxFlat_ki7oq")
-theme_override_styles/fill = SubResource("StyleBoxFlat_fi6y3")
-show_percentage = false
-
-[connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
-[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
