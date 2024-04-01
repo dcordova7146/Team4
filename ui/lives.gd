@@ -1,6 +1,6 @@
 @tool
 class_name Lives
-extends Node2D
+extends Control
 ## A sort of progress bar that displays discrete values with heart shapes.
 
 const DEFAULT_COLOR: Color = Color("#f8221c")

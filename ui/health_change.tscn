@@ -23,7 +23,7 @@ _data = {
 
 [node name="HealthChange" type="RichTextLabel"]
 clip_contents = false
-offset_right = 48.0
+offset_right = 96.0
 offset_bottom = 40.0
 theme_override_font_sizes/normal_font_size = 64
 scroll_active = false
