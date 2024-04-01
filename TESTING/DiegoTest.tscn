@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://TESTING/TEST.gd" id="1_vh28s"]
 [ext_resource type="PackedScene" uid="uid://bxvfe2h3ur6ol" path="res://map/room.tscn" id="2_m8q1q"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="3_1nryx"]
-[ext_resource type="Script" path="res://map/Camera2D.gd" id="4_qjrqp"]
+[ext_resource type="Script" path="res://map/camera_2d.gd" id="4_qjrqp"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_vh28s")

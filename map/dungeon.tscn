@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://map/dungeon.gd" id="1_1hjgm"]
 [ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://ui/pause_menu.tscn" id="2_img3q"]
+[ext_resource type="Script" path="res://map/camera_2d.gd" id="3_0bf8r"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="3_51vlb"]
 [ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://map/rock.tscn" id="4_7yry6"]
-[ext_resource type="Script" path="res://map/Camera2D.gd" id="4_hmp84"]
 [ext_resource type="PackedScene" uid="uid://dx5nejrm0qvau" path="res://enemy/fireball_turret.tscn" id="6_gpxj7"]
 [ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="7_wap1c"]
 
@@ -23,7 +23,7 @@ size = Vector2i(320, 180)
 [node name="MinimapCamera" type="Camera2D" parent="MinimapViewport"]
 offset = Vector2(150, 60)
 zoom = Vector2(0.25, 0.25)
-script = ExtResource("4_hmp84")
+script = ExtResource("3_0bf8r")
 
 [node name="HUD" parent="." instance=ExtResource("7_wap1c")]
 
@@ -89,7 +89,7 @@ offset = Vector2(155, 70)
 zoom = Vector2(4.3, 4.3)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-script = ExtResource("4_hmp84")
+script = ExtResource("3_0bf8r")
 
 [connection signal="game_exited_to_menu" from="PauseMenu" to="." method="_on_pause_menu_game_exited_to_menu"]
 [connection signal="game_restarted" from="PauseMenu" to="." method="_on_pause_menu_game_restarted"]

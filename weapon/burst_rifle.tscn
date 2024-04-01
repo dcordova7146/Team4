@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnwpwikn763lo"]
+[gd_scene load_steps=5 format=3 uid="uid://bit2cxxu4xi8o"]
 
-[ext_resource type="Script" path="res://player/gun.gd" id="1_thr3t"]
-[ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://tempAssets/pistol.png" id="2_8528f"]
+[ext_resource type="Script" path="res://weapon/burst_rifle.gd" id="1_sr33w"]
+[ext_resource type="Texture2D" uid="uid://usqoitat0pvm" path="res://tempAssets/burst_rifle.png" id="2_8oclc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
 bg_color = Color(0, 0, 0, 0.266667)
@@ -9,20 +9,22 @@ bg_color = Color(0, 0, 0, 0.266667)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi6y3"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="Pistol" type="Node2D"]
+[node name="Burst Rifle" type="Node2D"]
 scale = Vector2(0.8, 0.8)
-script = ExtResource("1_thr3t")
+script = ExtResource("1_sr33w")
+damage = 11.0
+speed = 167.0
 bullet_scale = Vector2(2, 1)
 
 [node name="GunPivot" type="Marker2D" parent="."]
 
 [node name="Sprite" type="Sprite2D" parent="GunPivot"]
-position = Vector2(15, -1)
-texture = ExtResource("2_8528f")
+position = Vector2(21, -3)
+texture = ExtResource("2_8oclc")
 
 [node name="BulletHole" type="Marker2D" parent="GunPivot/Sprite"]
 unique_name_in_owner = true
-position = Vector2(4, -2.5)
+position = Vector2(7, -0.5)
 
 [node name="ShootingTimer" type="Timer" parent="."]
 

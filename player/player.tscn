@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_iitf2"]
 [ext_resource type="Texture2D" uid="uid://b010odvgbpiye" path="res://tempAssets/p1.png" id="2_22u6h"]
-[ext_resource type="PackedScene" uid="uid://bit2cxxu4xi8o" path="res://player/weapons/burst_rifle/burst_rifle.tscn" id="3_6tftd"]
-[ext_resource type="PackedScene" uid="uid://blnmaye6htmo6" path="res://player/weapons/shotgun/shotgun.tscn" id="3_e3kkd"]
-[ext_resource type="PackedScene" uid="uid://dnwpwikn763lo" path="res://player/weapons/pistol/pistol.tscn" id="4_nftq2"]
-[ext_resource type="PackedScene" uid="uid://u2vho6i5c0nc" path="res://player/weapons/machine_gun/machine_gun.tscn" id="6_nqhi7"]
-[ext_resource type="PackedScene" uid="uid://32a0rer8h7vt" path="res://player/weapons/sniper_rifle/sniper_rifle.tscn" id="7_gohho"]
+[ext_resource type="PackedScene" uid="uid://dnwpwikn763lo" path="res://weapon/pistol.tscn" id="3_htkx3"]
+[ext_resource type="PackedScene" uid="uid://u2vho6i5c0nc" path="res://weapon/machine_gun.tscn" id="4_yarha"]
+[ext_resource type="PackedScene" uid="uid://bit2cxxu4xi8o" path="res://weapon/burst_rifle.tscn" id="5_fw7d2"]
+[ext_resource type="PackedScene" uid="uid://blnmaye6htmo6" path="res://weapon/shotgun.tscn" id="6_d3724"]
+[ext_resource type="PackedScene" uid="uid://32a0rer8h7vt" path="res://weapon/sniper_rifle.tscn" id="7_uxrnu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv7g"]
 size = Vector2(16, 16)
@@ -33,23 +33,23 @@ wait_time = 0.05
 
 [node name="Guns" type="Node2D" parent="."]
 
-[node name="Pistol" parent="Guns" instance=ExtResource("4_nftq2")]
+[node name="Pistol" parent="Guns" instance=ExtResource("3_htkx3")]
 process_mode = 4
 visible = false
 
-[node name="Machine Gun" parent="Guns" instance=ExtResource("6_nqhi7")]
+[node name="Machine Gun" parent="Guns" instance=ExtResource("4_yarha")]
 process_mode = 4
 visible = false
 
-[node name="Burst Rifle" parent="Guns" instance=ExtResource("3_6tftd")]
+[node name="Burst Rifle" parent="Guns" instance=ExtResource("5_fw7d2")]
 process_mode = 4
 visible = false
 
-[node name="Shotgun" parent="Guns" instance=ExtResource("3_e3kkd")]
+[node name="Shotgun" parent="Guns" instance=ExtResource("6_d3724")]
 process_mode = 4
 visible = false
 
-[node name="Sniper Rifle" parent="Guns" instance=ExtResource("7_gohho")]
+[node name="Sniper Rifle" parent="Guns" instance=ExtResource("7_uxrnu")]
 process_mode = 4
 visible = false
 
