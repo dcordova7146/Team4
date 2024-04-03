@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://doe0sstc3n5sh"]
+[gd_scene load_steps=6 format=3 uid="uid://doe0sstc3n5sh"]
 
-[ext_resource type="Script" path="res://ui/lives.gd" id="1_74fjh"]
+[ext_resource type="Script" path="res://ui/meter.gd" id="1_3gfvi"]
+[ext_resource type="Script" path="res://ui/hud.gd" id="1_w84rr"]
 [ext_resource type="Script" path="res://ui/blood_cup.gd" id="2_156fb"]
 [ext_resource type="Texture2D" uid="uid://cdvs87wypg7qa" path="res://tempAssets/bloodcup.png.png" id="2_j2t6t"]
 
@@ -10,11 +11,10 @@ outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_w84rr")
 
-[node name="Lives" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("1_74fjh")
+[node name="Lives" type="HBoxContainer" parent="."]
+script = ExtResource("1_3gfvi")
 
 [node name="Minimap" type="ColorRect" parent="."]
 anchors_preset = 1

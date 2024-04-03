@@ -9,7 +9,6 @@ const LIFE: PackedScene = preload("res://drop/life.tscn")
 const HEALTH_CHANGE: PackedScene = preload("res://ui/health_change.tscn")
 
 @onready var spawn: Node2D = $Spawn
-@onready var lives: Lives = $HUD/Lives
 @onready var player: Node2D = $Player
 @onready var minimap: SubViewport = $MinimapViewport
 @onready var minimap_camera: Camera2D = $MinimapViewport/MinimapCamera
