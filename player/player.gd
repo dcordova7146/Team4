@@ -14,6 +14,8 @@ extends CharacterBody2D
 
 ## Index of the currently active weapon.
 var _active_weapon_index: int = 0
+## Total number of weapons in possession.
+var _weapon_count: int = 5
 
 
 func _ready() -> void:
@@ -39,6 +41,22 @@ func _input(event: InputEvent) -> void:
 		_change_active_weapon(3)
 	elif event.is_action_pressed("weapon_slot_5"):
 		_change_active_weapon(4)
+	elif event.is_action_pressed("next_weapon_slot"):
+		# Roll over to first weapon.
+		var next_index: int = _active_weapon_index + 1
+		_change_active_weapon(
+				next_index
+				if next_index < _weapon_count
+				else 0
+		)
+	elif event.is_action_pressed("previous_weapon_slot"):
+		# Roll over to last weapon.
+		var previous_index: int = _active_weapon_index - 1
+		_change_active_weapon(
+				previous_index
+				if previous_index > -1
+				else _weapon_count - 1
+		)
 
 
 ## Change the active weapon to that at the specified slot.
