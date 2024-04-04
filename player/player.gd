@@ -1,5 +1,4 @@
 ## Contributors: James, Diego, Karwai
-
 extends CharacterBody2D
 
 ## Initial number of lives.
@@ -16,11 +15,13 @@ extends CharacterBody2D
 ## Index of the currently active weapon.
 var _active_weapon_index: int = 0
 
-## Broadcast health state on ready so it may be rendered by the HUD.
+
 func _ready() -> void:
+	# Broadcast health state on ready so it may be rendered by the HUD.
 	Events.lives_changed.emit(lives, max_lives)
 	# Set active weapon to first slot.
 	_change_active_weapon(0)
+
 
 func _physics_process(_delta: float) -> void:
 	get_input()
@@ -30,25 +31,29 @@ func _physics_process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("weapon_slot_1"):
 		_change_active_weapon(0)
-	if event.is_action_pressed("weapon_slot_2"):
+	elif event.is_action_pressed("weapon_slot_2"):
 		_change_active_weapon(1)
-	if event.is_action_pressed("weapon_slot_3"):
+	elif event.is_action_pressed("weapon_slot_3"):
 		_change_active_weapon(2)
-	if event.is_action_pressed("weapon_slot_4"):
+	elif event.is_action_pressed("weapon_slot_4"):
 		_change_active_weapon(3)
-	if event.is_action_pressed("weapon_slot_5"):
+	elif event.is_action_pressed("weapon_slot_5"):
 		_change_active_weapon(4)
 
 
 ## Change the active weapon to that at the specified slot.
 func _change_active_weapon(slot: int) -> void:
-	var old_weapon: Node2D = $Guns.get_child(_active_weapon_index)
+	var old_weapon: Gun = $Guns.get_child(_active_weapon_index)
 	old_weapon.process_mode = PROCESS_MODE_DISABLED
 	old_weapon.visible = false
-	var new_weapon: Node2D = $Guns.get_child(slot)
+	
+	var new_weapon: Gun = $Guns.get_child(slot)
 	new_weapon.process_mode = PROCESS_MODE_INHERIT
 	new_weapon.visible = true
+	
 	_active_weapon_index = slot
+	
+	Events.active_weapon_changed.emit(new_weapon)
 
 
 # Move the player according to cardinal direction input.

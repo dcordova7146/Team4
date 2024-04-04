@@ -10,6 +10,8 @@ damage = 50.0
 speed = 1000.0
 cooldown_duration = 1.0
 auto_fire_duration = 1.0
+loaded_bullet_count_max = 5
+reserve_bullet_count_max = 50
 
 [node name="Sprite" parent="GunPivot" index="0"]
 position = Vector2(25, -2)

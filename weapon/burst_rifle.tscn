@@ -10,6 +10,8 @@ bullet_count = 3
 spacing = 0.04
 damage = 11.0
 speed = 167.0
+loaded_bullet_count_max = 15
+reserve_bullet_count_max = 300
 bullet_scale = Vector2(2, 1)
 
 [node name="Sprite" parent="GunPivot" index="0"]

@@ -1,6 +1,6 @@
 @tool
 class_name Meter
-extends Control
+extends BoxContainer
 ## A sort of progress bar for displaying discrete values.
 
 ## Max value.

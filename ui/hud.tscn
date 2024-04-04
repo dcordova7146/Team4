@@ -1,44 +1,115 @@
-[gd_scene load_steps=6 format=3 uid="uid://doe0sstc3n5sh"]
+[gd_scene load_steps=13 format=3 uid="uid://doe0sstc3n5sh"]
 
 [ext_resource type="Script" path="res://ui/meter.gd" id="1_3gfvi"]
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_w84rr"]
 [ext_resource type="Script" path="res://ui/blood_cup.gd" id="2_156fb"]
 [ext_resource type="Texture2D" uid="uid://cdvs87wypg7qa" path="res://tempAssets/bloodcup.png.png" id="2_j2t6t"]
+[ext_resource type="Texture2D" uid="uid://2wxjfuktenwi" path="res://tempAssets/heart.png" id="3_tctny"]
+[ext_resource type="Texture2D" uid="uid://b43iwmjoqo7i5" path="res://tempAssets/heart_empty.png" id="4_l77fl"]
+[ext_resource type="Texture2D" uid="uid://hxur0kber07h" path="res://ui/bullets.png" id="5_ucdqg"]
+[ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://tempAssets/pistol.png" id="8_ml7ux"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ejrmc"]
-font_size = 32
-outline_size = 12
+outline_size = 4
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85o6u"]
+atlas = ExtResource("5_ucdqg")
+region = Rect2(0, 0, 8, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn4md"]
+atlas = ExtResource("5_ucdqg")
+region = Rect2(0, 5, 8, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfltq"]
+bg_color = Color(0, 0, 0, 0.266667)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_w84rr")
 
-[node name="Lives" type="HBoxContainer" parent="."]
+[node name="TopLeft" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Lives" type="HBoxContainer" parent="TopLeft"]
+layout_mode = 2
 script = ExtResource("1_3gfvi")
+texture_filled = ExtResource("3_tctny")
+texture_empty = ExtResource("4_l77fl")
+
+[node name="BloodCup" type="HBoxContainer" parent="TopLeft"]
+layout_mode = 2
+script = ExtResource("2_156fb")
+
+[node name="TextureRect" type="TextureRect" parent="TopLeft/BloodCup"]
+layout_mode = 2
+texture = ExtResource("2_j2t6t")
+
+[node name="Label" type="Label" parent="TopLeft/BloodCup"]
+layout_mode = 2
+text = "×0"
+label_settings = SubResource("LabelSettings_ejrmc")
 
 [node name="Minimap" type="ColorRect" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -320.0
-offset_bottom = 180.0
+offset_left = -160.0
+offset_bottom = 90.0
 grow_horizontal = 0
 color = Color(0, 0, 0, 0.266667)
 
 [node name="TextureRect" type="TextureRect" parent="Minimap"]
 layout_mode = 0
 
-[node name="BloodCup" type="HBoxContainer" parent="."]
-offset_left = 400.0
-offset_right = 455.0
-offset_bottom = 32.0
-script = ExtResource("2_156fb")
+[node name="LowerLeft" type="HBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+offset_right = 124.0
+grow_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="BloodCup"]
+[node name="LoadedBullets" type="VBoxContainer" parent="LowerLeft"]
 layout_mode = 2
-texture = ExtResource("2_j2t6t")
+alignment = 2
+script = ExtResource("1_3gfvi")
+texture_filled = SubResource("AtlasTexture_85o6u")
+texture_empty = SubResource("AtlasTexture_xn4md")
 
-[node name="Label" type="Label" parent="BloodCup"]
+[node name="Weapon" type="VBoxContainer" parent="LowerLeft"]
 layout_mode = 2
-text = "×0"
+size_flags_vertical = 8
+
+[node name="ReservedBullets" type="Label" parent="LowerLeft/Weapon"]
+layout_mode = 2
+text = "100/100"
+label_settings = SubResource("LabelSettings_ejrmc")
+
+[node name="WeaponEquipped" type="PanelContainer" parent="LowerLeft/Weapon"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_pfltq")
+
+[node name="TextureRect" type="TextureRect" parent="LowerLeft/Weapon/WeaponEquipped"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_ml7ux")
+
+[node name="SeedLabel" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Seed: 9999"
 label_settings = SubResource("LabelSettings_ejrmc")
