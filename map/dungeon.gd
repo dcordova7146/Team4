@@ -12,6 +12,7 @@ const HEALTH_CHANGE: PackedScene = preload("res://ui/health_change.tscn")
 @onready var player: Node2D = $Player
 @onready var minimap: SubViewport = $MinimapViewport
 @onready var minimap_camera: Camera2D = $MinimapViewport/MinimapCamera
+@onready var hud: HUD = $HUD
 @onready var hud_minimap: TextureRect = $HUD/Minimap/TextureRect
 
 ## The seed of the current dungeon.
@@ -29,7 +30,7 @@ func _ready() -> void:
 ## Create dungeon based on given seed.
 func create(dungeon_seed: int) -> void:
 	rng_seed = dungeon_seed
-	(%SeedLabel as Label).text = "Seed: %s" % dungeon_seed
+	hud.seed_label.text = "Seed: %s" % dungeon_seed
 	visualize(GenerateDungeon.generate(dungeon_seed))
 
 
@@ -76,6 +77,6 @@ func _on_enemy_died(pos: Vector2) -> void:
 
 func _on_health_changed(pos: Vector2, amount: int) -> void:
 	var health_change: HealthChange = HEALTH_CHANGE.instantiate()
-	health_change.global_position = pos * 4.3
+	health_change.global_position = pos
 	health_change.display(amount)
-	$HUD.add_child(health_change)
+	add_child(health_change)

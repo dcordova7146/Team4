@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://do78uiwbgckay"]
+[gd_scene load_steps=3 format=3 uid="uid://do78uiwbgckay"]
 
 [ext_resource type="Script" path="res://ui/pause_menu.gd" id="1_btakn"]
+
+[sub_resource type="Theme" id="Theme_v4r0e"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -12,59 +14,57 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_v4r0e")
 color = Color(0, 0, 0, 0.501961)
 
-[node name="PauseLabel" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -88.0
-offset_right = 88.0
-offset_bottom = 88.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 64
-text = "Paused"
-
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="List" type="VBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -248.0
-offset_top = -198.0
-offset_right = 248.0
-offset_bottom = 198.0
+offset_left = -62.0
+offset_top = -69.0
+offset_right = 62.0
+offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ResumeButton" type="Button" parent="Buttons"]
+[node name="PauseLabel" type="Label" parent="List"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="List"]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="List/Buttons"]
+layout_mode = 2
 text = "Resume"
+alignment = 0
 
-[node name="RestartButton" type="Button" parent="Buttons"]
+[node name="RestartButton" type="Button" parent="List/Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
 text = "Restart (same seed)"
+alignment = 0
 
-[node name="RestartRandomButton" type="Button" parent="Buttons"]
+[node name="RestartRandomButton" type="Button" parent="List/Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
 text = "Restart (random seed)"
+alignment = 0
 
-[node name="QuitToMenuButton" type="Button" parent="Buttons"]
+[node name="QuitToMenuButton" type="Button" parent="List/Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
 text = "Quit to Menu"
+alignment = 0
 
-[node name="QuitToDesktopButton" type="Button" parent="Buttons"]
+[node name="QuitToDesktopButton" type="Button" parent="List/Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
 text = "Quit to Desktop"
+alignment = 0
 
-[connection signal="pressed" from="Buttons/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="Buttons/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="Buttons/RestartRandomButton" to="." method="_on_restart_random_button_pressed"]
-[connection signal="pressed" from="Buttons/QuitToMenuButton" to="." method="_on_quit_to_menu_button_pressed"]
-[connection signal="pressed" from="Buttons/QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]
+[connection signal="pressed" from="List/Buttons/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="List/Buttons/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="List/Buttons/RestartRandomButton" to="." method="_on_restart_random_button_pressed"]
+[connection signal="pressed" from="List/Buttons/QuitToMenuButton" to="." method="_on_quit_to_menu_button_pressed"]
+[connection signal="pressed" from="List/Buttons/QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]

@@ -522,15 +522,11 @@ libraries = {
 }
 
 [node name="TypeLabel" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.588235)
-offset_left = 118.0
-offset_top = 61.0
-offset_right = 504.0
-offset_bottom = 149.0
-scale = Vector2(0.2, 0.2)
+offset_left = 7.0
+offset_top = -1.0
+offset_right = 8.0
+offset_bottom = 12.0
 theme_override_colors/font_color = Color(0.262745, 0.207843, 0.396078, 1)
-theme_override_font_sizes/font_size = 64
-text = "[Room Type]"
 script = ExtResource("2_gc5mi")
 
 [connection signal="body_entered" from="Play Area" to="." method="_on_play_area_body_entered"]

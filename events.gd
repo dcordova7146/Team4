@@ -5,6 +5,7 @@ extends Node
 
 signal player_died
 signal room_entered(room: Room)
+signal active_weapon_changed(new_weapon: Gun)
 signal waveCleared
 signal health_changed(pos: Vector2, amount: int)
 signal lives_changed(current_lives: int, max_lives: int)

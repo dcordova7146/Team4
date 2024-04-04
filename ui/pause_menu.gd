@@ -1,14 +1,13 @@
 ## Contributors: Karwai
-
 extends CanvasLayer
 ## Menu that appears when the game is paused.
 
 signal game_restarted(use_random: bool)
 signal game_exited_to_menu
 
-@onready var buttons: VBoxContainer = $Buttons
-@onready var label: Label = $PauseLabel
-
+@onready var buttons: VBoxContainer = $List/Buttons
+@onready var label: Label = $List/PauseLabel
+@onready var resume_button: Button = $List/Buttons/ResumeButton
 
 ## Listen to player death event.
 func _ready() -> void:
@@ -75,6 +74,5 @@ func _on_quit_to_desktop_button_pressed() -> void:
 
 ## Pause game with "Game Over!" message and disable resume button.
 func _on_player_died() -> void:
-	var resume_button: Button = $Buttons/ResumeButton
 	resume_button.disabled = true
 	pause("Game Over!")

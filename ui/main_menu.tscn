@@ -9,11 +9,10 @@ script = ExtResource("1_bdvd7")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -88.0
-offset_right = 88.0
-offset_bottom = 88.0
+offset_left = -44.5
+offset_right = 44.5
+offset_bottom = 45.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 64
 text = "[Title]"
 
 [node name="Buttons" type="VBoxContainer" parent="."]
@@ -22,10 +21,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -148.0
-offset_top = -165.5
-offset_right = 148.0
-offset_bottom = 165.5
+offset_left = -66.0
+offset_top = -104.0
+offset_right = 69.0
+offset_bottom = 101.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -45,18 +44,18 @@ placeholder_text = "Leave blank for random seed"
 
 [node name="StartButton" type="Button" parent="Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
 text = "Start"
+alignment = 0
 
 [node name="SettingsButton" type="Button" parent="Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
 text = "Settings"
+alignment = 0
 
 [node name="QuitToDesktopButton" type="Button" parent="Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
 text = "Quit"
+alignment = 0
 
 [connection signal="text_changed" from="Buttons/HBoxContainer/SeedTextInput" to="." method="_on_seed_text_input_text_changed"]
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
