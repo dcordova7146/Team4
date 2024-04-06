@@ -44,6 +44,7 @@ z_index = 2
 position = Vector2(32, 112)
 
 [node name="Rock" parent="." instance=ExtResource("4_7yry6")]
+visible = false
 position = Vector2(-479, 85)
 
 [node name="Rock2" parent="Rock" instance=ExtResource("4_7yry6")]

@@ -9,6 +9,7 @@ extends CharacterBody2D
 ## The sibling node player.
 @onready var player: Node2D = get_node("/root/Main/Dungeon/Player")
 var awake: bool = false
+@onready var on_hit_animation = $on_hit
 
 ## Set max value of the health bar to the initial health.
 func _ready() -> void:
@@ -38,7 +39,7 @@ func take_damage(damage_total: float) -> void:
 	# Update health bar to reflect health and display.
 	health_bar.value = health
 	health_bar.visible = true
-
+	on_hit_animation.play("on_hit")
 
 ## Drop a life and then delete self.
 func die() -> void:

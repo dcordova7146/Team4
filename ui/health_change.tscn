@@ -22,6 +22,7 @@ _data = {
 }
 
 [node name="HealthChange" type="RichTextLabel"]
+z_index = 10
 clip_contents = false
 offset_right = 96.0
 offset_bottom = 40.0
