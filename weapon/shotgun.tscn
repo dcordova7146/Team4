@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://blnmaye6htmo6"]
 
 [ext_resource type="PackedScene" uid="uid://d20nshp1r4q6r" path="res://weapon/gun.tscn" id="1_fpx8b"]
-[ext_resource type="Texture2D" uid="uid://d1q2al00xj36c" path="res://tempAssets/shotgun.png" id="2_3iru3"]
+[ext_resource type="Texture2D" uid="uid://d1q2al00xj36c" path="res://tempAssets/weapons/shotgun.png" id="2_3iru3"]
 [ext_resource type="Script" path="res://weapon/shotgun.gd" id="2_mujnm"]
 
 [node name="Shotgun" instance=ExtResource("1_fpx8b")]

@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://fyat7l76scsr" path="res://tempAssets/World/doors/LeftDoor.png" id="4_hjecd"]
 [ext_resource type="Texture2D" uid="uid://btk0f6t0nv7k2" path="res://tempAssets/World/doors/TopDoor.png" id="5_6hrvb"]
 [ext_resource type="Texture2D" uid="uid://c87xswjoaabdj" path="res://tempAssets/World/doors/RightDoor.png" id="6_m0tnp"]
-[ext_resource type="Texture2D" uid="uid://cj0770rj04ylb" path="res://tempAssets/warning.png" id="9_xsowb"]
+[ext_resource type="Texture2D" uid="uid://cj0770rj04ylb" path="res://tempAssets/Warning.png" id="9_xsowb"]
 [ext_resource type="Script" path="res://map/barrier.gd" id="10_wfbh8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_assl7"]
@@ -297,8 +297,6 @@ _data = {
 
 [node name="Room" type="Node2D"]
 script = ExtResource("1_k281e")
-
-[node name="Diego C" type="Node" parent="."]
 
 [node name="MapSprite" type="Node2D" parent="."]
 visibility_layer = 4

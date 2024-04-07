@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgy6ly50typcx"]
 
 [ext_resource type="Script" path="res://projectile/bullet.gd" id="1_eo7iy"]
-[ext_resource type="Texture2D" uid="uid://42rdpb74ekav" path="res://tempAssets/sniper_rifle_bullet.png" id="2_akfa7"]
+[ext_resource type="Texture2D" uid="uid://42rdpb74ekav" path="res://tempAssets/projectiles/sniper_rifle_bullet.png" id="2_akfa7"]
 
 [node name="Sniper Rifle Bullet" type="Area2D"]
 top_level = true
