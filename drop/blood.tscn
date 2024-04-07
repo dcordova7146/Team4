@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cj3hp6ftwl4em"]
 
-[ext_resource type="Texture2D" uid="uid://cwye624b5a2g3" path="res://tempAssets/blooddrop.png" id="1_hmgdr"]
+[ext_resource type="Texture2D" uid="uid://cwye624b5a2g3" path="res://tempAssets/drops/blooddrop.png" id="1_hmgdr"]
 [ext_resource type="Script" path="res://drop/blood.gd" id="1_vnli7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_usqnh"]

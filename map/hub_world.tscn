@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxh12lreok64u"]
+
+[ext_resource type="Texture2D" uid="uid://bk0ctb1i6sy4k" path="res://tempAssets/World/hubworld.png" id="1_ao46v"]
+[ext_resource type="PackedScene" uid="uid://cwgdip16lqsek" path="res://map/teleporter.tscn" id="2_tkiw1"]
+
+[node name="hub_world" type="Node2D"]
+
+[node name="hub" type="Sprite2D" parent="."]
+texture = ExtResource("1_ao46v")
+
+[node name="Spawn" type="Marker2D" parent="."]
+
+[node name="toDungeonTp" parent="." instance=ExtResource("2_tkiw1")]
+position = Vector2(0, -215)
+scale = Vector2(1.5, 1.5)
+
+[node name="toStoreTp" parent="." instance=ExtResource("2_tkiw1")]
+position = Vector2(-197, -28)
+scale = Vector2(1.5, 1.5)
+
+[node name="toTrainingTp" parent="." instance=ExtResource("2_tkiw1")]
+position = Vector2(204, -28)
+scale = Vector2(1.5, 1.5)

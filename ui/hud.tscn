@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://ui/meter.gd" id="1_3gfvi"]
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_w84rr"]
 [ext_resource type="Script" path="res://ui/blood_cup.gd" id="2_156fb"]
-[ext_resource type="Texture2D" uid="uid://cdvs87wypg7qa" path="res://tempAssets/bloodcup.png.png" id="2_j2t6t"]
-[ext_resource type="Texture2D" uid="uid://2wxjfuktenwi" path="res://tempAssets/heart.png" id="3_tctny"]
-[ext_resource type="Texture2D" uid="uid://b43iwmjoqo7i5" path="res://tempAssets/heart_empty.png" id="4_l77fl"]
+[ext_resource type="Texture2D" uid="uid://cdvs87wypg7qa" path="res://tempAssets/drops/bloodcup.png.png" id="2_j2t6t"]
+[ext_resource type="Texture2D" uid="uid://2wxjfuktenwi" path="res://tempAssets/drops/heart.png" id="3_tctny"]
+[ext_resource type="Texture2D" uid="uid://b43iwmjoqo7i5" path="res://tempAssets/drops/heart_empty.png" id="4_l77fl"]
 [ext_resource type="Texture2D" uid="uid://hxur0kber07h" path="res://ui/bullets.png" id="5_ucdqg"]
-[ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://tempAssets/pistol.png" id="8_ml7ux"]
+[ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://tempAssets/weapons/pistol.png" id="8_ml7ux"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ejrmc"]
 outline_size = 4

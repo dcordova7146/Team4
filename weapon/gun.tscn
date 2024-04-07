@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://d20nshp1r4q6r"]
 
 [ext_resource type="Script" path="res://weapon/gun.gd" id="1_jxd65"]
-[ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://tempAssets/pistol.png" id="2_2grcx"]
+[ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://tempAssets/weapons/pistol.png" id="2_2grcx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
 bg_color = Color(0, 0, 0, 0.266667)

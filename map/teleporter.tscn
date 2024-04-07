@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://cwgdip16lqsek"]
+
+[ext_resource type="Script" path="res://map/teleporter.gd" id="1_lhrfh"]
+[ext_resource type="Texture2D" uid="uid://dvsshi6v26imx" path="res://tempAssets/Teleporter/tpGate.png" id="1_x1qpn"]
+[ext_resource type="Texture2D" uid="uid://dpc5h4h626t2s" path="res://tempAssets/Teleporter/portal.png" id="2_ypd2c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtog2"]
+atlas = ExtResource("2_ypd2c")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rb8hb"]
+atlas = ExtResource("2_ypd2c")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3kam"]
+atlas = ExtResource("2_ypd2c")
+region = Rect2(0, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2d3rr"]
+atlas = ExtResource("2_ypd2c")
+region = Rect2(40, 40, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xc3md"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtog2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rb8hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3kam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2d3rr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3wdir"]
+
+[node name="Teleporter" type="Node2D"]
+script = ExtResource("1_lhrfh")
+
+[node name="Gate" type="Sprite2D" parent="."]
+texture = ExtResource("1_x1qpn")
+
+[node name="Portal" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xc3md")
+frame_progress = 0.710702
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -3)
+shape = SubResource("CapsuleShape2D_3wdir")
