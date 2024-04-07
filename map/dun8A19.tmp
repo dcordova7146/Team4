@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://map/camera_2d.gd" id="3_0bf8r"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="3_51vlb"]
 [ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://map/rock.tscn" id="4_7yry6"]
-[ext_resource type="PackedScene" uid="uid://sqyxernsmlq2" path="res://enemy/skulls/cursed_tombstone.tscn" id="7_d3rg2"]
 [ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="7_wap1c"]
+[ext_resource type="PackedScene" uid="uid://bir4mmpfg5c2q" path="res://enemy/skulls/frost_skull.tscn" id="8_bm5a5"]
 
 [node name="Dungeon" type="Node2D"]
 process_mode = 1
@@ -78,8 +78,8 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("3_0bf8r")
 
-[node name="Cursed Tombstone" parent="." instance=ExtResource("7_d3rg2")]
-position = Vector2(194, 75)
+[node name="Frost Skull" parent="." instance=ExtResource("8_bm5a5")]
+position = Vector2(160, 82)
 
 [connection signal="pressed" from="HUD/Generate Dungeon Test Button" to="." method="_on_button_pressed"]
 [connection signal="game_exited_to_menu" from="PauseMenu" to="." method="_on_pause_menu_game_exited_to_menu"]

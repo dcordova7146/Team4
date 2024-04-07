@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=3 uid="uid://bir4mmpfg5c2q"]
+
+[ext_resource type="Script" path="res://enemy/skulls/frost_skull.gd" id="1_o41gj"]
+[ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_rbscb"]
+[ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_x2ql7"]
+[ext_resource type="Texture2D" uid="uid://3m5k3sk2ciji" path="res://tempAssets/frostSkull.png" id="4_gbcsw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b5305"]
+resource_local_to_scene = true
+shader = ExtResource("3_x2ql7")
+shader_parameter/enabled = true
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82ml1"]
+bg_color = Color(0, 0, 0, 0.266667)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akpgk"]
+bg_color = Color(0.596078, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_bb2dl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frost Skull:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_jvo8a"]
+resource_name = "on_hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frost Skull:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a7seo"]
+_data = {
+"RESET": SubResource("Animation_bb2dl"),
+"on_hit": SubResource("Animation_jvo8a")
+}
+
+[node name="Frost Skull" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_o41gj")
+
+[node name="Dot" parent="." instance=ExtResource("2_rbscb")]
+
+[node name="Frost Skull" type="Sprite2D" parent="."]
+visibility_layer = 2
+material = SubResource("ShaderMaterial_b5305")
+position = Vector2(0, 2)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("4_gbcsw")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 2)
+scale = Vector2(0.05, 0.05)
+polygon = PackedVector2Array(94, -203, 109, -203, 109, -156, 94, -156, 94, -141, 125, -141, 125, -125, 172, -125, 172, -109, 188, -109, 188, -94, 172, -94, 172, -78, 188, -78, 188, -62, 203, -62, 203, -47, 188, -47, 188, -31, 156, -31, 156, 63, 141, 63, 141, 94, 125, 94, 125, 125, 141, 125, 141, 156, 125, 156, 125, 172, 109, 172, 109, 188, 94, 188, 94, 172, 78, 172, 78, 141, 63, 141, 63, 156, 31, 156, 31, 141, 16, 141, 16, 156, -16, 156, -16, 141, -31, 141, -31, 156, -62, 156, -62, 141, -78, 141, -78, 125, -94, 125, -94, 172, -109, 172, -109, 188, -125, 188, -125, 172, -141, 172, -141, 141, -156, 141, -156, 156, -172, 156, -172, 141, -187, 141, -187, 125, -172, 125, -172, 109, -156, 109, -156, 94, -141, 94, -141, 78, -172, 78, -172, 94, -203, 94, -203, 78, -219, 78, -219, 63, -203, 63, -203, 47, -219, 47, -219, 31, -234, 31, -234, 0, -219, 0, -219, -16, -203, -16, -203, -31, -219, -31, -219, -47, -234, -47, -234, -62, -219, -62, -219, -78, -203, -78, -203, -62, -172, -62, -172, -78, -187, -78, -187, -94, -172, -94, -172, -109, -141, -109, -141, -125, -156, -125, -156, -156, -141, -156, -141, -172, -125, -172, -125, -156, -109, -156, -109, -141, -94, -141, -94, -125, -62, -125, -62, -141, -47, -141, -47, -156, 47, -156, 47, -172, 63, -172, 63, -203, 78, -203, 78, -219, 94, -219)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+offset_bottom = -12.0
+theme_override_styles/background = SubResource("StyleBoxFlat_82ml1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_akpgk")
+max_value = 50.0
+show_percentage = false
+
+[node name="on_hit" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a7seo")
+}
+
+[node name="Shoot" type="Timer" parent="."]
+process_callback = 0
+wait_time = 2.0
+
+[connection signal="timeout" from="Shoot" to="." method="_on_shoot_timeout"]

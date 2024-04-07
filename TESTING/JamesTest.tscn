@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://8hob070qhfet"]
+
+[ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="3_1br3b"]
+[ext_resource type="PackedScene" uid="uid://cq6l1w3ackej8" path="res://enemy/skulls/bomb_skull.tscn" id="3_3j05i"]
+
+[node name="Test" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("3_1br3b")]
+position = Vector2(25, 38)
+
+[node name="Bomb Skull" parent="." instance=ExtResource("3_3j05i")]
+position = Vector2(69, 46)

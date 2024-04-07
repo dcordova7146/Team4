@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://map/camera_2d.gd" id="3_0bf8r"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="3_51vlb"]
 [ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://map/rock.tscn" id="4_7yry6"]
-[ext_resource type="PackedScene" uid="uid://sqyxernsmlq2" path="res://enemy/skulls/cursed_tombstone.tscn" id="7_d3rg2"]
+[ext_resource type="PackedScene" uid="uid://cq6l1w3ackej8" path="res://enemy/skulls/bomb_skull.tscn" id="7_j6iiu"]
 [ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="7_wap1c"]
 
 [node name="Dungeon" type="Node2D"]
@@ -78,8 +78,8 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("3_0bf8r")
 
-[node name="Cursed Tombstone" parent="." instance=ExtResource("7_d3rg2")]
-position = Vector2(194, 75)
+[node name="Bomb Skull" parent="." instance=ExtResource("7_j6iiu")]
+position = Vector2(226, 114)
 
 [connection signal="pressed" from="HUD/Generate Dungeon Test Button" to="." method="_on_button_pressed"]
 [connection signal="game_exited_to_menu" from="PauseMenu" to="." method="_on_pause_menu_game_exited_to_menu"]

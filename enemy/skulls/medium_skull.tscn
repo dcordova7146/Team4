@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c4neg4b8vv5dn"]
+[gd_scene load_steps=11 format=3 uid="uid://c4neg4b8vv5dn"]
 
 [ext_resource type="Script" path="res://enemy/skulls/medium_skull.gd" id="1_7d76o"]
 [ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_vfn8c"]
 [ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_6tx7v"]
-[ext_resource type="Texture2D" uid="uid://bdtxomolk7ecx" path="res://tempAssets/skull.png" id="3_jqvx0"]
+[ext_resource type="Texture2D" uid="uid://b44e30xmk3jym" path="res://tempAssets/mediumSkull.png" id="4_wqq51"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b5305"]
 resource_local_to_scene = true
@@ -11,37 +11,18 @@ shader = ExtResource("3_6tx7v")
 shader_parameter/enabled = true
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8lppj"]
-radius = 9.0
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82ml1"]
 bg_color = Color(0, 0, 0, 0.266667)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akpgk"]
 bg_color = Color(0.596078, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_jvo8a"]
-resource_name = "on_hit"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Skull:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
 [sub_resource type="Animation" id="Animation_bb2dl"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Skull:material:shader_parameter/enabled")
+tracks/0/path = NodePath("Medium Skull:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,6 +30,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_jvo8a"]
+resource_name = "on_hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Medium Skull:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a7seo"]
@@ -64,15 +61,17 @@ script = ExtResource("1_7d76o")
 
 [node name="Dot" parent="." instance=ExtResource("2_vfn8c")]
 
-[node name="Skull" type="Sprite2D" parent="."]
+[node name="Medium Skull" type="Sprite2D" parent="."]
 visibility_layer = 2
 material = SubResource("ShaderMaterial_b5305")
 position = Vector2(0, -5.96046e-08)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("3_jqvx0")
+scale = Vector2(0.062, 0.062)
+texture = ExtResource("4_wqq51")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_8lppj")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -5.96046e-08)
+scale = Vector2(0.062, 0.062)
+polygon = PackedVector2Array(47, -157, 48, -157, 48, -156, 49, -156, 49, -143, 63, -143, 63, -142, 64, -142, 64, -141, 65, -141, 65, -127, 94, -127, 94, -126, 95, -126, 95, -125, 96, -125, 96, -111, 109, -111, 109, -110, 110, -110, 110, -109, 111, -109, 111, -96, 125, -96, 125, -95, 126, -95, 126, -94, 127, -94, 127, -64, 141, -64, 141, -63, 142, -63, 142, -62, 143, -62, 143, -33, 156, -33, 156, -32, 157, -32, 157, -31, 158, -31, 158, 31, 157, 31, 157, 32, 156, 32, 156, 33, 143, 33, 143, 47, 142, 47, 142, 48, 141, 48, 141, 49, 127, 49, 127, 78, 126, 78, 126, 79, 125, 79, 125, 80, 111, 80, 111, 109, 110, 109, 110, 110, 109, 110, 109, 111, 96, 111, 96, 125, 95, 125, 95, 126, 94, 126, 94, 127, 80, 127, 80, 141, 79, 141, 79, 142, 78, 142, 78, 143, 65, 143, 65, 156, 64, 156, 64, 157, 63, 157, 63, 158, 31, 158, 31, 157, 30, 157, 30, 156, 29, 156, 29, 143, 18, 143, 18, 156, 17, 156, 17, 157, 16, 157, 16, 158, -16, 158, -16, 157, -17, 157, -17, 156, -18, 156, -18, 143, -29, 143, -29, 156, -30, 156, -30, 157, -31, 157, -31, 158, -62, 158, -62, 157, -63, 157, -63, 156, -64, 156, -64, 143, -78, 143, -78, 142, -79, 142, -79, 141, -80, 141, -80, 127, -94, 127, -94, 126, -95, 126, -95, 125, -96, 125, -96, 111, -109, 111, -109, 110, -110, 110, -110, 109, -111, 109, -111, 80, -125, 80, -125, 79, -126, 79, -126, 78, -127, 78, -127, 49, -141, 49, -141, 48, -142, 48, -142, 47, -143, 47, -143, 33, -156, 33, -156, 32, -157, 32, -157, 31, -158, 31, -158, -31, -157, -31, -157, -32, -156, -32, -156, -33, -143, -33, -143, -62, -142, -62, -142, -63, -141, -63, -141, -64, -127, -64, -127, -94, -126, -94, -126, -95, -125, -95, -125, -96, -111, -96, -111, -109, -110, -109, -110, -110, -109, -110, -109, -111, -96, -111, -96, -125, -95, -125, -95, -126, -94, -126, -94, -127, -64, -127, -64, -141, -63, -141, -63, -142, -62, -142, -62, -143, -49, -143, -49, -156, -48, -156, -48, -157, -47, -157, -47, -158, 47, -158)
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 visible = false
