@@ -1,6 +1,6 @@
 ## Contributors: James, Karwai
 class_name Gun
-extends Node2D
+extends Area2D
 
 signal loaded_bullet_count_changed()
 signal reserve_bullet_count_changed()
@@ -26,14 +26,13 @@ signal shot_attempted_without_loaded_bullets()
 @export var reserve_bullet_count_max: int = 100
 ## Scale of the bullet.
 @export var bullet_scale: Vector2 = Vector2(1, 1)
+## Whether the gun can be dropped.
+@export var is_droppable: bool = true
 
 ## Current number of bullets loaded.
 var loaded_bullet_count: int:
 	set(value):
 		loaded_bullet_count = value
-		# Hide reload reminder when no longer empty.
-		if loaded_bullet_count > 0:
-			reload_label.visible = false
 		loaded_bullet_count_changed.emit()
 
 ## Current number of bullets reserved.
@@ -41,83 +40,81 @@ var reserve_bullet_count: int:
 	set(value):
 		reserve_bullet_count = value
 		reserve_bullet_count_changed.emit()
-
+var has_reserve_bullets: bool:
+	get:
+		return reserve_bullet_count > 0
+var is_loaded: bool:
+	get:
+		return loaded_bullet_count > 0
+var is_loaded_fully: bool:
+	get:
+		return loaded_bullet_count == loaded_bullet_count_max
 ## Whether the gun still cooling down from the last time it was fired.
 ##
 ## If true, bullets cannot be shot.
 var _is_cooling_down: bool = false
 
-@onready var gun_pivot: Marker2D = $GunPivot
+@onready var pivot: Marker2D = $Pivot
+@onready var muzzle: Marker2D = $Pivot/Muzzle
+@onready var sprite_2d: Sprite2D = $Pivot/Sprite
 @onready var shooting_timer: Timer = $ShootingTimer
 @onready var cooldown_timer: Timer = $CooldownTimer
-@onready var reload_timer: Timer = $ReloadTimer
-@onready var reload_bar: ProgressBar = $ReloadBar
-@onready var reload_label: Label = $ReloadLabel
-@onready var bullet_hole: Node2D = %BulletHole
-@onready var sprite_2d: Sprite2D = $GunPivot/Sprite
-
+@onready var outline_shader: Shader = load("res://drop/outline.gdshader")
 
 ## Set up timers for shooting and cooldown and value of cooldown progress bar.
 func _ready() -> void:
-	reset_bullet_count()
+	_reset_bullet_count()
 	shooting_timer.wait_time = auto_fire_duration
 	cooldown_timer.wait_time = cooldown_duration
-	reload_timer.wait_time = reload_duration
-	reload_bar.max_value = reload_duration
-	
 
 
-## When primary action pressed, fire.
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("primary_action"):
-		# Don't fire if still cooling down.
-		if not _is_cooling_down:
-			# Show a reload reminder if empty.
-			if loaded_bullet_count == 0:
-				reload_label.visible = true;
-			else:
-				_shoot()
-		shooting_timer.start()
-	if event.is_action_released("primary_action"):
+## Aim the pivot towards the given target.
+func aim(target: Vector2) -> void:
+	pivot.look_at(target)
+
+
+## Shoot, and start a timer to shoot regularly thereafter.
+func hold_trigger() -> void:
+	# Don't fire if still cooling down or not loaded.
+	if not _is_cooling_down or loaded_bullet_count == 0:
+		_shoot()
+	shooting_timer.start()
+
+
+## Stop the timer to automatically continue shooting.
+func release_trigger() -> void:
+	if not shooting_timer.is_stopped():
 		shooting_timer.stop()
-		
-	
-	elif event.is_action_pressed("reload"):
-		# Don't reload if loaded bullets already at max.
-		if not loaded_bullet_count == loaded_bullet_count_max:
-			_reload()
-
-
-## Face the mouse position at all times.
-func _physics_process(_delta: float) -> void:
-	gun_pivot.look_at(get_global_mouse_position())
-	if not reload_timer.is_stopped():
-		reload_bar.value = reload_timer.time_left
 
 
 ## Set the amount of bullets loaded and reserved to full.
-func reset_bullet_count() -> void:
+func _reset_bullet_count() -> void:
 	loaded_bullet_count = loaded_bullet_count_max
 	reserve_bullet_count = reserve_bullet_count_max
 
 
 ## Create bullets and begin cooldown until it can be fired again.
-func _shoot() -> void:
-	# If no loaded bullets or reloading, don't shoot.
-	if loaded_bullet_count == 0 or not reload_timer.is_stopped():
-		shot_attempted_without_loaded_bullets.emit()
-		return;
+func _shoot() -> int:
+	# Don't if no loaded bullets.
+	if loaded_bullet_count == 0:
+		return -1;
 	_spawn_bullets()
 	# Begin cooldown and start timer to end it.
 	_is_cooling_down = true
 	cooldown_timer.start()
+	return 0
 
 
-## Begin the reload timer if it'sn't running.
-func _reload() -> void:
-	if reload_timer.is_stopped():
-		reload_bar.visible = true
-		reload_timer.start()
+## Show a 1-pixel white outline around sprite 2D.
+func show_outline() -> void:
+	var shader_material: ShaderMaterial = ShaderMaterial.new()
+	shader_material.shader = outline_shader
+	sprite_2d.material = shader_material
+
+
+## Remove outline.
+func hide_outline() -> void:
+	sprite_2d.material = null
 
 
 ## Behavior of gun upon firing.
@@ -130,14 +127,14 @@ func _spawn_bullets() -> void:
 ## Instantiate and add a bullet to the root scene
 ## with the position and rotation of the bullet hole, unless otherwise given.
 func _add_bullet(
-		bullet_position: Vector2 = bullet_hole.global_position,
-		bullet_rotation: float = bullet_hole.global_rotation) -> void:
-	# Don't add a bullet if none loaded.
+		bullet_position: Vector2 = muzzle.global_position,
+		bullet_rotation: float = muzzle.global_rotation) -> void:
+	# Don't if none loaded.
 	if loaded_bullet_count == 0:
 		return;
 	elif loaded_bullet_count < 0:
 		printerr("_loaded_bullet_count is less than 0!")
-	# Comsume a bullet from the magazine.
+	# Consume a loaded bullet.
 	loaded_bullet_count -= 1;
 	var new_bullet: Bullet = _instantiate_bullet()
 	new_bullet.global_position = bullet_position
@@ -160,16 +157,17 @@ func _on_shooting_timer_timeout() -> void:
 	_shoot()
 
 
-## When cooldown is over, cooling down is over and the progress bar is hidden.
+## When cooldown is over, cooling down is over...
 func _on_cooldown_timer_timeout() -> void:
 	_is_cooling_down = false
 
 
-## Load bullets from reserve up to the max loadable,
-## otherwise the rest in reserve.
-func _on_reload_timer_timeout() -> void:
-	var space_left: int = loaded_bullet_count_max - loaded_bullet_count
-	var amount_to_load: int = mini(space_left, reserve_bullet_count)
-	loaded_bullet_count += amount_to_load
-	reserve_bullet_count -= amount_to_load
-	reload_bar.visible = false
+func _on_body_entered(_body: Node2D) -> void:
+	add_to_group("takeable")
+	Events.takeable_group_changed.emit()
+
+
+func _on_body_exited(_body: Node2D) -> void:
+	remove_from_group("takeable")
+	Events.takeable_group_changed.emit()
+	hide_outline()

@@ -14,9 +14,8 @@ loaded_bullet_count_max = 15
 reserve_bullet_count_max = 300
 bullet_scale = Vector2(2, 1)
 
-[node name="Sprite" parent="GunPivot" index="0"]
-position = Vector2(21, -3)
+[node name="Sprite" parent="Pivot" index="0"]
 texture = ExtResource("2_8oclc")
 
-[node name="BulletHole" parent="GunPivot/Sprite" index="0"]
-position = Vector2(7, -0.5)
+[node name="Muzzle" parent="Pivot" index="1"]
+position = Vector2(7, 0)

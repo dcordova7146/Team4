@@ -6,7 +6,7 @@
 [node name="Sniper Rifle Bullet" type="Area2D"]
 top_level = true
 collision_layer = 8
-collision_mask = 7
+collision_mask = 5
 script = ExtResource("1_eo7iy")
 
 [node name="Projectile" type="Sprite2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://db5fatnj0uwms"]
+[gd_scene load_steps=12 format=3 uid="uid://db5fatnj0uwms"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_iitf2"]
 [ext_resource type="Texture2D" uid="uid://b010odvgbpiye" path="res://tempAssets/p1.png" id="2_22u6h"]
@@ -11,6 +11,16 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv7g"]
 size = Vector2(16, 16)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5f81s"]
+bg_color = Color(0, 0, 0, 0.266667)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6uj0h"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wqqao"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 23
@@ -20,9 +30,6 @@ script = ExtResource("1_iitf2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ysv7g")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_22u6h")
-
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
@@ -30,27 +37,50 @@ one_shot = true
 [node name="BlinkTimer" type="Timer" parent="."]
 wait_time = 0.05
 
-[node name="Guns" type="Node2D" parent="."]
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
 
-[node name="Pistol" parent="Guns" instance=ExtResource("3_htkx3")]
-process_mode = 4
+[node name="ReloadBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 16.0
+offset_bottom = -20.0
+theme_override_styles/background = SubResource("StyleBoxFlat_5f81s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6uj0h")
+show_percentage = false
+
+[node name="ReloadLabel" type="Label" parent="."]
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 17.0
+offset_bottom = -11.0
+text = "Reload"
+label_settings = SubResource("LabelSettings_wqqao")
+
+[node name="Flip" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Flip"]
+texture = ExtResource("2_22u6h")
+
+[node name="Hand" type="Node2D" parent="Flip"]
+position = Vector2(8, 0)
+
+[node name="Pistol" parent="Flip/Hand" instance=ExtResource("3_htkx3")]
 visible = false
 
-[node name="Machine Gun" parent="Guns" instance=ExtResource("4_yarha")]
-process_mode = 4
+[node name="Machine Gun" parent="Flip/Hand" instance=ExtResource("4_yarha")]
 visible = false
 
-[node name="Burst Rifle" parent="Guns" instance=ExtResource("5_fw7d2")]
-process_mode = 4
+[node name="Burst Rifle" parent="Flip/Hand" instance=ExtResource("5_fw7d2")]
 visible = false
 
-[node name="Shotgun" parent="Guns" instance=ExtResource("6_d3724")]
-process_mode = 4
+[node name="Shotgun" parent="Flip/Hand" instance=ExtResource("6_d3724")]
 visible = false
 
-[node name="Sniper Rifle" parent="Guns" instance=ExtResource("7_uxrnu")]
-process_mode = 4
+[node name="Sniper Rifle" parent="Flip/Hand" instance=ExtResource("7_uxrnu")]
 visible = false
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

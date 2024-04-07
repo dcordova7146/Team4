@@ -13,9 +13,8 @@ auto_fire_duration = 1.0
 loaded_bullet_count_max = 5
 reserve_bullet_count_max = 50
 
-[node name="Sprite" parent="GunPivot" index="0"]
-position = Vector2(25, -2)
+[node name="Sprite" parent="Pivot" index="0"]
 texture = ExtResource("3_i65r4")
 
-[node name="BulletHole" parent="GunPivot/Sprite" index="0"]
-position = Vector2(14, -0.5)
+[node name="Muzzle" parent="Pivot" index="1"]
+position = Vector2(14, 0)

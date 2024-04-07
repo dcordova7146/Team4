@@ -12,3 +12,4 @@ signal lives_changed(current_lives: int, max_lives: int)
 signal enemy_died(pos: Vector2)
 signal enemy_defeated(enemy: Node)
 signal dungeon_complete
+signal takeable_group_changed

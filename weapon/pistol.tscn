@@ -4,3 +4,4 @@
 
 [node name="Gun" instance=ExtResource("1_fd60f")]
 bullet_scale = Vector2(2, 1)
+is_droppable = false

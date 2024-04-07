@@ -1,29 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://d20nshp1r4q6r"]
+[gd_scene load_steps=4 format=3 uid="uid://d20nshp1r4q6r"]
 
 [ext_resource type="Script" path="res://weapon/gun.gd" id="1_jxd65"]
 [ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://tempAssets/weapons/pistol.png" id="2_2grcx"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki7oq"]
-bg_color = Color(0, 0, 0, 0.266667)
+[sub_resource type="CircleShape2D" id="CircleShape2D_t4ukx"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi6y3"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_t88qp"]
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
-
-[node name="Gun" type="Node2D"]
+[node name="Gun" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+monitoring = false
 script = ExtResource("1_jxd65")
 
-[node name="GunPivot" type="Marker2D" parent="."]
+[node name="Pivot" type="Marker2D" parent="."]
 
-[node name="Sprite" type="Sprite2D" parent="GunPivot"]
-position = Vector2(15, -1)
+[node name="Sprite" type="Sprite2D" parent="Pivot"]
 texture = ExtResource("2_2grcx")
 
-[node name="BulletHole" type="Marker2D" parent="GunPivot/Sprite"]
-unique_name_in_owner = true
+[node name="Muzzle" type="Marker2D" parent="Pivot"]
 position = Vector2(4, -2.5)
 
 [node name="ShootingTimer" type="Timer" parent="."]
@@ -31,28 +24,10 @@ position = Vector2(4, -2.5)
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="ReloadTimer" type="Timer" parent="."]
-one_shot = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_t4ukx")
 
-[node name="ReloadBar" type="ProgressBar" parent="."]
-visible = false
-offset_left = -16.0
-offset_top = -24.0
-offset_right = 16.0
-offset_bottom = -20.0
-theme_override_styles/background = SubResource("StyleBoxFlat_ki7oq")
-theme_override_styles/fill = SubResource("StyleBoxFlat_fi6y3")
-show_percentage = false
-
-[node name="ReloadLabel" type="Label" parent="."]
-visible = false
-offset_left = -16.0
-offset_top = -40.0
-offset_right = 20.0
-offset_bottom = -27.0
-text = "RELOAD"
-label_settings = SubResource("LabelSettings_t88qp")
-
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
-[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

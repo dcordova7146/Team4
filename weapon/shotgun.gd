@@ -10,11 +10,11 @@ extends Gun
 
 func _spawn_bullets() -> void:
 	var start_angle: float = (
-			bullet_hole.global_rotation - 
+			muzzle.global_rotation - 
 			bullet_count * deg_to_rad(spread_angle) / 2
 	)
 	for i: int in range(bullet_count):
 		_add_bullet(
-				bullet_hole.global_position,
+				muzzle.global_position,
 				start_angle + deg_to_rad(spread_angle) * i
 		)
