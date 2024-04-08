@@ -28,14 +28,19 @@ func spawn_random_skull() -> void:
 	get_parent().add_child(skull_instance)
 	
 	# Calculate random position near tombstone
-	var spawn_distance = 45  # Adjust this value as needed
+	var spawn_distance = 30  # Adjust this value as needed
 	var random_offset = Vector2(randf_range(-spawn_distance, spawn_distance), randf_range(-spawn_distance, spawn_distance))
 	# Set the position relative to the tombstone's position
 	skull_instance.position = global_position + random_offset
-
-
 
 func _on_spawn_timer_timeout():
 	print("Timer Ended, Spawned Skull")
 	spawn_random_skull()
 	has_spawned = false
+
+# Overide
+func die() -> void:
+	for i in 3: # Spawn 3 Skulls Upon Death
+		spawn_random_skull()
+	# Parent Class die()
+	queue_free()

@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Move towards the player if not exploded
-	if player and not $Explosion.visible: ## RE-ADD AWAKE CONDITION AFTER TESTING
+	if (player and awake) and not $Explosion.visible: ## RE-ADD AWAKE CONDITION AFTER TESTING
 		var direction: Vector2 = global_position.direction_to(player.global_position)
 		velocity = direction.normalized() * speed
 		move_and_slide()

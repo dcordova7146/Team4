@@ -9,7 +9,7 @@ func _ready() -> void:
 	speed = 25
 
 func _physics_process(_delta: float) -> void:
-	if player: ## RE-ADD AWAKE CONDITION AFTER TESTING
+	if player and awake: ## RE-ADD AWAKE CONDITION AFTER TESTING
 		var direction: Vector2 = global_position.direction_to(player.global_position)
 		var distance_to_player = global_position.distance_to(player.global_position)
 
