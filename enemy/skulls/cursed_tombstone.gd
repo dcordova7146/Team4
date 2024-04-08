@@ -8,7 +8,7 @@ func _ready() -> void:
 	speed = 0
 
 func _physics_process(_delta: float) -> void:
-	if player: ## RE-ADD AWAKE CONDITION AFTER TESTING
+	if player and awake: ## RE-ADD AWAKE CONDITION AFTER TESTING
 		if not has_spawned:
 			print("Timer Start, Preparing Skull")
 			$SpawnTimer.start()
