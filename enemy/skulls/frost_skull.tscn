@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bir4mmpfg5c2q"]
+[gd_scene load_steps=12 format=3 uid="uid://bir4mmpfg5c2q"]
 
 [ext_resource type="Script" path="res://enemy/skulls/frost_skull.gd" id="1_o41gj"]
 [ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_rbscb"]
 [ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_x2ql7"]
 [ext_resource type="Texture2D" uid="uid://3m5k3sk2ciji" path="res://tempAssets/frostSkull.png" id="4_gbcsw"]
+[ext_resource type="Texture2D" uid="uid://0pphpjo88y37" path="res://tempAssets/iceCube.png" id="5_cqowj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b5305"]
 resource_local_to_scene = true
@@ -68,6 +69,13 @@ position = Vector2(0, 2)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("4_gbcsw")
 
+[node name="Ice" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.74902)
+position = Vector2(-1, 2)
+scale = Vector2(0.006, 0.006)
+texture = ExtResource("5_cqowj")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, 2)
 scale = Vector2(0.05, 0.05)
@@ -76,9 +84,9 @@ polygon = PackedVector2Array(94, -203, 109, -203, 109, -156, 94, -156, 94, -141,
 [node name="HealthBar" type="ProgressBar" parent="."]
 visible = false
 offset_left = -8.0
-offset_top = -16.0
+offset_top = -15.0
 offset_right = 8.0
-offset_bottom = -12.0
+offset_bottom = -11.0
 theme_override_styles/background = SubResource("StyleBoxFlat_82ml1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_akpgk")
 max_value = 50.0

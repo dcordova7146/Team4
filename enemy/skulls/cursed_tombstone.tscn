@@ -77,9 +77,9 @@ polygon = PackedVector2Array(-16, -172, 0, -172, 0, -156, 63, -156, 63, -172, 94
 [node name="HealthBar" type="ProgressBar" parent="."]
 visible = false
 offset_left = -4.0
-offset_top = -7.0
+offset_top = -12.0
 offset_right = 4.0
-offset_bottom = -5.0
+offset_bottom = -10.0
 theme_override_styles/background = SubResource("StyleBoxFlat_82ml1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_akpgk")
 show_percentage = false
