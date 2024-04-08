@@ -1,47 +1,52 @@
 extends Skull
 
-# Constants
-var player_distance_threshold = 85
+const PLAYER_DISTANCE_THRESHOLD = 85  # Threshold distance for player detection
+const MAX_HEALTH = 100  # Maximum health points
 
-# Variables
-var will_shoot = false
-var frost_projectile = preload("res://projectile/frost_projectile.tscn")
+var will_shoot = false  # Flag to indicate if the skull will shoot
+var is_shoot_preparing = false  # Flag to track shoot preparation
+var frost_projectile = preload("res://projectile/frost_projectile.tscn")  # Preloaded frost projectile
 
 func _ready() -> void:
-	# Initialize properties
-	health = 50
-	speed = 25
+	health = MAX_HEALTH  # Set initial health to maximum
+	speed = 20  # Movement speed
+	super._ready()  # Call base class _ready function
 
 func _physics_process(_delta: float) -> void:
 	if player and awake:
-		# Calculate direction and distance to player
 		var direction: Vector2 = global_position.direction_to(player.global_position)
 		var distance_to_player = global_position.distance_to(player.global_position)
 
-		if distance_to_player <= player_distance_threshold:
-			# Player is within shooting range
-			will_shoot = true
-		elif will_shoot:
-			# Player moved out of range, reset shooting flag
-			will_shoot = false
+		# Check if player is within shooting range
+		will_shoot = distance_to_player <= PLAYER_DISTANCE_THRESHOLD
 
-		if will_shoot:
-			# Prepare to shoot
+		if will_shoot and not is_shoot_preparing:
+			is_shoot_preparing = true
 			velocity = Vector2.ZERO
 			print("Preparing to shoot")
 			$Shoot.start()  # Start shooting timer
-			$Ice.visible = true  # Make Ice Shell visible
+			$Ice.visible = true  # Make ice shell visible
 			$CollisionPolygon2D.disabled = true  # Disable collision
-		else:
-			# Move towards the player
+		elif not will_shoot:
 			velocity = direction * speed
 			move_and_slide()
-			$Ice.visible = false  # Hide Ice Shell
+			$Ice.visible = false  # Hide ice shell
 			$CollisionPolygon2D.disabled = false  # Enable collision
 	else:
 		pass
 
 func _on_shoot_timeout():
 	print("Shooting Frost")
-	# Shoot logic goes here
-	will_shoot = false  # Reset shooting flag
+	will_shoot = false
+	is_shoot_preparing = false
+
+	if $Ice.visible:
+		var healed_amount = 25
+		health += healed_amount
+		health = min(health, MAX_HEALTH)  # Ensure health doesn't exceed maximum
+		print("Healing: ", health)
+		update_health_bar()  # Update health bar visual
+
+func update_health_bar():
+	if health_bar:
+		health_bar.value = health  # Update health bar value
