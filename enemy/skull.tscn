@@ -20,22 +20,6 @@ bg_color = Color(0, 0, 0, 0.266667)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akpgk"]
 bg_color = Color(0.596078, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_jvo8a"]
-resource_name = "on_hit"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Skull:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
 [sub_resource type="Animation" id="Animation_bb2dl"]
 length = 0.001
 tracks/0/type = "value"
@@ -51,6 +35,22 @@ tracks/0/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_jvo8a"]
+resource_name = "on_hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skull:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a7seo"]
 _data = {
 "RESET": SubResource("Animation_bb2dl"),
@@ -64,6 +64,7 @@ collision_mask = 7
 script = ExtResource("1_wcjy6")
 
 [node name="Dot" parent="." instance=ExtResource("2_gubwf")]
+visible = false
 
 [node name="Skull" type="Sprite2D" parent="."]
 visibility_layer = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c37a3v8yxcr3e"]
+[gd_scene load_steps=10 format=3 uid="uid://c37a3v8yxcr3e"]
 
 [ext_resource type="Script" path="res://enemy/dummy.gd" id="1_ks3dc"]
 [ext_resource type="Texture2D" uid="uid://b1lg46osgmovs" path="res://tempAssets/enemies/dummyStand.png" id="2_1r0nt"]
@@ -45,6 +45,12 @@ _data = {
 "onHit": SubResource("Animation_dj7qq")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buxwp"]
+bg_color = Color(0, 0, 0, 0.266667)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ctu50"]
+bg_color = Color(0.596078, 0, 0, 1)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_ks3dc")
 
@@ -59,7 +65,17 @@ texture = ExtResource("3_ds0mt")
 position = Vector2(-1, -8)
 shape = SubResource("CapsuleShape2D_xu2v4")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="on_hit" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1mc4f")
 }
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -8.0
+offset_top = -25.0
+offset_right = 8.0
+offset_bottom = -21.0
+theme_override_styles/background = SubResource("StyleBoxFlat_buxwp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ctu50")
+show_percentage = false

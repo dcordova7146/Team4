@@ -1,0 +1,125 @@
+[gd_scene load_steps=8 format=3 uid="uid://bbvrevqxj81g0"]
+
+[ext_resource type="Texture2D" uid="uid://172a0ngiopts" path="res://tempAssets/traps/Spike Trap.png" id="1_vqw6k"]
+[ext_resource type="Script" path="res://map/Traps/trap.gd" id="2_dya4d"]
+
+[sub_resource type="Animation" id="Animation_h3w7m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:can_hurt")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_aud0j"]
+resource_name = "activate"
+length = 3.0
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.1665, -0.0333, 0.1332, 0.2997, 0.5328, 0.7659, 0.8991, 1.1322, 1.332, 1.5984, 1.8648, 2.1312, 2.3643, 2.5974, 2.8638),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 9, 10, 11, 12, 13]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2321, 2.83333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:can_hurt")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.332, 2.76667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wfqcy"]
+_data = {
+"RESET": SubResource("Animation_h3w7m"),
+"activate": SubResource("Animation_aud0j")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgsy1"]
+size = Vector2(34, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qdpaj"]
+radius = 20.025
+
+[node name="Trap" type="Sprite2D"]
+z_index = 1
+texture = ExtResource("1_vqw6k")
+hframes = 14
+script = ExtResource("2_dya4d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Trap")
+libraries = {
+"": SubResource("AnimationLibrary_wfqcy")
+}
+
+[node name="Trap" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="detector" type="CollisionShape2D" parent="Trap"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_hgsy1")
+
+[node name="hitbox" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_qdpaj")
+debug_color = Color(0.898039, 0.286275, 0.368627, 0.419608)
+
+[connection signal="body_entered" from="Trap" to="." method="_on_trap_body_entered"]

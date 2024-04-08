@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkeo06v1wya0k"]
+[gd_scene load_steps=8 format=3 uid="uid://bkeo06v1wya0k"]
 
 [ext_resource type="Script" path="res://TESTING/TEST.gd" id="1_vh28s"]
 [ext_resource type="PackedScene" uid="uid://bxvfe2h3ur6ol" path="res://map/room.tscn" id="2_m8q1q"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="3_1nryx"]
-[ext_resource type="Script" path="res://map/camera_2d.gd" id="4_qjrqp"]
+[ext_resource type="PackedScene" uid="uid://bbvrevqxj81g0" path="res://map/Traps/trap.tscn" id="4_1xmlt"]
+[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="5_7ji51"]
+[ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="6_pfha1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gq4eg"]
+resource_local_to_scene = true
+shader = ExtResource("6_pfha1")
+shader_parameter/enabled = true
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_vh28s")
@@ -17,11 +25,18 @@ position = Vector2(0, 138)
 position = Vector2(310, 138)
 
 [node name="Player" parent="." instance=ExtResource("3_1nryx")]
-position = Vector2(158, 88)
+position = Vector2(42, 46)
+
+[node name="Trap" parent="." instance=ExtResource("4_1xmlt")]
+position = Vector2(163, 47)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(150, 60)
-zoom = Vector2(3.76, 3.76)
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-script = ExtResource("4_qjrqp")
+anchor_mode = 0
+
+[node name="Skull" parent="." instance=ExtResource("5_7ji51")]
+position = Vector2(242, 47)
+
+[node name="Skull" parent="Skull" index="1"]
+material = SubResource("ShaderMaterial_gq4eg")
+
+[editable path="Skull"]

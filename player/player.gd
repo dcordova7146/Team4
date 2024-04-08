@@ -135,7 +135,8 @@ func _process_collisions() -> void:
 		var collider: Object = collision.get_collider()
 		
 		var enemy: Skull = collider as Skull
-		if enemy:
+		
+		if enemy :
 			_lose_life()
 		
 		var life: Life = collider as Life
@@ -143,6 +144,10 @@ func _process_collisions() -> void:
 			# Remove collided lives.
 			life.queue_free()
 			_gain_life()
+			
+		var trap: Trap = collider as Trap
+		if trap:
+			_lose_life()
 
 
 ## Flip if the mouse is to the left, such that it faces the mouse.
@@ -276,6 +281,7 @@ func _lose_life() -> void:
 	# Let HUD life bar know health state.
 	Events.lives_changed.emit(lives, max_lives)
 	# Make temporarily invincible.
+	print("going invincible")
 	invincibility_timer.start()
 	# Make appearance blink rapidly.
 	blink_timer.start()

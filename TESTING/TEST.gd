@@ -12,6 +12,7 @@ func _ready():
 	$Room2.set_Rtype(1)
 	$Room3.set_Rtype(3)
 	Events.emit_signal("dungeon_complete")
+	$Skull.awake = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
