@@ -43,15 +43,16 @@ enum roomType {
 @export var rType: roomType = roomType.ROOM
 
 func _ready() -> void:
-	Events.dungeon_complete.connect(on_Dungeon_Complete)
+	#Events.dungeon_complete.connect(on_Dungeon_Complete)
 	Events.enemy_defeated.connect(on_kill)
+	setupRoom()
 	
 #Emit room entered signal if body entered is the player.
 #function is used to talk to the camera to lock it to a room instead of free roam camera
 func on_Dungeon_Complete()->void:
 	#print("called?")
 	updateRoom()
-	setupRoom()
+	#setupRoom()
 	
 
 func _on_play_area_body_entered(_body: Node2D) -> void:

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://ui/pause_menu.tscn" id="2_img3q"]
 [ext_resource type="Script" path="res://map/camera_2d.gd" id="3_0bf8r"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="3_51vlb"]
-[ext_resource type="PackedScene" uid="uid://dueklggl1m6m7" path="res://map/rock.tscn" id="4_7yry6"]
+[ext_resource type="PackedScene" uid="uid://byy8d84jgw0g" path="res://map/hub_world.tscn" id="5_dx0w7"]
 [ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="7_wap1c"]
 
 [node name="Dungeon" type="Node2D"]
@@ -38,40 +38,13 @@ visible = false
 
 [node name="Spawn" type="Node2D" parent="."]
 
+[node name="HubWorld" parent="Spawn" instance=ExtResource("5_dx0w7")]
+
 [node name="Player" parent="." instance=ExtResource("3_51vlb")]
 z_index = 2
 position = Vector2(33, 74)
 
-[node name="Rock" parent="." instance=ExtResource("4_7yry6")]
-visible = false
-position = Vector2(-479, 85)
-
-[node name="Rock2" parent="Rock" instance=ExtResource("4_7yry6")]
-position = Vector2(226, -35)
-
-[node name="Rock3" parent="Rock" instance=ExtResource("4_7yry6")]
-position = Vector2(-320, -33)
-
-[node name="Rock4" parent="Rock" instance=ExtResource("4_7yry6")]
-position = Vector2(-422, -141)
-
-[node name="Rock5" parent="Rock" instance=ExtResource("4_7yry6")]
-position = Vector2(-566, -171)
-
-[node name="Rock6" parent="Rock" instance=ExtResource("4_7yry6")]
-position = Vector2(-762, -315)
-
-[node name="Rock9" parent="Rock" instance=ExtResource("4_7yry6")]
-position = Vector2(506, 130)
-
-[node name="Rock10" parent="Rock" instance=ExtResource("4_7yry6")]
-position = Vector2(667, 165)
-
-[node name="Rock11" parent="Rock" instance=ExtResource("4_7yry6")]
-position = Vector2(509, 280)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(155, 70)
+[node name="MainCamera" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0

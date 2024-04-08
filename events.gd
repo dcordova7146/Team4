@@ -13,3 +13,4 @@ signal enemy_died(pos: Vector2)
 signal enemy_defeated(enemy: Node)
 signal dungeon_complete
 signal takeable_group_changed
+signal teleporter_entered(teleporter: Node2D)

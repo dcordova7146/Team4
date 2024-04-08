@@ -8,4 +8,4 @@ func _ready() -> void:
 	Events.room_entered.connect(_on_room_entered)
 
 func _on_room_entered(room: Node2D) -> void:
-	position = room.position
+	position = room.position + Room.SIZE / 2

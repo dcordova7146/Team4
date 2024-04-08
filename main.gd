@@ -21,9 +21,9 @@ func _ready() -> void:
 func _on_new_game_requested(dungeon_seed: int) -> void:
 	var game: PackedScene = preload("res://map/dungeon.tscn")
 	var game_instance: Dungeon = game.instantiate()
-	if game_instance != null:
+	if game_instance:
 		add_child(game_instance)
-		game_instance.create(dungeon_seed)
+		game_instance.rng_seed = dungeon_seed
 		game_instance.game_restarted.connect(_on_game_restarted)
 		game_instance.game_exited_to_menu.connect(show_main_menu)
 
