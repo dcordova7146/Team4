@@ -52,6 +52,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_6uj0h")
 show_percentage = false
 
 [node name="ReloadLabel" type="Label" parent="."]
+visible = false
 offset_left = -16.0
 offset_top = -24.0
 offset_right = 17.0

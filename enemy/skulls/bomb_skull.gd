@@ -25,6 +25,7 @@ func check_explode() -> void:
 		# Start the fuse timer if not exploded
 		$Explosion.visible = true
 		$Fuse.start()
+		$fuse.play("charge explosion")
 
 func _on_fuse_timeout() -> void:
 	# Handle fuse timeout

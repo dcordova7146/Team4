@@ -361,16 +361,16 @@ shape = SubResource("RectangleShape2D_pgx51")
 debug_color = Color(0.694118, 0.286275, 1, 0.419608)
 
 [node name="topLeftBound" type="Marker2D" parent="Play Area"]
-position = Vector2(-114.167, -45.8333)
+position = Vector2(-110.833, -42.5)
 
 [node name="topRightBound" type="Marker2D" parent="Play Area"]
-position = Vector2(114.167, -45.8333)
+position = Vector2(111.667, -43.3333)
 
 [node name="botLeftBound" type="Marker2D" parent="Play Area"]
-position = Vector2(-114.167, 49.1667)
+position = Vector2(-111.667, 46.6667)
 
 [node name="botRightBound" type="Marker2D" parent="Play Area"]
-position = Vector2(115, 49.1667)
+position = Vector2(110.833, 45.8333)
 
 [node name="North" type="Area2D" parent="." groups=["RoomScanners"]]
 position = Vector2(154, -11)

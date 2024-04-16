@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cq6l1w3ackej8"]
+[gd_scene load_steps=20 format=3 uid="uid://cq6l1w3ackej8"]
 
 [ext_resource type="Script" path="res://enemy/skulls/bomb_skull.gd" id="1_tpe58"]
 [ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_1myod"]
@@ -10,7 +10,7 @@
 resource_local_to_scene = true
 shader = ExtResource("3_ddva4")
 shader_parameter/enabled = true
-shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+shader_parameter/ColorParameter = Color(0.603922, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82ml1"]
 bg_color = Color(0, 0, 0, 0.266667)
@@ -32,6 +32,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bomb Skull:material:shader_parameter/ColorParameter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_jvo8a"]
 resource_name = "on_hit"
@@ -48,12 +60,204 @@ tracks/0/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bomb Skull:material:shader_parameter/ColorParameter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a7seo"]
 _data = {
 "RESET": SubResource("Animation_bb2dl"),
 "on_hit": SubResource("Animation_jvo8a")
 }
+
+[sub_resource type="Animation" id="Animation_i5wp0"]
+resource_name = "charge explosion"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.06, 0.06), Vector2(0.12, 0.12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bomb Skull:material:shader_parameter/ColorParameter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.933333, 0.760784, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bomb Skull:material:shader_parameter/enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Bomb Skull:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Explosion:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_rgycv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.12, 0.12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bomb Skull:material:shader_parameter/ColorParameter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.603922, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bomb Skull:material:shader_parameter/enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Bomb Skull:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Explosion:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ahxqp"]
+_data = {
+"RESET": SubResource("Animation_rgycv"),
+"charge explosion": SubResource("Animation_i5wp0")
+}
+
+[sub_resource type="Gradient" id="Gradient_3ww5g"]
+colors = PackedColorArray(0.960784, 0.709804, 0.141176, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sbj4c"]
+gradient = SubResource("Gradient_3ww5g")
+
+[sub_resource type="Curve" id="Curve_yul7m"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.88, 0.208791), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3ts81"]
+curve = SubResource("Curve_yul7m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cu08i"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 49, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_3ts81")
+color_ramp = SubResource("GradientTexture1D_sbj4c")
 
 [node name="Bomb Skull" type="CharacterBody2D"]
 collision_layer = 4
@@ -70,6 +274,7 @@ scale = Vector2(0.12, 0.12)
 texture = ExtResource("3_u2pca")
 
 [node name="Bomb Skull" type="Sprite2D" parent="."]
+visible = false
 visibility_layer = 2
 material = SubResource("ShaderMaterial_b5305")
 position = Vector2(0, 2)
@@ -77,6 +282,7 @@ scale = Vector2(0.058, 0.058)
 texture = ExtResource("4_g0df5")
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(0, 2)
 scale = Vector2(0.058, 0.058)
 polygon = PackedVector2Array(47, -187, 78, -187, 78, -203, 94, -203, 94, -187, 109, -187, 109, -172, 125, -172, 125, -156, 109, -156, 109, -141, 94, -141, 94, -125, 78, -125, 78, -141, 47, -141, 47, -156, 31, -156, 31, -141, 16, -141, 16, -125, 31, -125, 31, -109, 63, -109, 63, -94, 78, -94, 78, -78, 94, -78, 94, -62, 109, -62, 109, 16, 94, 16, 94, 63, 78, 63, 78, 78, 63, 78, 63, 94, 47, 94, 47, 109, 31, 109, 31, 94, 16, 94, 16, 109, -16, 109, -16, 94, -31, 94, -31, 109, -47, 109, -47, 94, -62, 94, -62, 78, -78, 78, -78, 63, -94, 63, -94, 16, -109, 16, -109, -62, -94, -62, -94, -78, -78, -78, -78, -94, -62, -94, -62, -109, -31, -109, -31, -125, -16, -125, -16, -141, -31, -141, -31, -156, -16, -156, -16, -172, 0, -172, 0, -187, 16, -187, 16, -203, 47, -203)
@@ -99,6 +305,20 @@ libraries = {
 
 [node name="Fuse" type="Timer" parent="."]
 process_callback = 0
-wait_time = 3.0
+wait_time = 1.5
+
+[node name="fuse" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ahxqp")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -9)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_cu08i")
+lifetime = 0.8
+one_shot = true
+speed_scale = 1.2
+explosiveness = 0.75
 
 [connection signal="timeout" from="Fuse" to="." method="_on_fuse_timeout"]

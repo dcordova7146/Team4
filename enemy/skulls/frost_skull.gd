@@ -6,6 +6,7 @@ const MAX_HEALTH = 100  # Maximum health points
 var will_shoot = false  # Flag to indicate if the skull will shoot
 var is_shoot_preparing = false  # Flag to track shoot preparation
 var frost_projectile = preload("res://projectile/frost_projectile.tscn")  # Preloaded frost projectile
+var frozen: bool = false
 
 func _ready() -> void:
 	health = MAX_HEALTH  # Set initial health to maximum

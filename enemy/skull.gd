@@ -55,7 +55,7 @@ func spawn_smaller_skulls() -> void:
 	
 func spawn_enemy(enemy_scene_path: String, count: int) -> void:
 	var enemy_scene: PackedScene = load(enemy_scene_path) as PackedScene
-	var separation_distance: int = 50
+	var separation_distance: int = 20
 	var spawn_position: Vector2 = position
 
 	for i: int in range(count):

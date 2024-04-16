@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkeo06v1wya0k"]
+[gd_scene load_steps=9 format=3 uid="uid://bkeo06v1wya0k"]
 
 [ext_resource type="Script" path="res://TESTING/TEST.gd" id="1_vh28s"]
 [ext_resource type="PackedScene" uid="uid://bxvfe2h3ur6ol" path="res://map/room.tscn" id="2_m8q1q"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bbvrevqxj81g0" path="res://map/Traps/trap.tscn" id="4_1xmlt"]
 [ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="5_7ji51"]
 [ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="6_pfha1"]
+[ext_resource type="PackedScene" uid="uid://bir4mmpfg5c2q" path="res://enemy/skulls/frost_skull.tscn" id="7_ao43w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gq4eg"]
 resource_local_to_scene = true
@@ -38,5 +39,8 @@ position = Vector2(242, 47)
 
 [node name="Skull" parent="Skull" index="1"]
 material = SubResource("ShaderMaterial_gq4eg")
+
+[node name="Frost Skull" parent="." instance=ExtResource("7_ao43w")]
+position = Vector2(107, 74)
 
 [editable path="Skull"]

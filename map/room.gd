@@ -9,17 +9,33 @@ var connections: int = 0
 @onready var type_label: Label = $TypeLabel
 var enemies: Array[Skull] = []
 var warning: Resource = preload("res://tempAssets/Warning.png")
-var enemy: PackedScene = preload("res://enemy/skull.tscn")
+
 
 ## Chances the enemy spawned is a medium skull.
+var small_skull_chance: float = .3
 var medium_skull_chance: float = 0.25
-## Chances the enemy spawned is a large skull if roll for medium failed.
-var large_skull_chance: float = 0.25
+var large_skull_chance: float = 0.15
+var bomb_skull_chance: float = 0.15
+var frost_skull_chance: float = .15
+var grave_chance: float = .05
 
 var small_skull: PackedScene = preload("res://enemy/skulls/small_skull.tscn")
 var medium_skull: PackedScene = preload("res://enemy/skulls/medium_skull.tscn")
 var large_skull: PackedScene = preload("res://enemy/skulls/large_skull.tscn")
+var bomb_skull: PackedScene = preload("res://enemy/skulls/bomb_skull.tscn")
+var frost_skull: PackedScene = preload("res://enemy/skulls/frost_skull.tscn")
+var grave: PackedScene = preload("res://enemy/skulls/cursed_tombstone.tscn")
 
+#disctionary that holds enemies and their corresponding weight for random number generation
+var enemyList = {
+	small_skull : small_skull_chance, 
+	medium_skull: medium_skull_chance,
+	large_skull : large_skull_chance,
+	bomb_skull  : bomb_skull_chance,
+	frost_skull : frost_skull_chance,
+	grave       : grave_chance 
+	}
+ 
 #enum direction{ 
 	#up = Vector2(0,-1), 
 	#down = Vector2(0,1),
@@ -142,24 +158,39 @@ func openLeft()-> void:
 func populateEnemySpawner() -> void:
 	#grab collision shape within the play area area2d to obtain the bounds of the play area
 	print("populating...")
+	var total_weight = 0.0
+	for weights in enemyList.values():
+		total_weight += weights
+	
+	#iterate for amount of enemies we have alloted in one room
 	for i: int in range(enemycount):
 		var randpos: Vector2 = rand_coor()
 		print(randpos)
 		# Randomly choose an enemy type.
+		
+		var offest = 0
 		var enemy_scene: PackedScene
-		if randf() < medium_skull_chance:
-			enemy_scene = medium_skull
-		elif randf() < large_skull_chance:
-			enemy_scene = large_skull
-		else:
-			enemy_scene = enemy
+		var rng = randf()
+		for x in enemyList.keys():
+			if rng < enemyList[x]+ offest:
+				enemy_scene = x
+				break
+			offest += enemyList[x]
+			
+		#if randf() < medium_skull_chance:
+			#enemy_scene = medium_skull
+		#elif randf() < large_skull_chance:
+			#enemy_scene = large_skull
+		#else:
+			#enemy_scene = small_skull
 			
 		var e1: Skull = enemy_scene.instantiate()
 		enemies.append(e1)
 		add_child(e1)
 		e1.global_position = randpos
 		# add_child(e1)
-		
+
+#pick a coordinate within the predetermined bounds of an individual room
 func rand_coor()-> Vector2:
 	var topleft: Vector2 = ($"Play Area/topLeftBound" as Marker2D).global_position
 	print(topleft)
