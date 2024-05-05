@@ -9,6 +9,7 @@ signal settings_menu_closed
 @onready var FullscreenButton: CheckButton = $Root/Scroll/Inputs/FullscreenButton
 @onready var ResolutionButton: OptionButton = $Root/Scroll/Inputs/ResolutionButton
 @onready var BackButton: Button = $Root/Nav/BackButton
+@onready var reticles: HBoxContainer = %Reticles
 
 func _ready() -> void:
 	_create_reticle_buttons()
@@ -26,7 +27,7 @@ func _create_reticle_buttons() -> void:
 		checkbox.button_group = button_group
 		checkbox.icon = Main.get_reticle_image(index)
 		checkbox.pressed.connect(_on_reticle_button_pressed.bind(index))
-		%Reticles.add_child(checkbox)
+		reticles.add_child(checkbox)
 
 
 ## Reflect the actual settings of the game in the inputs.

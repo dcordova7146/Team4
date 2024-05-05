@@ -9,6 +9,8 @@ const RETICLE_SIZE: int = 64
 const RETICLE_COUNT: int = 4
 ## Reticle sprite atlas.
 static var reticle: Texture2D = load("res://ui/reticle.png")
+static var game_scene: PackedScene = load("res://map/dungeon.tscn")
+static var settings_menu: PackedScene = load("res://ui/settings_menu.tscn")
 
 func _ready() -> void:
 	# Change main viewport cull mask to hide sprite intended only for minimap.
@@ -19,8 +21,7 @@ func _ready() -> void:
 
 ## Create a new game instance and listen for restart/quit events.
 func _on_new_game_requested(dungeon_seed: int) -> void:
-	var game: PackedScene = preload("res://map/dungeon.tscn")
-	var game_instance: Dungeon = game.instantiate()
+	var game_instance: Dungeon = game_scene.instantiate()
 	if game_instance:
 		add_child(game_instance)
 		game_instance.rng_seed = dungeon_seed
@@ -40,8 +41,7 @@ func _on_game_restarted(dungeon_seed: int, game: Node) -> void:
 
 ## Open settings menu.
 func _on_main_menu_settings_menu_opened() -> void:
-	var settings: PackedScene = preload("res://ui/settings_menu.tscn")
-	var settings_instance: SettingsMenu = settings.instantiate()
+	var settings_instance: SettingsMenu = settings_menu.instantiate()
 	if settings_instance != null:
 		add_child(settings_instance)
 		settings_instance.settings_menu_closed.connect(show_main_menu)

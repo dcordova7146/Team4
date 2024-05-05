@@ -27,7 +27,7 @@ var frost_skull: PackedScene = preload("res://enemy/skulls/frost_skull.tscn")
 var grave: PackedScene = preload("res://enemy/skulls/cursed_tombstone.tscn")
 
 #disctionary that holds enemies and their corresponding weight for random number generation
-var enemyList = {
+var enemyList: Dictionary = {
 	small_skull : small_skull_chance, 
 	medium_skull: medium_skull_chance,
 	large_skull : large_skull_chance,
@@ -158,8 +158,8 @@ func openLeft()-> void:
 func populateEnemySpawner() -> void:
 	#grab collision shape within the play area area2d to obtain the bounds of the play area
 	print("populating...")
-	var total_weight = 0.0
-	for weights in enemyList.values():
+	var total_weight: float = 0.0
+	for weights: float in enemyList.values():
 		total_weight += weights
 	
 	#iterate for amount of enemies we have alloted in one room
@@ -168,10 +168,10 @@ func populateEnemySpawner() -> void:
 		print(randpos)
 		# Randomly choose an enemy type.
 		
-		var offest = 0
+		var offest: int = 0
 		var enemy_scene: PackedScene
-		var rng = randf()
-		for x in enemyList.keys():
+		var rng: float = randf()
+		for x: PackedScene in enemyList.keys():
 			if rng < enemyList[x]+ offest:
 				enemy_scene = x
 				break

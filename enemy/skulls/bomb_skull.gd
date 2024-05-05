@@ -2,6 +2,9 @@ extends Skull
 
 # Distance at which the bomb skull explodes upon reaching the player.
 var explosion_distance: float = 30
+@onready var explosion_sprite: Sprite2D = $Explosion
+@onready var fuse_timer: Timer = $FuseTimer
+@onready var fuse_animation: AnimationPlayer = $FuseAnimation
 
 func _ready() -> void:
 	# Initialize health and speed
@@ -9,9 +12,9 @@ func _ready() -> void:
 	speed = 20
 	print("BombSkull is ready!")
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Move towards the player if not exploded
-	if (player and awake) and not $Explosion.visible: ## RE-ADD AWAKE CONDITION AFTER TESTING
+	if (player and awake) and not explosion_sprite.visible: ## RE-ADD AWAKE CONDITION AFTER TESTING
 		var direction: Vector2 = global_position.direction_to(player.global_position)
 		velocity = direction.normalized() * speed
 		move_and_slide()
@@ -19,13 +22,13 @@ func _physics_process(delta: float) -> void:
 
 func check_explode() -> void:
 	# Check if within explosion range
-	var distance_to_player = global_position.distance_to(player.global_position)
+	var distance_to_player: float = global_position.distance_to(player.global_position)
 	if distance_to_player < explosion_distance:
 		print("BombSkull is within explosion range!")
 		# Start the fuse timer if not exploded
-		$Explosion.visible = true
-		$Fuse.start()
-		$fuse.play("charge explosion")
+		explosion_sprite.visible = true
+		fuse_timer.start()
+		fuse_animation.play("charge explosion")
 
 func _on_fuse_timeout() -> void:
 	# Handle fuse timeout
@@ -33,18 +36,18 @@ func _on_fuse_timeout() -> void:
 	explode()
 
 func explode() -> void:
-	if $Explosion.visible:
+	if explosion_sprite.visible:
 		print("BombSkull has exploded!")
-		var distance_to_player = global_position.distance_to(player.global_position)
+		var distance_to_player: float = global_position.distance_to(player.global_position)
 		if distance_to_player < explosion_distance:
 			print("Player is taking damage!")
-			player.lose_life()
+			player._lose_life()
 		super.die()
 
 func die() -> void:
 	# Handle the death of BombSkull
-	$Explosion.visible = true  # Make the explosion sprite visible
-	$Fuse.start()  # Start the fuse timer
+	explosion_sprite.visible = true  # Make the explosion sprite visible
+	fuse_timer.start()  # Start the fuse timer
 	print("BombSkull has died!")
 	# Call the parent die function if additional functionality is required.
 

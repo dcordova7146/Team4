@@ -97,8 +97,8 @@ libraries = {
 "": SubResource("AnimationLibrary_a7seo")
 }
 
-[node name="Shoot" type="Timer" parent="."]
+[node name="ShootTimer" type="Timer" parent="."]
 process_callback = 0
 wait_time = 2.0
 
-[connection signal="timeout" from="Shoot" to="." method="_on_shoot_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timeout"]

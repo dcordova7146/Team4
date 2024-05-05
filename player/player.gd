@@ -1,4 +1,5 @@
 ## Contributors: James, Diego, Karwai
+class_name Player
 extends CharacterBody2D
 
 ## Initial number of lives.

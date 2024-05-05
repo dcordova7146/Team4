@@ -7,9 +7,9 @@ extends CharacterBody2D
 @export var speed: float = 50
 @onready var health_bar: ProgressBar = $HealthBar
 ## The sibling node player.
-@onready var player: Node2D = get_node("/root/Main/Dungeon/Player")
+@onready var player: Player = get_node("/root/Main/Dungeon/Player")
 var awake: bool = false
-@onready var on_hit_animation = $on_hit
+@onready var on_hit_animation: AnimationPlayer = $on_hit
 
 ## Set max value of the health bar to the initial health.
 func _ready() -> void:
