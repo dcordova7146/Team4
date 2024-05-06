@@ -1,0 +1,132 @@
+[gd_scene load_steps=20 format=3 uid="uid://d0ukj27a57h7p"]
+
+[ext_resource type="Script" path="res://drop/shop_mat.gd" id="1_ojaut"]
+
+[sub_resource type="Gradient" id="Gradient_r6rk8"]
+offsets = PackedFloat32Array(0.0932203, 0.228814, 1)
+colors = PackedColorArray(1, 1, 0.905882, 1, 1, 1, 0.886275, 1, 0, 0, 0, 0.129412)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mqsfd"]
+gradient = SubResource("Gradient_r6rk8")
+
+[sub_resource type="Curve" id="Curve_2s1on"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.992424, 0.0525079), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j2be4"]
+curve = SubResource("Curve_2s1on")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_35stn"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(4, 1, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 6.31
+initial_velocity_max = 14.54
+gravity = Vector3(0, -50, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_j2be4")
+color_ramp = SubResource("GradientTexture1D_mqsfd")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vlbfk"]
+
+[sub_resource type="Gradient" id="Gradient_s5u81"]
+offsets = PackedFloat32Array(0, 0.911017)
+colors = PackedColorArray(1, 1, 0.8, 1, 1, 1, 1, 0.384314)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bh6om"]
+gradient = SubResource("Gradient_s5u81")
+
+[sub_resource type="Curve" id="Curve_qtbgb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.286834), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_myejh"]
+curve = SubResource("Curve_qtbgb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tc35f"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(4, 1, 1)
+spread = 62.26
+flatness = 0.308
+initial_velocity_max = 6.85
+gravity = Vector3(0, -30, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_myejh")
+color_initial_ramp = SubResource("GradientTexture1D_bh6om")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b00rc"]
+
+[sub_resource type="Gradient" id="Gradient_vhcdu"]
+colors = PackedColorArray(1, 1, 0.0784314, 1, 1, 1, 1, 0.501961)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nw5sq"]
+gradient = SubResource("Gradient_vhcdu")
+
+[sub_resource type="Curve" id="Curve_qn502"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.992424, 0.531348), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pms5m"]
+curve = SubResource("Curve_qn502")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5fgx0"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(4, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 42.534
+gravity = Vector3(0, -30, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_pms5m")
+color_ramp = SubResource("GradientTexture1D_nw5sq")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gtqib"]
+
+[node name="ShopMat" type="Node2D"]
+script = ExtResource("1_ojaut")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 2)
+
+[node name="common_item1" type="Marker2D" parent="."]
+position = Vector2(-40, 0)
+
+[node name="uncommon shine" type="GPUParticles2D" parent="common_item1"]
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_35stn")
+
+[node name="Area2D" type="Area2D" parent="common_item1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="common_item1/Area2D"]
+visible = false
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_vlbfk")
+
+[node name="common_item2" type="Marker2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="common_item2"]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_tc35f")
+
+[node name="Area2D" type="Area2D" parent="common_item2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="common_item2/Area2D"]
+visible = false
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_b00rc")
+
+[node name="special_item" type="Marker2D" parent="."]
+position = Vector2(40, 0)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="special_item"]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_5fgx0")
+
+[node name="Area2D" type="Area2D" parent="special_item"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="special_item/Area2D"]
+visible = false
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_gtqib")
