@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://w4n3g0cnjwr6"]
+
+[ext_resource type="PackedScene" uid="uid://b1h7hthr1s5jd" path="res://projectile/bullet.tscn" id="1_smb6u"]
+[ext_resource type="Texture2D" uid="uid://d3au055m4fn0c" path="res://projectile/swipe1.png" id="2_yjw1v"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_g726y"]
+points = PackedVector2Array(-10, -14, 0, -14, 7, -7, 9, 0, 7, 7, 0, 14, -10, 14)
+
+[node name="Swipe" instance=ExtResource("1_smb6u")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_yjw1v")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("ConvexPolygonShape2D_g726y")

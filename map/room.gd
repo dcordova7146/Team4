@@ -168,7 +168,7 @@ func populateEnemySpawner() -> void:
 		print(randpos)
 		# Randomly choose an enemy type.
 		
-		var offest: int = 0
+		var offest: float = 0
 		var enemy_scene: PackedScene
 		var rng: float = randf()
 		for x: PackedScene in enemyList.keys():

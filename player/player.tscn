@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://db5fatnj0uwms"]
+[gd_scene load_steps=13 format=3 uid="uid://db5fatnj0uwms"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_iitf2"]
 [ext_resource type="Texture2D" uid="uid://b010odvgbpiye" path="res://tempAssets/p1.png" id="2_22u6h"]
 [ext_resource type="PackedScene" uid="uid://dnwpwikn763lo" path="res://weapon/pistol.tscn" id="3_htkx3"]
+[ext_resource type="PackedScene" uid="uid://c8gxu8yayj15w" path="res://weapon/melee_weapon.tscn" id="3_mmdbs"]
 [ext_resource type="PackedScene" uid="uid://u2vho6i5c0nc" path="res://weapon/machine_gun.tscn" id="4_yarha"]
 [ext_resource type="PackedScene" uid="uid://bit2cxxu4xi8o" path="res://weapon/burst_rifle.tscn" id="5_fw7d2"]
 [ext_resource type="PackedScene" uid="uid://blnmaye6htmo6" path="res://weapon/shotgun.tscn" id="6_d3724"]
@@ -67,6 +68,8 @@ texture = ExtResource("2_22u6h")
 
 [node name="Hand" type="Node2D" parent="Flip"]
 position = Vector2(8, 0)
+
+[node name="MeleeWeapon" parent="Flip/Hand" instance=ExtResource("3_mmdbs")]
 
 [node name="Pistol" parent="Flip/Hand" instance=ExtResource("3_htkx3")]
 visible = false

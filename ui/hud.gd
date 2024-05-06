@@ -37,18 +37,27 @@ func _update_reserved_bullets() -> void:
 			active_weapon.reserve_bullet_count_max,
 	])
 
-##
+## Reflect the status of a given weapon.
 func _on_active_weapon_changed(new_weapon: Gun) -> void:
-	if active_weapon:
+	# Stop listening to changes on old weapon.
+	if active_weapon and active_weapon.is_bullet_finite:
 		active_weapon.loaded_bullet_count_changed.disconnect(_update_loaded_bullets)
 		active_weapon.reserve_bullet_count_changed.disconnect(_update_reserved_bullets)
 	
 	active_weapon = new_weapon
-	_update_loaded_bullets()
-	_update_reserved_bullets()
-	active_weapon.loaded_bullet_count_changed.connect(_update_loaded_bullets)
-	active_weapon.reserve_bullet_count_changed.connect(_update_reserved_bullets)
-	## Show weapon equipped.
+	# Only monitor changes on weapon whose bullet counts will change.
+	if active_weapon.is_bullet_finite:
+		# Reflect status of new weapon.
+		_update_loaded_bullets()
+		_update_reserved_bullets()
+		# Listen to changes on new weapon.
+		active_weapon.loaded_bullet_count_changed.connect(_update_loaded_bullets)
+		active_weapon.reserve_bullet_count_changed.connect(_update_reserved_bullets)
+	else:
+		# Don't show loaded bullets since they are irrelevant.
+		loaded_bullets.visible = false
+		reserved_bullets.text = "∞/∞"
+	# Show weapon equipped.
 	weapon_equipped.texture = new_weapon.sprite_2d.texture
 
 

@@ -183,12 +183,13 @@ func _outline_nearest_gun() -> void:
 func _reload_equipped_gun() -> int:
 	var gun: Gun = _get_equipped_weapon()
 	# Don't if already reloading, gun not equipped, gun fully loaded,
-	# or have no bullets to load.
+	# gun has infinite bullets, or have no bullets to load.
 	if (
 			not gun or
 			gun.is_loaded_fully or
 			not gun.has_reserve_bullets or
-			_is_reloading_gun
+			_is_reloading_gun or
+			not gun.is_bullet_finite
 	):
 		# Update to show there is no ammo.
 		_update_reload_label()

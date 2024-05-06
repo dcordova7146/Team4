@@ -7,13 +7,15 @@ signal reserve_bullet_count_changed()
 signal shot_attempted_without_loaded_bullets()
 
 ## Bullet fired.
-@export var bullet: PackedScene = preload("res://projectile/bullet_square.tscn")
-## Damage dealt to the enemy contacted.
+@export var bullet: PackedScene = preload("res://projectile/bullet.tscn")
+## Bullet damage.
 @export var damage: float = 10.0
-## Speed of the bullet.
+## Bullet speed.
 @export var speed: float = 250.0
-## Range of the bullet.
+## Bullet range.
 @export var max_range: float = 1000.0
+## Bullet scale.
+@export var bullet_scale: Vector2 = Vector2(1, 1)
 ## Seconds until it can be fired again.
 @export var cooldown_duration: float = 0.5
 ## Seconds until it automatically fires again while the primary action key is held.
@@ -24,10 +26,15 @@ signal shot_attempted_without_loaded_bullets()
 @export var loaded_bullet_count_max: int = 10
 ## Max number of bullets reserved.
 @export var reserve_bullet_count_max: int = 100
-## Scale of the bullet.
-@export var bullet_scale: Vector2 = Vector2(1, 1)
-## Whether the gun can be dropped.
+## Whether it can be dropped.
 @export var is_droppable: bool = true
+## Number of enemies a bullet can hit before being deleted.
+@export var pierce: int = 1
+## Whether bullets pierce a finite number of enemies.
+@export var is_pierce_finite: bool = true
+## Whether a finite number of bullets exist.
+@export var is_bullet_finite: bool = true
+
 
 ## Current number of bullets loaded.
 var loaded_bullet_count: int:
@@ -49,10 +56,12 @@ var is_loaded: bool:
 var is_loaded_fully: bool:
 	get:
 		return loaded_bullet_count == loaded_bullet_count_max
-## Whether the gun still cooling down from the last time it was fired.
+## Whether it's still cooling down from the last time it was fired.
 ##
 ## If true, bullets cannot be shot.
-var _is_cooling_down: bool = false
+var _is_cooling_down: bool:
+	get:
+		return not cooldown_timer.is_stopped()
 
 @onready var pivot: Marker2D = $Pivot
 @onready var muzzle: Marker2D = $Pivot/Muzzle
@@ -81,7 +90,7 @@ func hold_trigger() -> void:
 	shooting_timer.start()
 
 
-## Stop the timer to automatically continue shooting.
+## Stop the timer for automatic shooting.
 func release_trigger() -> void:
 	if not shooting_timer.is_stopped():
 		shooting_timer.stop()
@@ -100,7 +109,6 @@ func _shoot() -> int:
 		return -1;
 	_spawn_bullets()
 	# Begin cooldown and start timer to end it.
-	_is_cooling_down = true
 	cooldown_timer.start()
 	return 0
 
@@ -117,8 +125,8 @@ func hide_outline() -> void:
 	sprite_2d.material = null
 
 
-## Behavior of gun upon firing.
-## Intended to be overridden by various gun types.
+## Behavior upon firing.
+## Intended to be overridden.
 ## By default, a single bullet is fired.
 func _spawn_bullets() -> void:
 	_add_bullet()
@@ -135,20 +143,23 @@ func _add_bullet(
 	elif loaded_bullet_count < 0:
 		printerr("_loaded_bullet_count is less than 0!")
 	# Consume a loaded bullet.
-	loaded_bullet_count -= 1;
+	if is_bullet_finite:
+		loaded_bullet_count -= 1;
 	var new_bullet: Bullet = _instantiate_bullet()
 	new_bullet.global_position = bullet_position
 	new_bullet.global_rotation = bullet_rotation
 	get_tree().root.add_child(new_bullet)
 
 
-## Instantiate a bullet with the properties specified on the gun.
+## Instantiate a bullet with the properties specified.
 func _instantiate_bullet() -> Bullet:
 	var new_bullet: Bullet = bullet.instantiate()
 	new_bullet.damage = damage
 	new_bullet.speed = speed
 	new_bullet.max_range = max_range
 	new_bullet.scale = bullet_scale
+	new_bullet.pierce = pierce
+	new_bullet.is_pierce_finite = is_pierce_finite
 	return new_bullet
 
 
@@ -159,7 +170,7 @@ func _on_shooting_timer_timeout() -> void:
 
 ## When cooldown is over, cooling down is over...
 func _on_cooldown_timer_timeout() -> void:
-	_is_cooling_down = false
+	return
 
 
 func _on_body_entered(_body: Node2D) -> void:

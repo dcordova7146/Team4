@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8gxu8yayj15w"]
+
+[ext_resource type="PackedScene" uid="uid://d20nshp1r4q6r" path="res://weapon/gun.tscn" id="1_hkgn0"]
+[ext_resource type="Script" path="res://weapon/melee_weapon.gd" id="2_fgxnb"]
+[ext_resource type="PackedScene" uid="uid://w4n3g0cnjwr6" path="res://projectile/swipe.tscn" id="2_ouphv"]
+[ext_resource type="Texture2D" uid="uid://bd2hpvq460wd6" path="res://weapon/sword.png" id="3_muxgq"]
+[ext_resource type="Shader" path="res://drop/outline.gdshader" id="4_bgoxf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_46pp1"]
+shader = ExtResource("4_bgoxf")
+shader_parameter/outline_color = Vector4(0, 0, 0, 1)
+
+[node name="MeleeWeapon" instance=ExtResource("1_hkgn0")]
+script = ExtResource("2_fgxnb")
+bullet = ExtResource("2_ouphv")
+damage = 25.0
+speed = 100.0
+max_range = 30.0
+is_pierce_finite = false
+is_bullet_finite = false
+
+[node name="Sprite" parent="Pivot" index="0"]
+material = SubResource("ShaderMaterial_46pp1")
+position = Vector2(0, -8)
+texture = ExtResource("3_muxgq")
+
+[node name="Muzzle" parent="Pivot" index="1"]
+position = Vector2(0, 0)
+
+[node name="CollisionShape2D" parent="." index="3"]
+visible = false

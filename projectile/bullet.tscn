@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1h7hthr1s5jd"]
+
+[ext_resource type="Script" path="res://projectile/bullet.gd" id="1_5ub0o"]
+[ext_resource type="Texture2D" uid="uid://3seo0lenlsut" path="res://projectile/bullet.png" id="2_qqbkg"]
+[ext_resource type="Shader" path="res://drop/outline.gdshader" id="2_x5lq3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vg6gu"]
+shader = ExtResource("2_x5lq3")
+shader_parameter/outline_color = Vector4(0, 0, 0, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khq67"]
+size = Vector2(2, 2)
+
+[node name="Bullet" type="Area2D"]
+top_level = true
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_5ub0o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vg6gu")
+texture = ExtResource("2_qqbkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_khq67")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
