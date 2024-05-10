@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvv51jcjucc2m"]
+[gd_scene load_steps=7 format=3 uid="uid://cvv51jcjucc2m"]
 
+[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="1_50lio"]
 [ext_resource type="Script" path="res://enemy/skulls/large_skull.gd" id="1_p7i2r"]
-[ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_u8sf6"]
 [ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_1y0w2"]
 [ext_resource type="Texture2D" uid="uid://bhdhj122p4pw1" path="res://tempAssets/largeSkull.png" id="4_uaijy"]
 
@@ -11,79 +11,16 @@ shader = ExtResource("3_1y0w2")
 shader_parameter/enabled = true
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82ml1"]
-bg_color = Color(0, 0, 0, 0.266667)
+[sub_resource type="CircleShape2D" id="CircleShape2D_kdnjd"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akpgk"]
-bg_color = Color(0.596078, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_bb2dl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Large Skull:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_jvo8a"]
-resource_name = "on_hit"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Large Skull:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a7seo"]
-_data = {
-"RESET": SubResource("Animation_bb2dl"),
-"on_hit": SubResource("Animation_jvo8a")
-}
-
-[node name="Large Skull" type="CharacterBody2D"]
-collision_layer = 4
-collision_mask = 7
+[node name="SkullLarge" instance=ExtResource("1_50lio")]
 script = ExtResource("1_p7i2r")
+health = 100.0
+speed = 25.0
 
-[node name="Dot" parent="." instance=ExtResource("2_u8sf6")]
-
-[node name="Large Skull" type="Sprite2D" parent="."]
-visibility_layer = 2
+[node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_0xq6a")
-position = Vector2(0, -5.96046e-08)
-scale = Vector2(0.075, 0.075)
 texture = ExtResource("4_uaijy")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, -5.96046e-08)
-scale = Vector2(0.075, 0.075)
-polygon = PackedVector2Array(47, -173, 48, -173, 48, -172, 49, -172, 49, -158, 78, -158, 78, -157, 79, -157, 79, -156, 80, -156, 80, -143, 109, -143, 109, -142, 110, -142, 110, -141, 111, -141, 111, -127, 125, -127, 125, -126, 126, -126, 126, -125, 127, -125, 127, -96, 141, -96, 141, -95, 142, -95, 142, -94, 143, -94, 143, -64, 156, -64, 156, -63, 157, -63, 157, -62, 158, -62, 158, -33, 172, -33, 172, -32, 173, -32, 173, -31, 174, -31, 174, 31, 173, 31, 173, 32, 172, 32, 172, 33, 158, 33, 158, 78, 157, 78, 157, 79, 156, 79, 156, 80, 143, 80, 143, 94, 142, 94, 142, 95, 141, 95, 141, 96, 125, 96, 125, 95, 124, 95, 124, 94, 123, 94, 123, 80, 111, 80, 111, 125, 110, 125, 110, 126, 109, 126, 109, 127, 96, 127, 96, 156, 95, 156, 95, 157, 94, 157, 94, 158, 80, 158, 80, 172, 79, 172, 79, 173, 78, 173, 78, 174, -78, 174, -78, 173, -79, 173, -79, 172, -80, 172, -80, 158, -94, 158, -94, 157, -95, 157, -95, 156, -96, 156, -96, 127, -109, 127, -109, 126, -110, 126, -110, 125, -111, 125, -111, 80, -123, 80, -123, 94, -124, 94, -124, 95, -125, 95, -125, 96, -141, 96, -141, 95, -142, 95, -142, 94, -143, 94, -143, 80, -156, 80, -156, 79, -157, 79, -157, 78, -158, 78, -158, 33, -172, 33, -172, 32, -173, 32, -173, 31, -174, 31, -174, -31, -173, -31, -173, -32, -172, -32, -172, -33, -158, -33, -158, -62, -157, -62, -157, -63, -156, -63, -156, -64, -143, -64, -143, -94, -142, -94, -142, -95, -141, -95, -141, -96, -127, -96, -127, -125, -126, -125, -126, -126, -125, -126, -125, -127, -111, -127, -111, -141, -110, -141, -110, -142, -109, -142, -109, -143, -80, -143, -80, -156, -79, -156, -79, -157, -78, -157, -78, -158, -49, -158, -49, -172, -48, -172, -48, -173, -47, -173, -47, -174, 47, -174)
-
-[node name="HealthBar" type="ProgressBar" parent="."]
-visible = false
-offset_left = -8.0
-offset_top = -24.0
-offset_right = 8.0
-offset_bottom = -20.0
-theme_override_styles/background = SubResource("StyleBoxFlat_82ml1")
-theme_override_styles/fill = SubResource("StyleBoxFlat_akpgk")
-show_percentage = false
-
-[node name="on_hit" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_a7seo")
-}
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_kdnjd")

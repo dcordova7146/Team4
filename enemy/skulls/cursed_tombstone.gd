@@ -3,10 +3,6 @@ extends Skull
 var has_spawned: bool = false
 @onready var spawn_timer: Timer = $SpawnTimer
 
-# Overide for Cursed Tombstone Enemy
-func _ready() -> void:
-	health = 100
-	speed = 0
 
 func _physics_process(_delta: float) -> void:
 	if player and awake: ## RE-ADD AWAKE CONDITION AFTER TESTING

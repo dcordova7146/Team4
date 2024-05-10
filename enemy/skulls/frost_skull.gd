@@ -9,7 +9,7 @@ var frost_projectile: Resource = preload("res://projectile/frost_projectile.tscn
 var frozen: bool = false
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var ice_sprite: Sprite2D = $Ice
-@onready var collision: CollisionPolygon2D = $CollisionPolygon2D
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
 	health = MAX_HEALTH  # Set initial health to maximum

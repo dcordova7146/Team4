@@ -1,3 +1,3 @@
 class_name Life
-extends StaticBody2D
+extends Area2D
 ## A heart shape that collides with the player.

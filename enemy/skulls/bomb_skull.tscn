@@ -1,7 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://cq6l1w3ackej8"]
+[gd_scene load_steps=16 format=3 uid="uid://cq6l1w3ackej8"]
 
+[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="1_kykgn"]
 [ext_resource type="Script" path="res://enemy/skulls/bomb_skull.gd" id="1_tpe58"]
-[ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_1myod"]
 [ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_ddva4"]
 [ext_resource type="Texture2D" uid="uid://fbmw26v4deas" path="res://tempAssets/redCircle.png" id="3_u2pca"]
 [ext_resource type="Texture2D" uid="uid://d1serqe1er50m" path="res://tempAssets/bombSkull.png" id="4_g0df5"]
@@ -12,72 +12,8 @@ shader = ExtResource("3_ddva4")
 shader_parameter/enabled = true
 shader_parameter/ColorParameter = Color(0.603922, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82ml1"]
-bg_color = Color(0, 0, 0, 0.266667)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akpgk"]
-bg_color = Color(0.596078, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_bb2dl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Bomb Skull:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Bomb Skull:material:shader_parameter/ColorParameter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_jvo8a"]
-resource_name = "on_hit"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Bomb Skull:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Bomb Skull:material:shader_parameter/ColorParameter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a7seo"]
-_data = {
-"RESET": SubResource("Animation_bb2dl"),
-"on_hit": SubResource("Animation_jvo8a")
-}
+[sub_resource type="CircleShape2D" id="CircleShape2D_uhlth"]
+radius = 7.0
 
 [sub_resource type="Animation" id="Animation_rgycv"]
 length = 0.001
@@ -96,7 +32,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bomb Skull:material:shader_parameter/ColorParameter")
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/ColorParameter")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -108,7 +44,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Bomb Skull:material:shader_parameter/enabled")
+tracks/2/path = NodePath("Sprite2D:material:shader_parameter/enabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -132,7 +68,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Bomb Skull:visible")
+tracks/4/path = NodePath("Sprite2D:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -172,7 +108,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bomb Skull:material:shader_parameter/ColorParameter")
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/ColorParameter")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -184,7 +120,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Bomb Skull:material:shader_parameter/enabled")
+tracks/2/path = NodePath("Sprite2D:material:shader_parameter/enabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -208,7 +144,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Bomb Skull:visible")
+tracks/4/path = NodePath("Sprite2D:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -259,60 +195,35 @@ scale_max = 2.0
 scale_curve = SubResource("CurveTexture_3ts81")
 color_ramp = SubResource("GradientTexture1D_sbj4c")
 
-[node name="Bomb Skull" type="CharacterBody2D"]
-collision_layer = 4
-collision_mask = 7
+[node name="SkullBomb" instance=ExtResource("1_kykgn")]
 script = ExtResource("1_tpe58")
 
-[node name="Dot" parent="." instance=ExtResource("2_1myod")]
+[node name="Sprite2D" parent="." index="1"]
+visible = false
+material = SubResource("ShaderMaterial_b5305")
+texture = ExtResource("4_g0df5")
 
-[node name="Explosion" type="Sprite2D" parent="."]
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_uhlth")
+
+[node name="Explosion" type="Sprite2D" parent="." index="5"]
 visible = false
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(0, 1.19209e-07)
 scale = Vector2(0.12, 0.12)
 texture = ExtResource("3_u2pca")
 
-[node name="Bomb Skull" type="Sprite2D" parent="."]
-visible = false
-visibility_layer = 2
-material = SubResource("ShaderMaterial_b5305")
-position = Vector2(0, 2)
-scale = Vector2(0.058, 0.058)
-texture = ExtResource("4_g0df5")
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
-visible = false
-position = Vector2(0, 2)
-scale = Vector2(0.058, 0.058)
-polygon = PackedVector2Array(47, -187, 78, -187, 78, -203, 94, -203, 94, -187, 109, -187, 109, -172, 125, -172, 125, -156, 109, -156, 109, -141, 94, -141, 94, -125, 78, -125, 78, -141, 47, -141, 47, -156, 31, -156, 31, -141, 16, -141, 16, -125, 31, -125, 31, -109, 63, -109, 63, -94, 78, -94, 78, -78, 94, -78, 94, -62, 109, -62, 109, 16, 94, 16, 94, 63, 78, 63, 78, 78, 63, 78, 63, 94, 47, 94, 47, 109, 31, 109, 31, 94, 16, 94, 16, 109, -16, 109, -16, 94, -31, 94, -31, 109, -47, 109, -47, 94, -62, 94, -62, 78, -78, 78, -78, 63, -94, 63, -94, 16, -109, 16, -109, -62, -94, -62, -94, -78, -78, -78, -78, -94, -62, -94, -62, -109, -31, -109, -31, -125, -16, -125, -16, -141, -31, -141, -31, -156, -16, -156, -16, -172, 0, -172, 0, -187, 16, -187, 16, -203, 47, -203)
-
-[node name="HealthBar" type="ProgressBar" parent="."]
-visible = false
-offset_left = -8.0
-offset_top = -16.0
-offset_right = 8.0
-offset_bottom = -12.0
-theme_override_styles/background = SubResource("StyleBoxFlat_82ml1")
-theme_override_styles/fill = SubResource("StyleBoxFlat_akpgk")
-max_value = 50.0
-show_percentage = false
-
-[node name="on_hit" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_a7seo")
-}
-
-[node name="FuseTimer" type="Timer" parent="."]
+[node name="FuseTimer" type="Timer" parent="." index="6"]
 process_callback = 0
 wait_time = 1.5
 
-[node name="FuseAnimation" type="AnimationPlayer" parent="."]
+[node name="FuseAnimation" type="AnimationPlayer" parent="." index="7"]
 libraries = {
 "": SubResource("AnimationLibrary_ahxqp")
 }
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="8"]
 position = Vector2(0, -9)
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_cu08i")

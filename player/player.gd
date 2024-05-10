@@ -8,6 +8,8 @@ extends CharacterBody2D
 @export var max_lives: int = 8
 ## Move speed multiplier.
 @export var speed: int = 125
+## Area2D for detecting collisions w/ nodes that don't push.
+@onready var area_2d: Area2D = $Area2D
 ## Timer until invincibility after losing a life wears off.
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 ## Timer until visibility is toggled.
@@ -134,18 +136,6 @@ func _process_collisions() -> void:
 	for i: int in get_slide_collision_count():
 		var collision: KinematicCollision2D = get_slide_collision(i)
 		var collider: Object = collision.get_collider()
-		
-		var enemy: Skull = collider as Skull
-		
-		if enemy :
-			_lose_life()
-		
-		var life: Life = collider as Life
-		if life:
-			# Remove collided lives.
-			life.queue_free()
-			_gain_life()
-			
 		var trap: Trap = collider as Trap
 		if trap:
 			_lose_life()
@@ -336,6 +326,12 @@ func _on_blink_timer_timeout() -> void:
 func _on_invincibility_timer_timeout() -> void:
 	blink_timer.stop()
 	visible = true
+	# Take more damage if still touching enemy.
+	var bodies: Array[Node2D] = area_2d.get_overlapping_bodies()
+	for body: Node2D in bodies:
+		var enemy: Skull = body as Skull
+		if enemy:
+			_lose_life()
 
 
 ## Set bool _is_near_gun to true if there are takeables, otherwise false.
@@ -357,3 +353,18 @@ func _on_reload_timer_timeout() -> void:
 	_update_reload_label()
 	# Hide progress bar.
 	reload_bar.visible = false
+
+
+## Consume collided lives.
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	var life: Life = area as Life
+	if life:
+		life.queue_free()
+		_gain_life()
+
+
+## Take damage on enemy contact.
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	var enemy: Skull = body as Skull
+	if enemy:
+		_lose_life()

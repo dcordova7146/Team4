@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cexqlf50w1why"]
 
-[ext_resource type="Texture2D" uid="uid://bdtxomolk7ecx" path="res://tempAssets/enemies/skull.png" id="1_grrgn"]
+[ext_resource type="Texture2D" uid="uid://kux87eu8ahlv" path="res://tempAssets/smallSkull.png" id="1_grrgn"]
 [ext_resource type="Script" path="res://enemy/skull.gd" id="1_wcjy6"]
 [ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_gubwf"]
 [ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_5xkh4"]
@@ -11,8 +11,8 @@ shader = ExtResource("3_5xkh4")
 shader_parameter/enabled = true
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8lppj"]
-radius = 9.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_b03o7"]
+radius = 7.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82ml1"]
 bg_color = Color(0, 0, 0, 0.266667)
@@ -25,7 +25,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Skull:material:shader_parameter/enabled")
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -41,7 +41,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Skull:material:shader_parameter/enabled")
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -60,21 +60,20 @@ _data = {
 [node name="Skull" type="CharacterBody2D"]
 z_index = 2
 collision_layer = 4
-collision_mask = 7
+collision_mask = 5
 script = ExtResource("1_wcjy6")
 
 [node name="Dot" parent="." instance=ExtResource("2_gubwf")]
 visible = false
 
-[node name="Skull" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 visibility_layer = 2
 material = SubResource("ShaderMaterial_73kiq")
 position = Vector2(0, -5.96046e-08)
-scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_grrgn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_8lppj")
+shape = SubResource("CircleShape2D_b03o7")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 visible = false
@@ -86,7 +85,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_82ml1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_akpgk")
 show_percentage = false
 
-[node name="on_hit" type="AnimationPlayer" parent="."]
+[node name="OnHitAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_a7seo")
 }

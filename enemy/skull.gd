@@ -9,7 +9,7 @@ extends CharacterBody2D
 ## The sibling node player.
 @onready var player: Player = get_node("/root/Main/Dungeon/Player")
 var awake: bool = false
-@onready var on_hit_animation: AnimationPlayer = $on_hit
+@onready var on_hit_animation: AnimationPlayer = $OnHitAnimation
 
 ## Set max value of the health bar to the initial health.
 func _ready() -> void:

@@ -406,7 +406,7 @@ debug_color = Color(0.819608, 0, 0.968627, 0.419608)
 [node name="BotDoor" type="Sprite2D" parent="."]
 visible = false
 visibility_layer = 2
-position = Vector2(154, 132.5)
+position = Vector2(154, 132)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_cgfv4")
 
@@ -422,7 +422,7 @@ shape = SubResource("RectangleShape2D_tlp1x")
 [node name="LeftDoor" type="Sprite2D" parent="."]
 visible = false
 visibility_layer = 2
-position = Vector2(9.2, 65)
+position = Vector2(10, 65)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_hjecd")
 
@@ -438,7 +438,7 @@ shape = SubResource("RectangleShape2D_84oan")
 [node name="TopDoor" type="Sprite2D" parent="."]
 visible = false
 visibility_layer = 2
-position = Vector2(156, 7.3)
+position = Vector2(156, 6)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("5_6hrvb")
 
@@ -454,7 +454,7 @@ shape = SubResource("RectangleShape2D_v0qnt")
 [node name="RightDoor" type="Sprite2D" parent="."]
 visible = false
 visibility_layer = 2
-position = Vector2(300.8, 67)
+position = Vector2(302, 67)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("6_m0tnp")
 

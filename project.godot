@@ -145,13 +145,16 @@ use={
 2d_render/layer_2="main"
 2d_render/layer_3="map"
 2d_physics/layer_1="walls"
-2d_physics/layer_2="Player(Scan)"
+2d_physics/layer_2="player (physics)"
 2d_physics/layer_3="enemies"
 2d_physics/layer_4="bullets"
 2d_physics/layer_5="pickups"
+2d_physics/layer_6="player (area)"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
