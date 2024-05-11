@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnvsjj2bbghyp"]
+
+[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="1_pfqps"]
+[ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="2_iim2t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_56ksm"]
+resource_local_to_scene = true
+shader = ExtResource("2_iim2t")
+shader_parameter/enabled = true
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+
+[node name="SkullSmall" instance=ExtResource("1_pfqps")]
+health = 25.0
+
+[node name="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_56ksm")

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://sqyxernsmlq2"]
+
+[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="1_4f18s"]
+[ext_resource type="Script" path="res://enemy/cursed_tombstone.gd" id="2_ooqyo"]
+[ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_e4bcg"]
+[ext_resource type="Texture2D" uid="uid://dgqb8y66454e4" path="res://enemy/tombstone.png" id="4_vh5hn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_56ksm"]
+resource_local_to_scene = true
+shader = ExtResource("3_e4bcg")
+shader_parameter/enabled = true
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+
+[node name="CursedTombstone" instance=ExtResource("1_4f18s")]
+script = ExtResource("2_ooqyo")
+health = 100.0
+speed = 0.0
+
+[node name="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_56ksm")
+texture = ExtResource("4_vh5hn")
+
+[node name="SpawnTimer" type="Timer" parent="." index="5"]
+process_callback = 0
+wait_time = 6.9
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

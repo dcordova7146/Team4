@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cog316fit0y7k"]
 
-[ext_resource type="Texture2D" uid="uid://b4ty61tokt26b" path="res://tempAssets/World/trainingRoom].png" id="1_ehmol"]
+[ext_resource type="Texture2D" uid="uid://b4ty61tokt26b" path="res://map/room_training.png" id="1_ehmol"]
 [ext_resource type="PackedScene" uid="uid://c37a3v8yxcr3e" path="res://enemy/dummy.tscn" id="2_u5acv"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="4_sjpft"]
 [ext_resource type="PackedScene" uid="uid://bd3r464d7oxbh" path="res://map/teleporter.tscn" id="4_ustl3"]

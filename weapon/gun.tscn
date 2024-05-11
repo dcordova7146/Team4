@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d20nshp1r4q6r"]
 
 [ext_resource type="Script" path="res://weapon/gun.gd" id="1_jxd65"]
-[ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://tempAssets/weapons/pistol.png" id="2_2grcx"]
+[ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://weapon/pistol.png" id="2_sltdw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t4ukx"]
 
@@ -14,7 +14,7 @@ script = ExtResource("1_jxd65")
 [node name="Pivot" type="Marker2D" parent="."]
 
 [node name="Sprite" type="Sprite2D" parent="Pivot"]
-texture = ExtResource("2_2grcx")
+texture = ExtResource("2_sltdw")
 
 [node name="Muzzle" type="Marker2D" parent="Pivot"]
 position = Vector2(4, -2.5)

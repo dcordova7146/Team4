@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://cexqlf50w1why"]
 
-[ext_resource type="Texture2D" uid="uid://kux87eu8ahlv" path="res://tempAssets/smallSkull.png" id="1_grrgn"]
 [ext_resource type="Script" path="res://enemy/skull.gd" id="1_wcjy6"]
 [ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_gubwf"]
 [ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_5xkh4"]
+[ext_resource type="Texture2D" uid="uid://kux87eu8ahlv" path="res://enemy/skull_small.png" id="4_fjoyd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_73kiq"]
 resource_local_to_scene = true
@@ -70,7 +70,7 @@ visible = false
 visibility_layer = 2
 material = SubResource("ShaderMaterial_73kiq")
 position = Vector2(0, -5.96046e-08)
-texture = ExtResource("1_grrgn")
+texture = ExtResource("4_fjoyd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_b03o7")

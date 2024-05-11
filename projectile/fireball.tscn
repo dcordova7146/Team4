@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bofb3nksa5vcy"]
 
 [ext_resource type="Script" path="res://projectile/fireball.gd" id="1_onepr"]
-[ext_resource type="Texture2D" uid="uid://cfolswa2ym0r6" path="res://tempAssets/projectiles/fireball.png" id="1_v55ar"]
+[ext_resource type="Texture2D" uid="uid://cfolswa2ym0r6" path="res://projectile/fireball.png" id="1_v55ar"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7imot"]
 radius = 2.0

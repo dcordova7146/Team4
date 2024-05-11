@@ -1,16 +1,53 @@
-[gd_scene load_steps=37 format=3 uid="uid://bxvfe2h3ur6ol"]
+[gd_scene load_steps=50 format=3 uid="uid://bxvfe2h3ur6ol"]
 
 [ext_resource type="Script" path="res://map/room.gd" id="1_k281e"]
-[ext_resource type="Texture2D" uid="uid://cyhjqf2e4ast" path="res://tempAssets/World/zero.png" id="2_dgx25"]
+[ext_resource type="PackedScene" uid="uid://dnvsjj2bbghyp" path="res://enemy/skull_small.tscn" id="2_8cv4c"]
 [ext_resource type="Script" path="res://map/room_type_label.gd" id="2_gc5mi"]
 [ext_resource type="Script" path="res://map/room_map_sprite.gd" id="2_gosqv"]
-[ext_resource type="Texture2D" uid="uid://dkf6rnbpwdnay" path="res://tempAssets/World/doors/BotDoor.png" id="3_cgfv4"]
+[ext_resource type="Script" path="res://map/chance_row.gd" id="2_jqava"]
+[ext_resource type="Texture2D" uid="uid://cyhjqf2e4ast" path="res://map/room_default.png" id="3_4acqo"]
 [ext_resource type="PackedScene" uid="uid://w08be4o1ar2p" path="res://map/door.tscn" id="4_4kphe"]
-[ext_resource type="Texture2D" uid="uid://fyat7l76scsr" path="res://tempAssets/World/doors/LeftDoor.png" id="4_hjecd"]
-[ext_resource type="Texture2D" uid="uid://btk0f6t0nv7k2" path="res://tempAssets/World/doors/TopDoor.png" id="5_6hrvb"]
-[ext_resource type="Texture2D" uid="uid://c87xswjoaabdj" path="res://tempAssets/World/doors/RightDoor.png" id="6_m0tnp"]
-[ext_resource type="Texture2D" uid="uid://cj0770rj04ylb" path="res://tempAssets/Warning.png" id="9_xsowb"]
+[ext_resource type="PackedScene" uid="uid://c4neg4b8vv5dn" path="res://enemy/skull_medium.tscn" id="4_esebd"]
+[ext_resource type="Texture2D" uid="uid://dkf6rnbpwdnay" path="res://map/door_bottom.png" id="4_rac6h"]
+[ext_resource type="PackedScene" uid="uid://cvv51jcjucc2m" path="res://enemy/skull_large.tscn" id="5_4nlo8"]
+[ext_resource type="PackedScene" uid="uid://cq6l1w3ackej8" path="res://enemy/skull_bomb.tscn" id="6_ic3qd"]
+[ext_resource type="Texture2D" uid="uid://fyat7l76scsr" path="res://map/door_left.png" id="6_llr0f"]
+[ext_resource type="Texture2D" uid="uid://btk0f6t0nv7k2" path="res://map/door_top.png" id="7_5qi8u"]
+[ext_resource type="PackedScene" uid="uid://bir4mmpfg5c2q" path="res://enemy/skull_frost.tscn" id="7_84ar3"]
+[ext_resource type="Texture2D" uid="uid://c87xswjoaabdj" path="res://map/door_right.png" id="8_jkt5k"]
+[ext_resource type="PackedScene" uid="uid://sqyxernsmlq2" path="res://enemy/cursed_tombstone.tscn" id="8_q3y4i"]
+[ext_resource type="Texture2D" uid="uid://cj0770rj04ylb" path="res://map/warning_sign.png" id="9_vjfqa"]
 [ext_resource type="Script" path="res://map/barrier.gd" id="10_wfbh8"]
+
+[sub_resource type="Resource" id="Resource_in8qp"]
+script = ExtResource("2_jqava")
+scene = ExtResource("2_8cv4c")
+chance = 0.3
+
+[sub_resource type="Resource" id="Resource_elk34"]
+script = ExtResource("2_jqava")
+scene = ExtResource("4_esebd")
+chance = 0.25
+
+[sub_resource type="Resource" id="Resource_ww4fp"]
+script = ExtResource("2_jqava")
+scene = ExtResource("5_4nlo8")
+chance = 0.15
+
+[sub_resource type="Resource" id="Resource_cviua"]
+script = ExtResource("2_jqava")
+scene = ExtResource("6_ic3qd")
+chance = 0.15
+
+[sub_resource type="Resource" id="Resource_1yj0x"]
+script = ExtResource("2_jqava")
+scene = ExtResource("7_84ar3")
+chance = 0.15
+
+[sub_resource type="Resource" id="Resource_nfkjy"]
+script = ExtResource("2_jqava")
+scene = ExtResource("8_q3y4i")
+chance = 0.05
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_assl7"]
 size = Vector2(310, 10)
@@ -297,6 +334,7 @@ _data = {
 
 [node name="Room" type="Node2D"]
 script = ExtResource("1_k281e")
+enemies_possible = Array[ExtResource("2_jqava")]([SubResource("Resource_in8qp"), SubResource("Resource_elk34"), SubResource("Resource_ww4fp"), SubResource("Resource_cviua"), SubResource("Resource_1yj0x"), SubResource("Resource_nfkjy")])
 
 [node name="MapSprite" type="Node2D" parent="."]
 visibility_layer = 4
@@ -311,7 +349,7 @@ theme_override_font_sizes/font_size = 64
 visibility_layer = 2
 position = Vector2(155, 69)
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_dgx25")
+texture = ExtResource("3_4acqo")
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
@@ -408,7 +446,7 @@ visible = false
 visibility_layer = 2
 position = Vector2(154, 132)
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("3_cgfv4")
+texture = ExtResource("4_rac6h")
 
 [node name="Door" parent="BotDoor" instance=ExtResource("4_4kphe")]
 
@@ -424,7 +462,7 @@ visible = false
 visibility_layer = 2
 position = Vector2(10, 65)
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("4_hjecd")
+texture = ExtResource("6_llr0f")
 
 [node name="Door" parent="LeftDoor" instance=ExtResource("4_4kphe")]
 
@@ -440,7 +478,7 @@ visible = false
 visibility_layer = 2
 position = Vector2(156, 6)
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("5_6hrvb")
+texture = ExtResource("7_5qi8u")
 
 [node name="Door" parent="TopDoor" instance=ExtResource("4_4kphe")]
 
@@ -456,7 +494,7 @@ visible = false
 visibility_layer = 2
 position = Vector2(302, 67)
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("6_m0tnp")
+texture = ExtResource("8_jkt5k")
 
 [node name="Door" parent="RightDoor" instance=ExtResource("4_4kphe")]
 
@@ -472,7 +510,7 @@ visible = false
 z_index = 5
 position = Vector2(155, 6)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_xsowb")
+texture = ExtResource("9_vjfqa")
 script = ExtResource("10_wfbh8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TopBarrier"]
@@ -485,7 +523,7 @@ visible = false
 z_index = 5
 position = Vector2(155, 134)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_xsowb")
+texture = ExtResource("9_vjfqa")
 script = ExtResource("10_wfbh8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BotBarrier"]
@@ -498,7 +536,7 @@ visible = false
 z_index = 5
 position = Vector2(301, 67)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_xsowb")
+texture = ExtResource("9_vjfqa")
 script = ExtResource("10_wfbh8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="RightBarrier"]
@@ -511,7 +549,7 @@ visible = false
 z_index = 5
 position = Vector2(9, 67)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_xsowb")
+texture = ExtResource("9_vjfqa")
 script = ExtResource("10_wfbh8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LeftBarrier"]

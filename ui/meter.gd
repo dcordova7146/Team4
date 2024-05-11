@@ -8,9 +8,9 @@ extends BoxContainer
 ## Current value.
 @export var value: int = 5
 ## Texture of filled value.
-@export var texture_filled: Texture2D = load("res://tempAssets/drops/heart.png")
+@export var texture_filled: Texture2D
 ## Texture of empty value.
-@export var texture_empty: Texture2D = load("res://tempAssets/drops/heart_empty.png")
+@export var texture_empty: Texture2D
 
 
 ## Change both value and max value and reflect them visually.

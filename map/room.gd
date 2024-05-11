@@ -8,33 +8,9 @@ var connections: int = 0
 @onready var playArea: Node2D = $"Play Area"
 @onready var type_label: Label = $TypeLabel
 var enemies: Array[Skull] = []
-var warning: Resource = preload("res://tempAssets/Warning.png")
-
-
-## Chances the enemy spawned is a medium skull.
-var small_skull_chance: float = .3
-var medium_skull_chance: float = 0.25
-var large_skull_chance: float = 0.15
-var bomb_skull_chance: float = 0.15
-var frost_skull_chance: float = .15
-var grave_chance: float = .05
-
-var small_skull: PackedScene = preload("res://enemy/skulls/small_skull.tscn")
-var medium_skull: PackedScene = preload("res://enemy/skulls/medium_skull.tscn")
-var large_skull: PackedScene = preload("res://enemy/skulls/large_skull.tscn")
-var bomb_skull: PackedScene = preload("res://enemy/skulls/bomb_skull.tscn")
-var frost_skull: PackedScene = preload("res://enemy/skulls/frost_skull.tscn")
-var grave: PackedScene = preload("res://enemy/skulls/cursed_tombstone.tscn")
-
-#disctionary that holds enemies and their corresponding weight for random number generation
-var enemyList: Dictionary = {
-	small_skull : small_skull_chance, 
-	medium_skull: medium_skull_chance,
-	large_skull : large_skull_chance,
-	bomb_skull  : bomb_skull_chance,
-	frost_skull : frost_skull_chance,
-	grave       : grave_chance 
-	}
+@export var warning: Resource
+## Array of enemies and their corresponding weights.
+@export var enemies_possible: Array[ChanceRow]
  
 #enum direction{ 
 	#up = Vector2(0,-1), 
@@ -159,30 +135,22 @@ func populateEnemySpawner() -> void:
 	#grab collision shape within the play area area2d to obtain the bounds of the play area
 	print("populating...")
 	var total_weight: float = 0.0
-	for weights: float in enemyList.values():
-		total_weight += weights
+	for chance_row: ChanceRow in enemies_possible:
+		total_weight += chance_row.chance
 	
 	#iterate for amount of enemies we have alloted in one room
 	for i: int in range(enemycount):
 		var randpos: Vector2 = rand_coor()
 		print(randpos)
 		# Randomly choose an enemy type.
-		
-		var offest: float = 0
+		var offset: float = 0
 		var enemy_scene: PackedScene
 		var rng: float = randf()
-		for x: PackedScene in enemyList.keys():
-			if rng < enemyList[x]+ offest:
-				enemy_scene = x
+		for chance_row: ChanceRow in enemies_possible:
+			if rng < chance_row.chance + offset:
+				enemy_scene = chance_row.scene
 				break
-			offest += enemyList[x]
-			
-		#if randf() < medium_skull_chance:
-			#enemy_scene = medium_skull
-		#elif randf() < large_skull_chance:
-			#enemy_scene = large_skull
-		#else:
-			#enemy_scene = small_skull
+			offset += chance_row.chance
 			
 		var e1: Skull = enemy_scene.instantiate()
 		enemies.append(e1)

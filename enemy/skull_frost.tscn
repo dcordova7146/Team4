@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://bir4mmpfg5c2q"]
+
+[ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="1_tl82i"]
+[ext_resource type="Script" path="res://enemy/skull_frost.gd" id="2_il8rc"]
+[ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_52fof"]
+[ext_resource type="Texture2D" uid="uid://3m5k3sk2ciji" path="res://enemy/skull_frost.png" id="4_rv6lw"]
+[ext_resource type="Texture2D" uid="uid://0pphpjo88y37" path="res://enemy/ice_cube.png" id="5_kdkw0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b5305"]
+resource_local_to_scene = true
+shader = ExtResource("3_52fof")
+shader_parameter/enabled = true
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_va5vh"]
+
+[node name="SkullFrost" instance=ExtResource("1_tl82i")]
+script = ExtResource("2_il8rc")
+
+[node name="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_b5305")
+texture = ExtResource("4_rv6lw")
+
+[node name="CollisionShape2D" parent="." index="2"]
+visible = false
+shape = SubResource("CircleShape2D_va5vh")
+
+[node name="Ice" type="Sprite2D" parent="." index="5"]
+visible = false
+modulate = Color(1, 1, 1, 0.74902)
+position = Vector2(-1, 2)
+scale = Vector2(0.006, 0.006)
+texture = ExtResource("5_kdkw0")
+
+[node name="ShootTimer" type="Timer" parent="." index="6"]
+process_callback = 0
+wait_time = 2.0
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timeout"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://byy8d84jgw0g"]
 
-[ext_resource type="Texture2D" uid="uid://bk0ctb1i6sy4k" path="res://tempAssets/World/hubworld.png" id="1_ao46v"]
+[ext_resource type="Texture2D" uid="uid://bk0ctb1i6sy4k" path="res://map/hub_world.png" id="1_ao46v"]
 [ext_resource type="PackedScene" uid="uid://bd3r464d7oxbh" path="res://map/teleporter.tscn" id="2_tkiw1"]
 
 [node name="HubWorld" type="Node2D"]

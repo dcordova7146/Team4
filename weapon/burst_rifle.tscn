@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d20nshp1r4q6r" path="res://weapon/gun.tscn" id="1_68848"]
 [ext_resource type="Script" path="res://weapon/burst_rifle.gd" id="1_sr33w"]
-[ext_resource type="Texture2D" uid="uid://usqoitat0pvm" path="res://tempAssets/weapons/burst_rifle.png" id="2_8oclc"]
+[ext_resource type="Texture2D" uid="uid://usqoitat0pvm" path="res://weapon/burst_rifle.png" id="2_8oclc"]
 
 [node name="Burst Rifle" instance=ExtResource("1_68848")]
 script = ExtResource("1_sr33w")

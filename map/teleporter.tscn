@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://bd3r464d7oxbh"]
 
 [ext_resource type="Script" path="res://map/teleporter.gd" id="1_lhrfh"]
-[ext_resource type="Texture2D" uid="uid://dvsshi6v26imx" path="res://tempAssets/Teleporter/tpGate.png" id="1_x1qpn"]
-[ext_resource type="Texture2D" uid="uid://dpc5h4h626t2s" path="res://tempAssets/Teleporter/portal.png" id="2_ypd2c"]
+[ext_resource type="Texture2D" uid="uid://dvsshi6v26imx" path="res://map/teleporter_gate.png" id="1_x1qpn"]
+[ext_resource type="Texture2D" uid="uid://dpc5h4h626t2s" path="res://map/teleporter_portal.png" id="2_ypd2c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wtog2"]
 atlas = ExtResource("2_ypd2c")

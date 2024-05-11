@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://c37a3v8yxcr3e"]
 
 [ext_resource type="Script" path="res://enemy/dummy.gd" id="1_ks3dc"]
-[ext_resource type="Texture2D" uid="uid://b1lg46osgmovs" path="res://tempAssets/enemies/dummyStand.png" id="2_1r0nt"]
-[ext_resource type="Texture2D" uid="uid://kboqhndarxwm" path="res://tempAssets/enemies/dummy.png" id="3_ds0mt"]
+[ext_resource type="Texture2D" uid="uid://b1lg46osgmovs" path="res://enemy/dummy_stand.png" id="2_1r0nt"]
+[ext_resource type="Texture2D" uid="uid://kboqhndarxwm" path="res://enemy/dummy.png" id="3_ds0mt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xu2v4"]
 radius = 11.0

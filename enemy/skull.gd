@@ -5,6 +5,10 @@ extends CharacterBody2D
 
 @export var health: float = 50
 @export var speed: float = 50
+## The enemy to spawn on death.
+@export var enemy_to_spawn: PackedScene
+## The amount of enemies to spawn on death.
+@export var spawn_count: int = 0
 @onready var health_bar: ProgressBar = $HealthBar
 ## The sibling node player.
 @onready var player: Player = get_node("/root/Main/Dungeon/Player")
@@ -46,21 +50,17 @@ func die() -> void:
 	Events.enemy_died.emit(global_position)
 	Events.enemy_defeated.emit(self)
 	queue_free()
-	# Call the overridden function to spawn smaller skulls
-	spawn_smaller_skulls()
+	if spawn_count > 0:
+		spawn_enemy(enemy_to_spawn, spawn_count)
 
-# Virtual function to be overridden in child classes
-func spawn_smaller_skulls() -> void:
-	pass
 	
-func spawn_enemy(enemy_scene_path: String, count: int) -> void:
-	var enemy_scene: PackedScene = load(enemy_scene_path) as PackedScene
+func spawn_enemy(enemy_scene_path: PackedScene, count: int) -> void:
 	var separation_distance: int = 20
 	var spawn_position: Vector2 = position
 
 	for i: int in range(count):
 		var room: Room = get_parent()
-		var enemy_instance: Skull = enemy_scene.instantiate()
+		var enemy_instance: Skull = enemy_scene_path.instantiate()
 		if enemy_instance and room:
 			enemy_instance.position = spawn_position
 			spawn_position += Vector2(separation_distance, 10)

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d20nshp1r4q6r" path="res://weapon/gun.tscn" id="1_oa1vt"]
 [ext_resource type="PackedScene" uid="uid://bgy6ly50typcx" path="res://projectile/sniper_rifle_bullet.tscn" id="2_e6eha"]
-[ext_resource type="Texture2D" uid="uid://chgyn7i2txl74" path="res://tempAssets/weapons/sniper_rifle.png" id="3_i65r4"]
+[ext_resource type="Texture2D" uid="uid://chgyn7i2txl74" path="res://weapon/sniper_rifle.png" id="3_f208t"]
 
 [node name="Sniper Rifle" instance=ExtResource("1_oa1vt")]
 bullet = ExtResource("2_e6eha")
@@ -14,7 +14,7 @@ loaded_bullet_count_max = 5
 reserve_bullet_count_max = 50
 
 [node name="Sprite" parent="Pivot" index="0"]
-texture = ExtResource("3_i65r4")
+texture = ExtResource("3_f208t")
 
 [node name="Muzzle" parent="Pivot" index="1"]
 position = Vector2(14, 0)

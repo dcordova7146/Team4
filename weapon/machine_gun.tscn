@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://u2vho6i5c0nc"]
 
 [ext_resource type="PackedScene" uid="uid://d20nshp1r4q6r" path="res://weapon/gun.tscn" id="1_cpkqh"]
-[ext_resource type="Texture2D" uid="uid://jbm7yg6ia2wc" path="res://tempAssets/weapons/machine_gun.png" id="2_ce5um"]
+[ext_resource type="Texture2D" uid="uid://jbm7yg6ia2wc" path="res://weapon/machine_gun.png" id="2_ce5um"]
 
 [node name="Machine Gun" instance=ExtResource("1_cpkqh")]
 damage = 5.0
