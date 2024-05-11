@@ -90,6 +90,7 @@ offset_right = 627.0
 offset_bottom = 136.0
 
 [node name="ItemCost" type="Label" parent="."]
+layout_mode = 0
 offset_left = 440.0
 offset_top = 159.0
 offset_right = 527.0
@@ -97,6 +98,7 @@ offset_bottom = 182.0
 text = "Item Cost"
 
 [node name="ItemCostField" type="TextEdit" parent="."]
+layout_mode = 0
 offset_left = 510.0
 offset_top = 155.0
 offset_right = 627.0
