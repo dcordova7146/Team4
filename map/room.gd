@@ -7,7 +7,7 @@ var connections: int = 0
 @export var enemycount: int = 3
 @onready var playArea: Node2D = $"Play Area"
 @onready var type_label: Label = $TypeLabel
-var enemies: Array[Skull] = []
+var enemies_inside: Array[Skull] = []
 @export var warning: Resource
 ## Array of enemies and their corresponding weights.
 @export var enemies_possible: Array[ChanceRow]
@@ -36,7 +36,6 @@ enum roomType {
 
 func _ready() -> void:
 	#Events.dungeon_complete.connect(on_Dungeon_Complete)
-	Events.enemy_defeated.connect(on_kill)
 	setupRoom()
 	
 #Emit room entered signal if body entered is the player.
@@ -54,9 +53,9 @@ func _on_play_area_body_entered(_body: Node2D) -> void:
 		roomType.BATTLE:
 			print("This is a battle room")
 			wakeEnemies()
-			# Only lock room if enemies are in it.
+			# Don't lock room if there's no enemies inside.
 			# (i.e. after the room was already cleared before.)
-			if not enemies.is_empty():
+			if not enemies_inside.is_empty():
 				lockRoom()
 		roomType.SHOP:
 			print("This is a shop room")	
@@ -140,8 +139,6 @@ func populateEnemySpawner() -> void:
 	
 	#iterate for amount of enemies we have alloted in one room
 	for i: int in range(enemycount):
-		var randpos: Vector2 = rand_coor()
-		print(randpos)
 		# Randomly choose an enemy type.
 		var offset: float = 0
 		var enemy_scene: PackedScene
@@ -152,22 +149,24 @@ func populateEnemySpawner() -> void:
 				break
 			offset += chance_row.chance
 			
-		var e1: Skull = enemy_scene.instantiate()
-		enemies.append(e1)
-		add_child(e1)
-		e1.global_position = randpos
-		# add_child(e1)
+		var instance: Skull = enemy_scene.instantiate()
+		add_enemy(instance)
+		instance.set_deferred("global_position", get_random_position())
 
-#pick a coordinate within the predetermined bounds of an individual room
-func rand_coor()-> Vector2:
+
+## Add an enemy.
+func add_enemy(new_enemy: Skull) -> void:
+	new_enemy.defeated.connect(on_kill)
+	enemies_inside.append(new_enemy)
+	call_deferred("add_child", new_enemy)
+
+
+## Returns a random position in the predetermined bounds of the room.
+func get_random_position()-> Vector2:
 	var topleft: Vector2 = ($"Play Area/topLeftBound" as Marker2D).global_position
-	print(topleft)
 	var topright: Vector2 = ($"Play Area/topRightBound" as Marker2D).global_position
-	print(topright)
 	var botleft: Vector2 = ($"Play Area/botLeftBound" as Marker2D).global_position
-	print(botleft)
 	var botright: Vector2 = ($"Play Area/botRightBound" as Marker2D).global_position
-	print(botright)
 	var randx: float = randf_range(topleft.x,topright.x)
 	var randy: float = randf_range(topleft.y,botleft.y)
 	return Vector2(randx,randy)
@@ -202,12 +201,8 @@ func unlockRoom()->void:
 	updateRoom()
 	
 func wakeEnemies()->void:
-	#print(enemies)
-	if(!enemies.is_empty()):
-		print("waking up enemies")
-		for i: Skull in enemies:
-			i.awake = true
-			#print(i.awake)
+	for enemy: Skull in enemies_inside:
+		enemy.awake = true
 	
 func setupRoom()->void:
 	#this function shall spawn whatever a room requires of it
@@ -241,23 +236,11 @@ func set_Rtype(tag: roomType) -> void:
 #error the kill is being registered multiple times instead of once
 #accurately grabbing the enemy and removing it from the array of enemies but 1 kill removes all enemies for some reason
 func on_kill(defeated_enemy: Skull) -> void:
-	#print(defeated_enemy)
-	#print(enemies)
-	var index: int = enemies.find(defeated_enemy)
-	#print(index)
+	var index: int = enemies_inside.find(defeated_enemy)
 	if index != -1:
-		#print("removing") 
-		#print(enemies[index])
-		enemies.remove_at(index)
+		enemies_inside.remove_at(index)
 	else:
-		#print("error")
 		pass
 	
-	if enemies.is_empty():
-		print("there are no enemies in this room")
+	if enemies_inside.is_empty():
 		unlockRoom()
-	
-	
-
-
-	

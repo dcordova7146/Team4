@@ -3,6 +3,8 @@
 class_name Skull
 extends CharacterBody2D
 
+signal defeated(enemy: Skull)
+
 @export var health: float = 50
 @export var speed: float = 50
 ## The enemy to spawn on death.
@@ -48,7 +50,7 @@ func take_damage(damage_total: float) -> void:
 ## Drop a life and then delete self.
 func die() -> void:
 	Events.enemy_died.emit(global_position)
-	Events.enemy_defeated.emit(self)
+	defeated.emit(self)
 	queue_free()
 	if spawn_count > 0:
 		spawn_enemy(enemy_to_spawn, spawn_count)
@@ -65,8 +67,7 @@ func spawn_enemy(enemy_scene_path: PackedScene, count: int) -> void:
 			enemy_instance.position = spawn_position
 			spawn_position += Vector2(separation_distance, 10)
 			enemy_instance.awake = true
-			room.enemies.append(enemy_instance)
-			room.call_deferred("add_child", enemy_instance)
+			room.add_enemy(enemy_instance)
 		else:
 			print("Failed to instantiate enemy from scene:", enemy_scene_path)
 
