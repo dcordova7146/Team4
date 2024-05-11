@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cavkudbs4u0x4"]
+
+[ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_brj22"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AbstractItem" parent="." instance=ExtResource("1_brj22")]

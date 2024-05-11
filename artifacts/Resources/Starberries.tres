@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://nnhnwp6hao8v"]
+
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_dclgl"]
+[ext_resource type="Texture2D" uid="uid://behomusje2shv" path="res://tempAssets/items/tile019.png" id="1_utshm"]
+
+[resource]
+script = ExtResource("1_dclgl")
+icon = ExtResource("1_utshm")
+name = "Starberries"
+rarity = "Uncommon"
+description = "duplicate current pistol-berry mods onto burst rifle "

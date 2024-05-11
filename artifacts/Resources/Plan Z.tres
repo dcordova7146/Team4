@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://6ox6ckhsub00"]
+
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_fa4og"]
+[ext_resource type="Texture2D" uid="uid://mo07fukqymf3" path="res://tempAssets/items/tile035.png" id="1_t5msk"]
+
+[resource]
+script = ExtResource("1_fa4og")
+icon = ExtResource("1_t5msk")
+name = "Plan Z"
+rarity = "Rare"
+description = "\"Everything in one conveniently sized pill\" - all stats plus 15%"

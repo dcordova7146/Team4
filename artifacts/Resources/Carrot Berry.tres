@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://cibr5gdn0oq5h"]
+
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_i4tve"]
+[ext_resource type="Texture2D" uid="uid://dwlhapxdpeh5d" path="res://tempAssets/items/tile000.png" id="1_iu8kf"]
+
+[resource]
+script = ExtResource("1_i4tve")
+icon = ExtResource("1_iu8kf")
+name = "Carrot Berry"
+rarity = "Common"
+description = "range increase on pistol 10% stackable"

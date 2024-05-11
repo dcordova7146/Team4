@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://byuevtusk5eky"]
+
+[ext_resource type="Texture2D" uid="uid://bibc06uwk6le6" path="res://tempAssets/items/tile055.png" id="1_64nww"]
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_vp7mt"]
+
+[resource]
+script = ExtResource("1_vp7mt")
+icon = ExtResource("1_64nww")
+name = "Hard Hat"
+rarity = "Rare"
+description = "\"safe measure\" - Enemies are hurt on touching player 25% off their max health"

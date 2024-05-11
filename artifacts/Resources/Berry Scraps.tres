@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://dpq7xefwqxnbp"]
+
+[ext_resource type="Texture2D" uid="uid://bfui3njmawdbq" path="res://tempAssets/items/tile051.png" id="1_00eba"]
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_c4wy3"]
+
+[resource]
+script = ExtResource("1_c4wy3")
+icon = ExtResource("1_00eba")
+name = "Berry Scraps"
+rarity = "Rare"
+description = "\"5 second rule!\" - gain a heart back on entering a new room"
