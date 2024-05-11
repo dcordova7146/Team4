@@ -3,9 +3,8 @@ extends Skull
 var has_spawned: bool = false
 @onready var spawn_timer: Timer = $SpawnTimer
 
-
 func _physics_process(_delta: float) -> void:
-	if player and awake: ## RE-ADD AWAKE CONDITION AFTER TESTING
+	if player and awake: 
 		if not has_spawned:
 			print("Timer Start, Preparing Skull")
 			spawn_timer.start()
@@ -15,9 +14,9 @@ func _physics_process(_delta: float) -> void:
 
 # Function to spawn a single random skull
 func spawn_random_skull() -> void:
-	var skull_types: Array[String] = ["small_skull", "medium_skull", "large_skull", "bomb_skull", "frost_skull"]
+	var skull_types: Array[String] = ["skull_small", "skull_medium", "skull_large", "skull_bomb", "skull_frost"]
 	var random_skull_type: String = skull_types[randi() % skull_types.size()]
-	var random_skull_path: String = "res://enemy/skulls/" + random_skull_type + ".tscn"
+	var random_skull_path: String = "res://enemy/" + random_skull_type + ".tscn"
 	
 	# Load the skull scene
 	var resource: PackedScene = load(random_skull_path)
