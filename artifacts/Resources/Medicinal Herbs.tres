@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://byq5kv6cc612l"]
+
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_37tld"]
+[ext_resource type="Texture2D" uid="uid://d3ktejihx3tht" path="res://tempAssets/items/tile025.png" id="1_uy6qj"]
+
+[resource]
+script = ExtResource("1_37tld")
+icon = ExtResource("1_uy6qj")
+name = "Medicinal Herbs"
+rarity = "Rare"
+description = "\"Its medicinal!\" - immune to negative effects from items"

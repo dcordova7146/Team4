@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://crijpqdjdyl7e"]
+
+[ext_resource type="Texture2D" uid="uid://bw6qcrry8vbgo" path="res://tempAssets/items/tile009.png" id="1_gckr1"]
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_t01u3"]
+
+[resource]
+script = ExtResource("1_t01u3")
+icon = ExtResource("1_gckr1")
+name = "Starberry Leaf"
+rarity = "Common"
+description = "10% increase to sword damage"

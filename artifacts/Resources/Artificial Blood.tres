@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://b0r1jkk88pf6e"]
+
+[ext_resource type="Texture2D" uid="uid://1034mxd3v6ww" path="res://tempAssets/items/tile067.png" id="1_cvhtl"]
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_mhric"]
+
+[resource]
+script = ExtResource("1_mhric")
+icon = ExtResource("1_cvhtl")
+name = "Artificial Blood"
+rarity = "NULL"
+description = "Gain 25 drops of blood"

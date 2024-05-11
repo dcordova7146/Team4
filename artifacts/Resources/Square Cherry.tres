@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://g2b1q6plvwbk"]
+
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_hpv4j"]
+[ext_resource type="Texture2D" uid="uid://chg5ud55dnbc0" path="res://tempAssets/items/tile003.png" id="1_qxcvf"]
+
+[resource]
+script = ExtResource("1_hpv4j")
+icon = ExtResource("1_qxcvf")
+name = "Square Cherry"
+rarity = "Common"
+description = "increase projectile size on pistol by 10% stackable"

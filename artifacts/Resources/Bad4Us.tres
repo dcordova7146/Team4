@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://bghr8rmavhn83"]
+
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_vbbal"]
+[ext_resource type="Texture2D" uid="uid://b60ss84mvhm2j" path="res://tempAssets/items/tile022.png" id="1_xll6h"]
+
+[resource]
+script = ExtResource("1_vbbal")
+icon = ExtResource("1_xll6h")
+name = "Bad4Us"
+rarity = "Common"
+description = "5% increase to Reload speed + 5% increase to fire rate -5% damage stackable"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://orbtbeo3nago"]
+
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_ga6ht"]
+[ext_resource type="Texture2D" uid="uid://bikeuhtba0b17" path="res://tempAssets/items/tile037.png" id="1_osga3"]
+
+[resource]
+script = ExtResource("1_ga6ht")
+icon = ExtResource("1_osga3")
+name = "Gamer Fuel"
+rarity = "Common"
+description = "5% increase to move speed"

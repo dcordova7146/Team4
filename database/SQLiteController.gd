@@ -1,11 +1,9 @@
 extends Control
 
 var database : SQLite
-var randomId = 2
-var populated: bool
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready()-> void:
 	database = SQLite.new()
 	database.path = "res://database/data.db"
 	#if(!database.open_db()):
@@ -15,30 +13,9 @@ func _ready():
 	createShopTables()
 	populateTable()
 	
-		
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func _on_create_table_button_down():
-	var table = {
-		"itemId" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true },
-		"itemName" : {"data_type" : "text"},
-		"itemEffect" : {"data_type" : "text"},
-		"itemCost" : {"data_type" : "int"},
-		"iconPath" : {"data_type" : "text"}
-	}
-	database.query("CREATE TABLE IF NOT EXISTS " + "items" + table )
-	#database.create_table("items", table)
-		
-	
-	pass # Replace with function body.
-
 #if shop tables does not exist on start up create the tables and populate the tables with items in the game
-func createShopTables():
-	var tableTemplate = {
+func createShopTables() -> void:
+	var tableTemplate: Dictionary = {
 		"itemId" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true },
 		"itemName" : {"data_type" : "text"},
 		"itemDescription" : {"data_type" : "text"},
@@ -48,18 +25,21 @@ func createShopTables():
 	}
 	#if(database.create_table("itemTable", tableTemplate)):
 		#populateTable()
+	#print(database.create_table("itemTable", tableTemplate))
+	#sql command mirroring above dictionary
 	database.query(
-	"CREATE TABLE IF NOT EXISTS " + "items" + "(
+	"CREATE TABLE IF NOT EXISTS " + "itemTable" + "(
 	\"itemId\"	INTEGER NOT NULL UNIQUE,
-	\"itemName\"	TEXT NOT NULL,
+	\"itemName\"	TEXT NOT NULL UNIQUE,
 	\"itemDescription\"	TEXT NOT NULL,
 	\"itemCost\"	INTEGER NOT NULL,
 	\"itemRarity\"	TEXT NOT NULL,
 	\"iconPath\"	INTEGER,
 	PRIMARY KEY(\"itemId\" AUTOINCREMENT)
 	);")
-	#print(database.create_table("itemTable", tableTemplate))
-func populateTable():
+	
+#table is immutable so it must be setup and populated before hand if it is not already created
+func populateTable() -> void:
 	## common items
 	insertData("Vitamins","2% increase damage Stackable",3,"Common","res://tempAssets/drops/items/tile020.png")
 	insertData("Carrot Berry","range increase on pistol 10% stackable",3,"Common","res://tempAssets/drops/items/tile000.png")
@@ -75,7 +55,7 @@ func populateTable():
 	insertData("Jala Fruit","duplicate current pistol-berry mods onto machine gun",10,"Uncommon","res://tempAssets/drops/items/tile014.png")
 	insertData("Muhnanah","duplicate current pistol-berry mods onto shotgun",10,"Uncommon","res://tempAssets/drops/items/tile013.png")
 	insertData("Atomic Fruit","duplicate current pistol-berry mods onto sniper",10,"Uncommon","res://tempAssets/drops/items/tile016.png")
-	insertData("Artificial Blood","Gain 25 drops of blood",-1,"NULL","res://tempAssets/drops/items/tile067.png")
+	insertData("Artificial Blood","Gain 25 drops of blood",-1,"Rare","res://tempAssets/drops/items/tile067.png")
 	insertData("Ginger","Cleanse negative effect on 1 random held item",10,"Uncommon","res://tempAssets/drops/items/tile059.png")
 	insertData("Firewood","Load pistol with fire bullets - frozen enemies are no longer invulnerable *replaces current element",15,"Uncommon","res://tempAssets/drops/items/tile063.png")
 	insertData("Frozen Shard","Load pistol with ice bullets - slow enemies on hit *replaces current element",3,"Uncommon","res://tempAssets/drops/items/tile068.png")
@@ -90,46 +70,40 @@ func populateTable():
 	insertData("Berry Scraps","\"5 second rule!\" - gain a heart back on entering a new room",50,"Rare","res://tempAssets/drops/items/tile051.png")
 	insertData("Plan Z","\"Everything in one conveniently sized pill\" - all stats plus 15%",50,"Rare","res://tempAssets/drops/items/tile035.png")
 	insertData("Medicinal Herbs","\"Its medicinal!\" - immune to negative effects from items",50,"Rare","res://tempAssets/drops/items/tile025.png")
-	pass
 	
-func insertData(name: String, description: String, cost:int, rarity: String, path: String):
-	database.query(
-		"INSERT OR IGNORE INTO " + "itemTable" + " (name, description, amount, rarity, image_path) VALUES
-		 (" + name +", " +  description+ ", " + str(cost) + ", " + rarity + ", " + path + ");")
+#Insert data helper function used to populate table with any item
+func insertData(name: String, description: String, cost:int, rarity: String, path: String) -> void:
+	var params: Array = [name,description,str(cost),rarity,path]
+	database.query_with_bindings(
+		"INSERT OR IGNORE INTO itemTable
+		 (itemName, itemDescription, itemCost, itemRarity, iconPath) VALUES (?, ?, ?, ?, ?);", params)
 	
-	var data = {
-		"itemName" : name,
-		"itemDescription" : description,
-		"itemCost" : cost,
-		"itemRarity": rarity,
-		"iconPath" : path,	
-	}
-	#database.insert_row("itemTable", data)
-	pass
-
-func _on_insert_data_button_down():
-	var data = {
-		"itemName" : $ItemNameField.text,
-		"itemEffect" : $ItemEffectField.text,
-		"itemCost" : int($ItemCostField.text),
-	}
-	database.insert_row("items",data)
-	pass # Replace with function body.
-
-func _on_select_data_button_down():
-	print(database.select_rows("items","",["*"]))
-	pass # Replace with function body.
-
-func _on_update_data_button_down():
-	database.update_rows("items", "itemId = 1", {
-		"itemName" : $ItemNameField.text,
-		"itemEffect" : $ItemEffectField.text,
-		"itemCost" : int($ItemCostField.text),
-	})
-	pass # Replace with function body.
-
-func _on_delete_data_button_down():
-	pass # Replace with function body.
-
-func _on_custom_select_button_down():
-	pass # Replace with function body.
+##create resources is a tool used to automate the process of creating custom resources and is only called once 
+func create_resources()->void:
+	var table = database.query("SELECT * FROM itemTable;")
+	#var all_items = database.select_rows("itemTable", "", ["*"])
+	#print (all_items)	
+	for i in database.query_result:	
+		var resource = Artifact.new()
+		var icon_path = i["iconPath"]
+		resource.setIcon(icon_path)
+		var item_name = i["itemName"]
+		resource.setName(item_name)
+		var item_rarity = i["itemRarity"]
+		resource.setRarity(item_rarity)
+		var item_description = i["itemDescription"]
+		resource.setDesc(item_description)
+		var resource_path = "res://artifacts/Resources/" + item_name + ".tres"
+		#print(resource_path)
+		ResourceSaver.save(resource, resource_path)
+		
+func selectRandomArtifact()->Artifact:
+	database.query("SELECT * FROM itemTable ORDER BY CASE WHEN itemRarity = 'Common' THEN RANDOM() * 0.5 WHEN itemRarity = 'Uncommon' THEN RANDOM() * 0.3 WHEN itemRarity = 'Rare' THEN RANDOM() * 0.2 END DESC LIMIT 1;")
+	
+	return ResourceDirectory.get_resource(database.query_result[0]["itemName"])
+	
+	
+	
+	
+	
+	

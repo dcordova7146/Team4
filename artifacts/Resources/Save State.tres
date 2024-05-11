@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://bh1g6g5mrmkfm"]
+
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_igm0u"]
+[ext_resource type="Texture2D" uid="uid://uugkprfaosis" path="res://tempAssets/items/tile043.png" id="1_u7ysx"]
+
+[resource]
+script = ExtResource("1_igm0u")
+icon = ExtResource("1_u7ysx")
+name = "Save State"
+rarity = "Uncommon"
+description = "Recover from death with 1 heart"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://dr16i32wgovdy"]
+
+[ext_resource type="Texture2D" uid="uid://hry4m5im1sdc" path="res://tempAssets/items/tile005.png" id="1_6lw0r"]
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_kaskp"]
+
+[resource]
+script = ExtResource("1_kaskp")
+icon = ExtResource("1_6lw0r")
+name = "Prickle Berry"
+rarity = "Common"
+description = "increase pierce on pistol by 1 stackable"

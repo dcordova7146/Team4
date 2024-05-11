@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://cpqdky857xkd7"]
+
+[ext_resource type="Texture2D" uid="uid://jr0jes44yuke" path="res://tempAssets/items/tile040.png" id="1_35jlf"]
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="1_513a4"]
+
+[resource]
+script = ExtResource("1_513a4")
+icon = ExtResource("1_35jlf")
+name = "VIP Membership"
+rarity = "Rare"
+description = "\"VIP access!\" - 25% off all items forever"
