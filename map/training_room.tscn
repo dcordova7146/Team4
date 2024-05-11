@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cog316fit0y7k"]
+[gd_scene load_steps=4 format=3 uid="uid://cog316fit0y7k"]
 
 [ext_resource type="Texture2D" uid="uid://b4ty61tokt26b" path="res://map/room_training.png" id="1_ehmol"]
 [ext_resource type="PackedScene" uid="uid://c37a3v8yxcr3e" path="res://enemy/dummy.tscn" id="2_u5acv"]
-[ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="4_sjpft"]
 [ext_resource type="PackedScene" uid="uid://bd3r464d7oxbh" path="res://map/teleporter.tscn" id="4_ustl3"]
 
 [node name="Training Room" type="Node2D"]
@@ -33,8 +32,3 @@ position = Vector2(111, 70)
 position = Vector2(-107, -97)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("4_sjpft")]
-position = Vector2(-60, -14)

@@ -9,7 +9,10 @@ var rarity: String
 signal aquired_item(item)
 
 func itemAquired(item : Artifact):
+	print("item quired")
+	print(item)
 	emit_signal("aquired_item", item)
+
 
 func setIcon(path: String)->void:
 	#print(path)

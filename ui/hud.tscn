@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://doe0sstc3n5sh"]
+[gd_scene load_steps=15 format=3 uid="uid://doe0sstc3n5sh"]
 
 [ext_resource type="Script" path="res://ui/meter.gd" id="1_3gfvi"]
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_w84rr"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b43iwmjoqo7i5" path="res://drop/heart_empty.png" id="4_l77fl"]
 [ext_resource type="Texture2D" uid="uid://hxur0kber07h" path="res://ui/bullets.png" id="5_ucdqg"]
 [ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://weapon/pistol.png" id="8_ml7ux"]
+[ext_resource type="PackedScene" uid="uid://dh35tb0xfup12" path="res://ui/item_slot.tscn" id="9_55qma"]
+[ext_resource type="Script" path="res://ui/Inventory.gd" id="9_hf40v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ejrmc"]
 outline_size = 4
@@ -113,3 +115,21 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Seed: 9999"
 label_settings = SubResource("LabelSettings_ejrmc")
+
+[node name="Inventory" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 10
+script = ExtResource("9_hf40v")
+
+[node name="itemSlot" parent="Inventory" instance=ExtResource("9_55qma")]
+layout_mode = 2

@@ -14,6 +14,8 @@ extends CharacterBody2D
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 ## Timer until visibility is toggled.
 @onready var blink_timer: Timer = $BlinkTimer
+##artifact inventory not the same place guns are kept
+@onready var inventory = get_node("../HUD/Inventory")
 ## The part that should be flipped depending on the position of the cursor.
 ##
 ## Flipping the root node creates a feedback loop,
@@ -368,3 +370,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	var enemy: Skull = body as Skull
 	if enemy:
 		_lose_life()
+		
+##obtain an artifact either through buying or picking up to add to inventory of artifacts
+func obtain_artifact(name)->void:
+	print("Inventory: ")
+	print(inventory)
+	inventory.add_artifact(name)

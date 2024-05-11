@@ -1,7 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cavkudbs4u0x4"]
+[gd_scene load_steps=4 format=3 uid="uid://cavkudbs4u0x4"]
 
 [ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_brj22"]
+[ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="2_7ofem"]
+[ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="3_vygdk"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="AbstractItem" parent="." instance=ExtResource("1_brj22")]
+position = Vector2(210, 144)
+
+[node name="Player" parent="." instance=ExtResource("2_7ofem")]
+position = Vector2(136, 140)
+
+[node name="HUD" parent="Player" instance=ExtResource("3_vygdk")]

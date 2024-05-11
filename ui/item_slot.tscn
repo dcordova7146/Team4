@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh35tb0xfup12"]
+
+[ext_resource type="Script" path="res://ui/item_slot.gd" id="1_rwkl4"]
+
+[node name="itemSlot" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_rwkl4")
+
+[node name="box" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+expand_mode = 1

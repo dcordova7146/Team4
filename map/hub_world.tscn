@@ -1,12 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://byy8d84jgw0g"]
+[gd_scene load_steps=4 format=3 uid="uid://byy8d84jgw0g"]
 
 [ext_resource type="Texture2D" uid="uid://bk0ctb1i6sy4k" path="res://map/hub_world.png" id="1_ao46v"]
 [ext_resource type="PackedScene" uid="uid://bd3r464d7oxbh" path="res://map/teleporter.tscn" id="2_tkiw1"]
+[ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="3_8bss6"]
 
 [node name="HubWorld" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
 texture = ExtResource("1_ao46v")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+build_mode = 1
+polygon = PackedVector2Array(-45, -94, -116, -93, -117, -39, -241, -40, -240, 55, -117, 56, -117, 116, -45, 116, -45, 247, 49, 247, 49, 115, 112, 115, 112, 55, 246, 55, 260, 63, 55, 268, -59, 272, -153, 91, -272, 77, -278, -59, -130, -119, -57, -105)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="RigidBody2D"]
+build_mode = 1
+polygon = PackedVector2Array(-45, -94, -46, -233, 49, -233, 50, -93, 112, -94, 113, -40, 247, -40, 246, 55, 265, 66, 261, -50, 67, -261, -70, -270, -66, -126, -57, -105)
 
 [node name="Spawn" type="Marker2D" parent="."]
 
@@ -18,3 +30,6 @@ position = Vector2(-197, -28)
 
 [node name="TrainingTeleporter" parent="." instance=ExtResource("2_tkiw1")]
 position = Vector2(204, -28)
+
+[node name="AbstractItem" parent="." instance=ExtResource("3_8bss6")]
+position = Vector2(-37, -32)
