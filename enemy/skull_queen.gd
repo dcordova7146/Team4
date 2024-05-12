@@ -1,8 +1,9 @@
 extends Skull
 
-const MAX_HEALTH: int = 250  # Maximum health points
+const MAX_HEALTH: int = 500  # Maximum health points
 const DESTINATION_THRESHOLD = 5 # Approximate area of destination
 
+var phase2: bool = false # Flag for Queen 2nd Phase
 var begin_movement: bool = false # Flag for Queen wake-up, lets player move before saving location and starting movement.
 var wake_timer_called: bool = false # Flag for timer being called
 var reached_destination_x: bool = false  # Flag to indicate if Queen reached destination Xcord.
@@ -16,7 +17,7 @@ var target_location: Vector2 = Vector2() # Record player location that Queen wil
 
 func _ready() -> void:
 	health = MAX_HEALTH  # Set initial health to maximum
-	speed = 0.25  # Movement speed
+	speed = 1  # Movement speed
 	super._ready()  # Call base class _ready function
 	update_health_bar()
 	$CollisionPolygon2D.disabled = true
@@ -38,7 +39,6 @@ func _physics_process(_delta: float) -> void:
 			if abs(target_location.x - global_position.x) < DESTINATION_THRESHOLD:
 				reached_destination_x = true
 				print("Queen reached target X coordinate")
-		
 		elif !reached_destination_y and reached_destination_x:
 			# Move towards the target Y coordinate
 			if target_location.y < global_position.y:
@@ -51,29 +51,38 @@ func _physics_process(_delta: float) -> void:
 				print("Queen reached target Y coordinate")
 		elif reached_destination_x and reached_destination_y and !reached_final_destination:
 			print("Queen has arrived at the target location")
+			change_phases()
 			reached_final_destination = true
 			print("Movement Cycle Ends, Move Timer Begins")
 			$MoveTimer.start()
-			$SkullQueenBite1.visible = false
-			$SkullQueenSleep.visible = true
+			change_sprites()
 			$CollisionPolygon2D.disabled = true
 			$HealthBar.visible = false
 	else:
 		pass
 
-func spawn_tombstone():
-	var separation_distance: int = 20
-	var spawn_position: Vector2 = position
-	var room = get_parent()
-	var enemy_instance = preload("res://enemy/cursed_tombstone.tscn").instantiate()
-	if enemy_instance and room:
-		enemy_instance.position = spawn_position
-		spawn_position += Vector2(separation_distance, 10)
-		enemy_instance.awake = true
-		room.enemies.append(enemy_instance)
-		room.call_deferred("add_child", enemy_instance)
+func change_phases():
+	if health < MAX_HEALTH / 2 and !phase2: 
+		phase2 = true
+		$SkullQueen.visible = false
+		$SkullQueenDamaged.visible = true
+		speed = speed * 2
+
+func change_sprites():
+	if health > MAX_HEALTH / 2:
+		if $SkullQueen.visible:
+			$SkullQueenSleep.visible = true
+			$SkullQueen.visible = false
+		elif $SkullQueenSleep.visible:
+			$SkullQueen.visible = true
+			$SkullQueenSleep.visible = false
 	else:
-		print("Failed to instantiate enemy from scene: Cursed Tombstone", )
+		if $SkullQueenDamaged.visible:
+			$SkullQueenDamagedSleep.visible = true
+			$SkullQueenDamaged.visible = false
+		elif $SkullQueenDamagedSleep.visible:
+			$SkullQueenDamaged.visible = true
+			$SkullQueenDamagedSleep.visible = false
 
 func update_health_bar() -> void:
 	if health_bar:
@@ -98,21 +107,19 @@ func _on_move_timer_timeout():
 	print("New Target Location Saved")
 	target_location = player.global_position
 	# Modify sprites and collisions
-	$SkullQueenSleep.visible = false
-	$SkullQueenBite1.visible = true
+	change_sprites()
 	$CollisionPolygon2D.disabled = false
 	$HealthBar.visible = true
 
 func _on_wake_timer_timeout():
 	print("\nWake Timer Ends")
 	# Change to Awake Sprite
-	$SkullQueenSleep.visible = false
-	$SkullQueenBite1.visible = true
 	$CollisionPolygon2D.disabled = false
 	$HealthBar.visible = true
 	# Save Player Location
 	target_location = player.global_position
 	# Begin Movement Cycle, (set Flag to True)
 	begin_movement = true
-	print("Target Location Saved, Movement Cycle Begins") 
+	print("Target Location Saved, Movement Cycle Begins")
+	change_sprites() 
 

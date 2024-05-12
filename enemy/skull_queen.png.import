@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3dq3a0bprw60"
-path="res://.godot/imported/skull_queen_bite1.png-1b6891bdf99b1b96c76166ce75c64c73.ctex"
+uid="uid://dvtifme2pv1q8"
+path="res://.godot/imported/skull_queen.png-b89bf149f68869064abf34a9a9c72736.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemy/skull_queen_bite1.png"
-dest_files=["res://.godot/imported/skull_queen_bite1.png-1b6891bdf99b1b96c76166ce75c64c73.ctex"]
+source_file="res://enemy/skull_queen.png"
+dest_files=["res://.godot/imported/skull_queen.png-b89bf149f68869064abf34a9a9c72736.ctex"]
 
 [params]
 
