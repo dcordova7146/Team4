@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://jr63xt28ljpj"]
+
+[ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_mteiy"]
+[ext_resource type="Script" path="res://artifacts/Artifacts/shower_in_a_can.gd" id="2_ghk6y"]
+
+[node name="ShowerInACan" instance=ExtResource("1_mteiy")]
+script = ExtResource("2_ghk6y")
