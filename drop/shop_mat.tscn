@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d0ukj27a57h7p"]
+[gd_scene load_steps=25 format=3 uid="uid://d0ukj27a57h7p"]
 
 [ext_resource type="Script" path="res://drop/shop_mat.gd" id="1_ojaut"]
 [ext_resource type="Texture2D" uid="uid://dw5e8gu03p77" path="res://tempAssets/shop_mat.png" id="2_clg2k"]
@@ -35,6 +35,9 @@ color_ramp = SubResource("GradientTexture1D_mqsfd")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vlbfk"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_jul4j"]
+resource_local_to_scene = true
+
 [sub_resource type="Gradient" id="Gradient_s5u81"]
 offsets = PackedFloat32Array(0, 0.911017)
 colors = PackedColorArray(1, 1, 0.8, 1, 1, 1, 1, 0.384314)
@@ -62,6 +65,9 @@ scale_curve = SubResource("CurveTexture_myejh")
 color_initial_ramp = SubResource("GradientTexture1D_bh6om")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b00rc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uydhb"]
+resource_local_to_scene = true
 
 [sub_resource type="Gradient" id="Gradient_vhcdu"]
 colors = PackedColorArray(1, 1, 0.0784314, 1, 1, 1, 1, 0.501961)
@@ -128,6 +134,10 @@ offset_top = -28.0
 offset_right = 22.0
 offset_bottom = 12.0
 
+[node name="Label" parent="itemSlot2" index="1"]
+visible = false
+label_settings = SubResource("LabelSettings_jul4j")
+
 [node name="common_item2" type="Marker2D" parent="itemSlot2"]
 position = Vector2(18, 28)
 
@@ -150,6 +160,10 @@ offset_top = -28.0
 offset_right = 67.0
 offset_bottom = 12.0
 
+[node name="Label" parent="itemSlot3" index="1"]
+visible = false
+label_settings = SubResource("LabelSettings_uydhb")
+
 [node name="special_item" type="Marker2D" parent="itemSlot3"]
 position = Vector2(13, 28)
 
@@ -167,3 +181,5 @@ position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_gtqib")
 
 [editable path="itemSlot"]
+[editable path="itemSlot2"]
+[editable path="itemSlot3"]
