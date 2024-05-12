@@ -13,6 +13,7 @@ var enemies_inside: Array[Skull] = []
 @export var enemies_possible: Array[ChanceRow]
 @onready var boss_skull = preload("res://enemy/skull_queen.tscn")
 @onready var campfire = preload("res://map/camp.tscn")
+@onready var shop = preload("res://drop/shop_mat.tscn")
 @onready var midMarker = $"Center Spawner"
 
 #enum direction{ 
@@ -166,7 +167,9 @@ func spawnBoss() ->void:
 func spawnCamp()->void:
 	print("spawn camp")
 	var camp = campfire.instantiate()
+	call_deferred("add_child", camp)
 	camp.set_deferred("global_position", get_middle_position())
+	
 ## Add an enemy.
 func add_enemy(new_enemy: Skull) -> void:
 	new_enemy.defeated.connect(on_kill)

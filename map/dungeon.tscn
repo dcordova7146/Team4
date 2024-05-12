@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcj36edtxg3ck"]
+[gd_scene load_steps=12 format=3 uid="uid://dcj36edtxg3ck"]
 
 [ext_resource type="Script" path="res://map/dungeon.gd" id="1_1hjgm"]
 [ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://ui/pause_menu.tscn" id="2_img3q"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cj3hp6ftwl4em" path="res://drop/blood.tscn" id="4_l42c7"]
 [ext_resource type="PackedScene" uid="uid://byy8d84jgw0g" path="res://map/hub_world.tscn" id="5_dx0w7"]
 [ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="7_wap1c"]
-[ext_resource type="PackedScene" uid="uid://boqmmvcvq0qgy" path="res://map/camp.tscn" id="10_klsoe"]
 
 [sub_resource type="Resource" id="Resource_1hrf6"]
 script = ExtResource("3_3hsop")
@@ -62,9 +61,6 @@ zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("3_0bf8r")
-
-[node name="StaticBody2D" parent="." instance=ExtResource("10_klsoe")]
-position = Vector2(-1, 80)
 
 [connection signal="pressed" from="HUD/Generate Dungeon Test Button" to="." method="_on_button_pressed"]
 [connection signal="game_exited_to_menu" from="PauseMenu" to="." method="_on_pause_menu_game_exited_to_menu"]
