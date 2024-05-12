@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://doe0sstc3n5sh"]
+[gd_scene load_steps=17 format=3 uid="uid://doe0sstc3n5sh"]
 
 [ext_resource type="Script" path="res://ui/meter.gd" id="1_3gfvi"]
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_w84rr"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://weapon/pistol.png" id="8_ml7ux"]
 [ext_resource type="Script" path="res://ui/Inventory.gd" id="9_hf40v"]
 [ext_resource type="Script" path="res://ui/Choice Menu.gd" id="10_rqxbb"]
+[ext_resource type="Texture2D" uid="uid://cwye624b5a2g3" path="res://drop/blood_drop.png" id="11_vj5r6"]
+[ext_resource type="Texture2D" uid="uid://bwbu1krm7gbby" path="res://drop/heart_small.png" id="12_d4k2d"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ejrmc"]
 outline_size = 4
@@ -148,11 +150,13 @@ script = ExtResource("10_rqxbb")
 
 [node name="Left" type="Button" parent="Choice Menu"]
 layout_mode = 2
+text = "Gain 15 Blood Drops"
+icon = ExtResource("11_vj5r6")
 
 [node name="Right" type="Button" parent="Choice Menu"]
 layout_mode = 2
+text = "Fully Heal "
+icon = ExtResource("12_d4k2d")
 
-[connection signal="mouse_entered" from="Choice Menu/Left" to="Choice Menu" method="_on_leftchoice_mouse_entered"]
-[connection signal="mouse_exited" from="Choice Menu/Left" to="Choice Menu" method="_on_leftchoice_mouse_exited"]
-[connection signal="mouse_entered" from="Choice Menu/Right" to="Choice Menu" method="_on_rightchoice_mouse_entered"]
-[connection signal="mouse_exited" from="Choice Menu/Right" to="Choice Menu" method="_on_rightchoice_mouse_exited"]
+[connection signal="button_down" from="Choice Menu/Left" to="Choice Menu" method="_on_left_button_down"]
+[connection signal="button_down" from="Choice Menu/Right" to="Choice Menu" method="_on_right_button_down"]
