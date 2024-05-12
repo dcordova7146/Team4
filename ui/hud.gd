@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var reserved_bullets: Label = $LowerLeft/Weapon/ReservedBullets
 @onready var weapon_equipped: TextureRect = $LowerLeft/Weapon/WeaponEquipped/TextureRect
 @onready var seed_label: Label = $SeedLabel
+@onready var blood_label: Label = $TopLeft/BloodCup/Label
 ## Reticle sprite atlas.
 static var bullets: Texture2D = load("res://ui/bullets.png")
 
@@ -15,6 +16,7 @@ var active_weapon: Gun
 func _ready() -> void:
 	Events.lives_changed.connect(_on_lives_changed)
 	Events.active_weapon_changed.connect(_on_active_weapon_changed)
+	Events.blood_count_changed.connect(_on_blood_count_changed)
 
 
 ## Redraw HUD life bar with given values.
@@ -50,6 +52,7 @@ func _on_active_weapon_changed(new_weapon: Gun) -> void:
 		# Reflect status of new weapon.
 		_update_loaded_bullets()
 		_update_reserved_bullets()
+		loaded_bullets.visible = true
 		# Listen to changes on new weapon.
 		active_weapon.loaded_bullet_count_changed.connect(_update_loaded_bullets)
 		active_weapon.reserve_bullet_count_changed.connect(_update_reserved_bullets)
@@ -59,6 +62,11 @@ func _on_active_weapon_changed(new_weapon: Gun) -> void:
 		reserved_bullets.text = "∞/∞"
 	# Show weapon equipped.
 	weapon_equipped.texture = new_weapon.sprite_2d.texture
+
+
+## Update the blood label. 
+func _on_blood_count_changed(new_count: int) -> void:
+	blood_label.text = "×%d" % new_count
 
 
 ## Get a texture cropped from a given region of a given texture.

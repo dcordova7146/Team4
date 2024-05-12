@@ -36,6 +36,11 @@ var _equipped_weapon_index: int = 0
 ##
 ## Has an outline if close enough, and is taken upon the "use" action.
 var nearest_gun: Gun
+## Amount of blood.
+var blood_count: int = 0:
+	set(new_count):
+		blood_count = new_count
+		Events.blood_count_changed.emit(new_count)
 ## Whether these is a gun nearby, and thus able to be taken.
 var _is_near_gun: bool = false
 var _is_reloading_gun: bool:
@@ -355,14 +360,6 @@ func _on_reload_timer_timeout() -> void:
 	_update_reload_label()
 	# Hide progress bar.
 	reload_bar.visible = false
-
-
-## Consume collided lives.
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	var life: Life = area as Life
-	if life:
-		life.queue_free()
-		_gain_life()
 
 
 ## Take damage on enemy contact.

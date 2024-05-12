@@ -8,6 +8,8 @@ signal game_exited_to_menu
 const LIFE: PackedScene = preload("res://drop/life.tscn")
 const HEALTH_CHANGE: PackedScene = preload("res://ui/health_change.tscn")
 
+@export var drop_table: Array[ChanceRow] = []
+
 @onready var spawn: Node2D = $Spawn
 @onready var player: Node2D = $Player
 @onready var minimap: SubViewport = $MinimapViewport
@@ -81,12 +83,14 @@ func _on_pause_menu_game_exited_to_menu() -> void:
 	game_exited_to_menu.emit()
 	queue_free()
 
-## Spawn life pickup at position of where enemy died.
-func _on_enemy_died(pos: Vector2) -> void:
-	var life: Node2D = LIFE.instantiate()
-	life.position = pos
-	#add_child(life)
-	call_deferred("add_child", life)
+
+## Randomly create drops at given position.
+func _on_enemy_died(death_position: Vector2) -> void:
+	for chance_row: ChanceRow in drop_table:
+		if randf() < chance_row.chance:
+			var instance: Node2D = chance_row.scene.instantiate()
+			instance.position = death_position
+			call_deferred("add_child", instance)
 
 
 func _on_health_changed(pos: Vector2, amount: int) -> void:

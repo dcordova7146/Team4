@@ -1,15 +1,29 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcj36edtxg3ck"]
+[gd_scene load_steps=12 format=3 uid="uid://dcj36edtxg3ck"]
 
 [ext_resource type="Script" path="res://map/dungeon.gd" id="1_1hjgm"]
 [ext_resource type="PackedScene" uid="uid://do78uiwbgckay" path="res://ui/pause_menu.tscn" id="2_img3q"]
+[ext_resource type="PackedScene" uid="uid://b43y01jhs1kja" path="res://drop/life.tscn" id="2_qmowa"]
 [ext_resource type="Script" path="res://map/camera_2d.gd" id="3_0bf8r"]
+[ext_resource type="Script" path="res://map/chance_row.gd" id="3_3hsop"]
 [ext_resource type="PackedScene" uid="uid://db5fatnj0uwms" path="res://player/player.tscn" id="3_51vlb"]
+[ext_resource type="PackedScene" uid="uid://cj3hp6ftwl4em" path="res://drop/blood.tscn" id="4_l42c7"]
 [ext_resource type="PackedScene" uid="uid://byy8d84jgw0g" path="res://map/hub_world.tscn" id="5_dx0w7"]
 [ext_resource type="PackedScene" uid="uid://doe0sstc3n5sh" path="res://ui/hud.tscn" id="7_wap1c"]
+
+[sub_resource type="Resource" id="Resource_1hrf6"]
+script = ExtResource("3_3hsop")
+scene = ExtResource("2_qmowa")
+chance = 0.1
+
+[sub_resource type="Resource" id="Resource_xclow"]
+script = ExtResource("3_3hsop")
+scene = ExtResource("4_l42c7")
+chance = 0.5
 
 [node name="Dungeon" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_1hjgm")
+drop_table = Array[ExtResource("3_3hsop")]([SubResource("Resource_1hrf6"), SubResource("Resource_xclow")])
 
 [node name="MinimapViewport" type="SubViewport" parent="."]
 transparent_bg = true
