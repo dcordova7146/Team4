@@ -33,3 +33,13 @@ position = Vector2(204, -28)
 
 [node name="AbstractItem" parent="." instance=ExtResource("3_8bss6")]
 position = Vector2(-37, -32)
+
+[node name="AbstractItem2" parent="." instance=ExtResource("3_8bss6")]
+position = Vector2(33, -29)
+
+[node name="AbstractItem3" parent="." instance=ExtResource("3_8bss6")]
+position = Vector2(-69, 23)
+
+[editable path="AbstractItem"]
+[editable path="AbstractItem2"]
+[editable path="AbstractItem3"]

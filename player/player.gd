@@ -372,7 +372,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		_lose_life()
 		
 ##obtain an artifact either through buying or picking up to add to inventory of artifacts
-func obtain_artifact(name)->void:
-	print("Inventory: ")
-	print(inventory)
-	inventory.add_artifact(name)
+func obtain_artifact(artifact:Artifact)->void:
+	#print("Inventory: ")
+	#print(inventory)
+	inventory.add_artifact(artifact)

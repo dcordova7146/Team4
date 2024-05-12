@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dh35tb0xfup12"]
+[gd_scene load_steps=3 format=3 uid="uid://dh35tb0xfup12"]
 
 [ext_resource type="Script" path="res://ui/item_slot.gd" id="1_rwkl4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fu3vn"]
+resource_local_to_scene = true
 
 [node name="itemSlot" type="PanelContainer"]
 offset_right = 40.0
@@ -11,3 +14,9 @@ script = ExtResource("1_rwkl4")
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+label_settings = SubResource("LabelSettings_fu3vn")

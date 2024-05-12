@@ -4,7 +4,8 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkdtt"]
 
-[node name="AbstractItem" type="Sprite2D"]
+[node name="AbstractItem" type="Sprite2D" groups=["artifacts"]]
+scale = Vector2(1, 1.0267)
 script = ExtResource("1_cfgkr")
 
 [node name="Area2D" type="Area2D" parent="."]

@@ -15,7 +15,7 @@ func _ready()->void:
 		#print(file_name)
 		cache[file_name] = load(resources_folder + "/" + file_name)
 		file_name = folder.get_next()
-	print(cache)
+	#print(cache)
 	#print(cache["Artifical Blood.tres"])
 
 func get_resource(name:String)->Artifact:
