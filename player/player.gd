@@ -16,8 +16,7 @@ extends CharacterBody2D
 @onready var blink_timer: Timer = $BlinkTimer
 ##artifact inventory not the same place guns are kept
 @onready var inventory = get_node("../HUD/Inventory")
-## modifier for damage dealt, affected by artifacts
-var damage_mul := 1.0
+
 ## The part that should be flipped depending on the position of the cursor.
 ##
 ## Flipping the root node creates a feedback loop,

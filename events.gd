@@ -28,6 +28,7 @@ signal reload_speed_multiplier()
 signal hydration()
 signal range_multiplier()
 signal cool_reload()
+signal bullet_size_multiplier()
 
 
 func print(debug:String)->void:

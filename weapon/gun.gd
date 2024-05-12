@@ -219,3 +219,7 @@ func set_range_mul(amount: float):
 	
 func sunnies():
 	reload_duration = 0
+	
+func bullet_resize(amount: float):
+	var percent = (amount/100.0) + 1.0
+	bullet_scale *= percent
