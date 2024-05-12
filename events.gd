@@ -24,6 +24,12 @@ signal add_vitamin_stack()
 signal add_speeder()
 signal add_gfuel_stack
 
+signal stackable_artifact(cur_artifact: Artifact)
+signal single_artifact(cur_artifact: Artifact)
+
+signal speed_multiplier(multiplier: float)
+signal damage_multiplier(multiplier: float)
+
 
 func print(debug:String)->void:
 	print(debug)

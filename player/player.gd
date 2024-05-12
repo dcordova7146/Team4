@@ -56,6 +56,10 @@ func _ready() -> void:
 	Events.takeable_group_changed.connect(_on_takeable_group_changed)
 	# Set active weapon to first slot.
 	_equip_weapon(0)
+	# Connect stackable artifact signal
+	Events.damage_multiplier.connect(set_dmg_mul)
+	# Connect single use artifact signal
+	Events.speed_multiplier.connect(set_speed_mul)
 	
 
 
