@@ -27,11 +27,8 @@ polygon = PackedVector2Array(-45, -94, -46, -233, 49, -233, 50, -93, 112, -94, 1
 [node name="DungeonTeleporter" parent="." instance=ExtResource("2_tkiw1")]
 position = Vector2(0, -215)
 
-[node name="StoreTeleporter" parent="." instance=ExtResource("2_tkiw1")]
-position = Vector2(-197, -28)
-
 [node name="TrainingTeleporter" parent="." instance=ExtResource("2_tkiw1")]
-position = Vector2(204, -28)
+position = Vector2(218, -1)
 
 [node name="AbstractItem" parent="." instance=ExtResource("3_8bss6")]
 position = Vector2(-3, -49)
@@ -52,7 +49,7 @@ position = Vector2(-58, -50)
 position = Vector2(0, 0.973991)
 
 [node name="ShopMat" parent="." instance=ExtResource("4_73rca")]
-position = Vector2(156, 31)
+position = Vector2(-172, -17)
 
 [node name="StaticBody2D" parent="." instance=ExtResource("5_vm0xt")]
 position = Vector2(0, 56)

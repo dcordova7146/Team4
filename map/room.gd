@@ -165,11 +165,15 @@ func spawnBoss() ->void:
 	instance.set_deferred("global_position", get_middle_position())
 
 func spawnCamp()->void:
-	print("spawn camp")
-	var camp = campfire.instantiate()
-	call_deferred("add_child", camp)
-	camp.set_deferred("global_position", get_middle_position())
+	var campInstance = campfire.instantiate()
+	call_deferred("add_child", campInstance)
+	campInstance.set_deferred("global_position", get_middle_position())
 	
+func spawnShop()->void:
+	var shopInstance = shop.instantiate()
+	call_deferred("add_child", shopInstance)
+	shopInstance.set_deferred("global_position", get_middle_position())
+
 ## Add an enemy.
 func add_enemy(new_enemy: Skull) -> void:
 	new_enemy.defeated.connect(on_kill)
@@ -187,9 +191,6 @@ func get_random_position()-> Vector2:
 	var randy: float = randf_range(topleft.y,botleft.y)
 	return Vector2(randx,randy)
 	
-func instanceShop()->void:
-	pass
-
 func get_middle_position()->Vector2:
 	print("mid marker")
 	print(midMarker.global_position)
@@ -233,6 +234,7 @@ func setupRoom()->void:
 		roomType.BATTLE:
 			type_label.text = "⚔ Battle"
 		roomType.SHOP:
+			spawnShop()
 			type_label.text = "💰 Shop"
 			# insantiate a shop for the player to spend currency to upgrade
 		roomType.REST:
