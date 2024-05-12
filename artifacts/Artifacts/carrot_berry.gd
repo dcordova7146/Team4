@@ -3,7 +3,7 @@ extends AbstractItem
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	resource = ResourceDirectory.get_resource("Square Cherry")
+	resource = ResourceDirectory.get_resource("Carrot Berry")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,5 +17,5 @@ func _on_player_entered(body):
 		collision.disabled = true
 		body.obtain_artifact(resource)
 		call_deferred("reparent", body)
-		Events.bullet_size_multiplier.emit(10.0)
+		Events.range_multiplier.emit(10.0)
 	

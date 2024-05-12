@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://3blevrf8r3n7"]
+[gd_scene load_steps=3 format=3 uid="uid://c1hnholtx02ue"]
 
 [ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_ohsx2"]
 [ext_resource type="Script" path="res://artifacts/Artifacts/square_cherry.gd" id="2_v5qyj"]
