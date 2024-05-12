@@ -22,7 +22,7 @@ bg_color = Color(1, 1, 1, 1)
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 2
 collision_layer = 2
 collision_mask = 3

@@ -12,6 +12,7 @@ var enemies_inside: Array[Skull] = []
 ## Array of enemies and their corresponding weights.
 @export var enemies_possible: Array[ChanceRow]
 @onready var boss_skull = preload("res://enemy/skull_queen.tscn")
+@onready var campfire = preload("res://map/camp.tscn")
 @onready var midMarker = $"Center Spawner"
 
 #enum direction{ 
@@ -67,7 +68,7 @@ func _on_play_area_body_entered(_body: Node2D) -> void:
 		roomType.SHOP:
 			print("This is a shop room")	
 		roomType.REST:
-			choice()
+			
 			print("This is a rest room")
 		roomType.BOSS:
 			wakeEnemies()
@@ -171,6 +172,10 @@ func spawnBoss() ->void:
 	add_enemy(instance)
 	instance.set_deferred("global_position", get_middle_position())
 
+func spawnCamp()->void:
+	print("spawn camp")
+	var camp = campfire.instantiate()
+	camp.set_deferred("global_position", get_middle_position())
 ## Add an enemy.
 func add_enemy(new_enemy: Skull) -> void:
 	new_enemy.defeated.connect(on_kill)
@@ -191,14 +196,6 @@ func get_random_position()-> Vector2:
 func instanceShop()->void:
 	pass
 
-func choice()->void:
-	#turn on choice menu 
-	pass
-	
-func choiceOff()->void:
-	#turn off choice menu
-	pass
-	
 func get_middle_position()->Vector2:
 	print("mid marker")
 	print(midMarker.global_position)
@@ -252,6 +249,8 @@ func setupRoom()->void:
 			type_label.text = "💰 Shop"
 			# insantiate a shop for the player to spend currency to upgrade
 		roomType.REST:
+			print("camp created")
+			spawnCamp()
 			type_label.text = "🏕 Rest"
 			# should give the player a choice to upgrade or heal themselves
 		roomType.BOSS:
@@ -260,7 +259,7 @@ func setupRoom()->void:
 			# spawn a boss and a boss health bar
 		roomType.START:
 			# where the player begins
-			emit_signal("StartRoom", get_middle_position())
+			#emit_signal("StartRoom", get_middle_position())
 			type_label.text = "🏁 Start"
 		roomType.ROOM:
 			#a room of ROOM type shouldnt happen this is a check for if the generator didnt mess up
