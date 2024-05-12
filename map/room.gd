@@ -35,6 +35,8 @@ enum roomType {
 	ROOM = 0
 }
 @export var rType: roomType = roomType.ROOM
+## Whether enemies have been spawned in the room.
+var enemies_spawned: bool = false
 
 func _ready() -> void:
 	#Events.dungeon_complete.connect(on_Dungeon_Complete)
@@ -47,37 +49,34 @@ func _ready() -> void:
 #Emit room entered signal if body entered is the player.
 #function is used to talk to the camera to lock it to a room instead of free roam camera
 func on_Dungeon_Complete()->void:
-	#print("called?")
 	updateRoom()
 	#setupRoom()
 	
 
 func _on_play_area_body_entered(_body: Node2D) -> void:
-	#print("Room entered")
 	Events.room_entered.emit(self) 
 	#print(self.get_name())
 	match rType:
 		roomType.BATTLE:
-			print("This is a battle room")
-			wakeEnemies()
 			# Don't lock room if there's no enemies inside.
 			# (i.e. after the room was already cleared before.)
-			if not enemies_inside.is_empty():
+			if not enemies_spawned:
 				lockRoom()
+				populateEnemySpawner()
+				wakeEnemies()
+				enemies_spawned = true
 		roomType.SHOP:
-			print("This is a shop room")	
+			pass
 		roomType.REST:
 			choice()
-			print("This is a rest room")
 		roomType.BOSS:
-			wakeEnemies()
-			if not enemies_inside.is_empty():
+			if not enemies_spawned:
 				lockRoom()
-			print("This is a boss room")
+				spawnBoss()
+				wakeEnemies()
+				enemies_spawned = true
 		roomType.START:
-			#bad solution to player spawning outside of dungeon
-			#_body.global_position = get_middle_position()
-			print("This is the start room")
+			pass
 		roomType.ROOM:
 			pass
 		_:
@@ -91,19 +90,12 @@ func _on_play_area_body_exited(_body: Node2D) -> void:
 #function is used to update the connected rooms dictionary based on room generation
 #in order to make traversal more interesting not all adjacent rooms are connected 
 func connectRooms(room2: Room, direction: Vector2) -> void:
-	#print("Success")
 	connectedRooms[direction] = room2
 	room2.connectedRooms[-direction] = Room
 	connections += 1
 	room2.connections += 1
-	#print(connectedRooms)
 	updateRoom()
 
-#Test function to test above connectRooms function
-#func _on_north_area_entered(area):
-	#if area.is_in_group("RoomScanners") and connectedRooms[Vector2(1,0)] != null:
-		#print("room is connected")
-		
 #Just visualizes the room door openings with how they are connected, calling seperate functions that activate collisions and adds sprites representing doors
 func updateRoom()-> void:
 	if connectedRooms[Vector2(0,-1)] != null:
@@ -144,11 +136,9 @@ func openLeft()-> void:
 		($"LeftBarrier" as Barrier).removeBarrier()
 		
 func populateEnemySpawner() -> void:
-	#grab collision shape within the play area area2d to obtain the bounds of the play area
-	print("populating...")
-	var total_weight: float = 0.0
-	for chance_row: ChanceRow in enemies_possible:
-		total_weight += chance_row.chance
+	#var total_weight: float = 0.0
+	#for chance_row: ChanceRow in enemies_possible:
+		#total_weight += chance_row.chance
 	
 	#iterate for amount of enemies we have alloted in one room
 	for i: int in range(enemycount):
@@ -213,21 +203,16 @@ func get_middle_position()->Vector2:
 func lockRoom() -> void:
 	#add possible barriers corresponding to open doors
 	#reactivate collisions to lock a player and enemies in a room
-	#print("locking room")
 	if connectedRooms[Vector2(0,-1)] != null:
-		#print("top door is now locked")
 		($"TopBarrier" as Barrier).setBarrier()
 		($Walls/TopNoDoor as CollisionShape2D).set_deferred("disabled", false)
 	if connectedRooms[Vector2(0,1)] != null:
-		#print("bot door is now locked")
 		($"BotBarrier" as Barrier).setBarrier()
 		($Walls/BottomNoDoor as CollisionShape2D).set_deferred("disabled", false)
 	if connectedRooms[Vector2(1,0)] != null:
-		#print("right door is now locked")
 		($"RightBarrier" as Barrier).setBarrier()
 		($Walls/RightNoDoor as CollisionShape2D).set_deferred("disabled", false)
 	if connectedRooms[Vector2(-1,0)] != null:
-		#print("left door is now locked")
 		($"LeftBarrier" as Barrier).setBarrier()
 		($Walls/LeftNoDoor as CollisionShape2D).set_deferred("disabled", false)
 	else:
@@ -235,7 +220,6 @@ func lockRoom() -> void:
 
 func unlockRoom()->void:
 	#upon wave clear room should unlock	
-	#print("Unlocking room")	
 	updateRoom()
 	
 func wakeEnemies()->void:
@@ -246,7 +230,6 @@ func setupRoom()->void:
 	#this function shall spawn whatever a room requires of it
 	match rType:
 		roomType.BATTLE:
-			populateEnemySpawner()
 			type_label.text = "⚔ Battle"
 		roomType.SHOP:
 			type_label.text = "💰 Shop"
@@ -255,7 +238,6 @@ func setupRoom()->void:
 			type_label.text = "🏕 Rest"
 			# should give the player a choice to upgrade or heal themselves
 		roomType.BOSS:
-			spawnBoss()
 			type_label.text = "👿 Boss"
 			# spawn a boss and a boss health bar
 		roomType.START:
@@ -289,7 +271,3 @@ func on_kill(defeated_enemy: Skull) -> void:
 	
 	if enemies_inside.is_empty():
 		unlockRoom()
-	
-	
-		
-	

@@ -24,7 +24,7 @@ func _on_new_game_requested(dungeon_seed: int) -> void:
 	var game_instance: Dungeon = game_scene.instantiate()
 	if game_instance:
 		add_child(game_instance)
-		game_instance.rng_seed = dungeon_seed
+		game_instance.dungeon_seed = dungeon_seed
 		game_instance.game_restarted.connect(_on_game_restarted)
 		game_instance.game_exited_to_menu.connect(show_main_menu)
 

@@ -16,7 +16,6 @@ func _process(_delta: float) -> void:
 
 
 func display(amount: int) -> void:
-	print("hello")
 	var string: String = String.num_int64(amount)
 	# Set color based on whether health was gained or lost.
 	if amount > 0:

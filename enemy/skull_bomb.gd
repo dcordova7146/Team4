@@ -10,7 +10,6 @@ func _ready() -> void:
 	# Initialize health and speed
 	health = 50
 	speed = 20
-	print("BombSkull is ready!")
 
 func _physics_process(_delta: float) -> void:
 	# Move towards the player if not exploded
