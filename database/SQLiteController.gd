@@ -15,7 +15,7 @@ func _ready()-> void:
 	
 #if shop tables does not exist on start up create the tables and populate the tables with items in the game
 func createShopTables() -> void:
-	var tableTemplate: Dictionary = {
+	var _tableTemplate: Dictionary = {
 		"itemId" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true },
 		"itemName" : {"data_type" : "text"},
 		"itemDescription" : {"data_type" : "text"},
@@ -80,20 +80,20 @@ func insertData(name: String, description: String, cost:int, rarity: String, pat
 	
 ##create resources is a tool used to automate the process of creating custom resources and is only called once 
 func create_resources()->void:
-	var table = database.query("SELECT * FROM itemTable;")
+	database.query("SELECT * FROM itemTable;")
 	#var all_items = database.select_rows("itemTable", "", ["*"])
 	#print (all_items)	
 	for i in database.query_result:	
-		var resource = Artifact.new()
-		var icon_path = i["iconPath"]
+		var resource:Artifact = Artifact.new()
+		var icon_path:String = i["iconPath"]
 		resource.setIcon(icon_path)
-		var item_name = i["itemName"]
+		var item_name:String = i["itemName"]
 		resource.setName(item_name)
-		var item_rarity = i["itemRarity"]
+		var item_rarity:String = i["itemRarity"]
 		resource.setRarity(item_rarity)
-		var item_description = i["itemDescription"]
+		var item_description:String = i["itemDescription"]
 		resource.setDesc(item_description)
-		var resource_path = "res://artifacts/Resources/" + item_name + ".tres"
+		var resource_path:String = "res://artifacts/Resources/" + item_name + ".tres"
 		#print(resource_path)
 		ResourceSaver.save(resource, resource_path)
 		

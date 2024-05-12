@@ -11,7 +11,7 @@ var enemies_inside: Array[Skull] = []
 @export var warning: Resource
 ## Array of enemies and their corresponding weights.
 @export var enemies_possible: Array[ChanceRow]
- 
+@onready var boss_skull = preload("res://enemy/skull_queen.tscn")
 #enum direction{ 
 	#up = Vector2(0,-1), 
 	#down = Vector2(0,1),
@@ -62,6 +62,9 @@ func _on_play_area_body_entered(_body: Node2D) -> void:
 		roomType.REST:
 			print("This is a rest room")
 		roomType.BOSS:
+			wakeEnemies()
+			if not enemies_inside.is_empty():
+				lockRoom()
 			print("This is a boss room")
 		roomType.START:
 			print("This is the start room")
@@ -153,6 +156,10 @@ func populateEnemySpawner() -> void:
 		add_enemy(instance)
 		instance.set_deferred("global_position", get_random_position())
 
+func spawnBoss() ->void:
+	var instance: Skull = boss_skull.instantiate()
+	add_enemy(instance)
+	instance.set_deferred("global_position", get_middle_position())
 
 ## Add an enemy.
 func add_enemy(new_enemy: Skull) -> void:
@@ -171,6 +178,13 @@ func get_random_position()-> Vector2:
 	var randy: float = randf_range(topleft.y,botleft.y)
 	return Vector2(randx,randy)
 	
+func get_middle_position()->Vector2:
+	var topleft: Vector2 = ($"Play Area/topLeftBound" as Marker2D).global_position
+	var topright: Vector2 = ($"Play Area/topRightBound" as Marker2D).global_position
+	var botleft: Vector2 = ($"Play Area/botLeftBound" as Marker2D).global_position
+	var botright: Vector2 = ($"Play Area/botRightBound" as Marker2D).global_position
+	var center: Vector2 = (topleft + topright +botleft +botright)/4
+	return center
 	
 func lockRoom() -> void:
 	#add possible barriers corresponding to open doors
@@ -217,7 +231,7 @@ func setupRoom()->void:
 			type_label.text = "🏕 Rest"
 			# should give the player a choice to upgrade or heal themselves
 		roomType.BOSS:
-			# lockRoom()
+			spawnBoss()
 			type_label.text = "👿 Boss"
 			# spawn a boss and a boss health bar
 		roomType.START:
@@ -242,5 +256,16 @@ func on_kill(defeated_enemy: Skull) -> void:
 	else:
 		pass
 	
+	if rType == roomType.BOSS and enemies_inside.is_empty(): 
+		#spawn reward screen
+		#spawn teleporter to new dungeon
+		print("boss room clear")
+		unlockRoom()
+		return
+	
 	if enemies_inside.is_empty():
 		unlockRoom()
+	
+	
+		
+	
