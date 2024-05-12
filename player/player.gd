@@ -63,6 +63,8 @@ func _ready() -> void:
 	Events.gain_money.connect(gain_blood_count)
 	# Dangerous healing: full health, minus 1 heart
 	Events.dangerous_healing.connect(shower_in_a_can)
+	# Hero hydration healing: plus 1 health, plus 1 heart
+	Events.hydration.connect(hero_hydration)
 	
 	
 
@@ -396,4 +398,8 @@ func shower_in_a_can():
 	max_lives -= 1
 	lives = max_lives
 	Events.lives_changed.emit(lives, max_lives)
-	
+
+func hero_hydration():
+	max_lives += 1
+	lives += 1
+	Events.lives_changed.emit(lives, max_lives)

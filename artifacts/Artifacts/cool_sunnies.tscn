@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://buh1jitnl5f8"]
+
+[ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_0wods"]
+[ext_resource type="Script" path="res://artifacts/Artifacts/cool_sunnies.gd" id="2_1wobb"]
+
+[node name="Cool Sunnies" instance=ExtResource("1_0wods")]
+script = ExtResource("2_1wobb")
