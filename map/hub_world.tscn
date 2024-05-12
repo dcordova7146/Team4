@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://byy8d84jgw0g"]
+[gd_scene load_steps=6 format=3 uid="uid://byy8d84jgw0g"]
 
 [ext_resource type="Texture2D" uid="uid://bk0ctb1i6sy4k" path="res://map/hub_world.png" id="1_ao46v"]
 [ext_resource type="PackedScene" uid="uid://bd3r464d7oxbh" path="res://map/teleporter.tscn" id="2_tkiw1"]
 [ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="3_8bss6"]
 [ext_resource type="PackedScene" uid="uid://d0ukj27a57h7p" path="res://drop/shop_mat.tscn" id="4_73rca"]
 [ext_resource type="PackedScene" uid="uid://boqmmvcvq0qgy" path="res://map/camp.tscn" id="5_vm0xt"]
-[ext_resource type="PackedScene" path="res://artifacts/Artifacts/shower_in_a_can.tscn" id="6_q18u7"]
-[ext_resource type="PackedScene" uid="uid://casspm8bm8vtu" path="res://artifacts/Artifacts/vitamins.tscn" id="7_u213a"]
 
 [node name="HubWorld" type="Node2D"]
 
@@ -55,33 +53,6 @@ position = Vector2(-172, -17)
 
 [node name="StaticBody2D" parent="." instance=ExtResource("5_vm0xt")]
 position = Vector2(0, 56)
-
-[node name="ShowerInACan" parent="." instance=ExtResource("6_q18u7")]
-position = Vector2(128, -4)
-
-[node name="Vitamins" parent="." instance=ExtResource("7_u213a")]
-position = Vector2(92, -5)
-
-[node name="ShowerInACan2" parent="." instance=ExtResource("6_q18u7")]
-position = Vector2(60, -3)
-
-[node name="ShowerInACan3" parent="." instance=ExtResource("6_q18u7")]
-position = Vector2(167, 30)
-
-[node name="ShowerInACan4" parent="." instance=ExtResource("6_q18u7")]
-position = Vector2(165, -16)
-
-[node name="ShowerInACan5" parent="." instance=ExtResource("6_q18u7")]
-position = Vector2(-40, 3)
-
-[node name="ShowerInACan6" parent="." instance=ExtResource("6_q18u7")]
-position = Vector2(-91, 59)
-
-[node name="ShowerInACan7" parent="." instance=ExtResource("6_q18u7")]
-position = Vector2(22, 118)
-
-[node name="ShowerInACan8" parent="." instance=ExtResource("6_q18u7")]
-position = Vector2(86, 83)
 
 [editable path="AbstractItem"]
 [editable path="AbstractItem2"]
