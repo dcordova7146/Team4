@@ -56,10 +56,13 @@ func _ready() -> void:
 	Events.takeable_group_changed.connect(_on_takeable_group_changed)
 	# Set active weapon to first slot.
 	_equip_weapon(0)
-	# Connect stackable artifact signal
+	# Connect damage artifact signal
 	Events.damage_multiplier.connect(set_dmg_mul)
-	# Connect single use artifact signal
+	# Connect speed artifact signal
 	Events.speed_multiplier.connect(set_speed_mul)
+	# Connect money artifact signal
+	Events.gain_money.connect(gain_blood_count)
+	
 	
 
 
@@ -388,3 +391,6 @@ func set_dmg_mul(amount: float):
 func set_speed_mul(amount: float):
 	var percent = (amount/100.0) + 1.0
 	speed *= percent
+	
+func gain_blood_count(additional_blood):
+	blood_count += additional_blood
