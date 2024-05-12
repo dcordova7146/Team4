@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxwmf08ht5oy4"]
+
+[ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_fm7a0"]
+[ext_resource type="Script" path="res://artifacts/Artifacts/gamer_fuel.gd" id="2_ya5tl"]
+
+[node name="Gamer Fuel" instance=ExtResource("1_fm7a0")]
+script = ExtResource("2_ya5tl")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

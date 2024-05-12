@@ -17,18 +17,11 @@ signal blood_count_changed(new_count: int)
 signal startRoom(spawnMarker : Vector2)
 signal choiceBegun()
 
-#item stackable signals 
-signal add_vitamin_stack()
 
-#not stackable signals
-signal add_speeder()
-signal add_gfuel_stack
-
-signal stackable_artifact(cur_artifact: Artifact)
-signal single_artifact(cur_artifact: Artifact)
-
+# artifact effect signals
 signal speed_multiplier(multiplier: float)
 signal damage_multiplier(multiplier: float)
+signal gain_money(amount: float)
 
 
 func print(debug:String)->void:
