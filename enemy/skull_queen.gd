@@ -102,7 +102,6 @@ func _on_move_timer_timeout():
 	$SkullQueenBite1.visible = true
 	$CollisionPolygon2D.disabled = false
 	$HealthBar.visible = true
-	spawn_tombstone()
 
 func _on_wake_timer_timeout():
 	print("\nWake Timer Ends")
