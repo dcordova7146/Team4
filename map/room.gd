@@ -167,7 +167,9 @@ func spawnBoss() ->void:
 func spawnCamp()->void:
 	print("spawn camp")
 	var camp = campfire.instantiate()
+	call_deferred("add_child", camp)
 	camp.set_deferred("global_position", get_middle_position())
+	
 ## Add an enemy.
 func add_enemy(new_enemy: Skull) -> void:
 	new_enemy.defeated.connect(on_kill)

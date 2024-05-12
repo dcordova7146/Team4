@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://byy8d84jgw0g"]
+[gd_scene load_steps=6 format=3 uid="uid://byy8d84jgw0g"]
 
 [ext_resource type="Texture2D" uid="uid://bk0ctb1i6sy4k" path="res://map/hub_world.png" id="1_ao46v"]
 [ext_resource type="PackedScene" uid="uid://bd3r464d7oxbh" path="res://map/teleporter.tscn" id="2_tkiw1"]
 [ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="3_8bss6"]
 [ext_resource type="PackedScene" uid="uid://d0ukj27a57h7p" path="res://drop/shop_mat.tscn" id="4_73rca"]
+[ext_resource type="PackedScene" uid="uid://boqmmvcvq0qgy" path="res://map/camp.tscn" id="5_vm0xt"]
 
 [node name="HubWorld" type="Node2D"]
 
@@ -33,16 +34,28 @@ position = Vector2(-197, -28)
 position = Vector2(204, -28)
 
 [node name="AbstractItem" parent="." instance=ExtResource("3_8bss6")]
-position = Vector2(-37, -32)
+position = Vector2(-3, -49)
+
+[node name="CollisionShape2D" parent="AbstractItem/Area2D" index="0"]
+position = Vector2(0, -0.973991)
 
 [node name="AbstractItem2" parent="." instance=ExtResource("3_8bss6")]
-position = Vector2(33, -29)
+position = Vector2(57, -49)
+
+[node name="CollisionShape2D" parent="AbstractItem2/Area2D" index="0"]
+position = Vector2(0, -0.973991)
 
 [node name="AbstractItem3" parent="." instance=ExtResource("3_8bss6")]
-position = Vector2(-69, 23)
+position = Vector2(-58, -50)
+
+[node name="CollisionShape2D" parent="AbstractItem3/Area2D" index="0"]
+position = Vector2(0, 0.973991)
 
 [node name="ShopMat" parent="." instance=ExtResource("4_73rca")]
 position = Vector2(156, 31)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("5_vm0xt")]
+position = Vector2(0, 56)
 
 [editable path="AbstractItem"]
 [editable path="AbstractItem2"]

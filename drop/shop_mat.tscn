@@ -1,8 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0ukj27a57h7p"]
+[gd_scene load_steps=23 format=3 uid="uid://d0ukj27a57h7p"]
 
 [ext_resource type="Script" path="res://drop/shop_mat.gd" id="1_ojaut"]
 [ext_resource type="Texture2D" uid="uid://dw5e8gu03p77" path="res://tempAssets/shop_mat.png" id="2_clg2k"]
 [ext_resource type="PackedScene" uid="uid://dh35tb0xfup12" path="res://ui/item_slot.tscn" id="2_x6ojr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8xi36"]
+resource_local_to_scene = true
 
 [sub_resource type="Gradient" id="Gradient_r6rk8"]
 offsets = PackedFloat32Array(0.0932203, 0.228814, 1)
@@ -99,6 +102,10 @@ offset_top = -28.0
 offset_right = -23.0
 offset_bottom = 12.0
 
+[node name="Label" parent="itemSlot" index="1"]
+visible = false
+label_settings = SubResource("LabelSettings_8xi36")
+
 [node name="common_item1" type="Marker2D" parent="itemSlot"]
 position = Vector2(23, 28)
 
@@ -158,3 +165,5 @@ process_material = SubResource("ParticleProcessMaterial_5fgx0")
 visible = false
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_gtqib")
+
+[editable path="itemSlot"]

@@ -5,8 +5,8 @@ extends StaticBody2D
 @export var used:bool = false
 func _ready():
 	used = false
-	print("camp")
-	print(used)
+	#print("camp")
+	#print(used)
 	$Sprite2D/AnimationPlayer.play("fire")
 
 #each camp is one use
@@ -16,7 +16,7 @@ func _on_area_2d_body_entered(body):
 		campfireDetection.disabled = true
 		$Area2D.monitoring = false
 		$Area2D.monitorable = false
-		Events.choiceBegun.emit()
+		Events.choiceBegun.emit(body)
 		used = true
 	
 	
