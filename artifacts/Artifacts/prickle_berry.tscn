@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjmifb8uv8sx4"]
+
+[ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_phreh"]
+[ext_resource type="Script" path="res://artifacts/Artifacts/prickle_berry.gd" id="2_wqc4e"]
+
+[node name="Prickle Berry" instance=ExtResource("1_phreh")]
+script = ExtResource("2_wqc4e")

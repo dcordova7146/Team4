@@ -23,6 +23,11 @@ signal speed_multiplier(multiplier: float)
 signal damage_multiplier(multiplier: float)
 signal gain_money(amount: float)
 signal dangerous_healing()
+signal pierce_modifier()
+signal reload_speed_multiplier()
+signal hydration()
+signal range_multiplier()
+signal cool_reload()
 
 
 func print(debug:String)->void:
