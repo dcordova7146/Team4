@@ -45,8 +45,9 @@ func explode() -> void:
 
 func die() -> void:
 	# Handle the death of BombSkull
-	explosion_sprite.visible = true  # Make the explosion sprite visible
-	fuse_timer.start()  # Start the fuse timer
+	explosion_sprite.visible = true
+	fuse_timer.start()
+	fuse_animation.play("charge explosion")
 	print("BombSkull has died!")
 	# Call the parent die function if additional functionality is required.
 
