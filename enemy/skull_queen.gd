@@ -22,7 +22,7 @@ func _ready() -> void:
 	$CollisionPolygon2D.disabled = true
 
 func _physics_process(_delta: float) -> void:
-	if !wake_timer_called:
+	if player and awake and !wake_timer_called:
 		print("\nWake Timer Started!")
 		$WakeTimer.start()
 		wake_timer_called = true 
