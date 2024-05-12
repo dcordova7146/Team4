@@ -78,6 +78,14 @@ func _ready() -> void:
 	
 	# Connect damage artifact signal
 	Events.damage_multiplier.connect(set_dmg_mul)
+	# Connect pierce mod artifact signal
+	Events.pierce_modifier.connect(modify_pierce)
+	# Connect reload speed mod artifact signal
+	Events.reload_speed_multiplier.connect(set_reload_mul)
+	# Connect range mod artifact signal
+	Events.range_multiplier.connect(set_range_mul)
+	# Connect cool sunnies mod artifact signal
+	Events.cool_reload.connect(sunnies)
 
 
 ## Aim the pivot towards the given target.
@@ -193,7 +201,21 @@ func set_dmg_mul(amount: float):
 	print(damage)
 
 func set_reload_mul(amount: float):
+	if reload_duration <= 0:
+		reload_duration = 0
+		return
 	print(reload_duration)
 	var percent = 1.0 - (amount/100.0)
 	reload_duration *= percent
 	print(reload_duration)
+	
+	
+func modify_pierce():
+	pierce+=1
+
+func set_range_mul(amount: float):
+	var percent = (amount/100.0) + 1.0
+	max_range *= percent
+	
+func sunnies():
+	reload_duration = 0

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://phpr8yqcbvao"]
+
+[ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_jv0if"]
+[ext_resource type="Script" path="res://artifacts/Artifacts/bad_4_us.gd" id="2_x4p6d"]
+
+[node name="Bad4Us" instance=ExtResource("1_jv0if")]
+script = ExtResource("2_x4p6d")
