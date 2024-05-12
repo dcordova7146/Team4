@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://doe0sstc3n5sh"]
+[gd_scene load_steps=15 format=3 uid="uid://doe0sstc3n5sh"]
 
 [ext_resource type="Script" path="res://ui/meter.gd" id="1_3gfvi"]
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_w84rr"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://hxur0kber07h" path="res://ui/bullets.png" id="5_ucdqg"]
 [ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://weapon/pistol.png" id="8_ml7ux"]
 [ext_resource type="Script" path="res://ui/Inventory.gd" id="9_hf40v"]
+[ext_resource type="Script" path="res://ui/Choice Menu.gd" id="10_rqxbb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ejrmc"]
 outline_size = 4
@@ -129,3 +130,29 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 10
 script = ExtResource("9_hf40v")
+
+[node name="Choice Menu" type="HBoxContainer" parent="."]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_rqxbb")
+
+[node name="Left" type="Button" parent="Choice Menu"]
+layout_mode = 2
+
+[node name="Right" type="Button" parent="Choice Menu"]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="Choice Menu/Left" to="Choice Menu" method="_on_leftchoice_mouse_entered"]
+[connection signal="mouse_exited" from="Choice Menu/Left" to="Choice Menu" method="_on_leftchoice_mouse_exited"]
+[connection signal="mouse_entered" from="Choice Menu/Right" to="Choice Menu" method="_on_rightchoice_mouse_entered"]
+[connection signal="mouse_exited" from="Choice Menu/Right" to="Choice Menu" method="_on_rightchoice_mouse_exited"]

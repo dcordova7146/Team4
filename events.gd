@@ -15,3 +15,7 @@ signal dungeon_complete
 signal takeable_group_changed
 signal teleporter_entered(teleporter: Node2D)
 signal blood_count_changed(new_count: int)
+signal startRoom(spawnMarker : Vector2)
+
+func print(debug:String)->void:
+	print(debug)
