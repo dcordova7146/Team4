@@ -10,6 +10,7 @@ shader_parameter/enabled = true
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
 [node name="SkullSmall" instance=ExtResource("1_pfqps")]
+scale = Vector2(0.8, 0.8)
 health = 25.0
 
 [node name="Sprite2D" parent="." index="1"]

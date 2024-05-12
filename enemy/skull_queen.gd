@@ -1,14 +1,15 @@
 extends Skull
 
-const MAX_HEALTH: int = 500  # Maximum health points
+const MAX_HEALTH: int = 600  # Maximum health points
 const DESTINATION_THRESHOLD = 5 # Approximate area of destination
 
 var phase2: bool = false # Flag for Queen 2nd Phase
+var phase3: bool = false # Flag for Queen 3rd Phase
 var begin_movement: bool = false # Flag for Queen wake-up, lets player move before saving location and starting movement.
 var wake_timer_called: bool = false # Flag for timer being called
 var reached_destination_x: bool = false  # Flag to indicate if Queen reached destination Xcord.
 var reached_destination_y: bool = false  # Flag to indicate if Queen reached destination Ycord.
-var reached_final_destination: bool = false # Flad to indicate if Queen reached final destination.
+var reached_final_destination: bool = false # Flag to indicate if Queen reached final destination.
 var target_location: Vector2 = Vector2() # Record player location that Queen will move to.
 
 @onready var move_timer: Timer = $MoveTimer
@@ -27,8 +28,8 @@ func _physics_process(_delta: float) -> void:
 		print("\nWake Timer Started!")
 		$WakeTimer.start()
 		wake_timer_called = true 
-	
 	if player and awake and begin_movement: ## RE-ADD AWAKE BOOl
+		change_phases()
 		if !reached_destination_x:
 			# Move towards the target X coordinate
 			if target_location.x < global_position.x:
@@ -51,7 +52,6 @@ func _physics_process(_delta: float) -> void:
 				print("Queen reached target Y coordinate")
 		elif reached_destination_x and reached_destination_y and !reached_final_destination:
 			print("Queen has arrived at the target location")
-			change_phases()
 			reached_final_destination = true
 			print("Movement Cycle Ends, Move Timer Begins")
 			$MoveTimer.start()
@@ -62,36 +62,48 @@ func _physics_process(_delta: float) -> void:
 		pass
 
 func change_phases():
-	if health < MAX_HEALTH / 2 and !phase2: 
+	if health < MAX_HEALTH * 2/3 and !phase2: 
 		phase2 = true
-		$SkullQueen.visible = false
-		$SkullQueenDamaged.visible = true
-		speed = speed * 2
+		$SkullQueenP1.visible = false
+		$SkullQueenP2.visible = true
+		speed = speed * 1.5
+	if health < MAX_HEALTH * 1/3 and phase2 and !phase3:
+		phase3 = true
+		$SkullQueenP2.visible = false
+		$SkullQueenP3.visible = true
+		speed = speed * 1.5
 
 func change_sprites():
-	if health > MAX_HEALTH / 2:
-		if $SkullQueen.visible:
-			$SkullQueenSleep.visible = true
-			$SkullQueen.visible = false
-		elif $SkullQueenSleep.visible:
-			$SkullQueen.visible = true
-			$SkullQueenSleep.visible = false
-	else:
-		if $SkullQueenDamaged.visible:
-			$SkullQueenDamagedSleep.visible = true
-			$SkullQueenDamaged.visible = false
-		elif $SkullQueenDamagedSleep.visible:
-			$SkullQueenDamaged.visible = true
-			$SkullQueenDamagedSleep.visible = false
+	if health > MAX_HEALTH * 2/3: # Phase 1 Sprite Changes
+		if $SkullQueenP1.visible:
+			$SkullQueenP1Sleep.visible = true
+			$SkullQueenP1.visible = false
+		elif $SkullQueenP1Sleep.visible:
+			$SkullQueenP1.visible = true
+			$SkullQueenP1Sleep.visible = false
+	elif health < MAX_HEALTH * 2/3 and health > MAX_HEALTH * 1/3: # Phase 2 Sprite Changes
+		if $SkullQueenP2.visible:
+			$SkullQueenP2Sleep.visible = true
+			$SkullQueenP2.visible = false
+		elif $SkullQueenP2Sleep.visible:
+			$SkullQueenP2.visible = true
+			$SkullQueenP2Sleep.visible = false
+	elif health < MAX_HEALTH * 1/3: # Phase 3 Sprite Changes
+		if $SkullQueenP3.visible:
+			$SkullQueenP3Sleep.visible = true
+			$SkullQueenP3.visible = false
+		elif $SkullQueenP3Sleep.visible:
+			$SkullQueenP3.visible = true
+			$SkullQueenP3Sleep.visible = false
 
 func update_health_bar() -> void:
 	if health_bar:
 		health_bar.value = health  # Update health bar value
 
 func die() -> void: # Emit 3 Hearts, b/c Queen is a Boss
-	var offset: int = 10
+	var offset: int = 12
 	# Emit events with randomly adjusted positions
-	for i in range(3):
+	for i in range(12):
 		Events.enemy_died.emit(global_position + Vector2(randf_range(-offset, offset), randf_range(-offset, offset)))
 	Events.enemy_defeated.emit(self)
 	queue_free()

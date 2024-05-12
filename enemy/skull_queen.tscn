@@ -1,12 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://cipn368kpkvlv"]
+[gd_scene load_steps=16 format=3 uid="uid://cipn368kpkvlv"]
 
 [ext_resource type="Script" path="res://enemy/skull_queen.gd" id="1_8em72"]
 [ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_lybg1"]
 [ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_nvfbk"]
-[ext_resource type="Texture2D" uid="uid://dvtifme2pv1q8" path="res://enemy/skull_queen.png" id="4_1uc7w"]
-[ext_resource type="Texture2D" uid="uid://5p8oyqkmdrf3" path="res://enemy/skull_queen_sleep.png" id="4_7ulc1"]
-[ext_resource type="Texture2D" uid="uid://c2r2w6kffwcfk" path="res://enemy/skull_queen_damaged_sleep.png" id="6_icb51"]
-[ext_resource type="Texture2D" uid="uid://wwt6t5qfi755" path="res://enemy/skull_queen_damaged.png" id="7_ats4j"]
+[ext_resource type="Texture2D" uid="uid://dfq3w6tromjb0" path="res://enemy/skull_queen_p3.png" id="4_4u7w6"]
+[ext_resource type="Texture2D" uid="uid://csbjcgfxy6gsk" path="res://enemy/skull_queen_p3_sleep.png" id="5_arvex"]
+[ext_resource type="Texture2D" uid="uid://cqb1ebps7j6g4" path="res://enemy/skull_queen_p2.png" id="6_i8cto"]
+[ext_resource type="Texture2D" uid="uid://bm248dp17rsme" path="res://enemy/skull_queen_p2_sleep.png" id="7_v1cbo"]
+[ext_resource type="Texture2D" uid="uid://csh55i18fres8" path="res://enemy/skull_queen_p1.png" id="8_qv2jk"]
+[ext_resource type="Texture2D" uid="uid://bfga4evn3c8fx" path="res://enemy/skull_queen_p1_sleep.png" id="9_4c6gh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_56ksm"]
 resource_local_to_scene = true
@@ -25,7 +27,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SkullQueenSleep:material:shader_parameter/enabled")
+tracks/0/path = NodePath("SkullQueenP3Sleep:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -41,7 +43,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SkullQueenSleep:material:shader_parameter/enabled")
+tracks/0/path = NodePath("SkullQueenP3Sleep:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -58,39 +60,53 @@ _data = {
 }
 
 [node name="SkullQueen" type="CharacterBody2D"]
-scale = Vector2(2, 2)
+scale = Vector2(2.5, 2.5)
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_8em72")
 
 [node name="Dot" parent="." instance=ExtResource("2_lybg1")]
 
-[node name="SkullQueen" type="Sprite2D" parent="."]
+[node name="SkullQueenP3" type="Sprite2D" parent="."]
 visible = false
 visibility_layer = 2
 material = SubResource("ShaderMaterial_56ksm")
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("4_1uc7w")
+texture = ExtResource("4_4u7w6")
 
-[node name="SkullQueenSleep" type="Sprite2D" parent="."]
-visibility_layer = 2
-material = SubResource("ShaderMaterial_56ksm")
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("4_7ulc1")
-
-[node name="SkullQueenDamaged" type="Sprite2D" parent="."]
+[node name="SkullQueenP3Sleep" type="Sprite2D" parent="."]
 visible = false
 visibility_layer = 2
 material = SubResource("ShaderMaterial_56ksm")
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("7_ats4j")
+texture = ExtResource("5_arvex")
 
-[node name="SkullQueenDamagedSleep" type="Sprite2D" parent="."]
+[node name="SkullQueenP2" type="Sprite2D" parent="."]
 visible = false
 visibility_layer = 2
 material = SubResource("ShaderMaterial_56ksm")
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("6_icb51")
+texture = ExtResource("6_i8cto")
+
+[node name="SkullQueenP2Sleep" type="Sprite2D" parent="."]
+visible = false
+visibility_layer = 2
+material = SubResource("ShaderMaterial_56ksm")
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("7_v1cbo")
+
+[node name="SkullQueenP1" type="Sprite2D" parent="."]
+visible = false
+visibility_layer = 2
+material = SubResource("ShaderMaterial_56ksm")
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("8_qv2jk")
+
+[node name="SkullQueenP1Sleep" type="Sprite2D" parent="."]
+visibility_layer = 2
+material = SubResource("ShaderMaterial_56ksm")
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("9_4c6gh")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 visible = false
@@ -100,7 +116,7 @@ offset_right = 4.0
 offset_bottom = -13.0
 theme_override_styles/background = SubResource("StyleBoxFlat_82ml1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_akpgk")
-max_value = 500.0
+max_value = 600.0
 show_percentage = false
 
 [node name="OnHitAnimation" type="AnimationPlayer" parent="."]
