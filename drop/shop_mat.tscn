@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://d0ukj27a57h7p"]
+[gd_scene load_steps=27 format=3 uid="uid://d0ukj27a57h7p"]
 
 [ext_resource type="Script" path="res://drop/shop_mat.gd" id="1_ojaut"]
 [ext_resource type="Texture2D" uid="uid://dw5e8gu03p77" path="res://tempAssets/shop_mat.png" id="2_clg2k"]
 [ext_resource type="PackedScene" uid="uid://dh35tb0xfup12" path="res://ui/item_slot.tscn" id="2_x6ojr"]
+[ext_resource type="Script" path="res://ui/shop_slot.gd" id="4_axbi2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8xi36"]
 resource_local_to_scene = true
@@ -34,6 +35,9 @@ scale_curve = SubResource("CurveTexture_j2be4")
 color_ramp = SubResource("GradientTexture1D_mqsfd")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vlbfk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7t8d7"]
+size = Vector2(29.4923, 44.6667)
 
 [sub_resource type="LabelSettings" id="LabelSettings_jul4j"]
 resource_local_to_scene = true
@@ -107,6 +111,7 @@ offset_left = -63.0
 offset_top = -28.0
 offset_right = -23.0
 offset_bottom = 12.0
+script = ExtResource("4_axbi2")
 
 [node name="Label" parent="itemSlot" index="1"]
 visible = false
@@ -127,6 +132,13 @@ process_material = SubResource("ParticleProcessMaterial_35stn")
 visible = false
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_vlbfk")
+
+[node name="itemHoverRange" type="Area2D" parent="itemSlot"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="itemSlot/itemHoverRange"]
+position = Vector2(21, 24.4519)
+scale = Vector2(1.35629, 1.00961)
+shape = SubResource("RectangleShape2D_7t8d7")
 
 [node name="itemSlot2" parent="." groups=["slot"] instance=ExtResource("2_x6ojr")]
 offset_left = -18.0
@@ -179,6 +191,26 @@ process_material = SubResource("ParticleProcessMaterial_5fgx0")
 visible = false
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_gtqib")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -98.0
+offset_right = -72.0
+offset_bottom = 21.0
+text = "BUY"
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -95.0
+offset_top = -29.0
+offset_right = -74.0
+offset_bottom = -4.0
+
+[node name="price label" type="Label" parent="Panel"]
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 17.0
+scale = Vector2(1.94609, 1.76675)
+text = "5"
 
 [editable path="itemSlot"]
 [editable path="itemSlot2"]

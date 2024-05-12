@@ -10,7 +10,6 @@ func _ready():
 		if i.is_in_group("slot"):
 			shopSlots.append(i)
 	populateShopMat()
-	#print(shopSlots)
 	
 func populateShopMat():
 	for i in shopSlots:
