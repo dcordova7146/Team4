@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bxvfe2h3ur6ol"]
+[gd_scene load_steps=45 format=3 uid="uid://bxvfe2h3ur6ol"]
 
 [ext_resource type="Script" path="res://map/room.gd" id="1_k281e"]
 [ext_resource type="PackedScene" uid="uid://dnvsjj2bbghyp" path="res://enemy/skull_small.tscn" id="2_8cv4c"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://map/room_map_sprite.gd" id="2_gosqv"]
 [ext_resource type="Script" path="res://map/chance_row.gd" id="2_jqava"]
 [ext_resource type="Texture2D" uid="uid://cyhjqf2e4ast" path="res://map/room_default.png" id="3_4acqo"]
-[ext_resource type="PackedScene" uid="uid://w08be4o1ar2p" path="res://map/door.tscn" id="4_4kphe"]
 [ext_resource type="PackedScene" uid="uid://c4neg4b8vv5dn" path="res://enemy/skull_medium.tscn" id="4_esebd"]
 [ext_resource type="Texture2D" uid="uid://dkf6rnbpwdnay" path="res://map/door_bottom.png" id="4_rac6h"]
 [ext_resource type="PackedScene" uid="uid://cvv51jcjucc2m" path="res://enemy/skull_large.tscn" id="5_4nlo8"]
@@ -75,18 +74,6 @@ size = Vector2(20, 137)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nub4"]
 size = Vector2(16, 137)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlp1x"]
-size = Vector2(35, 1.66667)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_84oan"]
-size = Vector2(1.66667, 30.8333)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0qnt"]
-size = Vector2(39.1667, 1.66667)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6tno0"]
-size = Vector2(1.00003, 32.5)
 
 [sub_resource type="Animation" id="Animation_8qmg8"]
 length = 0.001
@@ -448,30 +435,12 @@ position = Vector2(154, 132)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_rac6h")
 
-[node name="Door" parent="BotDoor" instance=ExtResource("4_4kphe")]
-
-[node name="Marker2D" parent="BotDoor/Door" index="0"]
-position = Vector2(0, 30)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BotDoor/Door"]
-position = Vector2(-0.833328, -0.416664)
-shape = SubResource("RectangleShape2D_tlp1x")
-
 [node name="LeftDoor" type="Sprite2D" parent="."]
 visible = false
 visibility_layer = 2
 position = Vector2(10, 65)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("6_llr0f")
-
-[node name="Door" parent="LeftDoor" instance=ExtResource("4_4kphe")]
-
-[node name="Marker2D" parent="LeftDoor/Door" index="0"]
-position = Vector2(-30, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftDoor/Door"]
-position = Vector2(-1, 2.08334)
-shape = SubResource("RectangleShape2D_84oan")
 
 [node name="TopDoor" type="Sprite2D" parent="."]
 visible = false
@@ -480,30 +449,12 @@ position = Vector2(156, 6)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("7_5qi8u")
 
-[node name="Door" parent="TopDoor" instance=ExtResource("4_4kphe")]
-
-[node name="Marker2D" parent="TopDoor/Door" index="0"]
-position = Vector2(0, -30)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopDoor/Door"]
-position = Vector2(-0.416672, -0.250001)
-shape = SubResource("RectangleShape2D_v0qnt")
-
 [node name="RightDoor" type="Sprite2D" parent="."]
 visible = false
 visibility_layer = 2
 position = Vector2(302, 67)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("8_jkt5k")
-
-[node name="Door" parent="RightDoor" instance=ExtResource("4_4kphe")]
-
-[node name="Marker2D" parent="RightDoor/Door" index="0"]
-position = Vector2(30, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightDoor/Door"]
-position = Vector2(0.499969, -0.416668)
-shape = SubResource("RectangleShape2D_6tno0")
 
 [node name="TopBarrier" type="Sprite2D" parent="."]
 visible = false
@@ -571,8 +522,3 @@ position = Vector2(155, 69)
 [connection signal="body_entered" from="Play Area" to="." method="_on_play_area_body_entered"]
 [connection signal="body_exited" from="Play Area" to="." method="_on_play_area_body_exited"]
 [connection signal="area_entered" from="North" to="." method="_on_north_area_entered"]
-
-[editable path="BotDoor/Door"]
-[editable path="LeftDoor/Door"]
-[editable path="TopDoor/Door"]
-[editable path="RightDoor/Door"]
