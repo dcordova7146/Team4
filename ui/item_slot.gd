@@ -4,6 +4,7 @@ extends PanelContainer
 @onready var count = $Label
 @onready var stack = 0
 
+#set the resource inside the artifact to data
 var resource: Artifact = null:
 	set(data):
 		resource = data
