@@ -126,12 +126,12 @@ libraries = {
 
 [node name="MoveTimer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 3.0
+wait_time = 10.0
 one_shot = true
 
 [node name="WakeTimer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

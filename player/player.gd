@@ -56,12 +56,13 @@ func _ready() -> void:
 	Events.takeable_group_changed.connect(_on_takeable_group_changed)
 	# Set active weapon to first slot.
 	_equip_weapon(0)
-	# Connect damage artifact signal
-	Events.damage_multiplier.connect(set_dmg_mul)
+
 	# Connect speed artifact signal
 	Events.speed_multiplier.connect(set_speed_mul)
 	# Connect money artifact signal
 	Events.gain_money.connect(gain_blood_count)
+	# Dangerous healing: full health, minus 1 heart
+	Events.dangerous_healing.connect(shower_in_a_can)
 	
 	
 
@@ -384,13 +385,15 @@ func obtain_artifact(artifact:Artifact)->void:
 	#print(inventory)
 	inventory.add_artifact(artifact)
 	
-func set_dmg_mul(amount: float):
-	var percent = (amount/100.0) + 1.0
-	damage_mul *= percent
-	
 func set_speed_mul(amount: float):
 	var percent = (amount/100.0) + 1.0
 	speed *= percent
 	
 func gain_blood_count(additional_blood):
 	blood_count += additional_blood
+
+func shower_in_a_can():
+	max_lives -= 1
+	lives = max_lives
+	Events.lives_changed.emit(lives, max_lives)
+	

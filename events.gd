@@ -22,6 +22,7 @@ signal choiceBegun(body: Node2D)
 signal speed_multiplier(multiplier: float)
 signal damage_multiplier(multiplier: float)
 signal gain_money(amount: float)
+signal dangerous_healing()
 
 
 func print(debug:String)->void:

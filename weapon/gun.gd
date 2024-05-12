@@ -75,6 +75,9 @@ func _ready() -> void:
 	_reset_bullet_count()
 	shooting_timer.wait_time = auto_fire_duration
 	cooldown_timer.wait_time = cooldown_duration
+	
+	# Connect damage artifact signal
+	Events.damage_multiplier.connect(set_dmg_mul)
 
 
 ## Aim the pivot towards the given target.
@@ -182,3 +185,15 @@ func _on_body_exited(_body: Node2D) -> void:
 	remove_from_group("takeable")
 	Events.takeable_group_changed.emit()
 	hide_outline()
+	
+func set_dmg_mul(amount: float):
+	print(damage)
+	var percent = (amount/100.0) + 1.0
+	damage *= percent
+	print(damage)
+
+func set_reload_mul(amount: float):
+	print(reload_duration)
+	var percent = 1.0 - (amount/100.0)
+	reload_duration *= percent
+	print(reload_duration)
