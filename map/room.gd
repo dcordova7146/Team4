@@ -13,6 +13,7 @@ var enemies_inside: Array[Skull] = []
 @export var enemies_possible: Array[ChanceRow]
 @onready var boss_skull = preload("res://enemy/skull_queen.tscn")
 @onready var campfire = preload("res://map/camp.tscn")
+@onready var shop = preload("res://drop/shop_mat.tscn")
 @onready var midMarker = $"Center Spawner"
 
 #enum direction{ 
