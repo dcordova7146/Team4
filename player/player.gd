@@ -16,6 +16,8 @@ extends CharacterBody2D
 @onready var blink_timer: Timer = $BlinkTimer
 ##artifact inventory not the same place guns are kept
 @onready var inventory = get_node("../HUD/Inventory")
+## modifier for damage dealt, affected by artifacts
+var damage_mul := 1.0
 ## The part that should be flipped depending on the position of the cursor.
 ##
 ## Flipping the root node creates a feedback loop,
@@ -54,6 +56,7 @@ func _ready() -> void:
 	Events.takeable_group_changed.connect(_on_takeable_group_changed)
 	# Set active weapon to first slot.
 	_equip_weapon(0)
+	
 
 
 func _physics_process(_delta: float) -> void:
@@ -373,3 +376,11 @@ func obtain_artifact(artifact:Artifact)->void:
 	#print("Inventory: ")
 	#print(inventory)
 	inventory.add_artifact(artifact)
+	
+func set_dmg_mul(amount: float):
+	var percent = (amount/100.0) + 1.0
+	damage_mul *= percent
+	
+func set_speed_mul(amount: float):
+	var percent = (amount/100.0) + 1.0
+	speed *= percent
