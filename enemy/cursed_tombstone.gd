@@ -14,24 +14,23 @@ func _physics_process(_delta: float) -> void:
 
 # Function to spawn a single random skull
 func spawn_random_skull() -> void:
+	# Deciding and Loading Random Skull
 	var skull_types: Array[String] = ["skull_small", "skull_medium", "skull_large", "skull_bomb", "skull_frost"]
 	var random_skull_type: String = skull_types[randi() % skull_types.size()]
 	var random_skull_path: String = "res://enemy/" + random_skull_type + ".tscn"
-	
-	# Load the skull scene
-	var resource: PackedScene = load(random_skull_path)
-	var skull_instance: Node2D = resource.instantiate()
-	# Add the skull to the scene
-	get_parent().add_child(skull_instance)
-	
-	# Calculate random position near tombstone
-	var spawn_distance: int = 30  # Adjust this value as needed
-	var random_offset: Vector2 = Vector2(
-			randf_range(-spawn_distance, spawn_distance),
-			randf_range(-spawn_distance, spawn_distance)
-	)
-	# Set the position relative to the tombstone's position
-	skull_instance.position = global_position + random_offset
+	var random_skull_resource: PackedScene = load(random_skull_path)
+	# Spawning the Skull
+	var offset: int = 25
+	var room: Room = get_parent()
+	var enemy_instance: Skull = random_skull_resource.instantiate()
+	if enemy_instance and room:
+		var random_offset = Vector2(randf_range(-offset, offset), randf_range(-offset, offset))
+		var spawn_position: Vector2 = position + random_offset
+		enemy_instance.position = spawn_position
+		enemy_instance.awake = true
+		room.add_enemy(enemy_instance)
+	else:
+		print("Failed to instantiate enemy from path: ", random_skull_path)
 
 func _on_spawn_timer_timeout() -> void:
 	print("Timer Ended, Spawned Skull")
@@ -43,4 +42,4 @@ func die() -> void:
 	for i: int in 3: # Spawn 3 Skulls Upon Death
 		spawn_random_skull()
 	# Parent Class die()
-	queue_free()
+	super.die()

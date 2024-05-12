@@ -18,7 +18,7 @@ var target_location: Vector2 = Vector2() # Record player location that Queen wil
 
 func _ready() -> void:
 	health = MAX_HEALTH  # Set initial health to maximum
-	speed = 1  # Movement speed
+	speed = 0.75  # Movement speed
 	super._ready()  # Call base class _ready function
 	update_health_bar()
 	$CollisionPolygon2D.disabled = true
@@ -58,6 +58,7 @@ func _physics_process(_delta: float) -> void:
 			change_sprites()
 			$CollisionPolygon2D.disabled = true
 			$HealthBar.visible = false
+			spawn_random_skull()
 	else:
 		pass
 
@@ -66,12 +67,12 @@ func change_phases():
 		phase2 = true
 		$SkullQueenP1.visible = false
 		$SkullQueenP2.visible = true
-		speed = speed * 1.5
+		speed = speed * 1.1
 	if health <= MAX_HEALTH * 1/3 and phase2 and !phase3:
 		phase3 = true
 		$SkullQueenP2.visible = false
 		$SkullQueenP3.visible = true
-		speed = speed * 1.5
+		speed = speed * 1.1
 
 func change_sprites():
 	if health > MAX_HEALTH * 2/3: # Phase 1 Sprite Changes
@@ -99,6 +100,34 @@ func change_sprites():
 func update_health_bar() -> void:
 	if health_bar:
 		health_bar.value = health  # Update health bar value
+
+# Function to spawn a single random skull
+func spawn_random_skull() -> void:
+	# Deciding and Loading Random Skull
+	var skull_types: Array[String] = ["skull_small", "skull_medium", "skull_large", "skull_bomb", "skull_frost"]
+	var random_skull_type: String = skull_types[randi() % skull_types.size()]
+	var random_skull_path: String = "res://enemy/" + random_skull_type + ".tscn"
+	var random_skull_resource: PackedScene = load(random_skull_path)
+	# Spawning the Skull
+	var number_of_skulls: int = 0
+	if !phase2 and !phase3: 
+		number_of_skulls = 1
+	elif phase2 and !phase3:
+		number_of_skulls = 2
+	else:
+		number_of_skulls = 3	
+	for i in range(number_of_skulls):
+		var offset: int = 25
+		var room: Room = get_parent()
+		var enemy_instance: Skull = random_skull_resource.instantiate()
+		if enemy_instance and room:
+			var random_offset = Vector2(randf_range(-offset, offset), randf_range(-offset, offset))
+			var spawn_position: Vector2 = position + random_offset
+			enemy_instance.position = spawn_position
+			enemy_instance.awake = true
+			room.add_enemy(enemy_instance)
+		else:
+			print("Failed to instantiate enemy from path: ", random_skull_path)
 
 func die() -> void: # Emit 3 Hearts, b/c Queen is a Boss
 	var offset: int = 12
