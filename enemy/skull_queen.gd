@@ -62,12 +62,12 @@ func _physics_process(_delta: float) -> void:
 		pass
 
 func change_phases():
-	if health < MAX_HEALTH * 2/3 and !phase2: 
+	if health <= MAX_HEALTH * 2/3 and !phase2: 
 		phase2 = true
 		$SkullQueenP1.visible = false
 		$SkullQueenP2.visible = true
 		speed = speed * 1.5
-	if health < MAX_HEALTH * 1/3 and phase2 and !phase3:
+	if health <= MAX_HEALTH * 1/3 and phase2 and !phase3:
 		phase3 = true
 		$SkullQueenP2.visible = false
 		$SkullQueenP3.visible = true
@@ -81,14 +81,14 @@ func change_sprites():
 		elif $SkullQueenP1Sleep.visible:
 			$SkullQueenP1.visible = true
 			$SkullQueenP1Sleep.visible = false
-	elif health < MAX_HEALTH * 2/3 and health > MAX_HEALTH * 1/3: # Phase 2 Sprite Changes
+	elif health <= MAX_HEALTH * 2/3 and health > MAX_HEALTH * 1/3: # Phase 2 Sprite Changes
 		if $SkullQueenP2.visible:
 			$SkullQueenP2Sleep.visible = true
 			$SkullQueenP2.visible = false
 		elif $SkullQueenP2Sleep.visible:
 			$SkullQueenP2.visible = true
 			$SkullQueenP2Sleep.visible = false
-	elif health < MAX_HEALTH * 1/3: # Phase 3 Sprite Changes
+	elif health <= MAX_HEALTH * 1/3: # Phase 3 Sprite Changes
 		if $SkullQueenP3.visible:
 			$SkullQueenP3Sleep.visible = true
 			$SkullQueenP3.visible = false

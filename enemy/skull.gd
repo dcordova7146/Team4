@@ -56,20 +56,34 @@ func die() -> void:
 		spawn_enemy(enemy_to_spawn, spawn_count)
 
 	
-func spawn_enemy(enemy_scene_path: PackedScene, count: int) -> void:
-	var separation_distance: int = 20
-	var spawn_position: Vector2 = position
+#func spawn_enemy(enemy_scene_path: PackedScene, count: int) -> void:
+	#var separation_distance: int = 20
+	#var spawn_position: Vector2 = position
+#
+	#for i: int in range(count):
+		#var room: Room = get_parent()
+		#var enemy_instance: Skull = enemy_scene_path.instantiate()
+		#if enemy_instance and room:
+			#enemy_instance.position = spawn_position
+			#spawn_position += Vector2(separation_distance, 10)
+			#enemy_instance.awake = true
+			#room.add_enemy(enemy_instance)
+		#else:
+			#print("Failed to instantiate enemy from scene:", enemy_scene_path)
 
-	for i: int in range(count):
-		var room: Room = get_parent()
+func spawn_enemy(enemy_scene_path: PackedScene, count: int) -> void:
+	var offset: int = 20
+
+	for i in range(count):
+		var room: Room = get_parent()  # Call get_parent() inside the loop
 		var enemy_instance: Skull = enemy_scene_path.instantiate()
 		if enemy_instance and room:
+			var random_offset = Vector2(randf_range(-offset, offset), randf_range(-offset, offset))
+			var spawn_position: Vector2 = position + random_offset
 			enemy_instance.position = spawn_position
-			spawn_position += Vector2(separation_distance, 10)
 			enemy_instance.awake = true
 			room.add_enemy(enemy_instance)
 		else:
 			print("Failed to instantiate enemy from scene:", enemy_scene_path)
-
 
 
