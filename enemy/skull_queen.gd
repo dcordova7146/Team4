@@ -103,20 +103,21 @@ func update_health_bar() -> void:
 
 # Function to spawn a single random skull
 func spawn_random_skull() -> void:
-	# Deciding and Loading Random Skull
-	var skull_types: Array[String] = ["skull_small", "skull_medium", "skull_large", "skull_bomb", "skull_frost"]
-	var random_skull_type: String = skull_types[randi() % skull_types.size()]
-	var random_skull_path: String = "res://enemy/" + random_skull_type + ".tscn"
-	var random_skull_resource: PackedScene = load(random_skull_path)
-	# Spawning the Skull
+	var skull_types: Array[String] = ["skull_small", "skull_medium", "skull_bomb", "skull_frost"]
 	var number_of_skulls: int = 0
 	if !phase2 and !phase3: 
 		number_of_skulls = 1
 	elif phase2 and !phase3:
 		number_of_skulls = 2
 	else:
-		number_of_skulls = 3	
+		number_of_skulls = 3
+	
 	for i in range(number_of_skulls):
+		# Deciding and Loading Random Skull
+		var random_skull_type: String = skull_types[randi() % skull_types.size()]
+		var random_skull_path: String = "res://enemy/" + random_skull_type + ".tscn"
+		var random_skull_resource: PackedScene = load(random_skull_path)
+		
 		var offset: int = 25
 		var room: Room = get_parent()
 		var enemy_instance: Skull = random_skull_resource.instantiate()
@@ -128,6 +129,7 @@ func spawn_random_skull() -> void:
 			room.add_enemy(enemy_instance)
 		else:
 			print("Failed to instantiate enemy from path: ", random_skull_path)
+
 
 func die() -> void: # Emit 3 Hearts, b/c Queen is a Boss
 	var offset: int = 12
