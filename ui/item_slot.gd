@@ -16,6 +16,6 @@ var resource: Artifact = null:
 			box.texture = data
 
 func updateStack()->void:
-	print("update stack")
+	#print("update stack")
 	stack += 1
 	count.text = str(stack)

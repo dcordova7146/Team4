@@ -102,11 +102,16 @@ func selectRandomArtifact()->Artifact:
 	database.query("SELECT * FROM itemTable ORDER BY CASE WHEN itemRarity = 'Common' THEN RANDOM() * 0.5 WHEN itemRarity = 'Uncommon' THEN RANDOM() * 0.3 WHEN itemRarity = 'Rare' THEN RANDOM() * 0.2 END DESC LIMIT 1;")
 	
 	return ResourceDirectory.get_resource(database.query_result[0]["itemName"])
+
+func getArtifactPrice(artifactName:String)->int:
+	database.query("SELECT itemCost FROM itemTable WHERE itemName = '" + artifactName + "';")
+	return database.query_result[0]["itemCost"]
 	
-func selectArtifact(artifact: Artifact)-> PackedScene:
-	database.query("SELECT * FROM itemTable WHERE itemName = " + artifact.name)
-	var scenename = "res://artifacts/Artifacts/" + database.query_result[0]["itemName"].replace(" ", "_").lower() + ".tscn"
-	return load(scenename)
-	
-	
+#func selectArtifact(artifact: Artifact)-> PackedScene:
+	#database.query("SELECT * FROM itemTable WHERE itemName = " + artifact.name)
+	#var query: String = database.query_result[0]["itemName"]
+	#var scenename = "res://artifacts/Artifacts/" + query.replace(" ", "_").to_lower() + ".tscn"
+	#return load(scenename)
+	#
+	#
 	

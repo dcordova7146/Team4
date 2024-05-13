@@ -232,12 +232,8 @@ offset_right = 40.0
 offset_bottom = 13.0
 text = "Price:"
 
-[node name="itemspawnpoint" type="Marker2D" parent="."]
-position = Vector2(94, 0)
-
 [connection signal="body_entered" from="itemSlot/area1" to="." method="_left_item_hover"]
 [connection signal="body_exited" from="itemSlot/area1" to="." method="_left_item_exited"]
-[connection signal="pressed" from="left/Button" to="." method="buyleftItem"]
 
 [editable path="itemSlot"]
 [editable path="itemSlot2"]
