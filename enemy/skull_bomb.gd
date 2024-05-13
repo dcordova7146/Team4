@@ -5,6 +5,7 @@ var explosion_distance: float = 30
 @onready var explosion_sprite: Sprite2D = $Explosion
 @onready var fuse_timer: Timer = $FuseTimer
 @onready var fuse_animation: AnimationPlayer = $FuseAnimation
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
 	# Initialize health and speed
@@ -25,6 +26,7 @@ func check_explode() -> void:
 	if distance_to_player < explosion_distance:
 		print("BombSkull is within explosion range!")
 		# Start the fuse timer if not exploded
+		collision.disabled = true
 		explosion_sprite.visible = true
 		fuse_timer.start()
 		fuse_animation.play("charge explosion")
@@ -45,6 +47,7 @@ func explode() -> void:
 
 func die() -> void:
 	# Handle the death of BombSkull
+	collision.disabled = true
 	explosion_sprite.visible = true
 	fuse_timer.start()
 	fuse_animation.play("charge explosion")
