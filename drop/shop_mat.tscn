@@ -193,6 +193,7 @@ offset_right = 67.0
 offset_bottom = 12.0
 
 [node name="Label" parent="itemSlot3" index="1"]
+visible = false
 label_settings = SubResource("LabelSettings_uydhb")
 
 [node name="special_item" type="Marker2D" parent="itemSlot3"]

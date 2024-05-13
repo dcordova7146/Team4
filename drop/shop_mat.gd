@@ -12,11 +12,12 @@ extends Node2D
 @onready var midSlot:GridContainer = $mid
 @onready var rightSlot:GridContainer = $right
 @onready var dropItem:Vector2 = $itemspawnpoint.global_position
-#@onready var dummyitem = preload("res://artifacts/Artifacts/artificial_blood.tscn")
-
+@onready var leftbought:bool = false
+@onready var midbought:bool = false
+@onready var rightbought:bool = false
 var player:Player
 
-func _ready():
+func _ready()->void:
 	#print(leftSlot.visible)
 	for i in get_children():
 		if i.is_in_group("slot"):
@@ -37,7 +38,7 @@ func populateShopMat()->void:
 	
 
 func _left_item_hover(body:Node2D)->void:
-	if(body.is_in_group("Player")):
+	if(body.is_in_group("Player") and leftbought == false):
 		player = body
 		leftSlot.show()
 		if body.blood_count >= leftSlot.price:
@@ -46,7 +47,8 @@ func _left_item_hover(body:Node2D)->void:
 		else:
 			leftSlot.button.disabled =true
 			#print("insufficient funds")
-		#print("hovering left item")
+		#print("hovering left item"
+	leftbought = true
 	pass # Replace with function body.
 
 func _left_item_exited(body:Node2D)->void:
@@ -54,44 +56,59 @@ func _left_item_exited(body:Node2D)->void:
 		leftSlot.hide()
 		
 	
-func buyleftItem():
+func buyleftItem()->void:
 	player.gain_blood_count(-leftSlot.price)
 	leftSlot.spawnItem()
+	leftSlot.hide()
+	closeSlot("left")
+	
 
-
-func _mid_item_hover(body):
-	if(body.is_in_group("Player")):
+func _mid_item_hover(body)->void:
+	if(body.is_in_group("Player") and midbought == false):
 		player = body
 		midSlot.show()
 		if body.blood_count >= midSlot.price:
 			midSlot.button.disabled =false
 		else:
 			midSlot.button.disabled =true
-	pass
+	midbought = true
 
-func _mid_item_exited(body):
+func _mid_item_exited(body)->void:
 	if(body.is_in_group("Player")):
 		midSlot.hide()
 
 
-func _buy_mid_item():
+func _buy_mid_item()->void:
 	player.gain_blood_count(-midSlot.price)
 	midSlot.spawnItem()
+	midSlot.hide()
+	closeSlot("mid")
 
 
-func _right_item_hover(body):
-	if(body.is_in_group("Player")):
+func _right_item_hover(body)->void:
+	if(body.is_in_group("Player") and rightbought==false):
 		player = body
 		rightSlot.show()
 		if body.blood_count >= rightSlot.price:
 			rightSlot.button.disabled =false
 		else:
 			rightSlot.button.disabled =true
+	rightbought = true
 
-func _right_item_exited(body):
+func _right_item_exited(body)->void:
 	if(body.is_in_group("Player")):
 		rightSlot.hide()
 
-func _buy_right_item():
+func _buy_right_item()->void:
 	player.gain_blood_count(-rightSlot.price)
 	rightSlot.spawnItem()
+	rightSlot.hide()
+	closeSlot("right")
+	
+func closeSlot(which:String)->void:
+	if which == "left":
+		shopSlots[0].resource = ResourceDirectory.get_resource("NONE")
+	if which == "mid":
+		shopSlots[1].resource = ResourceDirectory.get_resource("NONE")
+	if which == "right":
+		shopSlots[2].resource = ResourceDirectory.get_resource("NONE")
