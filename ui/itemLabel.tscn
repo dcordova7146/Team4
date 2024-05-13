@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy8jnua7pp4ts"]
+
+[ext_resource type="Script" path="res://drop/buy_box.gd" id="1_y26hc"]
+
+[node name="itemLabel" type="GridContainer"]
+offset_left = -54.0
+offset_top = -63.0
+offset_right = -10.0
+offset_bottom = -23.0
+script = ExtResource("1_y26hc")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "Buy"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="priceLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 13.0
+text = "Price:"

@@ -7,6 +7,8 @@ extends GridContainer
 @onready var artifact:Artifact
 @onready var price:int
 @onready var button:Button = $Button
+@onready var markerLoc:Vector2 = $"../itemspawnpoint".global_position
+@onready var rootNode: Node2D = $".."
 
 func _ready():
 	visible = false
@@ -25,5 +27,10 @@ func setScene()->void:
 	itemScene = load(tscnPath)
 	#print(tscnPath)
 
-func buyItem()->void:
-	pass
+func spawnItem()->void:
+	var itemInstance = itemScene.instantiate()
+	rootNode.add_child(itemInstance)
+	itemInstance.set_deferred("global_position", markerLoc)
+	
+	
+

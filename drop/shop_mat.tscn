@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://d0ukj27a57h7p"]
+[gd_scene load_steps=29 format=3 uid="uid://d0ukj27a57h7p"]
 
 [ext_resource type="Script" path="res://drop/shop_mat.gd" id="1_ojaut"]
 [ext_resource type="Texture2D" uid="uid://dw5e8gu03p77" path="res://tempAssets/shop_mat.png" id="2_clg2k"]
 [ext_resource type="PackedScene" uid="uid://dh35tb0xfup12" path="res://ui/item_slot.tscn" id="2_x6ojr"]
-[ext_resource type="Script" path="res://drop/buy_box.gd" id="4_ajcaq"]
+[ext_resource type="PackedScene" uid="uid://cy8jnua7pp4ts" path="res://ui/itemLabel.tscn" id="4_32hbl"]
+[ext_resource type="Texture2D" uid="uid://dvao43y0osat6" path="res://tempAssets/face.png" id="5_l624u"]
 
 [sub_resource type="GDScript" id="GDScript_2yt0w"]
 script/source = "extends \"res://ui/item_slot.gd\"
@@ -82,7 +83,8 @@ scale_max = 1.5
 scale_curve = SubResource("CurveTexture_myejh")
 color_initial_ramp = SubResource("GradientTexture1D_bh6om")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b00rc"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppn1t"]
+size = Vector2(32, 80)
 
 [sub_resource type="LabelSettings" id="LabelSettings_uydhb"]
 resource_local_to_scene = true
@@ -111,7 +113,8 @@ scale_max = 2.0
 scale_curve = SubResource("CurveTexture_pms5m")
 color_ramp = SubResource("GradientTexture1D_nw5sq")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gtqib"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_msgop"]
+size = Vector2(33, 80)
 
 [node name="ShopMat" type="Node2D"]
 script = ExtResource("1_ojaut")
@@ -180,9 +183,8 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="itemSlot2/common_item2/area2"]
-visible = false
-position = Vector2(0, -2)
-shape = SubResource("CapsuleShape2D_b00rc")
+position = Vector2(2, 13)
+shape = SubResource("RectangleShape2D_ppn1t")
 
 [node name="itemSlot3" parent="." groups=["slot"] instance=ExtResource("2_x6ojr")]
 offset_left = 27.0
@@ -191,7 +193,6 @@ offset_right = 67.0
 offset_bottom = 12.0
 
 [node name="Label" parent="itemSlot3" index="1"]
-visible = false
 label_settings = SubResource("LabelSettings_uydhb")
 
 [node name="special_item" type="Marker2D" parent="itemSlot3"]
@@ -208,37 +209,42 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="itemSlot3/special_item/area3"]
-visible = false
-position = Vector2(0, -2)
-shape = SubResource("CapsuleShape2D_gtqib")
+position = Vector2(6, 13)
+shape = SubResource("RectangleShape2D_msgop")
 
-[node name="left" type="GridContainer" parent="."]
-offset_left = -67.0
-offset_top = -69.0
-offset_right = -23.0
-offset_bottom = -29.0
-script = ExtResource("4_ajcaq")
+[node name="left" parent="." instance=ExtResource("4_32hbl")]
+offset_left = -61.0
+offset_right = -17.0
 
-[node name="Button" type="Button" parent="left"]
-layout_mode = 2
-text = "Buy"
+[node name="mid" parent="." instance=ExtResource("4_32hbl")]
+offset_left = -18.0
+offset_right = 26.0
 
-[node name="Panel" type="Panel" parent="left"]
-layout_mode = 2
-
-[node name="priceLabel" type="Label" parent="left/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 13.0
-text = "Price:"
+[node name="right" parent="." instance=ExtResource("4_32hbl")]
+offset_left = 28.0
+offset_right = 72.0
 
 [node name="itemspawnpoint" type="Marker2D" parent="."]
 position = Vector2(94, 0)
 
+[node name="Sprite2D" type="Sprite2D" parent="itemspawnpoint"]
+self_modulate = Color(1, 1, 1, 0.435294)
+position = Vector2(8, 8)
+texture = ExtResource("5_l624u")
+
 [connection signal="body_entered" from="itemSlot/area1" to="." method="_left_item_hover"]
 [connection signal="body_exited" from="itemSlot/area1" to="." method="_left_item_exited"]
+[connection signal="body_entered" from="itemSlot2/common_item2/area2" to="." method="_mid_item_hover"]
+[connection signal="body_exited" from="itemSlot2/common_item2/area2" to="." method="_mid_item_exited"]
+[connection signal="body_entered" from="itemSlot3/special_item/area3" to="." method="_right_item_hover"]
+[connection signal="body_exited" from="itemSlot3/special_item/area3" to="." method="_right_item_exited"]
 [connection signal="pressed" from="left/Button" to="." method="buyleftItem"]
+[connection signal="pressed" from="mid/Button" to="." method="_buy_mid_item"]
+[connection signal="pressed" from="right/Button" to="." method="_buy_right_item"]
 
 [editable path="itemSlot"]
 [editable path="itemSlot2"]
 [editable path="itemSlot3"]
+[editable path="left"]
+[editable path="mid"]
+[editable path="right"]
