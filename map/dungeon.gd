@@ -37,19 +37,14 @@ func create_dungeon(seed: int) -> void:
 	print("Creating dungeon.")
 	dungeon_seed = seed
 	hud.seed_label.text = "Seed: %s" % seed
-	var dungeon_dictionary: Dictionary = GenerateDungeon.generate(seed)
 	# Delete all nodes under spawn.
 	for i: int in range(0, spawn.get_child_count()):
 		spawn.get_child(i).queue_free()
-	# Move player to center of start room.
-	player.global_position = Room.SIZE / 2
-	# Add rooms.
-	var root: Node2D = Node2D.new()
-	for key: Vector2 in dungeon_dictionary.keys():
-		var room: Room = dungeon_dictionary[key]
-		room.on_Dungeon_Complete()
-		root.call_deferred("add_child", room)
-	spawn.add_child(root)
+	# Generate dungeon.
+	var dungeon: Node2D = GenerateDungeon.generate(seed)
+	# Move dungeon to player's position.
+	dungeon.global_position = player.global_position - Room.SIZE / 2
+	spawn.call_deferred("add_child", dungeon)
 	
 #temp function to see effectiveness of random generation
 func _on_button_pressed() -> void:

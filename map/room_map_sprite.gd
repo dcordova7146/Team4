@@ -6,12 +6,12 @@ extends Node2D
 
 
 const LABEL_EMOJI: Dictionary = {
-	Room.roomType.BATTLE: "⚔",
-	Room.roomType.SHOP: "💰",
-	Room.roomType.REST: "⛺",
-	Room.roomType.BOSS: "👿",
-	Room.roomType.START: "🏁",
-	Room.roomType.ROOM: "",
+	Room.RoomType.BATTLE: "⚔",
+	Room.RoomType.SHOP: "💰",
+	Room.RoomType.REST: "⛺",
+	Room.RoomType.BOSS: "👿",
+	Room.RoomType.START: "🏁",
+	Room.RoomType.ROOM: "",
 }
 
 const DOOR_SIZE: float = 50.0
@@ -26,7 +26,7 @@ const DOOR_RT: Vector2 = Vector2(Room.SIZE.x, Room.SIZE.y / 2 - DOOR_SIZE / 2)
 
 
 func _ready() -> void:
-	type_label.text = LABEL_EMOJI[room.rType]
+	type_label.text = LABEL_EMOJI[room.room_type]
 
 func _draw() -> void:
 	# Draw background.
@@ -34,13 +34,13 @@ func _draw() -> void:
 	# Draw wall around entire room (i.e. no doors).
 	draw_rect(Rect2(position, Room.SIZE), WALL_COLOR, false, WALL_WIDTH)
 	# "Punch" holes in wall according to connections.
-	if room.connectedRooms[Vector2(0,-1)] != null:
+	if room.connected_rooms[Vector2(0,-1)] != null:
 		_draw_door(DOOR_TL, DOOR_TL + Vector2(DOOR_SIZE, 0))
-	if room.connectedRooms[Vector2(0,1)] != null:
+	if room.connected_rooms[Vector2(0,1)] != null:
 		_draw_door(DOOR_BL, DOOR_BL + Vector2(DOOR_SIZE, 0))
-	if room.connectedRooms[Vector2(1,0)] != null:
+	if room.connected_rooms[Vector2(1,0)] != null:
 		_draw_door(DOOR_RT, DOOR_RT + Vector2(0, DOOR_SIZE))
-	if room.connectedRooms[Vector2(-1,0)] != null:
+	if room.connected_rooms[Vector2(-1,0)] != null:
 		_draw_door(DOOR_LT, DOOR_LT + Vector2(0, DOOR_SIZE))
 
 

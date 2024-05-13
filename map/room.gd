@@ -22,13 +22,13 @@ var enemies_inside: Array[Skull] = []
 	#left = Vector2(-1,0),
 	#right = Vector2(1,0)
 #}
-@export var connectedRooms: Dictionary = {
+@export var connected_rooms: Dictionary = {
 	Vector2(1,0): null, 
 	Vector2(-1,0): null, 
 	Vector2(0,1): null, 
 	Vector2(0,-1): null 
 }
-enum roomType {
+enum RoomType {
 	BATTLE = 2,
 	SHOP = 3,
 	REST = 4,
@@ -36,7 +36,7 @@ enum roomType {
 	START = 1,
 	ROOM = 0
 }
-@export var rType: roomType = roomType.ROOM
+@export var room_type: RoomType = RoomType.ROOM
 ## Whether enemies have been spawned in the room.
 var enemies_spawned: bool = false
 
@@ -58,8 +58,8 @@ func on_Dungeon_Complete()->void:
 func _on_play_area_body_entered(_body: Node2D) -> void:
 	Events.room_entered.emit(self) 
 	#print(self.get_name())
-	match rType:
-		roomType.BATTLE:
+	match room_type:
+		RoomType.BATTLE:
 			# Don't lock room if there's no enemies inside.
 			# (i.e. after the room was already cleared before.)
 			if not enemies_spawned:
@@ -67,20 +67,20 @@ func _on_play_area_body_entered(_body: Node2D) -> void:
 				populateEnemySpawner()
 				wakeEnemies()
 				enemies_spawned = true
-		roomType.SHOP:
+		RoomType.SHOP:
 			pass
-		roomType.REST:
+		RoomType.REST:
 			
 			print("This is a rest room")
-		roomType.BOSS:
+		RoomType.BOSS:
 			if not enemies_spawned:
 				lockRoom()
 				spawnBoss()
 				wakeEnemies()
 				enemies_spawned = true
-		roomType.START:
+		RoomType.START:
 			pass
-		roomType.ROOM:
+		RoomType.ROOM:
 			pass
 		_:
 			print("Unknown state")
@@ -92,22 +92,22 @@ func _on_play_area_body_exited(_body: Node2D) -> void:
 
 #function is used to update the connected rooms dictionary based on room generation
 #in order to make traversal more interesting not all adjacent rooms are connected 
-func connectRooms(room2: Room, direction: Vector2) -> void:
-	connectedRooms[direction] = room2
-	room2.connectedRooms[-direction] = Room
+func connect_rooms(room2: Room, direction: Vector2) -> void:
+	connected_rooms[direction] = room2
+	room2.connected_rooms[-direction] = Room
 	connections += 1
 	room2.connections += 1
 	updateRoom()
 
 #Just visualizes the room door openings with how they are connected, calling seperate functions that activate collisions and adds sprites representing doors
 func updateRoom()-> void:
-	if connectedRooms[Vector2(0,-1)] != null:
+	if connected_rooms[Vector2(0,-1)] != null:
 		openTop()
-	if connectedRooms[Vector2(0,1)] != null:
+	if connected_rooms[Vector2(0,1)] != null:
 		openBot()
-	if connectedRooms[Vector2(1,0)] != null:
+	if connected_rooms[Vector2(1,0)] != null:
 		openRight()
-	if connectedRooms[Vector2(-1,0)] != null:
+	if connected_rooms[Vector2(-1,0)] != null:
 		openLeft()
 	else:
 		pass
@@ -205,16 +205,16 @@ func get_middle_position()->Vector2:
 func lockRoom() -> void:
 	#add possible barriers corresponding to open doors
 	#reactivate collisions to lock a player and enemies in a room
-	if connectedRooms[Vector2(0,-1)] != null:
+	if connected_rooms[Vector2(0,-1)] != null:
 		($"TopBarrier" as Barrier).setBarrier()
 		($Walls/TopNoDoor as CollisionShape2D).set_deferred("disabled", false)
-	if connectedRooms[Vector2(0,1)] != null:
+	if connected_rooms[Vector2(0,1)] != null:
 		($"BotBarrier" as Barrier).setBarrier()
 		($Walls/BottomNoDoor as CollisionShape2D).set_deferred("disabled", false)
-	if connectedRooms[Vector2(1,0)] != null:
+	if connected_rooms[Vector2(1,0)] != null:
 		($"RightBarrier" as Barrier).setBarrier()
 		($Walls/RightNoDoor as CollisionShape2D).set_deferred("disabled", false)
-	if connectedRooms[Vector2(-1,0)] != null:
+	if connected_rooms[Vector2(-1,0)] != null:
 		($"LeftBarrier" as Barrier).setBarrier()
 		($Walls/LeftNoDoor as CollisionShape2D).set_deferred("disabled", false)
 	else:
@@ -230,34 +230,33 @@ func wakeEnemies()->void:
 	
 func setupRoom()->void:
 	#this function shall spawn whatever a room requires of it
-	match rType:
-		roomType.BATTLE:
+	match room_type:
+		RoomType.BATTLE:
 			type_label.text = "⚔ Battle"
-		roomType.SHOP:
+		RoomType.SHOP:
 			spawnShop()
 			type_label.text = "💰 Shop"
 			# insantiate a shop for the player to spend currency to upgrade
-		roomType.REST:
+		RoomType.REST:
 			print("camp created")
 			spawnCamp()
 			type_label.text = "🏕 Rest"
 			# should give the player a choice to upgrade or heal themselves
-		roomType.BOSS:
+		RoomType.BOSS:
 			type_label.text = "👿 Boss"
 			# spawn a boss and a boss health bar
-		roomType.START:
+		RoomType.START:
 			# where the player begins
 			#emit_signal("StartRoom", get_middle_position())
 			type_label.text = "🏁 Start"
-		roomType.ROOM:
+		RoomType.ROOM:
 			#a room of ROOM type shouldnt happen this is a check for if the generator didnt mess up
 			type_label.text = "Room"
 		_:
 			print("Unknown state")
 
-func set_Rtype(tag: roomType) -> void:
-	rType = tag
-	pass
+func set_room_type(room_type: RoomType) -> void:
+	room_type = room_type
 	
 #error the kill is being registered multiple times instead of once
 #accurately grabbing the enemy and removing it from the array of enemies but 1 kill removes all enemies for some reason
@@ -268,7 +267,7 @@ func on_kill(defeated_enemy: Skull) -> void:
 	else:
 		pass
 	
-	if rType == roomType.BOSS and enemies_inside.is_empty(): 
+	if room_type == RoomType.BOSS and enemies_inside.is_empty(): 
 		#spawn teleporter to new dungeon
 		print("boss room clear")
 		unlockRoom()
