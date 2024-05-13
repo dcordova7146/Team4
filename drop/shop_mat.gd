@@ -48,7 +48,7 @@ func _left_item_hover(body:Node2D)->void:
 			leftSlot.button.disabled =true
 			#print("insufficient funds")
 		#print("hovering left item"
-	leftbought = true
+	
 	pass # Replace with function body.
 
 func _left_item_exited(body:Node2D)->void:
@@ -61,6 +61,7 @@ func buyleftItem()->void:
 	leftSlot.spawnItem()
 	leftSlot.hide()
 	closeSlot("left")
+	leftbought = true
 	
 
 func _mid_item_hover(body)->void:
@@ -71,7 +72,7 @@ func _mid_item_hover(body)->void:
 			midSlot.button.disabled =false
 		else:
 			midSlot.button.disabled =true
-	midbought = true
+	
 
 func _mid_item_exited(body)->void:
 	if(body.is_in_group("Player")):
@@ -83,6 +84,7 @@ func _buy_mid_item()->void:
 	midSlot.spawnItem()
 	midSlot.hide()
 	closeSlot("mid")
+	midbought = true
 
 
 func _right_item_hover(body)->void:
@@ -93,7 +95,7 @@ func _right_item_hover(body)->void:
 			rightSlot.button.disabled =false
 		else:
 			rightSlot.button.disabled =true
-	rightbought = true
+	
 
 func _right_item_exited(body)->void:
 	if(body.is_in_group("Player")):
@@ -104,6 +106,7 @@ func _buy_right_item()->void:
 	rightSlot.spawnItem()
 	rightSlot.hide()
 	closeSlot("right")
+	rightbought = true
 	
 func closeSlot(which:String)->void:
 	if which == "left":
