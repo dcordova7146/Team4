@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://dp07axnibk346"]
+
+[ext_resource type="Texture2D" uid="uid://0fw7keljupib" path="res://tempAssets/items/tile026.png" id="1_m0gc2"]
+[ext_resource type="Script" path="res://artifacts/artifact.gd" id="2_xgl6d"]
+
+[resource]
+script = ExtResource("2_xgl6d")
+icon = ExtResource("1_m0gc2")
+name = "Hero Hydration"
+rarity = "Rare"
+description = "Gain an extra max life Stackable"
