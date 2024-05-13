@@ -118,25 +118,25 @@ func openTop()-> void:
 	if($Walls/TopNoDoor):
 		($TopDoor as Node2D).visible = true
 		($Walls/TopNoDoor as CollisionShape2D).set_deferred("disabled", true)
-		($"TopBarrier" as Barrier).removeBarrier()
+		($"TopBarrier" as Node2D).visible = false
 		
 func openBot()-> void:
 	if($Walls/BottomNoDoor):
 		($Walls/BottomNoDoor as CollisionShape2D).set_deferred("disabled", true)
 		($BotDoor as Node2D).visible = true
-		($"BotBarrier" as Barrier).removeBarrier()
+		($"BotBarrier" as Node2D).visible = false
 	
 func openRight()-> void:
 	if($Walls/RightNoDoor):
 		($Walls/RightNoDoor as CollisionShape2D).set_deferred("disabled", true)
 		($RightDoor as Node2D).visible = true
-		($"RightBarrier" as Barrier).removeBarrier()
+		($"RightBarrier" as Node2D).visible = false
 		
 func openLeft()-> void:
 	if($Walls/LeftNoDoor):
 		($Walls/LeftNoDoor as CollisionShape2D).set_deferred("disabled", true)
 		($LeftDoor as Node2D).visible = true
-		($"LeftBarrier" as Barrier).removeBarrier()
+		($"LeftBarrier" as Node2D).visible = false
 		
 func populateEnemySpawner() -> void:
 	#var total_weight: float = 0.0
@@ -206,16 +206,16 @@ func lockRoom() -> void:
 	#add possible barriers corresponding to open doors
 	#reactivate collisions to lock a player and enemies in a room
 	if connected_rooms[Vector2(0,-1)] != null:
-		($"TopBarrier" as Barrier).setBarrier()
+		($"TopBarrier" as Barrier).visible = true
 		($Walls/TopNoDoor as CollisionShape2D).set_deferred("disabled", false)
 	if connected_rooms[Vector2(0,1)] != null:
-		($"BotBarrier" as Barrier).setBarrier()
+		($"BotBarrier" as Barrier).visible = true
 		($Walls/BottomNoDoor as CollisionShape2D).set_deferred("disabled", false)
 	if connected_rooms[Vector2(1,0)] != null:
-		($"RightBarrier" as Barrier).setBarrier()
+		($"RightBarrier" as Barrier).visible = true
 		($Walls/RightNoDoor as CollisionShape2D).set_deferred("disabled", false)
 	if connected_rooms[Vector2(-1,0)] != null:
-		($"LeftBarrier" as Barrier).setBarrier()
+		($"LeftBarrier" as Barrier).visible = true
 		($Walls/LeftNoDoor as CollisionShape2D).set_deferred("disabled", false)
 	else:
 		pass
