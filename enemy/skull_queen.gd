@@ -1,7 +1,7 @@
 extends Skull
 
 const MAX_HEALTH: int = 600  # Maximum health points
-const DESTINATION_THRESHOLD = 25 # Approximate area of destination
+const DESTINATION_THRESHOLD = 10 # Approximate area of destination
 
 var phase2: bool = false # Flag for Queen 2nd Phase
 var phase3: bool = false # Flag for Queen 3rd Phase
