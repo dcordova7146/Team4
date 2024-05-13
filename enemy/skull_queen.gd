@@ -1,7 +1,7 @@
 extends Skull
 
 const MAX_HEALTH: int = 600  # Maximum health points
-const DESTINATION_THRESHOLD = 5 # Approximate area of destination
+const DESTINATION_THRESHOLD = 25 # Approximate area of destination
 
 var phase2: bool = false # Flag for Queen 2nd Phase
 var phase3: bool = false # Flag for Queen 3rd Phase
@@ -18,7 +18,7 @@ var target_location: Vector2 = Vector2() # Record player location that Queen wil
 
 func _ready() -> void:
 	health = MAX_HEALTH  # Set initial health to maximum
-	speed = 0.75  # Movement speed
+	speed = 1 # Movement speed
 	super._ready()  # Call base class _ready function
 	update_health_bar()
 	$CollisionPolygon2D.disabled = true
@@ -67,12 +67,12 @@ func change_phases():
 		phase2 = true
 		$SkullQueenP1.visible = false
 		$SkullQueenP2.visible = true
-		speed = speed * 1.1
+		speed = speed * 1.25
 	if health <= MAX_HEALTH * 1/3 and phase2 and !phase3:
 		phase3 = true
 		$SkullQueenP2.visible = false
 		$SkullQueenP3.visible = true
-		speed = speed * 1.1
+		speed = speed * 1.25
 
 func change_sprites():
 	if health > MAX_HEALTH * 2/3: # Phase 1 Sprite Changes

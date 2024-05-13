@@ -110,10 +110,10 @@ texture = ExtResource("9_4c6gh")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 visible = false
-offset_left = -4.0
-offset_top = -15.0
-offset_right = 4.0
-offset_bottom = -13.0
+offset_left = -4.4
+offset_top = -14.0
+offset_right = 3.6
+offset_bottom = -12.0
 theme_override_styles/background = SubResource("StyleBoxFlat_82ml1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_akpgk")
 max_value = 600.0
@@ -126,7 +126,7 @@ libraries = {
 
 [node name="MoveTimer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 8.0
+wait_time = 5.0
 one_shot = true
 
 [node name="WakeTimer" type="Timer" parent="."]
