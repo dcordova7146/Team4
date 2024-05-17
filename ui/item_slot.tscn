@@ -5,12 +5,12 @@
 [sub_resource type="LabelSettings" id="LabelSettings_fu3vn"]
 resource_local_to_scene = true
 
-[node name="itemSlot" type="PanelContainer"]
+[node name="ItemSlot" type="PanelContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_rwkl4")
 
-[node name="box" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 expand_mode = 1

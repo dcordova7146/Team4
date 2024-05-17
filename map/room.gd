@@ -11,10 +11,10 @@ var enemies_inside: Array[Skull] = []
 @export var warning: Resource
 ## Array of enemies and their corresponding weights.
 @export var enemies_possible: Array[ChanceRow]
-@onready var boss_skull = preload("res://enemy/skull_queen.tscn")
-@onready var campfire = preload("res://map/camp.tscn")
-@onready var shop = preload("res://drop/shop_mat.tscn")
-@onready var midMarker = $"Center Spawner"
+@onready var boss_skull: PackedScene = preload("res://enemy/skull_queen.tscn")
+@onready var campfire: PackedScene = preload("res://map/camp.tscn")
+@onready var shop: PackedScene = preload("res://drop/shop_mat.tscn")
+@onready var center_marker: Marker2D = $CenterMarker
 
 #enum direction{ 
 	#up = Vector2(0,-1), 
@@ -159,18 +159,18 @@ func populateEnemySpawner() -> void:
 		add_enemy(instance)
 		instance.set_deferred("global_position", get_random_position())
 
-func spawnBoss() ->void:
+func spawnBoss() -> void:
 	var instance: Skull = boss_skull.instantiate()
 	add_enemy(instance)
 	instance.set_deferred("global_position", get_middle_position())
 
-func spawnCamp()->void:
-	var campInstance = campfire.instantiate()
+func spawnCamp() -> void:
+	var campInstance: Node2D = campfire.instantiate()
 	call_deferred("add_child", campInstance)
 	campInstance.set_deferred("global_position", get_middle_position())
 	
-func spawnShop()->void:
-	var shopInstance = shop.instantiate()
+func spawnShop() -> void:
+	var shopInstance: Node2D = shop.instantiate()
 	call_deferred("add_child", shopInstance)
 	shopInstance.set_deferred("global_position", get_middle_position())
 
@@ -184,17 +184,15 @@ func add_enemy(new_enemy: Skull) -> void:
 ## Returns a random position in the predetermined bounds of the room.
 func get_random_position()-> Vector2:
 	var topleft: Vector2 = ($"Play Area/topLeftBound" as Marker2D).global_position
-	var topright: Vector2 = ($"Play Area/topRightBound" as Marker2D).global_position
-	var botleft: Vector2 = ($"Play Area/botLeftBound" as Marker2D).global_position
 	var botright: Vector2 = ($"Play Area/botRightBound" as Marker2D).global_position
-	var randx: float = randf_range(topleft.x,topright.x)
-	var randy: float = randf_range(topleft.y,botleft.y)
+	var randx: float = randf_range(topleft.x, botright.x)
+	var randy: float = randf_range(topleft.y, botright.y)
 	return Vector2(randx,randy)
 	
 func get_middle_position()->Vector2:
 	print("mid marker")
-	print(midMarker.global_position)
-	return midMarker.global_position
+	print(center_marker.global_position)
+	return center_marker.global_position
 	#var topleft: Vector2 = ($"Play Area/topLeftBound" as Marker2D).global_position
 	#var topright: Vector2 = ($"Play Area/topRightBound" as Marker2D).global_position
 	#var botleft: Vector2 = ($"Play Area/botLeftBound" as Marker2D).global_position
@@ -255,8 +253,8 @@ func setupRoom()->void:
 		_:
 			print("Unknown state")
 
-func set_room_type(room_type: RoomType) -> void:
-	room_type = room_type
+func set_room_type(new_type: RoomType) -> void:
+	room_type = new_type
 	
 #error the kill is being registered multiple times instead of once
 #accurately grabbing the enemy and removing it from the array of enemies but 1 kill removes all enemies for some reason

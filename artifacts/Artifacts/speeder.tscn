@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4pufmn20181j"]
+[gd_scene load_steps=4 format=3 uid="uid://c4pufmn20181j"]
 
 [ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_b726v"]
 [ext_resource type="Script" path="res://artifacts/Artifacts/speeder.gd" id="2_olyth"]
+[ext_resource type="Resource" uid="uid://do4hhsi38y6ef" path="res://artifacts/Resources/Speeder.tres" id="3_fv62n"]
 
 [node name="Speeder" instance=ExtResource("1_b726v")]
 script = ExtResource("2_olyth")
+resource = ExtResource("3_fv62n")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

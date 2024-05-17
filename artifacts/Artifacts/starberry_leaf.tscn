@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx4i4n54ybsey"]
+[gd_scene load_steps=4 format=3 uid="uid://dx4i4n54ybsey"]
 
 [ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_l7scl"]
 [ext_resource type="Script" path="res://artifacts/Artifacts/starberry_leaf.gd" id="2_byf38"]
+[ext_resource type="Resource" uid="uid://crijpqdjdyl7e" path="res://artifacts/Resources/Starberry Leaf.tres" id="3_qyvib"]
 
 [node name="Starberry Leaf" instance=ExtResource("1_l7scl")]
 script = ExtResource("2_byf38")
+resource = ExtResource("3_qyvib")

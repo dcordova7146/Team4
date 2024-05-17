@@ -1,4 +1,4 @@
-#Diego Cordova + Optimization Done by Karwei
+# Diego Cordova + Optimization Done by Karwei
 extends Node
 
 var room: PackedScene = preload("res://map/room.tscn")

@@ -1,29 +1,21 @@
-extends Resource
 class_name Artifact
+extends Resource
 
 @export var icon: Texture2D
 @export var name: String
 @export_enum("Common","Uncommon", "Rare")
 var rarity: String
 @export_multiline var description: String
-signal aquired_item(item)
-
-func itemAquired(item : Artifact):
-	print("item quired")
-	print(item)
-	emit_signal("aquired_item", item)
 
 
-func setIcon(path: String)->void:
-	#print(path)
-	#load(path)
+func setIcon(path: String) -> void:
 	ResourceLoader.load(path)
 
-func setName(itemName: String)->void:
+func setName(itemName: String) -> void:
 	name = itemName
 
-func setRarity(itemRarity: String)->void:
+func setRarity(itemRarity: String) -> void:
 	rarity = itemRarity
 
-func setDesc(itemDesc: String)->void:
+func setDesc(itemDesc: String) -> void:
 	description = itemDesc

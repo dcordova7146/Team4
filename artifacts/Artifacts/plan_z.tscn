@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dk1pl8fjitv4p"]
+[gd_scene load_steps=4 format=3 uid="uid://dk1pl8fjitv4p"]
 
 [ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_1e4qp"]
 [ext_resource type="Script" path="res://artifacts/Artifacts/plan_z.gd" id="2_v0334"]
+[ext_resource type="Resource" uid="uid://6ox6ckhsub00" path="res://artifacts/Resources/Plan Z.tres" id="3_58cvq"]
 
 [node name="PlanZ" instance=ExtResource("1_1e4qp")]
 script = ExtResource("2_v0334")
+resource = ExtResource("3_58cvq")

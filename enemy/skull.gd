@@ -11,6 +11,7 @@ signal defeated(enemy: Skull)
 @export var enemy_to_spawn: PackedScene
 ## The amount of enemies to spawn on death.
 @export var spawn_count: int = 0
+@export var is_invincible: bool = false
 @onready var health_bar: ProgressBar = $HealthBar
 ## The sibling node player.
 @onready var player: Player = get_node("/root/Main/Dungeon/Player")
@@ -74,11 +75,14 @@ func die() -> void:
 func spawn_enemy(enemy_scene_path: PackedScene, count: int) -> void:
 	var offset: int = 20
 
-	for i in range(count):
+	for i: int in range(count):
 		var room: Room = get_parent()  # Call get_parent() inside the loop
 		var enemy_instance: Skull = enemy_scene_path.instantiate()
 		if enemy_instance and room:
-			var random_offset = Vector2(randf_range(-offset, offset), randf_range(-offset, offset))
+			var random_offset: Vector2 = Vector2(
+					randf_range(-offset, offset),
+					randf_range(-offset, offset)
+			)
 			var spawn_position: Vector2 = position + random_offset
 			enemy_instance.position = spawn_position
 			enemy_instance.awake = true

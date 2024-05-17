@@ -40,6 +40,9 @@ func _on_body_entered(body: Node2D) -> void:
 		# TODO: Change to only do nothing if enemy was hit recently.
 		if enemies_hit.has(skull):
 			return
+		# Do nothing if enemy is invincible.
+		if skull.is_invincible:
+			return
 		skull.take_damage(damage)
 		enemies_hit.append(skull)
 		if is_pierce_finite:

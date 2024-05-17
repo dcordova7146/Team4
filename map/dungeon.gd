@@ -33,15 +33,14 @@ func _ready() -> void:
 
 
 # Create a dungeon from a seed.
-func create_dungeon(seed: int) -> void:
-	print("Creating dungeon.")
-	dungeon_seed = seed
-	hud.seed_label.text = "Seed: %s" % seed
+func create_dungeon(new_seed: int) -> void:
+	dungeon_seed = new_seed
+	hud.seed_label.text = "Seed: %s" % dungeon_seed
 	# Delete all nodes under spawn.
 	for i: int in range(0, spawn.get_child_count()):
 		spawn.get_child(i).queue_free()
 	# Generate dungeon.
-	var dungeon: Node2D = GenerateDungeon.generate(seed)
+	var dungeon: Node2D = GenerateDungeon.generate(dungeon_seed)
 	# Move dungeon to player's position.
 	dungeon.global_position = player.global_position - Room.SIZE / 2
 	spawn.call_deferred("add_child", dungeon)
@@ -56,12 +55,12 @@ func _on_button_pressed() -> void:
 ## Give seed to main, then delete self.
 func _on_pause_menu_game_restarted(use_random: bool) -> void:
 	# Use same seed unless random seed is specified.
-	var seed: int = (
+	var new_seed: int = (
 			randi_range(0, 1_000_000) 
 			if use_random 
 			else dungeon_seed
 	)
-	game_restarted.emit(seed, self)
+	game_restarted.emit(new_seed, self)
 
 ## Pass signal to main, then delete self.
 func _on_pause_menu_game_exited_to_menu() -> void:

@@ -1,21 +1,17 @@
+class_name ItemSlot
 extends PanelContainer
+## UI display of an item. Holds an amount of an item.
 
-@onready var box = $box
-@onready var count = $Label
-@onready var stack = 0
-
-#set the resource inside the artifact to data
-var resource: Artifact = null:
+var item: Artifact = null:
 	set(data):
-		resource = data
-		
-		if data != null:
-			box.texture = data.icon
-			updateStack()
-		else:
-			box.texture = data
+		if data:
+			item = data
+			texture_rect.texture = data.icon
+			count = 1
+var count: int = 0:
+	set(new_count):
+		count = new_count
+		label.text = str(count)
 
-func updateStack()->void:
-	#print("update stack")
-	stack += 1
-	count.text = str(stack)
+@onready var texture_rect: TextureRect = $TextureRect
+@onready var label: Label = $Label

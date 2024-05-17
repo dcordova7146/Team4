@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://pgj11pocvkba"]
+[gd_scene load_steps=3 format=3 uid="uid://dhhkwq8bee3er"]
 
-[ext_resource type="Texture2D" uid="uid://c3s50q33a8lrr" path="res://tempAssets/snowflake.png" id="1_88tlb"]
+[ext_resource type="Texture2D" uid="uid://c3s50q33a8lrr" path="res://enemy/snowflake.png" id="1_88tlb"]
 [ext_resource type="Script" path="res://projectile/frost_projectile.gd" id="1_gecs1"]
 
 [node name="FrostProjectile" type="Node2D"]

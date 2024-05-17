@@ -1,35 +1,31 @@
 extends HBoxContainer
 
-#@onready var player: Player = preload("/Player")
-# Called when the node enters the scene tree for the first time.
-var player
-func _ready():
-	visible = false
-	Events.connect("choiceBegun", choose)
+var player: Player
 
-#on body entered of campfire obtain signal to turn on visibility of menu
-func choose(body):
+func _ready() -> void:
+	Events.connect("choiceBegun", present_choice)
+
+## Pause and show.
+func present_choice(body: Node2D) -> void:
 	player = body
-	print("choice begun")
 	get_tree().paused = true
 	visible = true
-	
-func chosen(modifier: String):
+
+
+## Hide and unpause.
+func hide_choice() -> void:
 	visible = false
-	if modifier == "blood":
-		print("player chose 15 blood")
-		player.gain_blood_count(15)
-		
-	if modifier == "hearts":
-		print("player chose full heal")
-		for i in player.max_lives:
-			player._gain_life()
 	get_tree().paused = false
-	
-
-func _on_left_button_down():
-	chosen("blood")
 
 
-func _on_right_button_down():
-	chosen("hearts")
+## Give player 15 blood.
+func _on_left_button_down() -> void:
+	hide_choice()
+	player.blood_count += 15
+
+
+## Give player max lives.
+func _on_right_button_down() -> void:
+	hide_choice()
+	for i: int in player.max_lives:
+		player._gain_life()

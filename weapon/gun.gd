@@ -194,32 +194,32 @@ func _on_body_exited(_body: Node2D) -> void:
 	Events.takeable_group_changed.emit()
 	hide_outline()
 	
-func set_dmg_mul(amount: float):
+func set_dmg_mul(amount: float) -> void:
 	print(damage)
-	var percent = (amount/100.0) + 1.0
+	var percent: float = (amount/100.0) + 1.0
 	damage *= percent
 	print(damage)
 
-func set_reload_mul(amount: float):
+func set_reload_mul(amount: float) -> void:
 	if reload_duration <= 0:
 		reload_duration = 0
 		return
 	print(reload_duration)
-	var percent = 1.0 - (amount/100.0)
+	var percent: float = 1.0 - (amount/100.0)
 	reload_duration *= percent
 	print(reload_duration)
 	
 	
-func modify_pierce():
-	pierce+=1
+func modify_pierce() -> void:
+	pierce += 1
 
-func set_range_mul(amount: float):
-	var percent = (amount/100.0) + 1.0
+func set_range_mul(amount: float) -> void:
+	var percent: float = (amount/100.0) + 1.0
 	max_range *= percent
 	
-func sunnies():
+func sunnies() -> void:
 	reload_duration = 0
 	
-func bullet_resize(amount: float):
-	var percent = (amount/100.0) + 1.0
+func bullet_resize(amount: float) -> void:
+	var percent: float = (amount/100.0) + 1.0
 	bullet_scale *= percent

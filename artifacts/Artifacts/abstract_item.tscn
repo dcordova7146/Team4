@@ -10,8 +10,7 @@ scale = Vector2(1, 1.0267)
 script = ExtResource("1_cfgkr")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 3
-collision_mask = 3
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_pkdtt")

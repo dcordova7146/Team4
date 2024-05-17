@@ -7,7 +7,7 @@ extends CharacterBody2D
 ## Max number of lives.
 @export var max_lives: int = 8
 ## Move speed multiplier.
-@export var speed: int = 125
+@export var speed: float = 125
 ## Area2D for detecting collisions w/ nodes that don't push.
 @onready var area_2d: Area2D = $Area2D
 ## Timer until invincibility after losing a life wears off.
@@ -15,7 +15,7 @@ extends CharacterBody2D
 ## Timer until visibility is toggled.
 @onready var blink_timer: Timer = $BlinkTimer
 ##artifact inventory not the same place guns are kept
-@onready var inventory = get_node("../HUD/Inventory")
+@onready var inventory: Inventory = get_node("../HUD/Inventory")
 
 ## The part that should be flipped depending on the position of the cursor.
 ##
@@ -38,7 +38,7 @@ var _equipped_weapon_index: int = 0
 ## Has an outline if close enough, and is taken upon the "use" action.
 var nearest_gun: Gun
 ## Amount of blood.
-var blood_count: int = 0:
+@export var blood_count: int = 0:
 	set(new_count):
 		blood_count = new_count
 		Events.blood_count_changed.emit(new_count)
@@ -58,8 +58,6 @@ func _ready() -> void:
 
 	# Connect speed artifact signal
 	Events.speed_multiplier.connect(set_speed_mul)
-	# Connect money artifact signal
-	Events.gain_money.connect(gain_blood_count)
 	# Dangerous healing: full health, minus 1 heart
 	Events.dangerous_healing.connect(shower_in_a_can)
 	# Hero hydration healing: plus 1 health, plus 1 heart
@@ -379,26 +377,29 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	var enemy: Skull = body as Skull
 	if enemy:
 		_lose_life()
-		
-##obtain an artifact either through buying or picking up to add to inventory of artifacts
-func obtain_artifact(artifact:Artifact)->void:
-	#print("Inventory: ")
-	#print(inventory)
+
+
+## Add given artifact to inventory.
+func obtain_artifact(artifact: Artifact) -> void:
 	inventory.add_artifact(artifact)
-	
-func set_speed_mul(amount: float):
-	var percent = (amount/100.0) + 1.0
+
+
+func set_speed_mul(amount: float) -> void:
+	var percent: float = (amount/100.0) + 1.0
 	speed *= percent
-	
-func gain_blood_count(additional_blood):
+
+
+func gain_blood_count(additional_blood: int) -> void:
 	blood_count += additional_blood
 
-func shower_in_a_can():
+
+func shower_in_a_can() -> void:
 	max_lives -= 1
 	lives = max_lives
 	Events.lives_changed.emit(lives, max_lives)
 
-func hero_hydration():
+
+func hero_hydration() -> void:
 	max_lives += 1
 	lives += 1
 	Events.lives_changed.emit(lives, max_lives)

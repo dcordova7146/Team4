@@ -7,10 +7,6 @@ var explosion_distance: float = 30
 @onready var fuse_animation: AnimationPlayer = $FuseAnimation
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
-func _ready() -> void:
-	# Initialize health and speed
-	health = 50
-	speed = 20
 
 func _physics_process(_delta: float) -> void:
 	# Move towards the player if not exploded
@@ -20,37 +16,34 @@ func _physics_process(_delta: float) -> void:
 		move_and_slide()
 		check_explode()
 
+
 func check_explode() -> void:
 	# Check if within explosion range
 	var distance_to_player: float = global_position.distance_to(player.global_position)
 	if distance_to_player < explosion_distance:
-		print("BombSkull is within explosion range!")
 		# Start the fuse timer if not exploded
-		collision.disabled = true
-		explosion_sprite.visible = true
-		fuse_timer.start()
-		fuse_animation.play("charge explosion")
+		start_fuse()
 
-func _on_fuse_timeout() -> void:
-	# Handle fuse timeout
-	print("BombSkull is exploding")
-	explode()
 
-func explode() -> void:
-	if explosion_sprite.visible:
-		print("BombSkull has exploded!")
-		var distance_to_player: float = global_position.distance_to(player.global_position)
-		if distance_to_player < explosion_distance:
-			print("Player is taking damage!")
-			player._lose_life()
-		super.die()
-
-func die() -> void:
-	# Handle the death of BombSkull
-	collision.disabled = true
+func start_fuse() -> void:
+	is_invincible = true
 	explosion_sprite.visible = true
 	fuse_timer.start()
 	fuse_animation.play("charge explosion")
-	print("BombSkull has died!")
-	# Call the parent die function if additional functionality is required.
 
+
+func _on_fuse_timeout() -> void:
+	explode()
+
+
+func explode() -> void:
+	if not explosion_sprite.visible:
+		return
+	var distance_to_player: float = global_position.distance_to(player.global_position)
+	if distance_to_player < explosion_distance:
+		player._lose_life()
+	super.die()
+
+
+func die() -> void:
+	start_fuse()

@@ -1,23 +1,16 @@
 extends StaticBody2D
+## Each camp is one use.
 
-@onready var campfireDetection = $Area2D/CollisionShape2D
-# Called when the node enters the scene tree for the first time.
-@export var used:bool = false
-func _ready():
-	used = false
-	#print("camp")
-	#print(used)
-	$Sprite2D/AnimationPlayer.play("fire")
+@export var used: bool = false
 
-#each camp is one use
-func _on_area_2d_body_entered(body):
-	if body.is_in_group("Player") and used == false:
-		print("entered if")
-		campfireDetection.disabled = true
-		$Area2D.monitoring = false
-		$Area2D.monitorable = false
-		Events.choiceBegun.emit(body)
-		used = true
-	
-	
-		
+@onready var animation_player: AnimationPlayer = $Sprite2D/AnimationPlayer
+
+func _ready() -> void:
+	animation_player.play("fire")
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if used:
+		return
+	Events.choiceBegun.emit(body)
+	used = true

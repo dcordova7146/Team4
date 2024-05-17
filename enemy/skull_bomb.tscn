@@ -197,6 +197,7 @@ color_ramp = SubResource("GradientTexture1D_sbj4c")
 
 [node name="SkullBomb" instance=ExtResource("1_kq465")]
 script = ExtResource("2_rip3a")
+speed = 20.0
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_b5305")

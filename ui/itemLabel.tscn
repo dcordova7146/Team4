@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" path="res://drop/buy_box.gd" id="1_y26hc"]
 
-[node name="itemLabel" type="GridContainer"]
+[node name="BuyBox" type="GridContainer"]
+visible = false
 offset_left = -54.0
 offset_top = -63.0
 offset_right = -10.0
@@ -16,8 +17,10 @@ text = "Buy"
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
 
-[node name="priceLabel" type="Label" parent="Panel"]
+[node name="PriceLabel" type="Label" parent="Panel"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 13.0
-text = "Price:"
+text = "🩸"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

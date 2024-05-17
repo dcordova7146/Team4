@@ -1,117 +1,50 @@
 extends Node2D
 
-@onready var left: Marker2D = $common_item1
-@onready var mid: Marker2D = $common_item2
-@onready var right: Marker2D = $special_item
-#shop slots array visualizes the inventory of the shop
-@onready var shopSlots: Array
-#shop inventory array holds the actual scene of the item to be spit out after it is bought
-@onready var shopInventory: Array
-# Called when the node enters the scene tree for the first time.
-@onready var leftSlot:GridContainer =  $left
-@onready var midSlot:GridContainer = $mid
-@onready var rightSlot:GridContainer = $right
-@onready var dropItem:Vector2 = $itemspawnpoint.global_position
-@onready var leftbought:bool = false
-@onready var midbought:bool = false
-@onready var rightbought:bool = false
-var player:Player
+@export var buy_box_scene: PackedScene
 
-func _ready()->void:
-	#print(leftSlot.visible)
-	for i in get_children():
-		if i.is_in_group("slot"):
-			shopSlots.append(i)
-	populateShopMat()
-	#print($itemspawnpoint/Sprite2D.global_position)
-	
-#populate the world with representations of the items while filling an array with the scenes that correlate to the items to an internal array 
-func populateShopMat()->void:
-	for i in shopSlots:
-		var artifact :Artifact= SqLiteController.selectRandomArtifact()
-		i.resource = artifact
-		shopInventory.append(artifact)
-	#print(shopInventory)
-	leftSlot.artifact = shopInventory[0]
-	midSlot.artifact =shopInventory[1]
-	rightSlot.artifact =shopInventory[2]
-	
-
-func _left_item_hover(body:Node2D)->void:
-	if(body.is_in_group("Player") and leftbought == false):
-		player = body
-		leftSlot.show()
-		if body.blood_count >= leftSlot.price:
-			leftSlot.button.disabled =false
-			#print("enough to buy left item")
-		else:
-			leftSlot.button.disabled =true
-			#print("insufficient funds")
-		#print("hovering left item"
-	
-	pass # Replace with function body.
-
-func _left_item_exited(body:Node2D)->void:
-	if(body.is_in_group("Player")):
-		leftSlot.hide()
-		
-	
-func buyleftItem()->void:
-	player.gain_blood_count(-leftSlot.price)
-	leftSlot.spawnItem()
-	leftSlot.hide()
-	closeSlot("left")
-	leftbought = true
-	
-
-func _mid_item_hover(body)->void:
-	if(body.is_in_group("Player") and midbought == false):
-		player = body
-		midSlot.show()
-		if body.blood_count >= midSlot.price:
-			midSlot.button.disabled =false
-		else:
-			midSlot.button.disabled =true
-	
-
-func _mid_item_exited(body)->void:
-	if(body.is_in_group("Player")):
-		midSlot.hide()
+## Visualizes the inventory of the shop.
+var item_slots: Array[ItemSlot]
+var buy_boxes: Array[BuyBox]
 
 
-func _buy_mid_item()->void:
-	player.gain_blood_count(-midSlot.price)
-	midSlot.spawnItem()
-	midSlot.hide()
-	closeSlot("mid")
-	midbought = true
+func _ready() -> void:
+	for node: Node in get_children():
+		if node.is_in_group("slot"):
+			item_slots.append(node)
+	populate()
 
 
-func _right_item_hover(body)->void:
-	if(body.is_in_group("Player") and rightbought==false):
-		player = body
-		rightSlot.show()
-		if body.blood_count >= rightSlot.price:
-			rightSlot.button.disabled =false
-		else:
-			rightSlot.button.disabled =true
-	
+## Populate the world with representations of the items
+## while filling an array with the scenes that correlate to the items
+## to an internal array.
+func populate() -> void:
+	for item_slot: ItemSlot in item_slots:
+		# Put random artifact in slot.
+		var artifact: Artifact = SqLiteController.selectRandomArtifact()
+		item_slot.item = artifact
+		# Create buy box.
+		var new_buy_box: BuyBox = buy_box_scene.instantiate()
+		new_buy_box.item_slot = item_slot
+		add_child(new_buy_box)
+		new_buy_box.artifact = artifact
+		new_buy_box.position = Vector2(item_slot.position.x, -75)
+		# Connect functions to show/hide buy box upon approach.
+		var area_2d: Area2D = item_slot.find_children("*", "Area2D")[0]
+		area_2d.body_entered.connect(_on_item_approach.bind(new_buy_box))
+		area_2d.body_exited.connect(_on_item_reproach.bind(new_buy_box))
 
-func _right_item_exited(body)->void:
-	if(body.is_in_group("Player")):
-		rightSlot.hide()
 
-func _buy_right_item()->void:
-	player.gain_blood_count(-rightSlot.price)
-	rightSlot.spawnItem()
-	rightSlot.hide()
-	closeSlot("right")
-	rightbought = true
-	
-func closeSlot(which:String)->void:
-	if which == "left":
-		shopSlots[0].resource = ResourceDirectory.get_resource("NONE")
-	if which == "mid":
-		shopSlots[1].resource = ResourceDirectory.get_resource("NONE")
-	if which == "right":
-		shopSlots[2].resource = ResourceDirectory.get_resource("NONE")
+## Show buy box if it hasn't been bought yet.
+func _on_item_approach(player: Player, buy_box: BuyBox) -> void:
+	if buy_box.is_purchased:
+		return
+	buy_box.show()
+	buy_box.player = player
+	# Disable buy button if player can't afford.
+	var is_affordable: bool = player.blood_count >= buy_box.price
+	buy_box.button.disabled = not is_affordable
+
+
+## Hide buy box.
+func _on_item_reproach(_player: Player, buy_box: BuyBox) -> void:
+	buy_box.hide()

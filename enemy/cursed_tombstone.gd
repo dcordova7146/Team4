@@ -24,7 +24,10 @@ func spawn_random_skull() -> void:
 	var room: Room = get_parent()
 	var enemy_instance: Skull = random_skull_resource.instantiate()
 	if enemy_instance and room:
-		var random_offset = Vector2(randf_range(-offset, offset), randf_range(-offset, offset))
+		var random_offset: Vector2 = Vector2(
+				randf_range(-offset, offset),
+				randf_range(-offset, offset)
+		)
 		var spawn_position: Vector2 = position + random_offset
 		enemy_instance.position = spawn_position
 		enemy_instance.awake = true

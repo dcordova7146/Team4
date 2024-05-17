@@ -1,37 +1,30 @@
+class_name BuyBox
 extends GridContainer
 
-# Called when the node enters the scene tree for the first time.
-#set the price to whats inside the current item slot
-@onready var itemScene:PackedScene
-@onready var priceTag:Label = $Panel/priceLabel
-@onready var artifact:Artifact
-@onready var price:int
-@onready var button:Button = $Button
-@onready var markerLoc:Marker2D = $"../itemspawnpoint"
-@onready var rootNode: Node2D = $".."
-@onready var itemspawn
+@onready var price_label: Label = $Panel/PriceLabel
+@onready var button: Button = $Button
+@onready var item_spawn_point: Marker2D = $"../ItemSpawnPoint"
 
-func _ready():
-	visible = false
-	call_deferred("setPrice")
-	call_deferred("setScene")
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+var artifact: Artifact:
+	set(new_artifact):
+		artifact = new_artifact
+		# Set the price to whats inside the current item slot.
+		price = SqLiteController.getArtifactPrice(artifact.name)
+		price_label.text = "%s\n🩸%d" % [artifact.name, price]
+var price: int
+var item_slot: ItemSlot
+var player: Player
+var is_purchased: bool = false
 
-func setPrice()->void:
-	price = SqLiteController.getArtifactPrice(artifact.name)
-	priceTag.text = "Price: " + str(price)
 
-func setScene()->void:
-	var fileName:String = (artifact.name).replace(" ", "_").to_lower()
-	#print(fileName)
-	var tscnPath:String= ("res://artifacts/Artifacts/" + fileName + ".tscn")
-	itemScene = load(tscnPath)
-	#print(tscnPath)
-
-func spawnItem()->void:
-	var itemInstance = itemScene.instantiate()
-	markerLoc.add_child(itemInstance)
-	itemInstance.set_deferred("global_position", markerLoc.global_position)
-	
-	
-
+func _on_button_pressed() -> void:
+	is_purchased = true
+	hide()
+	player.blood_count -= price
+	item_slot.item = ResourceDirectory.get_resource("NONE")
+	var file_name: String = (artifact.name).replace(" ", "_").to_lower()
+	var tscn_path: String = ("res://artifacts/Artifacts/" + file_name + ".tscn")
+	var item_scene: PackedScene = load(tscn_path)
+	var item_instance: Node = item_scene.instantiate()
+	item_spawn_point.add_child(item_instance)
+	item_instance.set_deferred("global_position", item_spawn_point.global_position)

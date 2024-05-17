@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://phpr8yqcbvao"]
+[gd_scene load_steps=4 format=3 uid="uid://phpr8yqcbvao"]
 
-[ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_5isu2"]
-[ext_resource type="Script" path="res://artifacts/Artifacts/bad_4_us.gd" id="2_ufimr"]
+[ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_18p4n"]
+[ext_resource type="Script" path="res://artifacts/Artifacts/bad_4_us.gd" id="2_xtb51"]
+[ext_resource type="Resource" uid="uid://bghr8rmavhn83" path="res://artifacts/Resources/Bad4Us.tres" id="3_aj2rc"]
 
-[node name="Bad4Us" instance=ExtResource("1_5isu2")]
-script = ExtResource("2_ufimr")
+[node name="Bad4Us" instance=ExtResource("1_18p4n")]
+script = ExtResource("2_xtb51")
+resource = ExtResource("3_aj2rc")

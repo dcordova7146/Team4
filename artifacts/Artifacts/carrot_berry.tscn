@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://3blevrf8r3n7"]
+[gd_scene load_steps=4 format=3 uid="uid://3blevrf8r3n7"]
 
 [ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_4tnly"]
 [ext_resource type="Script" path="res://artifacts/Artifacts/carrot_berry.gd" id="2_ym2ju"]
+[ext_resource type="Resource" uid="uid://cibr5gdn0oq5h" path="res://artifacts/Resources/Carrot Berry.tres" id="3_qq8c4"]
 
 [node name="SquareCherry" instance=ExtResource("1_4tnly")]
 script = ExtResource("2_ym2ju")
+resource = ExtResource("3_qq8c4")
