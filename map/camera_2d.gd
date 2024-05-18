@@ -1,11 +1,12 @@
-#Diego Cordova
+# Diego Cordova, Karwai Kang
 extends Camera2D
 
 
 ## Listen for room enter events.
-#camera waits for signal from the event handler then uses an anonymous function
 func _ready() -> void:
 	Events.room_entered.connect(_on_room_entered)
 
+
+## Set position to position of given room.
 func _on_room_entered(room: Node2D) -> void:
-	global_position = room.global_position + Room.SIZE / 2
+	global_position = room.global_position

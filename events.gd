@@ -14,7 +14,6 @@ signal enemy_defeated(enemy: Node)
 signal takeable_group_changed
 signal teleporter_entered(teleporter: Node2D)
 signal blood_count_changed(new_count: int)
-signal startRoom(spawnMarker : Vector2)
 signal choiceBegun(body: Node2D)
 
 

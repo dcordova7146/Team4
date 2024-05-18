@@ -1,32 +1,37 @@
 extends Node2D
 ## The sprite of a room on the map.
 
-@onready var room: Room = get_parent()
-@onready var type_label: Label = $TypeLabel
-
-
+## Emoji for each room type. Used as icons on map.
 const LABEL_EMOJI: Dictionary = {
 	Room.RoomType.BATTLE: "⚔",
 	Room.RoomType.SHOP: "💰",
 	Room.RoomType.REST: "⛺",
 	Room.RoomType.BOSS: "👿",
 	Room.RoomType.START: "🏁",
-	Room.RoomType.ROOM: "",
 }
-
+## Size of door.
 const DOOR_SIZE: float = 50.0
+## Color of background.
 const BG_COLOR: Color = Color.DARK_BLUE
+## Color of wall.
 const WALL_COLOR: Color = Color.WHITE
+## Width of wall.
 const WALL_WIDTH: float = 20.0
-
+## Position of the left of the top door.
 const DOOR_TL: Vector2 = Vector2(Room.SIZE.x / 2 - DOOR_SIZE / 2, 0)
+## Position of left of the bottom door.
 const DOOR_BL: Vector2 = Vector2(Room.SIZE.x / 2 - DOOR_SIZE / 2, Room.SIZE.y)
+## Position of the top of the left door.
 const DOOR_LT: Vector2 = Vector2(0, Room.SIZE.y / 2 - DOOR_SIZE / 2)
+## Position of the top of the right door.
 const DOOR_RT: Vector2 = Vector2(Room.SIZE.x, Room.SIZE.y / 2 - DOOR_SIZE / 2)
 
+@onready var room: Room = get_parent()
+@onready var type_label: Label = $TypeLabel
 
 func _ready() -> void:
 	type_label.text = LABEL_EMOJI[room.room_type]
+	type_label.position.x = Room.SIZE.x / 2 - 64.0
 
 func _draw() -> void:
 	# Draw background.

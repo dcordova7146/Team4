@@ -4,12 +4,12 @@ extends Node2D
 
 signal game_restarted(dungeon_seed: int)
 signal game_exited_to_menu
-
 const LIFE: PackedScene = preload("res://drop/life.tscn")
 const HEALTH_CHANGE: PackedScene = preload("res://ui/health_change.tscn")
-
+## Items with a chance to be dropped upon death of enemies.
 @export var drop_table: Array[ChanceRow] = []
-
+## The seed of the current dungeon.
+var dungeon_seed: int = 0
 @onready var spawn: Node2D = $Spawn
 @onready var player: Node2D = $Player
 @onready var minimap: SubViewport = $MinimapViewport
@@ -19,8 +19,6 @@ const HEALTH_CHANGE: PackedScene = preload("res://ui/health_change.tscn")
 @onready var hub_world: Node2D = $Spawn/HubWorld
 @onready var main_camera: Camera2D = $Player/MainCamera
 
-## The seed of the current dungeon.
-var dungeon_seed: int = 0
 
 func _ready() -> void:
 	# Connect minimap viewport to HUD.
@@ -32,7 +30,7 @@ func _ready() -> void:
 	Events.teleporter_entered.connect(_on_teleporter_entered)
 
 
-# Create a dungeon from a seed.
+## Create a dungeon from a seed.
 func create_dungeon(new_seed: int) -> void:
 	dungeon_seed = new_seed
 	hud.seed_label.text = "Seed: %s" % dungeon_seed
@@ -42,16 +40,17 @@ func create_dungeon(new_seed: int) -> void:
 	# Generate dungeon.
 	var dungeon: Node2D = GenerateDungeon.generate(dungeon_seed)
 	# Move dungeon to player's position.
-	dungeon.global_position = player.global_position - Room.SIZE / 2
+	dungeon.global_position = player.global_position
 	spawn.call_deferred("add_child", dungeon)
-	
-#temp function to see effectiveness of random generation
+
+
+## temp function to see effectiveness of random generation.
 func _on_button_pressed() -> void:
 	randomize()
 	player.position = Vector2(0, 0) #whenever generate a room reset player to start room
 	create_dungeon(randi_range(-1000,1000))
 
-#Karwei
+
 ## Give seed to main, then delete self.
 func _on_pause_menu_game_restarted(use_random: bool) -> void:
 	# Use same seed unless random seed is specified.
@@ -61,6 +60,7 @@ func _on_pause_menu_game_restarted(use_random: bool) -> void:
 			else dungeon_seed
 	)
 	game_restarted.emit(new_seed, self)
+
 
 ## Pass signal to main, then delete self.
 func _on_pause_menu_game_exited_to_menu() -> void:
@@ -82,7 +82,7 @@ func _on_health_changed(pos: Vector2, amount: int) -> void:
 	health_change.global_position = pos
 	health_change.display(amount)
 	add_child(health_change)
-	
+
 
 ## Create dungeon if teleporter entered leads to dungeon.
 func _on_teleporter_entered(teleporter: Node2D) -> void:

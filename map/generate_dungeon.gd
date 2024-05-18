@@ -1,4 +1,4 @@
-# Diego Cordova + Optimization Done by Karwei
+# Diego Cordova, Karwai Kang
 extends Node
 
 var room: PackedScene = preload("res://map/room.tscn")
@@ -9,17 +9,14 @@ var room: PackedScene = preload("res://map/room.tscn")
 @export var room_battle_ratio: float = 0.75
 @export var room_shop_ratio: float = 0.15
 @export var room_rest_ratio: float = 0.1
-
 var room_queue: Array[Room.RoomType] = []
-#Karwei addition to ease readability 
 const direction_vector: Dictionary = {
-	1: Vector2(1, 0),
-	2: Vector2(-1, 0),
-	3: Vector2(0, 1),
-	4: Vector2(0, -1),
+	1: Vector2.UP,
+	2: Vector2.RIGHT,
+	3: Vector2.DOWN,
+	4: Vector2.LEFT,
 }
 
-#Diego Function optimized by karwei
 #The basic walker that starts at a base room and randomly chooses a direction to walk in and add a room if one does not already exist and then calling the connect room function to have a record of what is connected with what
 func generate(dungeon_seed: int) -> Node2D:
 	seed(dungeon_seed)
@@ -68,11 +65,11 @@ func generate(dungeon_seed: int) -> Node2D:
 		#dungeon = generate(dungeon_seed * randf_range(-1,1))
 	for current_position: Vector2 in dungeon.keys():
 		var current_room: Room = dungeon[current_position]
-		current_room.on_Dungeon_Complete()
 		root.add_child(current_room)
 	return root
-	
-# Create a queue of room types to then assign to the rooms.
+
+
+## Create a queue of room types to then assign to the rooms.
 func set_queue(count: int) -> void:
 	var room_battle_count: int = int(count * room_battle_ratio)
 	var room_rest_count: int = int(count * room_rest_ratio)

@@ -50,11 +50,11 @@ func take_damage(damage_total: float) -> void:
 
 ## Drop a life and then delete self.
 func die() -> void:
+	if spawn_count > 0:
+		spawn_enemy(enemy_to_spawn, spawn_count)
 	Events.enemy_died.emit(global_position)
 	defeated.emit(self)
 	queue_free()
-	if spawn_count > 0:
-		spawn_enemy(enemy_to_spawn, spawn_count)
 
 	
 #func spawn_enemy(enemy_scene_path: PackedScene, count: int) -> void:
@@ -76,7 +76,7 @@ func spawn_enemy(enemy_scene_path: PackedScene, count: int) -> void:
 	var offset: int = 20
 
 	for i: int in range(count):
-		var room: Room = get_parent()  # Call get_parent() inside the loop
+		var room: Room = get_parent()
 		var enemy_instance: Skull = enemy_scene_path.instantiate()
 		if enemy_instance and room:
 			var random_offset: Vector2 = Vector2(

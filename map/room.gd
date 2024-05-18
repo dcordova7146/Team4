@@ -1,275 +1,264 @@
-#Diego Cordova 
+# Diego Cordova, Karwai Kang
 class_name Room
 extends Node2D
 
-const SIZE: Vector2 = Vector2(258 * 1.2, 115 * 1.2) #edit by karwei to optimize room gen
-var connections: int = 0
-@export var enemycount: int = 3
-@onready var playArea: Node2D = $"Play Area"
-@onready var type_label: Label = $TypeLabel
-var enemies_inside: Array[Skull] = []
-@export var warning: Resource
-## Array of enemies and their corresponding weights.
-@export var enemies_possible: Array[ChanceRow]
-@onready var boss_skull: PackedScene = preload("res://enemy/skull_queen.tscn")
-@onready var campfire: PackedScene = preload("res://map/camp.tscn")
-@onready var shop: PackedScene = preload("res://drop/shop_mat.tscn")
-@onready var center_marker: Marker2D = $CenterMarker
-
-#enum direction{ 
-	#up = Vector2(0,-1), 
-	#down = Vector2(0,1),
-	#left = Vector2(-1,0),
-	#right = Vector2(1,0)
-#}
-@export var connected_rooms: Dictionary = {
-	Vector2(1,0): null, 
-	Vector2(-1,0): null, 
-	Vector2(0,1): null, 
-	Vector2(0,-1): null 
-}
+## Determines the behavior upon entering.
 enum RoomType {
 	BATTLE = 2,
 	SHOP = 3,
 	REST = 4,
 	BOSS = 5,
+	## Where the player begins.
 	START = 1,
 	ROOM = 0
 }
-@export var room_type: RoomType = RoomType.ROOM
+## Size of the sprite.
+const WIDTH: int = 320
+const HEIGHT: int = 160
+const WALL: int = 12
+const SIZE: Vector2 = Vector2(
+		WIDTH,
+		HEIGHT
+)
+const SIZE_DOOR: int = 40
+## Text of the label for each type.
+const LABEL: Dictionary = {
+	Room.RoomType.BATTLE: "⚔ Battle",
+	Room.RoomType.SHOP:  "💰 Shop",
+	Room.RoomType.REST: "🏕 Rest",
+	Room.RoomType.BOSS: "👿 Boss",
+	Room.RoomType.START: "🏁 Start",
+	Room.RoomType.ROOM: "???",
+}
+## Number of enemies to spawn.
+@export var enemy_count: int = 3
+## Array of enemies and their corresponding weights.
+@export var enemies_possible: Array[ChanceRow]
+## Scene of door.
+@export var door_scene: PackedScene
+## Scene of door.
+@export var door_sprite_horizontal: CompressedTexture2D
+## Scene of door.
+@export var door_sprite_vertical: CompressedTexture2D
+## Number of rooms connected to it.
+var connections: int = 0
+## Enemies inside it.
+var enemies_inside: Array[Skull] = []
+## Doors of the room.
+var doors: Array[Door]
+## Label of the type in the top left corner.
+@onready var type_label: Label = $TypeLabel
+## Walls
+@onready var walls: StaticBody2D = $Walls
+## Collision shape of the area.
+@onready var area_shape: CollisionShape2D = $Area2D/CollisionShape2D
+## Boss enemy scene.
+@onready var boss_skull: PackedScene = preload("res://enemy/skull_queen.tscn")
+## Campfire scene.
+@onready var campfire: PackedScene = preload("res://map/camp.tscn")
+## Shop mat scene.
+@onready var shop: PackedScene = preload("res://drop/shop_mat.tscn")
+## Rooms connected to this room. Have doorways to them and vice-versa.
+var connected_rooms: Dictionary = {
+	Vector2.UP: null,
+	Vector2.RIGHT: null,
+	Vector2.DOWN: null,
+	Vector2.LEFT: null
+}
+## Type of the room.
+var room_type: RoomType = RoomType.ROOM
 ## Whether enemies have been spawned in the room.
-var enemies_spawned: bool = false
+var entered: bool = false
+
 
 func _ready() -> void:
-	#Events.dungeon_complete.connect(on_Dungeon_Complete)
-	#print(self.get_name())
-	#print(":")
-	#print(midMarker.global_position)
-	#print("\n")
-	setupRoom()
-	
-#Emit room entered signal if body entered is the player.
-#function is used to talk to the camera to lock it to a room instead of free roam camera
-func on_Dungeon_Complete()->void:
-	updateRoom()
-	#setupRoom()
-	
+	type_label.text = LABEL[room_type]
+	# Set area.
+	var shape: RectangleShape2D = RectangleShape2D.new()
+	shape.size = Vector2(
+			WIDTH - 2 * WALL,
+			HEIGHT - 2 * WALL
+	)
+	area_shape.shape = shape
+	# Create walls.
+	var polygon: PackedVector2Array = PackedVector2Array([
+			Vector2(WIDTH / -2, HEIGHT / -2),
+			Vector2(SIZE_DOOR / -2, HEIGHT / -2),
+			Vector2(SIZE_DOOR / -2, HEIGHT / -2 + WALL),
+			Vector2(WIDTH / -2 + WALL, HEIGHT / -2 + WALL),
+			Vector2(WIDTH / -2 + WALL, SIZE_DOOR / -2),
+			Vector2(WIDTH / -2, SIZE_DOOR / -2),
+	])
+	create_wall(polygon)
+	create_wall(polygon * Transform2D(Vector2.LEFT, Vector2.DOWN, Vector2.ZERO))
+	create_wall(polygon * Transform2D(Vector2.LEFT, Vector2.UP, Vector2.ZERO))
+	create_wall(polygon * Transform2D(Vector2.RIGHT, Vector2.UP, Vector2.ZERO))
+	# Create doors.
+	create_door(
+			Vector2(0, HEIGHT / -2 + WALL / 2),
+			door_sprite_horizontal,
+			connected_rooms[Vector2.UP] == null
+	)
+	create_door(
+			Vector2(WIDTH / 2 - WALL / 2, 0),
+			door_sprite_vertical,
+			connected_rooms[Vector2.RIGHT] == null
+	)
+	create_door(
+			Vector2(0, HEIGHT / 2 - WALL / 2),
+			door_sprite_horizontal,
+			connected_rooms[Vector2.DOWN] == null, Vector2(1, -1)
+	)
+	create_door(
+			Vector2(WIDTH / -2 + WALL / 2, 0),
+			door_sprite_vertical,
+			connected_rooms[Vector2.LEFT] == null, Vector2(-1, 1)
+	)
 
-func _on_play_area_body_entered(_body: Node2D) -> void:
-	Events.room_entered.emit(self) 
-	#print(self.get_name())
-	match room_type:
-		RoomType.BATTLE:
-			# Don't lock room if there's no enemies inside.
-			# (i.e. after the room was already cleared before.)
-			if not enemies_spawned:
-				lockRoom()
-				populateEnemySpawner()
-				wakeEnemies()
-				enemies_spawned = true
-		RoomType.SHOP:
-			pass
-		RoomType.REST:
-			
-			print("This is a rest room")
-		RoomType.BOSS:
-			if not enemies_spawned:
-				lockRoom()
-				spawnBoss()
-				wakeEnemies()
-				enemies_spawned = true
-		RoomType.START:
-			pass
-		RoomType.ROOM:
-			pass
-		_:
-			print("Unknown state")
-	#activate spawners
 
-func _on_play_area_body_exited(_body: Node2D) -> void:
-	updateRoom()
-	
+func create_wall(polygon: PackedVector2Array) -> void:
+	var collision: CollisionPolygon2D = CollisionPolygon2D.new()
+	collision.polygon = polygon
+	walls.add_child(collision)
 
-#function is used to update the connected rooms dictionary based on room generation
-#in order to make traversal more interesting not all adjacent rooms are connected 
+
+func create_door(
+		door_position: Vector2,
+		texture: CompressedTexture2D,
+		sealed: bool = false,
+		door_scale: Vector2 = Vector2.ONE
+	) -> void:
+	var door: Door = door_scene.instantiate()
+	door.position = door_position
+	door.sprite_texture = texture
+	door.sprite_scale = door_scale
+	door.sealed = sealed
+	add_child(door)
+	doors.append(door)
+
+
+## Update the connected rooms based on room generation.
+## In order to make traversal more interesting not all adjacent rooms are connected
 func connect_rooms(room2: Room, direction: Vector2) -> void:
 	connected_rooms[direction] = room2
 	room2.connected_rooms[-direction] = Room
 	connections += 1
 	room2.connections += 1
-	updateRoom()
 
-#Just visualizes the room door openings with how they are connected, calling seperate functions that activate collisions and adds sprites representing doors
-func updateRoom()-> void:
-	if connected_rooms[Vector2(0,-1)] != null:
-		openTop()
-	if connected_rooms[Vector2(0,1)] != null:
-		openBot()
-	if connected_rooms[Vector2(1,0)] != null:
-		openRight()
-	if connected_rooms[Vector2(-1,0)] != null:
-		openLeft()
-	else:
-		pass
-			
-func openTop()-> void:
-	#add a door
-	#disable no door collision
-	if($Walls/TopNoDoor):
-		($TopDoor as Node2D).visible = true
-		($Walls/TopNoDoor as CollisionShape2D).set_deferred("disabled", true)
-		($"TopBarrier" as Node2D).visible = false
-		
-func openBot()-> void:
-	if($Walls/BottomNoDoor):
-		($Walls/BottomNoDoor as CollisionShape2D).set_deferred("disabled", true)
-		($BotDoor as Node2D).visible = true
-		($"BotBarrier" as Node2D).visible = false
-	
-func openRight()-> void:
-	if($Walls/RightNoDoor):
-		($Walls/RightNoDoor as CollisionShape2D).set_deferred("disabled", true)
-		($RightDoor as Node2D).visible = true
-		($"RightBarrier" as Node2D).visible = false
-		
-func openLeft()-> void:
-	if($Walls/LeftNoDoor):
-		($Walls/LeftNoDoor as CollisionShape2D).set_deferred("disabled", true)
-		($LeftDoor as Node2D).visible = true
-		($"LeftBarrier" as Node2D).visible = false
-		
-func populateEnemySpawner() -> void:
+
+## Open all doors.
+func open_doors() -> void:
+	for door: Door in doors:
+		door.locked = false
+
+
+func spawn_enemies() -> void:
 	#var total_weight: float = 0.0
 	#for chance_row: ChanceRow in enemies_possible:
 		#total_weight += chance_row.chance
 	
 	#iterate for amount of enemies we have alloted in one room
-	for i: int in range(enemycount):
+	for i: int in range(enemy_count):
 		# Randomly choose an enemy type.
 		var offset: float = 0
 		var enemy_scene: PackedScene
-		var rng: float = randf()
 		for chance_row: ChanceRow in enemies_possible:
-			if rng < chance_row.chance + offset:
+			if randf() < chance_row.chance + offset:
 				enemy_scene = chance_row.scene
 				break
 			offset += chance_row.chance
-			
 		var instance: Skull = enemy_scene.instantiate()
 		add_enemy(instance)
-		instance.set_deferred("global_position", get_random_position())
+		instance.set_deferred("position", get_random_position())
 
-func spawnBoss() -> void:
+
+## Spawn a boss.
+## TODO and a boss health bar.
+func spawn_boss() -> void:
 	var instance: Skull = boss_skull.instantiate()
 	add_enemy(instance)
-	instance.set_deferred("global_position", get_middle_position())
 
-func spawnCamp() -> void:
+
+## Give player choice to upgrade or heal themselves.
+func spawn_camp() -> void:
 	var campInstance: Node2D = campfire.instantiate()
 	call_deferred("add_child", campInstance)
-	campInstance.set_deferred("global_position", get_middle_position())
-	
-func spawnShop() -> void:
+
+
+## Spawn a shop for the player to spend currency.
+func spawn_shop() -> void:
 	var shopInstance: Node2D = shop.instantiate()
 	call_deferred("add_child", shopInstance)
-	shopInstance.set_deferred("global_position", get_middle_position())
+
 
 ## Add an enemy.
 func add_enemy(new_enemy: Skull) -> void:
-	new_enemy.defeated.connect(on_kill)
+	new_enemy.defeated.connect(_on_enemy_defeated)
 	enemies_inside.append(new_enemy)
 	call_deferred("add_child", new_enemy)
 
 
 ## Returns a random position in the predetermined bounds of the room.
-func get_random_position()-> Vector2:
-	var topleft: Vector2 = ($"Play Area/topLeftBound" as Marker2D).global_position
-	var botright: Vector2 = ($"Play Area/botRightBound" as Marker2D).global_position
-	var randx: float = randf_range(topleft.x, botright.x)
-	var randy: float = randf_range(topleft.y, botright.y)
-	return Vector2(randx,randy)
-	
-func get_middle_position()->Vector2:
-	print("mid marker")
-	print(center_marker.global_position)
-	return center_marker.global_position
-	#var topleft: Vector2 = ($"Play Area/topLeftBound" as Marker2D).global_position
-	#var topright: Vector2 = ($"Play Area/topRightBound" as Marker2D).global_position
-	#var botleft: Vector2 = ($"Play Area/botLeftBound" as Marker2D).global_position
-	#var botright: Vector2 = ($"Play Area/botRightBound" as Marker2D).global_position
-	#var center: Vector2 = (topleft + topright +botleft +botright)/4
-	#return center
-	
-func lockRoom() -> void:
-	#add possible barriers corresponding to open doors
-	#reactivate collisions to lock a player and enemies in a room
-	if connected_rooms[Vector2(0,-1)] != null:
-		($"TopBarrier" as Barrier).visible = true
-		($Walls/TopNoDoor as CollisionShape2D).set_deferred("disabled", false)
-	if connected_rooms[Vector2(0,1)] != null:
-		($"BotBarrier" as Barrier).visible = true
-		($Walls/BottomNoDoor as CollisionShape2D).set_deferred("disabled", false)
-	if connected_rooms[Vector2(1,0)] != null:
-		($"RightBarrier" as Barrier).visible = true
-		($Walls/RightNoDoor as CollisionShape2D).set_deferred("disabled", false)
-	if connected_rooms[Vector2(-1,0)] != null:
-		($"LeftBarrier" as Barrier).visible = true
-		($Walls/LeftNoDoor as CollisionShape2D).set_deferred("disabled", false)
-	else:
-		pass
+func get_random_position() -> Vector2:
+	var size_x: float = WIDTH - 2 * WALL
+	var size_y: float = HEIGHT - 2 * WALL
+	var random_x: float = randf_range(0, size_x - 4)
+	var random_y: float = randf_range(0, size_y - 4)
+	return Vector2(random_x - size_x / 2, random_y - size_y / 2)
 
-func unlockRoom()->void:
-	#upon wave clear room should unlock	
-	updateRoom()
-	
-func wakeEnemies()->void:
+
+## Add barriers at doors, locking player and enemies.
+func barricade_doors() -> void:
+	for door: Door in doors:
+		door.locked = true
+
+
+## Wake all enemies inside.
+func wake_enemies() -> void:
 	for enemy: Skull in enemies_inside:
 		enemy.awake = true
-	
-func setupRoom()->void:
-	#this function shall spawn whatever a room requires of it
+
+
+func _on_play_area_body_entered(_body: Node2D) -> void:
+	# Tell camera to move to room.
+	Events.room_entered.emit(self)
+	# Don't do anything if already entered.
+	if entered:
+		return
 	match room_type:
 		RoomType.BATTLE:
-			type_label.text = "⚔ Battle"
+			barricade_doors()
+			spawn_enemies()
+			wake_enemies()
 		RoomType.SHOP:
-			spawnShop()
-			type_label.text = "💰 Shop"
-			# insantiate a shop for the player to spend currency to upgrade
+			spawn_shop()
 		RoomType.REST:
-			print("camp created")
-			spawnCamp()
-			type_label.text = "🏕 Rest"
-			# should give the player a choice to upgrade or heal themselves
+			spawn_camp()
 		RoomType.BOSS:
-			type_label.text = "👿 Boss"
-			# spawn a boss and a boss health bar
+			barricade_doors()
+			spawn_boss()
+			wake_enemies()
 		RoomType.START:
-			# where the player begins
-			#emit_signal("StartRoom", get_middle_position())
-			type_label.text = "🏁 Start"
+			pass
 		RoomType.ROOM:
-			#a room of ROOM type shouldnt happen this is a check for if the generator didnt mess up
-			type_label.text = "Room"
+			push_error("Invalid room type ROOM")
 		_:
-			print("Unknown state")
+			push_error("Unknown room type ", room_type)
+	entered = true
 
-func set_room_type(new_type: RoomType) -> void:
-	room_type = new_type
-	
-#error the kill is being registered multiple times instead of once
-#accurately grabbing the enemy and removing it from the array of enemies but 1 kill removes all enemies for some reason
-func on_kill(defeated_enemy: Skull) -> void:
+
+func _on_play_area_body_exited(_body: Node2D) -> void:
+	open_doors()
+
+
+## Remove enemy from list and update doors if empty.
+func _on_enemy_defeated(defeated_enemy: Skull) -> void:
 	var index: int = enemies_inside.find(defeated_enemy)
 	if index != -1:
 		enemies_inside.remove_at(index)
-	else:
-		pass
-	
-	if room_type == RoomType.BOSS and enemies_inside.is_empty(): 
-		#spawn teleporter to new dungeon
-		print("boss room clear")
-		unlockRoom()
-		return
-	
+	# Unlock upon wave clear.
 	if enemies_inside.is_empty():
-		unlockRoom()
+		open_doors()
+	# TODO Spawn teleporter to new dungeon.
+	if room_type == RoomType.BOSS and enemies_inside.is_empty(): 
+		print("boss room clear")

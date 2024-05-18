@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bxvfe2h3ur6ol"]
+[gd_scene load_steps=21 format=3 uid="uid://bxvfe2h3ur6ol"]
 
 [ext_resource type="Script" path="res://map/room.gd" id="1_k281e"]
 [ext_resource type="PackedScene" uid="uid://dnvsjj2bbghyp" path="res://enemy/skull_small.tscn" id="2_8cv4c"]
@@ -7,16 +7,13 @@
 [ext_resource type="Script" path="res://map/chance_row.gd" id="2_jqava"]
 [ext_resource type="Texture2D" uid="uid://cyhjqf2e4ast" path="res://map/room_default.png" id="3_4acqo"]
 [ext_resource type="PackedScene" uid="uid://c4neg4b8vv5dn" path="res://enemy/skull_medium.tscn" id="4_esebd"]
-[ext_resource type="Texture2D" uid="uid://dkf6rnbpwdnay" path="res://map/door_bottom.png" id="4_rac6h"]
 [ext_resource type="PackedScene" uid="uid://cvv51jcjucc2m" path="res://enemy/skull_large.tscn" id="5_4nlo8"]
 [ext_resource type="PackedScene" uid="uid://cq6l1w3ackej8" path="res://enemy/skull_bomb.tscn" id="6_ic3qd"]
-[ext_resource type="Texture2D" uid="uid://fyat7l76scsr" path="res://map/door_left.png" id="6_llr0f"]
 [ext_resource type="Texture2D" uid="uid://btk0f6t0nv7k2" path="res://map/door_top.png" id="7_5qi8u"]
 [ext_resource type="PackedScene" uid="uid://bir4mmpfg5c2q" path="res://enemy/skull_frost.tscn" id="7_84ar3"]
 [ext_resource type="Texture2D" uid="uid://c87xswjoaabdj" path="res://map/door_right.png" id="8_jkt5k"]
 [ext_resource type="PackedScene" uid="uid://sqyxernsmlq2" path="res://enemy/cursed_tombstone.tscn" id="8_q3y4i"]
-[ext_resource type="Texture2D" uid="uid://cj0770rj04ylb" path="res://map/warning_sign.png" id="9_vjfqa"]
-[ext_resource type="Script" path="res://map/barrier.gd" id="10_wfbh8"]
+[ext_resource type="PackedScene" uid="uid://w08be4o1ar2p" path="res://map/door.tscn" id="9_ldw5k"]
 
 [sub_resource type="Resource" id="Resource_in8qp"]
 script = ExtResource("2_jqava")
@@ -48,280 +45,12 @@ script = ExtResource("2_jqava")
 scene = ExtResource("8_q3y4i")
 chance = 0.05
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_assl7"]
-size = Vector2(310, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3cfp"]
-size = Vector2(17, 138)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5g735"]
-size = Vector2(310, 14)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1m3f"]
-size = Vector2(17, 138)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgx51"]
-size = Vector2(228.333, 95)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7bitr"]
-size = Vector2(310, 15)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dti14"]
-size = Vector2(310, 14)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2y876"]
-size = Vector2(20, 137)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nub4"]
-size = Vector2(16, 137)
-
-[sub_resource type="Animation" id="Animation_8qmg8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(155, 6)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_te71t"]
-resource_name = "tbar"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(155, 6), Vector2(155, 2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.215686)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0n62f"]
-_data = {
-"RESET": SubResource("Animation_8qmg8"),
-"barrier": SubResource("Animation_te71t")
-}
-
-[sub_resource type="Animation" id="Animation_grebr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(155, 134)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_7ktlg"]
-resource_name = "bbar"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(155, 134), Vector2(155, 131)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.215686)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yuldh"]
-_data = {
-"RESET": SubResource("Animation_grebr"),
-"barrier": SubResource("Animation_7ktlg")
-}
-
-[sub_resource type="Animation" id="Animation_lwgtn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(301, 67)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_wjjs6"]
-resource_name = "rbar"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(301, 67), Vector2(301, 63)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.215686)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hjuv3"]
-_data = {
-"RESET": SubResource("Animation_lwgtn"),
-"barrier": SubResource("Animation_wjjs6")
-}
-
-[sub_resource type="Animation" id="Animation_vg4kc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(9, 67)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_5xp8v"]
-resource_name = "lbar"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(9, 67), Vector2(9, 63)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.215686)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uwmel"]
-_data = {
-"RESET": SubResource("Animation_vg4kc"),
-"barrier": SubResource("Animation_5xp8v")
-}
-
 [node name="Room" type="Node2D"]
 script = ExtResource("1_k281e")
 enemies_possible = Array[ExtResource("2_jqava")]([SubResource("Resource_in8qp"), SubResource("Resource_elk34"), SubResource("Resource_ww4fp"), SubResource("Resource_cviua"), SubResource("Resource_1yj0x"), SubResource("Resource_nfkjy")])
+door_scene = ExtResource("9_ldw5k")
+door_sprite_horizontal = ExtResource("7_5qi8u")
+door_sprite_vertical = ExtResource("8_jkt5k")
 
 [node name="MapSprite" type="Node2D" parent="."]
 visibility_layer = 4
@@ -330,194 +59,25 @@ script = ExtResource("2_gosqv")
 [node name="TypeLabel" type="Label" parent="MapSprite"]
 offset_right = 40.0
 offset_bottom = 23.0
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 128
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visibility_layer = 2
-position = Vector2(155, 69)
-scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_4acqo")
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
-[node name="BottomNoDoor" type="CollisionShape2D" parent="Walls"]
-position = Vector2(155, 133)
-shape = SubResource("RectangleShape2D_assl7")
-
-[node name="RightNoDoor" type="CollisionShape2D" parent="Walls"]
-position = Vector2(301.5, 69)
-shape = SubResource("RectangleShape2D_i3cfp")
-
-[node name="TopNoDoor" type="CollisionShape2D" parent="Walls"]
-position = Vector2(155, 7)
-shape = SubResource("RectangleShape2D_5g735")
-
-[node name="LeftNoDoor" type="CollisionShape2D" parent="Walls"]
-position = Vector2(8.5, 69)
-shape = SubResource("RectangleShape2D_m1m3f")
-
-[node name="TopLeftCorner" type="CollisionPolygon2D" parent="Walls"]
-build_mode = 1
-polygon = PackedVector2Array(0, 0, 130, 0, 138, 13, 17, 13, 17, 58, 0, 50)
-
-[node name="TopRightCorner" type="CollisionPolygon2D" parent="Walls"]
-position = Vector2(310, 0)
-build_mode = 1
-polygon = PackedVector2Array(0, 0, -131, 0, -136, 13, -17, 13, -17, 57, 0, 50)
-
-[node name="BotLeftCorner" type="CollisionPolygon2D" parent="Walls"]
-position = Vector2(0, 138)
-polygon = PackedVector2Array(0, 0, 0, -56, 17, -62, 17, -10, 136, -10, 131, 0)
-
-[node name="BotRightCorner" type="CollisionPolygon2D" parent="Walls"]
-position = Vector2(310, 138)
-build_mode = 1
-polygon = PackedVector2Array(0, 0, 0, -56, -17, -62, -17, -10, -138, -10, -135, 0)
-
-[node name="Play Area" type="Area2D" parent="."]
-position = Vector2(155, 69)
-scale = Vector2(1.2, 1.2)
-collision_layer = 0
+[node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 
-[node name="pArea" type="CollisionShape2D" parent="Play Area"]
-position = Vector2(0, 1.66666)
-shape = SubResource("RectangleShape2D_pgx51")
-debug_color = Color(0.694118, 0.286275, 1, 0.419608)
-
-[node name="topLeftBound" type="Marker2D" parent="Play Area"]
-position = Vector2(-110.833, -42.5)
-
-[node name="topRightBound" type="Marker2D" parent="Play Area"]
-position = Vector2(111.667, -43.3333)
-
-[node name="botLeftBound" type="Marker2D" parent="Play Area"]
-position = Vector2(-111.667, 46.6667)
-
-[node name="botRightBound" type="Marker2D" parent="Play Area"]
-position = Vector2(110.833, 45.8333)
-
-[node name="North" type="Area2D" parent="." groups=["RoomScanners"]]
-position = Vector2(154, -11)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="North"]
-position = Vector2(1, 2.5)
-shape = SubResource("RectangleShape2D_7bitr")
-debug_color = Color(0.827451, 0, 0.956863, 0.419608)
-
-[node name="South" type="Area2D" parent="." groups=["RoomScanners"]]
-position = Vector2(155, 142)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="South"]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_dti14")
-debug_color = Color(0.862745, 0, 0.862745, 0.419608)
-
-[node name="East" type="Area2D" parent="." groups=["RoomScanners"]]
-position = Vector2(318, 70)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="East"]
-position = Vector2(2, -1)
-shape = SubResource("RectangleShape2D_2y876")
-debug_color = Color(0.807843, 0.00392157, 0.996078, 0.419608)
-
-[node name="West" type="Area2D" parent="." groups=["RoomScanners"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="West"]
-position = Vector2(-8, 69.5)
-shape = SubResource("RectangleShape2D_6nub4")
-debug_color = Color(0.819608, 0, 0.968627, 0.419608)
-
-[node name="BotDoor" type="Sprite2D" parent="."]
-visible = false
-visibility_layer = 2
-position = Vector2(154, 132)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("4_rac6h")
-
-[node name="LeftDoor" type="Sprite2D" parent="."]
-visible = false
-visibility_layer = 2
-position = Vector2(10, 65)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("6_llr0f")
-
-[node name="TopDoor" type="Sprite2D" parent="."]
-visible = false
-visibility_layer = 2
-position = Vector2(156, 6)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("7_5qi8u")
-
-[node name="RightDoor" type="Sprite2D" parent="."]
-visible = false
-visibility_layer = 2
-position = Vector2(302, 67)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("8_jkt5k")
-
-[node name="TopBarrier" type="Sprite2D" parent="."]
-visible = false
-z_index = 5
-position = Vector2(155, 6)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_vjfqa")
-script = ExtResource("10_wfbh8")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TopBarrier"]
-libraries = {
-"": SubResource("AnimationLibrary_0n62f")
-}
-
-[node name="BotBarrier" type="Sprite2D" parent="."]
-visible = false
-z_index = 5
-position = Vector2(155, 134)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_vjfqa")
-script = ExtResource("10_wfbh8")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BotBarrier"]
-libraries = {
-"": SubResource("AnimationLibrary_yuldh")
-}
-
-[node name="RightBarrier" type="Sprite2D" parent="."]
-visible = false
-z_index = 5
-position = Vector2(301, 67)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_vjfqa")
-script = ExtResource("10_wfbh8")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="RightBarrier"]
-libraries = {
-"": SubResource("AnimationLibrary_hjuv3")
-}
-
-[node name="LeftBarrier" type="Sprite2D" parent="."]
-visible = false
-z_index = 5
-position = Vector2(9, 67)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_vjfqa")
-script = ExtResource("10_wfbh8")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LeftBarrier"]
-libraries = {
-"": SubResource("AnimationLibrary_uwmel")
-}
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
 [node name="TypeLabel" type="Label" parent="."]
-offset_left = 7.0
-offset_top = -1.0
-offset_right = 8.0
-offset_bottom = 12.0
-theme_override_colors/font_color = Color(0.262745, 0.207843, 0.396078, 1)
+visible = false
+offset_right = 1.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0.789466, 0.753021, 0.90722, 1)
 script = ExtResource("2_gc5mi")
 
-[node name="CenterMarker" type="Marker2D" parent="."]
-position = Vector2(155, 69)
-
-[connection signal="body_entered" from="Play Area" to="." method="_on_play_area_body_entered"]
-[connection signal="body_exited" from="Play Area" to="." method="_on_play_area_body_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_play_area_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_play_area_body_exited"]

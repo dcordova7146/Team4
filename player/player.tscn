@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://db5fatnj0uwms"]
+[gd_scene load_steps=14 format=3 uid="uid://db5fatnj0uwms"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_iitf2"]
 [ext_resource type="Texture2D" uid="uid://b010odvgbpiye" path="res://player/player.png" id="2_22u6h"]
@@ -9,8 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://blnmaye6htmo6" path="res://weapon/shotgun.tscn" id="6_d3724"]
 [ext_resource type="PackedScene" uid="uid://32a0rer8h7vt" path="res://weapon/sniper_rifle.tscn" id="7_uxrnu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv7g"]
-size = Vector2(16, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_my8fn"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tldfe"]
+radius = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5f81s"]
 bg_color = Color(0, 0, 0, 0.266667)
@@ -30,14 +33,14 @@ motion_mode = 1
 script = ExtResource("1_iitf2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ysv7g")
+shape = SubResource("CircleShape2D_my8fn")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 32
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_ysv7g")
+shape = SubResource("CircleShape2D_tldfe")
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 2.0
