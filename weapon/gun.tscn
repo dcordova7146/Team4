@@ -19,8 +19,6 @@ texture = ExtResource("2_sltdw")
 [node name="Muzzle" type="Marker2D" parent="Pivot"]
 position = Vector2(4, -2.5)
 
-[node name="ShootingTimer" type="Timer" parent="."]
-
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -29,5 +27,4 @@ shape = SubResource("CircleShape2D_t4ukx")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
-[connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
