@@ -63,6 +63,7 @@ var is_loaded_fully: bool:
 var _is_cooling_down: bool:
 	get:
 		return not cooldown_timer.is_stopped()
+var _is_trigger_held: bool = false
 
 @onready var pivot: Marker2D = $Pivot
 @onready var muzzle: Marker2D = $Pivot/Muzzle
@@ -94,6 +95,7 @@ func aim(target: Vector2) -> void:
 
 ## Shoot, and start a timer to shoot regularly thereafter.
 func hold_trigger() -> void:
+	_is_trigger_held = true
 	# Don't fire if still cooling down.
 	if _is_cooling_down:
 		return
@@ -102,8 +104,9 @@ func hold_trigger() -> void:
 
 ## Stop the timer for automatic shooting.
 func release_trigger() -> void:
-	if not cooldown_timer.is_stopped():
-		cooldown_timer.stop()
+	_is_trigger_held = false
+	#if not cooldown_timer.is_stopped():
+		#cooldown_timer.stop()
 
 
 ## Set the amount of bullets loaded and reserved to full.
@@ -175,7 +178,8 @@ func _instantiate_bullet() -> Bullet:
 
 ## Shoot when cooldown is over.
 func _on_cooldown_timer_timeout() -> void:
-	_shoot()
+	if _is_trigger_held:
+		_shoot()
 
 
 func _on_body_entered(_body: Node2D) -> void:
@@ -187,7 +191,8 @@ func _on_body_exited(_body: Node2D) -> void:
 	remove_from_group("takeable")
 	Events.takeable_group_changed.emit()
 	hide_outline()
-	
+
+
 func set_dmg_mul(amount: float) -> void:
 	print(damage)
 	var percent: float = (amount/100.0) + 1.0
