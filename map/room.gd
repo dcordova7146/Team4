@@ -21,15 +21,6 @@ const SIZE: Vector2 = Vector2(
 		HEIGHT
 )
 const SIZE_DOOR: int = 40
-## Text of the label for each type.
-const LABEL: Dictionary = {
-	Room.RoomType.BATTLE: "⚔ Battle",
-	Room.RoomType.SHOP:  "💰 Shop",
-	Room.RoomType.REST: "🏕 Rest",
-	Room.RoomType.BOSS: "👿 Boss",
-	Room.RoomType.START: "🏁 Start",
-	Room.RoomType.ROOM: "???",
-}
 ## Number of enemies to spawn.
 @export var enemy_count: int = 3
 ## Array of enemies and their corresponding weights.
@@ -46,8 +37,8 @@ var connections: int = 0
 var enemies_inside: Array[Skull] = []
 ## Doors of the room.
 var doors: Array[Door]
-## Label of the type in the top left corner.
-@onready var type_label: Label = $TypeLabel
+## Label describing the controls. Only visible in starting room.
+@onready var explanation_label: Label = $ExplanationLabel
 ## Walls
 @onready var walls: StaticBody2D = $Walls
 ## Collision shape of the area.
@@ -256,7 +247,7 @@ func _on_play_area_body_entered(_body: Node2D) -> void:
 			spawn_boss()
 			wake_enemies()
 		RoomType.START:
-			pass
+			explanation_label.show()
 		RoomType.ROOM:
 			push_error("Invalid room type ROOM")
 		_:

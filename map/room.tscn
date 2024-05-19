@@ -76,11 +76,20 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
-[node name="TypeLabel" type="Label" parent="."]
+[node name="ExplanationLabel" type="Label" parent="."]
 visible = false
-offset_right = 1.0
-offset_bottom = 13.0
+offset_left = -144.0
+offset_top = -64.0
+offset_right = -9.0
+offset_bottom = -51.0
 theme_override_colors/font_color = Color(0.789466, 0.753021, 0.90722, 1)
+text = "WASD/Arrow keys to move.
+Left mouse button to attack.
+Scroll to cycle weapon.
+1, 2, 3, 4, 5 to switch weapon.
+F to drop weapon.
+E to pick up weapon.
+Mouse hover over items to see description."
 script = ExtResource("2_gc5mi")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_play_area_body_entered"]
