@@ -179,18 +179,16 @@ func spawn_enemies() -> void:
 		add_enemy(instance)
 		instance.set_deferred("position", get_random_position())
 
-
+## coin flip on a room generation if heads pick between 3 different trap layouts
 func spawn_Trap() -> void:
 	if randi_range(0,1) == 1:
-		print("trap spawned")
 		var trap_instance: Node
-		var randon_index = randi_range(1,3)
-		match randon_index:
+		var random_index: int = randi_range(1,3)
+		match random_index:
 			1: trap_instance = trap_prefabs[0].instantiate()
 			2: trap_instance = trap_prefabs[1].instantiate()
 			3: trap_instance = trap_prefabs[2].instantiate()
 		call_deferred("add_child", trap_instance)
-	#aaaaaaapass
 ## Spawn a boss.
 ## TODO and a boss health bar.
 func spawn_boss() -> void:
@@ -202,7 +200,6 @@ func spawn_boss() -> void:
 func spawn_camp() -> void:
 	var campInstance: Node2D = campfire.instantiate()
 	call_deferred("add_child", campInstance)
-
 
 ## Spawn a shop for the player to spend currency.
 func spawn_shop() -> void:
