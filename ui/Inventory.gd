@@ -16,6 +16,7 @@ func add_artifact(artifact: Artifact) -> bool:
 			return false
 	# if not found, add slot and place in inventory
 	var new_slot: ItemSlot = slot_scene.instantiate()
+	new_slot.tooltip_text = artifact.description
 	add_child(new_slot)
 	new_slot.item = artifact
 	slots.append(new_slot)
