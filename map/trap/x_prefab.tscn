@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxvwa1tmgktxy"]
+
+[ext_resource type="PackedScene" uid="uid://bbvrevqxj81g0" path="res://map/trap/trap.tscn" id="1_w3ucb"]
+
+[node name="X" type="Node2D"]
+
+[node name="Trap" parent="." instance=ExtResource("1_w3ucb")]
+position = Vector2(0, -24)
+
+[node name="Trap2" parent="." instance=ExtResource("1_w3ucb")]
+position = Vector2(-104, -40)
+
+[node name="Trap3" parent="." instance=ExtResource("1_w3ucb")]
+position = Vector2(-24, 0)
+
+[node name="Trap4" parent="." instance=ExtResource("1_w3ucb")]
+position = Vector2(24, 0)
+
+[node name="Trap5" parent="." instance=ExtResource("1_w3ucb")]
+position = Vector2(104, -40)
+
+[node name="Trap6" parent="." instance=ExtResource("1_w3ucb")]
+position = Vector2(0, 24)
+
+[node name="Trap7" parent="." instance=ExtResource("1_w3ucb")]
+position = Vector2(-104, 40)
+
+[node name="Trap8" parent="." instance=ExtResource("1_w3ucb")]
+position = Vector2(104, 40)

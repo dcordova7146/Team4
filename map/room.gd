@@ -58,6 +58,11 @@ var doors: Array[Door]
 @onready var campfire: PackedScene = preload("res://map/camp.tscn")
 ## Shop mat scene.
 @onready var shop: PackedScene = preload("res://drop/shop_mat.tscn")
+## all related trap prefabs 
+@onready var x_prefab: PackedScene = preload("res://map/trap/x_prefab.tscn")
+@onready var o_prefab: PackedScene = preload("res://map/trap/o_prefab.tscn")
+@onready var l_prefab: PackedScene = preload("res://map/trap/[]_prefab.tscn")
+var trap_prefabs: Array[PackedScene]
 ## Rooms connected to this room. Have doorways to them and vice-versa.
 var connected_rooms: Dictionary = {
 	Vector2.UP: null,
@@ -72,6 +77,9 @@ var entered: bool = false
 
 
 func _ready() -> void:
+	trap_prefabs.append(x_prefab)
+	trap_prefabs.append(o_prefab)
+	trap_prefabs.append(l_prefab)
 	type_label.text = LABEL[room_type]
 	# Set area.
 	var shape: RectangleShape2D = RectangleShape2D.new()
@@ -172,6 +180,17 @@ func spawn_enemies() -> void:
 		instance.set_deferred("position", get_random_position())
 
 
+func spawn_Trap() -> void:
+	if randi_range(0,1) == 1:
+		print("trap spawned")
+		var trap_instance: Node
+		var randon_index = randi_range(1,3)
+		match randon_index:
+			1: trap_instance = trap_prefabs[0].instantiate()
+			2: trap_instance = trap_prefabs[1].instantiate()
+			3: trap_instance = trap_prefabs[2].instantiate()
+		call_deferred("add_child", trap_instance)
+	#aaaaaaapass
 ## Spawn a boss.
 ## TODO and a boss health bar.
 func spawn_boss() -> void:
@@ -230,6 +249,7 @@ func _on_play_area_body_entered(_body: Node2D) -> void:
 			barricade_doors()
 			spawn_enemies()
 			wake_enemies()
+			spawn_Trap()
 		RoomType.SHOP:
 			spawn_shop()
 		RoomType.REST:
