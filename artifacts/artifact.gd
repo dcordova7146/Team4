@@ -6,6 +6,7 @@ extends Resource
 @export_enum("Common","Uncommon", "Rare")
 var rarity: String
 @export_multiline var description: String
+var price: int
 
 
 func setIcon(path: String) -> void:

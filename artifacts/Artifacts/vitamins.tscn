@@ -1,11 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://casspm8bm8vtu"]
+[gd_scene load_steps=3 format=3 uid="uid://casspm8bm8vtu"]
 
 [ext_resource type="PackedScene" uid="uid://bss27eisqwbuc" path="res://artifacts/Artifacts/abstract_item.tscn" id="1_w4hua"]
 [ext_resource type="Script" path="res://artifacts/Artifacts/vitamins.gd" id="2_vf4mf"]
-[ext_resource type="Resource" uid="uid://8hhemuw3kc0o" path="res://artifacts/Resources/Vitamins.tres" id="3_vaseq"]
 
 [node name="Vitamins" instance=ExtResource("1_w4hua")]
 script = ExtResource("2_vf4mf")
-resource = ExtResource("3_vaseq")
+artifact_name = "Vitamins"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

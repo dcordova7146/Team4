@@ -20,7 +20,7 @@ func _ready() -> void:
 func populate() -> void:
 	for item_slot: ItemSlot in item_slots:
 		# Put random artifact in slot.
-		var artifact: Artifact = SqLiteController.selectRandomArtifact()
+		var artifact: Artifact = SqLiteController.get_random_artifact()
 		item_slot.item = artifact
 		# Create buy box.
 		var new_buy_box: BuyBox = buy_box_scene.instantiate()
@@ -41,7 +41,7 @@ func _on_item_approach(player: Player, buy_box: BuyBox) -> void:
 	buy_box.show()
 	buy_box.player = player
 	# Disable buy button if player can't afford.
-	var is_affordable: bool = player.blood_count >= buy_box.price
+	var is_affordable: bool = player.blood_count >= buy_box.artifact.price
 	buy_box.button.disabled = not is_affordable
 
 

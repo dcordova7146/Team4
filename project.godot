@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 GenerateDungeon="*res://map/generate_dungeon.gd"
 Events="*res://events.gd"
 SqLiteController="*res://database/SQLiteController.gd"
-ResourceDirectory="*res://artifacts/resource_manager.gd"
 
 [debug]
 
