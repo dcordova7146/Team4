@@ -2,10 +2,11 @@
 class_name Gun
 extends Area2D
 
+## Sent to tell HUD the loaded bullet count changed.
 signal loaded_bullet_count_changed()
+## Sent to tell HUD the reserve bullet count changed.
 signal reserve_bullet_count_changed()
 signal shot_attempted_without_loaded_bullets()
-
 ## Bullet fired.
 @export var bullet: PackedScene = preload("res://projectile/bullet.tscn")
 ## Bullet damage.
@@ -34,25 +35,25 @@ signal shot_attempted_without_loaded_bullets()
 @export var is_pierce_finite: bool = true
 ## Whether a finite number of bullets exist.
 @export var is_bullet_finite: bool = true
-
-
 ## Current number of bullets loaded.
 var loaded_bullet_count: int:
 	set(value):
 		loaded_bullet_count = value
 		loaded_bullet_count_changed.emit()
-
 ## Current number of bullets reserved.
 var reserve_bullet_count: int:
 	set(value):
 		reserve_bullet_count = value
 		reserve_bullet_count_changed.emit()
+## Whether it has reserved bullets.
 var has_reserve_bullets: bool:
 	get:
 		return reserve_bullet_count > 0
+## Whether it has loaded bullets.
 var is_loaded: bool:
 	get:
 		return loaded_bullet_count > 0
+## Whether the loaded bullets is at its max amount.
 var is_loaded_fully: bool:
 	get:
 		return loaded_bullet_count == loaded_bullet_count_max
@@ -66,14 +67,12 @@ var _is_cooling_down: bool:
 @onready var pivot: Marker2D = $Pivot
 @onready var muzzle: Marker2D = $Pivot/Muzzle
 @onready var sprite_2d: Sprite2D = $Pivot/Sprite
-@onready var shooting_timer: Timer = $ShootingTimer
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var outline_shader: Shader = load("res://drop/outline.gdshader")
 
 ## Set up timers for shooting and cooldown and value of cooldown progress bar.
 func _ready() -> void:
 	_reset_bullet_count()
-	shooting_timer.wait_time = auto_fire_duration
 	cooldown_timer.wait_time = cooldown_duration
 	
 	# Connect damage artifact signal
@@ -95,16 +94,16 @@ func aim(target: Vector2) -> void:
 
 ## Shoot, and start a timer to shoot regularly thereafter.
 func hold_trigger() -> void:
-	# Don't fire if still cooling down or not loaded.
-	if not _is_cooling_down or loaded_bullet_count == 0:
-		_shoot()
-	shooting_timer.start()
+	# Don't fire if still cooling down.
+	if _is_cooling_down:
+		return
+	_shoot()
 
 
 ## Stop the timer for automatic shooting.
 func release_trigger() -> void:
-	if not shooting_timer.is_stopped():
-		shooting_timer.stop()
+	if not cooldown_timer.is_stopped():
+		cooldown_timer.stop()
 
 
 ## Set the amount of bullets loaded and reserved to full.
@@ -174,14 +173,9 @@ func _instantiate_bullet() -> Bullet:
 	return new_bullet
 
 
-## Shoot when shooting timer times out....
-func _on_shooting_timer_timeout() -> void:
-	_shoot()
-
-
-## When cooldown is over, cooling down is over...
+## Shoot when cooldown is over.
 func _on_cooldown_timer_timeout() -> void:
-	return
+	_shoot()
 
 
 func _on_body_entered(_body: Node2D) -> void:
