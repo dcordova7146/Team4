@@ -27,10 +27,12 @@ const SIZE_DOOR: int = 40
 @export var enemies_possible: Array[ChanceRow]
 ## Scene of door.
 @export var door_scene: PackedScene
-## Scene of door.
+## Sprite of a horizontal door.
 @export var door_sprite_horizontal: CompressedTexture2D
-## Scene of door.
+## Sprite of a vertical door.
 @export var door_sprite_vertical: CompressedTexture2D
+## Scene of a teleporter.
+@export var teleporter_scene: PackedScene
 ## Number of rooms connected to it.
 var connections: int = 0
 ## Enemies inside it.
@@ -180,6 +182,8 @@ func spawn_Trap() -> void:
 			2: trap_instance = trap_prefabs[1].instantiate()
 			3: trap_instance = trap_prefabs[2].instantiate()
 		call_deferred("add_child", trap_instance)
+
+
 ## Spawn a boss.
 ## TODO and a boss health bar.
 func spawn_boss() -> void:
@@ -236,7 +240,6 @@ func _on_play_area_body_entered(_body: Node2D) -> void:
 		RoomType.BATTLE:
 			barricade_doors()
 			spawn_enemies()
-			wake_enemies()
 			spawn_Trap()
 		RoomType.SHOP:
 			spawn_shop()
@@ -245,7 +248,6 @@ func _on_play_area_body_entered(_body: Node2D) -> void:
 		RoomType.BOSS:
 			barricade_doors()
 			spawn_boss()
-			wake_enemies()
 		RoomType.START:
 			explanation_label.show()
 		RoomType.ROOM:
@@ -267,6 +269,8 @@ func _on_enemy_defeated(defeated_enemy: Skull) -> void:
 	# Unlock upon wave clear.
 	if enemies_inside.is_empty():
 		open_doors()
-	# TODO Spawn teleporter to new dungeon.
+	# Spawn teleporter to new dungeon.
 	if room_type == RoomType.BOSS and enemies_inside.is_empty(): 
-		print("boss room clear")
+		var new_teleporter: Node2D = teleporter_scene.instantiate()
+		new_teleporter.name = "DungeonTeleporter"
+		call_deferred("add_child", new_teleporter)

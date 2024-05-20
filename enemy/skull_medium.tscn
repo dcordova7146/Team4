@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4neg4b8vv5dn"]
+[gd_scene load_steps=8 format=3 uid="uid://c4neg4b8vv5dn"]
 
 [ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="1_4foa3"]
+[ext_resource type="Script" path="res://enemy/skull_medium.gd" id="2_fou7w"]
 [ext_resource type="PackedScene" uid="uid://dnvsjj2bbghyp" path="res://enemy/skull_small.tscn" id="2_pnb2j"]
 [ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_0y1rd"]
 [ext_resource type="Texture2D" uid="uid://b44e30xmk3jym" path="res://enemy/skull_medium.png" id="4_5udvf"]
@@ -15,6 +16,7 @@ shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 radius = 9.0
 
 [node name="SkullMedium" instance=ExtResource("1_4foa3")]
+script = ExtResource("2_fou7w")
 speed = 37.5
 enemy_to_spawn = ExtResource("2_pnb2j")
 spawn_count = 2
@@ -25,3 +27,8 @@ texture = ExtResource("4_5udvf")
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_wb2ck")
+
+[node name="ShootTimer" type="Timer" parent="." index="5"]
+autostart = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

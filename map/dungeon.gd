@@ -9,7 +9,13 @@ const HEALTH_CHANGE: PackedScene = preload("res://ui/health_change.tscn")
 ## Items with a chance to be dropped upon death of enemies.
 @export var drop_table: Array[ChanceRow] = []
 ## The seed of the current dungeon.
-var dungeon_seed: int = 0
+var dungeon_seed: int = 0:
+	set(new_seed):
+		# Only reseed if seed different.
+		if new_seed != dungeon_seed:
+			dungeon_seed =  new_seed
+			hud.seed_label.text = "Seed: %s" % dungeon_seed
+			seed(dungeon_seed)
 @onready var spawn: Node2D = $Spawn
 @onready var player: Node2D = $Player
 @onready var minimap: SubViewport = $MinimapViewport
@@ -30,15 +36,13 @@ func _ready() -> void:
 	Events.teleporter_entered.connect(_on_teleporter_entered)
 
 
-## Create a dungeon from a seed.
-func create_dungeon(new_seed: int) -> void:
-	dungeon_seed = new_seed
-	hud.seed_label.text = "Seed: %s" % dungeon_seed
+## Create a dungeon.
+func create_dungeon() -> void:
 	# Delete all nodes under spawn.
 	for i: int in range(0, spawn.get_child_count()):
 		spawn.get_child(i).queue_free()
 	# Generate dungeon.
-	var dungeon: Node2D = GenerateDungeon.generate(dungeon_seed)
+	var dungeon: Node2D = GenerateDungeon.generate()
 	# Move dungeon to player's position.
 	dungeon.global_position = player.global_position
 	spawn.call_deferred("add_child", dungeon)
@@ -46,9 +50,9 @@ func create_dungeon(new_seed: int) -> void:
 
 ## temp function to see effectiveness of random generation.
 func _on_button_pressed() -> void:
-	randomize()
-	player.position = Vector2(0, 0) #whenever generate a room reset player to start room
-	create_dungeon(randi_range(-1000,1000))
+	player.position = Vector2(0, 0)
+	dungeon_seed = randi_range(-1000,1000)
+	create_dungeon()
 
 
 ## Give seed to main, then delete self.
@@ -68,13 +72,21 @@ func _on_pause_menu_game_exited_to_menu() -> void:
 	queue_free()
 
 
-## Randomly create drops at given position.
-func _on_enemy_died(death_position: Vector2) -> void:
-	for chance_row: ChanceRow in drop_table:
-		if randf() < chance_row.chance:
-			var instance: Node2D = chance_row.scene.instantiate()
-			instance.position = death_position
-			call_deferred("add_child", instance)
+var offset: int = 5
+
+## Randomly create drops at given position, with the given rolls.
+func _on_enemy_died(death_position: Vector2, rolls: int = 1) -> void:
+	Events.enemy_kill_count += 1
+	for i: int in rolls:
+		for chance_row: ChanceRow in drop_table:
+			if randf() < chance_row.chance:
+				var instance: Node2D = chance_row.scene.instantiate()
+				var offset_position: Vector2 = Vector2(
+					randi_range(-offset, offset),
+					randi_range(-offset, offset)
+				)
+				instance.position = death_position + offset_position
+				call_deferred("add_child", instance)
 
 
 func _on_health_changed(pos: Vector2, amount: int) -> void:
@@ -87,8 +99,10 @@ func _on_health_changed(pos: Vector2, amount: int) -> void:
 ## Create dungeon if teleporter entered leads to dungeon.
 func _on_teleporter_entered(teleporter: Node2D) -> void:
 	if teleporter.name == "DungeonTeleporter":
+		Events.level += 1
 		# Move camera back to root.
-		player.remove_child(main_camera)
-		add_child(main_camera)
+		if player.is_ancestor_of(main_camera):
+			player.remove_child(main_camera)
+			add_child(main_camera)
 		# Create dungeon.
-		create_dungeon(dungeon_seed)
+		create_dungeon()

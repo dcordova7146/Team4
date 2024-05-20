@@ -8,6 +8,9 @@ extends CanvasLayer
 @onready var weapon_equipped: TextureRect = $LowerLeft/Weapon/WeaponEquipped/TextureRect
 @onready var seed_label: Label = $SeedLabel
 @onready var blood_label: Label = $TopLeft/BloodCup/Label
+@onready var level_label: Label = $TopLeft/LevelCounter/Label
+@onready var enemy_label: Label = $TopLeft/EnemyCounter/Label
+@onready var room_label: Label = $TopLeft/RoomCounter/Label
 ## Reticle sprite atlas.
 static var bullets: Texture2D = load("res://ui/bullets.png")
 
@@ -18,6 +21,9 @@ func _ready() -> void:
 	Events.lives_changed.connect(_on_lives_changed)
 	Events.active_weapon_changed.connect(_on_active_weapon_changed)
 	Events.blood_count_changed.connect(_on_blood_count_changed)
+	Events.level_changed.connect(_on_level_changed)
+	Events.enemy_kill_count_changed.connect(_on_kill_count_changed)
+	Events.room_clear_count_changed.connect(_on_clear_count_changed)
 
 
 ## Redraw HUD life bar with given values.
@@ -67,7 +73,22 @@ func _on_active_weapon_changed(new_weapon: Gun) -> void:
 
 ## Update the blood label. 
 func _on_blood_count_changed(new_count: int) -> void:
-	blood_label.text = "×%d" % new_count
+	blood_label.text = "%d" % new_count
+
+
+## Update the level label. 
+func _on_level_changed(new_count: int) -> void:
+	level_label.text = "%d" % new_count
+
+
+## Update the kill_count label. 
+func _on_kill_count_changed(new_count: int) -> void:
+	enemy_label.text = "%d" % new_count
+
+
+## Update the clear_count label. 
+func _on_clear_count_changed(new_count: int) -> void:
+	room_label.text = "%d" % new_count
 
 
 ## Get a texture cropped from a given region of a given texture.

@@ -22,11 +22,16 @@ func _ready() -> void:
 ## Create a new game instance and listen for restart/quit events.
 func _on_new_game_requested(dungeon_seed: int) -> void:
 	var game_instance: Dungeon = game_scene.instantiate()
-	if game_instance:
-		add_child(game_instance)
-		game_instance.dungeon_seed = dungeon_seed
-		game_instance.game_restarted.connect(_on_game_restarted)
-		game_instance.game_exited_to_menu.connect(show_main_menu)
+	if not game_instance:
+		return
+	## Reset stats.
+	Events.level = 0
+	Events.enemy_kill_count = 0
+	Events.room_clear_count = 0
+	add_child(game_instance)
+	game_instance.dungeon_seed = dungeon_seed
+	game_instance.game_restarted.connect(_on_game_restarted)
+	game_instance.game_exited_to_menu.connect(show_main_menu)
 
 
 ## Show the main menu.
@@ -38,6 +43,7 @@ func _on_game_restarted(dungeon_seed: int, game: Node) -> void:
 	game.queue_free()
 	await game.tree_exited
 	_on_new_game_requested(dungeon_seed)
+
 
 ## Open settings menu.
 func _on_main_menu_settings_menu_opened() -> void:

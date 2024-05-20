@@ -31,19 +31,21 @@ func spawn_random_skull() -> void:
 		)
 		var spawn_position: Vector2 = position + random_offset
 		enemy_instance.position = spawn_position
-		enemy_instance.awake = true
 		room.add_enemy(enemy_instance)
 	else:
 		print("Failed to instantiate enemy from path: ", random_skull_path)
+
 
 func _on_spawn_timer_timeout() -> void:
 	print("Timer Ended, Spawned Skull")
 	spawn_random_skull()
 	has_spawned = false
 
-# Overide
+
+## Override.
 func die() -> void:
-	for i: int in 3: # Spawn 3 Skulls Upon Death
+	## Spawn 3 Skulls Upon Death.
+	for i: int in 3:
 		spawn_random_skull()
 	# Parent Class die()
 	super.die()

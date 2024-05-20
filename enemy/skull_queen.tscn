@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://cipn368kpkvlv"]
+[gd_scene load_steps=15 format=3 uid="uid://cipn368kpkvlv"]
 
 [ext_resource type="Script" path="res://enemy/skull_queen.gd" id="1_8em72"]
-[ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="2_lybg1"]
 [ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_nvfbk"]
 [ext_resource type="Texture2D" uid="uid://dfq3w6tromjb0" path="res://enemy/skull_queen_p3.png" id="4_4u7w6"]
 [ext_resource type="Texture2D" uid="uid://csbjcgfxy6gsk" path="res://enemy/skull_queen_p3_sleep.png" id="5_arvex"]
@@ -64,8 +63,6 @@ scale = Vector2(2.5, 2.5)
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_8em72")
-
-[node name="Dot" parent="." instance=ExtResource("2_lybg1")]
 
 [node name="Phase3" type="Sprite2D" parent="."]
 visible = false

@@ -8,14 +8,15 @@ extends Area2D
 @export var speed: float = 250
 ## Distance that can be travelled until it despawns.
 @export var max_range: float = 1000
-## Number of enemies a bullet can hit before despawning.
+## Number of enemies it hits before despawning.
 @export var pierce: int = 1
-## Whether bullets pierce a finite number of enemies.
+## Whether it pierces a finite number of enemies.
 @export var is_pierce_finite: bool = true
-## Distance traveled by the bullet.
+## Distance traveled kept to track to know when the max range is reached.
 var travelled_distance: float = 0.0
-## Enemies hit.
+## Enemies hit to prevent the same enemies from being hit repeatedly.
 var enemies_hit: Array[Skull] = []
+
 
 func _physics_process(delta: float) -> void:
 	# Calculate direction vector based on bullet's rotation.
@@ -25,8 +26,7 @@ func _physics_process(delta: float) -> void:
 	position += direction * speed * delta
 	# Update distance traveled by bullet.
 	travelled_distance += speed * delta
-	
-	# If bullet traveled beyond max range, queue  for deletion.
+	# If bullet traveled beyond max range, delete.
 	if travelled_distance > max_range:    
 		queue_free()
 
@@ -37,7 +37,6 @@ func _on_body_entered(body: Node2D) -> void:
 	var skull: Skull = body as Skull
 	if skull:
 		# Do nothing if enemy was already hit.
-		# TODO: Change to only do nothing if enemy was hit recently.
 		if enemies_hit.has(skull):
 			return
 		# Do nothing if enemy is invincible.

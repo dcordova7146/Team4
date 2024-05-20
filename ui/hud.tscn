@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://doe0sstc3n5sh"]
+[gd_scene load_steps=21 format=3 uid="uid://doe0sstc3n5sh"]
 
 [ext_resource type="Script" path="res://ui/meter.gd" id="1_3gfvi"]
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_w84rr"]
@@ -7,7 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://2wxjfuktenwi" path="res://drop/heart.png" id="3_tctny"]
 [ext_resource type="Texture2D" uid="uid://b43iwmjoqo7i5" path="res://drop/heart_empty.png" id="4_l77fl"]
 [ext_resource type="Texture2D" uid="uid://hxur0kber07h" path="res://ui/bullets.png" id="5_ucdqg"]
+[ext_resource type="Texture2D" uid="uid://pga6xscx8lci" path="res://ui/stairs.png" id="7_562au"]
 [ext_resource type="Texture2D" uid="uid://bmxyjh70ha6ec" path="res://weapon/pistol.png" id="8_ml7ux"]
+[ext_resource type="Texture2D" uid="uid://kux87eu8ahlv" path="res://enemy/skull_small.png" id="8_q8752"]
+[ext_resource type="Texture2D" uid="uid://hc5ecclkhaas" path="res://map/room_icon.png" id="9_afg03"]
 [ext_resource type="Script" path="res://ui/Inventory.gd" id="9_hf40v"]
 [ext_resource type="Script" path="res://ui/Choice Menu.gd" id="10_rqxbb"]
 [ext_resource type="PackedScene" uid="uid://dh35tb0xfup12" path="res://ui/item_slot.tscn" id="10_wp51a"]
@@ -48,6 +51,7 @@ texture_empty = ExtResource("4_l77fl")
 
 [node name="BloodCup" type="HBoxContainer" parent="TopLeft"]
 layout_mode = 2
+tooltip_text = "Blood. The currency."
 script = ExtResource("2_156fb")
 
 [node name="TextureRect" type="TextureRect" parent="TopLeft/BloodCup"]
@@ -56,7 +60,46 @@ texture = ExtResource("2_j2t6t")
 
 [node name="Label" type="Label" parent="TopLeft/BloodCup"]
 layout_mode = 2
-text = "×0"
+text = "0"
+label_settings = SubResource("LabelSettings_ejrmc")
+
+[node name="LevelCounter" type="HBoxContainer" parent="TopLeft"]
+layout_mode = 2
+tooltip_text = "The current level."
+
+[node name="TextureRect" type="TextureRect" parent="TopLeft/LevelCounter"]
+layout_mode = 2
+texture = ExtResource("7_562au")
+
+[node name="Label" type="Label" parent="TopLeft/LevelCounter"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_ejrmc")
+
+[node name="EnemyCounter" type="HBoxContainer" parent="TopLeft"]
+layout_mode = 2
+tooltip_text = "The amount of enemies killed."
+
+[node name="TextureRect" type="TextureRect" parent="TopLeft/EnemyCounter"]
+layout_mode = 2
+texture = ExtResource("8_q8752")
+
+[node name="Label" type="Label" parent="TopLeft/EnemyCounter"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_ejrmc")
+
+[node name="RoomCounter" type="HBoxContainer" parent="TopLeft"]
+layout_mode = 2
+tooltip_text = "The amount of rooms entered."
+
+[node name="TextureRect" type="TextureRect" parent="TopLeft/RoomCounter"]
+layout_mode = 2
+texture = ExtResource("9_afg03")
+
+[node name="Label" type="Label" parent="TopLeft/RoomCounter"]
+layout_mode = 2
+text = "0"
 label_settings = SubResource("LabelSettings_ejrmc")
 
 [node name="Minimap" type="ColorRect" parent="."]

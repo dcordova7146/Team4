@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://db5fatnj0uwms"]
+[gd_scene load_steps=15 format=3 uid="uid://db5fatnj0uwms"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_iitf2"]
 [ext_resource type="Texture2D" uid="uid://b010odvgbpiye" path="res://player/player.png" id="2_22u6h"]
@@ -8,12 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://bit2cxxu4xi8o" path="res://weapon/burst_rifle.tscn" id="5_fw7d2"]
 [ext_resource type="PackedScene" uid="uid://blnmaye6htmo6" path="res://weapon/shotgun.tscn" id="6_d3724"]
 [ext_resource type="PackedScene" uid="uid://32a0rer8h7vt" path="res://weapon/sniper_rifle.tscn" id="7_uxrnu"]
+[ext_resource type="PackedScene" uid="uid://c0pv1j1w1ak38" path="res://ui/dot.tscn" id="9_d85pt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_my8fn"]
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tldfe"]
-radius = 8.0
+radius = 3.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5f81s"]
 bg_color = Color(0, 0, 0, 0.266667)
@@ -33,6 +34,7 @@ motion_mode = 1
 script = ExtResource("1_iitf2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_my8fn")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -96,7 +98,11 @@ visible = false
 [node name="Sniper Rifle" parent="Flip/Hand" instance=ExtResource("7_uxrnu")]
 visible = false
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="Hitbox" parent="." instance=ExtResource("9_d85pt")]
+visible = false
+size = 3.0
+color = Color(1, 1, 1, 1)
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]

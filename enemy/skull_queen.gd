@@ -176,19 +176,9 @@ func take_damage(damage_total: float) -> void:
 
 ## Drop more loot than normal enemies.
 func die() -> void:
-	var offset: int = 12
-	# Emit events with randomly adjusted positions
-	for i: int in range(12):
-		Events.enemy_died.emit(
-				global_position + Vector2(
-						randf_range(-offset, offset),
-						randf_range(-offset, offset)
-				)
-		)
-	Events.enemy_defeated.emit(self)
+	Events.enemy_died.emit(global_position, 12)
+	defeated.emit(self)
 	queue_free()
-	if spawn_count > 0:
-		spawn_enemy(enemy_to_spawn, spawn_count)
 
 
 func _on_move_timer_timeout() -> void:

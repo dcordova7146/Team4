@@ -17,9 +17,12 @@ const direction_vector: Dictionary = {
 	4: Vector2.LEFT,
 }
 
-#The basic walker that starts at a base room and randomly chooses a direction to walk in and add a room if one does not already exist and then calling the connect room function to have a record of what is connected with what
-func generate(dungeon_seed: int) -> Node2D:
-	seed(dungeon_seed)
+## The basic walker that starts at a base room
+## and randomly chooses a direction to walk in
+## and add a room if one does not already exist
+## and then calling the connect room function
+## to have a record of what is connected with what.
+func generate() -> Node2D:
 	var dungeon: Dictionary = {}
 	var root: Node2D = Node2D.new()
 	var rooms_added: int = 0

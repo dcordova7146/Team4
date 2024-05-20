@@ -1,6 +1,6 @@
-## Karwei K
+## Karwai K.
 extends Node2D
-## A simple 2D circle for representing nodes on the map.
+## A simple 2D circle.
 
 @export var size: float = 10.0
 @export var color: Color = Color.RED

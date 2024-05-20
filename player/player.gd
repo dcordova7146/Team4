@@ -31,6 +31,8 @@ extends CharacterBody2D
 @onready var reload_bar: ProgressBar = $ReloadBar
 ## Message to reload; shown if trigger held when gun unloaded.
 @onready var reload_label: Label = $ReloadLabel
+## Visual indication of hurtbox.
+@onready var hitbox: Node2D = $Hitbox
 ## Index of the currently active weapon.
 var _equipped_weapon_index: int = 0
 ## The closest gun on the ground.
@@ -88,6 +90,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			_get_equipped_weapon().hold_trigger()
 	elif event.is_action_released("primary_action"):
 		_get_equipped_weapon().release_trigger()
+	elif event.is_action_pressed("focus"):
+		hitbox.show()
+	elif event.is_action_released("focus"):
+		hitbox.hide()
 	elif event.is_action_pressed("reload"):
 		_reload_equipped_gun()
 	elif event.is_action_pressed("equip_weapon_slot_1"):
@@ -135,7 +141,7 @@ func _equip_weapon(index: int, hide_old: bool = true) -> int:
 	_update_reload_label()
 	# Signal to HUD.
 	Events.active_weapon_changed.emit(new_weapon)
-	return 0;
+	return 0
 
 
 # Move the player according to cardinal direction input.
@@ -144,7 +150,10 @@ func _get_input() -> void:
 	var direction: Vector2 = Input.get_vector(
 			"move_left", "move_right", "move_up", "move_down"
 	)
-	velocity = direction * speed
+	if Input.is_action_pressed("focus"):
+		velocity = direction * speed * 0.5
+	else:
+		velocity = direction * speed
 	move_and_slide()
 
 
@@ -290,7 +299,6 @@ func _lose_life() -> void:
 	# Let HUD life bar know health state.
 	Events.lives_changed.emit(lives, max_lives)
 	# Make temporarily invincible.
-	print("going invincible")
 	invincibility_timer.start()
 	# Make appearance blink rapidly.
 	blink_timer.start()
@@ -375,7 +383,7 @@ func _on_reload_timer_timeout() -> void:
 ## Take damage on enemy contact.
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var enemy: Skull = body as Skull
-	if enemy:
+	if enemy and enemy.awake:
 		_lose_life()
 
 

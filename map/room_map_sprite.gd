@@ -67,5 +67,7 @@ func _on_room_entered(room_entered: Room) -> void:
 	if player_inside != (room_entered == room):
 		player_inside = room_entered == room
 		if player_inside:
+			if not player_visited:
+				Events.room_clear_count += 1
 			player_visited = true
 		queue_redraw()

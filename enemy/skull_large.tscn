@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvv51jcjucc2m"]
+[gd_scene load_steps=8 format=3 uid="uid://cvv51jcjucc2m"]
 
 [ext_resource type="PackedScene" uid="uid://cexqlf50w1why" path="res://enemy/skull.tscn" id="1_02ecg"]
-[ext_resource type="PackedScene" uid="uid://c4neg4b8vv5dn" path="res://enemy/skull_medium.tscn" id="2_k68pb"]
+[ext_resource type="Script" path="res://enemy/skull_large.gd" id="2_swy3w"]
 [ext_resource type="Shader" uid="uid://h4jx6i525oq3" path="res://enemy/on_hit.tres" id="3_aogkj"]
+[ext_resource type="PackedScene" uid="uid://c4neg4b8vv5dn" path="res://enemy/skull_medium.tscn" id="4_es6j8"]
 [ext_resource type="Texture2D" uid="uid://bhdhj122p4pw1" path="res://enemy/skull_large.png" id="4_y2pcs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0xq6a"]
@@ -15,9 +16,11 @@ shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
 [node name="SkullLarge" instance=ExtResource("1_02ecg")]
 scale = Vector2(1.2, 1.2)
+script = ExtResource("2_swy3w")
+bone_count = 5
 health = 100.0
-speed = 25.0
-enemy_to_spawn = ExtResource("2_k68pb")
+speed = 20.0
+enemy_to_spawn = ExtResource("4_es6j8")
 spawn_count = 2
 
 [node name="Sprite2D" parent="." index="1"]
@@ -26,3 +29,8 @@ texture = ExtResource("4_y2pcs")
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_kdnjd")
+
+[node name="ShootTimer" type="Timer" parent="." index="5"]
+autostart = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

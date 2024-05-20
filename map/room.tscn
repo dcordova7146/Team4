@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bxvfe2h3ur6ol"]
+[gd_scene load_steps=22 format=3 uid="uid://bxvfe2h3ur6ol"]
 
 [ext_resource type="Script" path="res://map/room.gd" id="1_k281e"]
 [ext_resource type="PackedScene" uid="uid://dnvsjj2bbghyp" path="res://enemy/skull_small.tscn" id="2_8cv4c"]
@@ -14,36 +14,37 @@
 [ext_resource type="Texture2D" uid="uid://c87xswjoaabdj" path="res://map/door_right.png" id="8_jkt5k"]
 [ext_resource type="PackedScene" uid="uid://sqyxernsmlq2" path="res://enemy/cursed_tombstone.tscn" id="8_q3y4i"]
 [ext_resource type="PackedScene" uid="uid://w08be4o1ar2p" path="res://map/door.tscn" id="9_ldw5k"]
+[ext_resource type="PackedScene" uid="uid://bd3r464d7oxbh" path="res://map/teleporter.tscn" id="12_ay7qf"]
 
 [sub_resource type="Resource" id="Resource_in8qp"]
-script = ExtResource("2_jqava")
-scene = ExtResource("2_8cv4c")
-chance = 0.3
-
-[sub_resource type="Resource" id="Resource_elk34"]
 script = ExtResource("2_jqava")
 scene = ExtResource("4_esebd")
 chance = 0.25
 
-[sub_resource type="Resource" id="Resource_ww4fp"]
+[sub_resource type="Resource" id="Resource_elk34"]
 script = ExtResource("2_jqava")
 scene = ExtResource("5_4nlo8")
 chance = 0.15
 
-[sub_resource type="Resource" id="Resource_cviua"]
+[sub_resource type="Resource" id="Resource_ww4fp"]
 script = ExtResource("2_jqava")
 scene = ExtResource("6_ic3qd")
 chance = 0.15
 
-[sub_resource type="Resource" id="Resource_1yj0x"]
+[sub_resource type="Resource" id="Resource_cviua"]
 script = ExtResource("2_jqava")
 scene = ExtResource("7_84ar3")
 chance = 0.15
 
-[sub_resource type="Resource" id="Resource_nfkjy"]
+[sub_resource type="Resource" id="Resource_1yj0x"]
 script = ExtResource("2_jqava")
 scene = ExtResource("8_q3y4i")
-chance = 0.05
+chance = 0.15
+
+[sub_resource type="Resource" id="Resource_nfkjy"]
+script = ExtResource("2_jqava")
+scene = ExtResource("2_8cv4c")
+chance = 0.1
 
 [node name="Room" type="Node2D"]
 script = ExtResource("1_k281e")
@@ -51,6 +52,7 @@ enemies_possible = Array[ExtResource("2_jqava")]([SubResource("Resource_in8qp"),
 door_scene = ExtResource("9_ldw5k")
 door_sprite_horizontal = ExtResource("7_5qi8u")
 door_sprite_vertical = ExtResource("8_jkt5k")
+teleporter_scene = ExtResource("12_ay7qf")
 
 [node name="MapSprite" type="Node2D" parent="."]
 visibility_layer = 4
@@ -84,6 +86,7 @@ offset_right = -9.0
 offset_bottom = -51.0
 theme_override_colors/font_color = Color(0.789466, 0.753021, 0.90722, 1)
 text = "WASD/Arrow keys to move.
+Hold shift to move slower and see hitbox.
 Left mouse button to attack.
 Scroll to cycle weapon.
 1, 2, 3, 4, 5 to switch weapon.
