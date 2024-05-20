@@ -1,4 +1,4 @@
-#Diego Cordova
+#Diego Cordova, Karwei K
 class_name Dungeon
 extends Node2D
 

@@ -1,3 +1,6 @@
+#Diego Cordova, Karwei K
+#Buy Box are the slots within the shop mat holding data that represents an item but is not an item
+
 class_name BuyBox
 extends GridContainer
 
@@ -14,7 +17,7 @@ var item_slot: ItemSlot
 var player: Player
 var is_purchased: bool = false
 
-
+## replaces the information held within this box and replaces it with the abstract item and removes the ability to purchase this box
 func _on_button_pressed() -> void:
 	is_purchased = true
 	hide()

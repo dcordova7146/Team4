@@ -1,6 +1,8 @@
+##Diego C
 extends Node2D
 
-
+## Test scene used to test various features 
+##should be ignored
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Room.connectRooms($Room2, Vector2(0,-1))

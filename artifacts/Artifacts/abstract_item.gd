@@ -1,3 +1,4 @@
+##Diego C, Karwei K
 class_name AbstractItem
 extends Sprite2D
 
@@ -10,7 +11,7 @@ extends Sprite2D
 			texture = _resource.icon
 var _resource: Artifact
 
-
+## Virtual Method to be implemented by the actual item with its unique effect
 func activate(_player: Player) -> void:
 	pass
 

@@ -1,3 +1,4 @@
+##Diego C, Karwei K
 extends Node2D
 
 @export var buy_box_scene: PackedScene
@@ -6,7 +7,7 @@ extends Node2D
 var item_slots: Array[ItemSlot]
 var buy_boxes: Array[BuyBox]
 
-
+## Grab each individual slot prepare it to be populated
 func _ready() -> void:
 	for node: Node in get_children():
 		if node.is_in_group("slot"):

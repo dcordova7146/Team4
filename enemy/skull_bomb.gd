@@ -1,3 +1,4 @@
+#James C, Karwei K
 extends Skull
 
 # Distance at which the bomb skull explodes upon reaching the player.

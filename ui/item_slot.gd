@@ -1,3 +1,4 @@
+## Diego C
 class_name ItemSlot
 extends PanelContainer
 ## UI display of an item. Holds an amount of an item.

@@ -65,7 +65,7 @@ func _ready() -> void:
 	
 	
 
-
+## called every frame to process the interactions in game
 func _physics_process(_delta: float) -> void:
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	_get_input()
@@ -384,6 +384,7 @@ func obtain_artifact(artifact: Artifact) -> void:
 	inventory.add_artifact(artifact)
 
 
+## below are functions used to modify player stats when called by an artifact on pickup
 func set_speed_mul(amount: float) -> void:
 	var percent: float = (amount/100.0) + 1.0
 	speed *= percent

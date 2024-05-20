@@ -1,3 +1,4 @@
+##Diego C, Karwei K
 class_name Door
 extends Node2D
 ## Door of a room.

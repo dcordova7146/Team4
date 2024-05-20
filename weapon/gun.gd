@@ -1,4 +1,4 @@
-## Contributors: James, Karwai
+## Contributors: James, Karwai, Diego C
 class_name Gun
 extends Area2D
 
@@ -192,6 +192,7 @@ func _on_body_exited(_body: Node2D) -> void:
 	Events.takeable_group_changed.emit()
 	hide_outline()
 
+## Below are functions related to artifacts to be called on pickup 
 
 func set_dmg_mul(amount: float) -> void:
 	print(damage)
@@ -208,7 +209,7 @@ func set_reload_mul(amount: float) -> void:
 	reload_duration *= percent
 	print(reload_duration)
 	
-	
+
 func modify_pierce() -> void:
 	pierce += 1
 

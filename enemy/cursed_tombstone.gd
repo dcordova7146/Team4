@@ -1,3 +1,4 @@
+#James C, Karwei K
 extends Skull
 
 var has_spawned: bool = false

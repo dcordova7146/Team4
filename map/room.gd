@@ -68,10 +68,10 @@ var entered: bool = false
 
 
 func _ready() -> void:
+	#ready the trap prefab array with the 3 varieties of trap layout patterns
 	trap_prefabs.append(x_prefab)
 	trap_prefabs.append(o_prefab)
 	trap_prefabs.append(l_prefab)
-	type_label.text = LABEL[room_type]
 	# Set area.
 	var shape: RectangleShape2D = RectangleShape2D.new()
 	shape.size = Vector2(
@@ -225,7 +225,7 @@ func wake_enemies() -> void:
 	for enemy: Skull in enemies_inside:
 		enemy.awake = true
 
-
+## Moved room population from dungeon creation to instead occur on entering a room for optimization purposes
 func _on_play_area_body_entered(_body: Node2D) -> void:
 	# Tell camera to move to room.
 	Events.room_entered.emit(self)

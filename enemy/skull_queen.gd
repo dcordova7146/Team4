@@ -1,3 +1,4 @@
+## James C
 extends Skull
 ## Maximum health points.
 const MAX_HEALTH: int = 600

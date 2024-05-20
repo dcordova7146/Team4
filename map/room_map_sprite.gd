@@ -1,3 +1,4 @@
+## karwei K
 extends Node2D
 ## The sprite of a room on the map.
 

@@ -1,3 +1,4 @@
+## James C, Karwei K
 extends Skull
 
 ## Threshold distance for player detection.

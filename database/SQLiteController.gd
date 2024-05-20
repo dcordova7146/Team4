@@ -1,3 +1,4 @@
+##Dieg Cordova, Karwei K
 extends Control
 #singleton script
 
@@ -56,6 +57,7 @@ func createShopTables() -> void:
 
 
 # Populate the tables with items.
+# all commented items are scrapped due to time constraints
 func populate_table() -> void:
 	## common items
 	insert_data("Vitamins","2% increase damage Stackable",3,"Common","tile020.png")
