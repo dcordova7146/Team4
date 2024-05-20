@@ -13,7 +13,10 @@ offset_left = -44.5
 offset_right = 44.5
 offset_bottom = 45.0
 grow_horizontal = 2
-text = "[Title]"
+theme_override_font_sizes/font_size = 32
+text = "Bodiless
+Skeletons"
+horizontal_alignment = 1
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 anchors_preset = 8
