@@ -52,6 +52,8 @@ bg_color = Color(0, 0, 0, 0.266667)
 bg_color = Color(0.596078, 0, 0, 1)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_ks3dc")
 
 [node name="stand" type="Sprite2D" parent="."]

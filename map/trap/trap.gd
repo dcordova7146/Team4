@@ -6,7 +6,6 @@ extends CharacterBody2D
 @export var can_hurt: bool = false
 
 func _on_trap_body_entered(player: Player) -> void:
-	print("trap area entered")
 	activate_trap()
 	
 	

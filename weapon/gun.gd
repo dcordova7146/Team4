@@ -195,19 +195,15 @@ func _on_body_exited(_body: Node2D) -> void:
 ## Below are functions related to artifacts to be called on pickup 
 
 func set_dmg_mul(amount: float) -> void:
-	print(damage)
 	var percent: float = (amount/100.0) + 1.0
 	damage *= percent
-	print(damage)
 
 func set_reload_mul(amount: float) -> void:
 	if reload_duration <= 0:
 		reload_duration = 0
 		return
-	print(reload_duration)
 	var percent: float = 1.0 - (amount/100.0)
 	reload_duration *= percent
-	print(reload_duration)
 	
 
 func modify_pierce() -> void:

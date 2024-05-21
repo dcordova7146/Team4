@@ -7,7 +7,6 @@ var has_spawned: bool = false
 func _physics_process(_delta: float) -> void:
 	if player and awake: 
 		if not has_spawned:
-			print("Timer Start, Preparing Skull")
 			spawn_timer.start()
 			has_spawned = true
 	else:
@@ -37,7 +36,6 @@ func spawn_random_skull() -> void:
 
 
 func _on_spawn_timer_timeout() -> void:
-	print("Timer Ended, Spawned Skull")
 	spawn_random_skull()
 	has_spawned = false
 
