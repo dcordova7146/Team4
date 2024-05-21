@@ -1,7 +1,7 @@
 ## Diego C
 extends Skull
 
-@onready var on_hit: AnimationPlayer = $on_hit
+#@onready var on_hit: AnimationPlayer = $on_hit
 	
 ## create a dummy with an "infinite amount of health" 
 ## overload the ready function to use only the necessary stats
@@ -18,5 +18,5 @@ func _physics_process(_delta: float) -> void:
 ## overload the take_damage function from skull parent class
 func take_damage(damage_total: float) -> void:
 	Events.health_changed.emit(global_position, -damage_total)
-	on_hit.play("onHit")
+	on_hit_animation.play("onHit")
 	
